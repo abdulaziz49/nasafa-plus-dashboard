@@ -1,0 +1,5 @@
+export const DASHBOARD_NAME = 'Dashboard'
+export const USER_PREMISSION_NAME = 'Users & Permissions'
+export const USER_GROUP_MANAGEMENT_NAME = 'Users\' Groups Management'
+export const USER_MANAGEMENT_NAME = 'Users Management'
+export const PERMISSION_MANAGEMENT_NAME = 'Permissions Management'

@@ -6,7 +6,7 @@ export const DASHBOARD_ROUTE_PATH: string = '/dashboard'
 const DashboardView = () => {
     return (
         <>
-            <ViewTemplate>
+            {/*<ViewTemplate>*/}
                 {/* Hero Section */}
                 <div className="hero bg-base-200 min-h-screen">
                     <div className="hero-content text-center">
@@ -63,7 +63,7 @@ const DashboardView = () => {
                         </div>
                     </div>
                 </div>
-            </ViewTemplate>
+            {/*</ViewTemplate>*/}
         </>
     )
 }
