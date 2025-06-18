@@ -4,6 +4,9 @@ import {type NavigateFunction, useNavigate} from "react-router-dom";
 // import DashboardPage from "../pages/dashboard_page.tsx";
 // import loginImage from '../assets/img/login-background.jpg'
 import loginImage from '../assets/svg/login-2.svg'
+import LazyImage from "../components/lazy_image.tsx";
+import ImageSkeleton from "../components/skeletons/image_skeleton.tsx";
+
 const LoginView = () => {
 
     const navigate: NavigateFunction = useNavigate();
@@ -39,7 +42,10 @@ const LoginView = () => {
                 </div>
             </div>
             {/*<img src={loginImage} className='max-h-full w-screen object-cover'/>*/}
-            <img src={loginImage} className='max-h-screen lg:max-h-full w-screen object-cover lg:object-none blur'/>
+            <LazyImage alt={'login-background'}
+                       placeholder={<ImageSkeleton classes='max-h-screen lg:max-h-full w-screen'/>} src={loginImage}
+                       classes='max-h-screen lg:max-h-full w-screen object-cover lg:object-none blur'/>
+            {/*<img src={loginImage} loading='lazy' className='max-h-screen lg:max-h-full w-screen object-cover lg:object-none blur'/>*/}
         </div>
     )
 }
