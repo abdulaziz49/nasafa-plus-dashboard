@@ -1,5 +1,6 @@
-import type {PropsWithChildren} from "react";
-import DrawerContainer from "./drawer/drawer_container.tsx";
+import {lazy, type PropsWithChildren, Suspense} from "react";
+// import DrawerContainer from "./drawer/drawer_container.tsx";
+const DrawerContainer = lazy(() => import('./drawer/drawer_container.tsx'))
 
 const ViewTemplate = ({children}: PropsWithChildren) => {
     return (
@@ -24,12 +25,15 @@ const ViewTemplate = ({children}: PropsWithChildren) => {
                     {children}
 
                 </div>
+                <Suspense fallback={<}>
+
                 <DrawerContainer>
                     <li><a>Sidebar Item 1</a></li>
                     <li><a>Sidebar Item 3</a></li>
                     <li><a>Sidebar Item 4</a></li>
                     <li><a>Sidebar Item 2</a></li>
                 </DrawerContainer>
+                </Suspense>
             </div>
         </>
     )
