@@ -1,5 +1,3 @@
-import ViewTemplate from "../components/view_template.tsx";
-
 export const DASHBOARD_ROUTE_PATH: string = '/dashboard'
 
 // export const DASHBOARD_ROUTE_PATH:string ='/dashboard'
