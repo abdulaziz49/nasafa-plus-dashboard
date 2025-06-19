@@ -1,20 +1,19 @@
-interface InputFieldPropsType {
+interface TextPropsType {
     labelText?: string,
     withLabel?: boolean,
-    fieldType: string,
     placeholder?: string,
     name: string,
     classes?: string
 }
 
-const InputField = ({fieldType, withLabel = false, labelText = '', placeholder = "", name, classes = ""}: InputFieldPropsType) => {
+const Textarea = ({withLabel = false, labelText = '', placeholder = "", name, classes}: TextPropsType) => {
     return (
         <div className={'flex flex-col ' + classes}>
             {/* Conditionally render the label only if 'withLabel' is true */}
             {withLabel && <label className="label mb-2">{labelText}</label>}
-            <input type={fieldType} name={name} className="input" placeholder={placeholder}/>
+            <textarea name={name} className="textarea" placeholder={placeholder}/>
         </div>
     )
 }
 
-export default InputField
+export default Textarea

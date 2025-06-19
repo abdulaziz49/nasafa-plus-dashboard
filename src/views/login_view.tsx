@@ -6,6 +6,10 @@ import {type NavigateFunction, useNavigate} from "react-router-dom";
 import loginImage from '../assets/svg/login-2.svg'
 import LazyImage from "../components/lazy_image.tsx";
 import ImageSkeleton from "../components/skeletons/image_skeleton.tsx";
+import FormContainer from "../components/form_container.tsx";
+import Button from "../components/button.tsx";
+import InputField from "../components/inputs/input_field.tsx";
+import LoginIcon from "../components/icons/auth_icons/login_icon.tsx";
 
 const LoginView = () => {
 
@@ -21,23 +25,22 @@ const LoginView = () => {
                 {/*</div>*/}
                 <div className="card bg-base-300 lg:max-w-sm w-5/6 shrink-0 shadow-2xl">
                     <div className="card-body">
-                        <div className='card-title flex justify-center'>
+                        <div className='card-title flex justify-center mb-6'>
                             {/*Login now!*/}
                             <h1 className="text-4xl lg:text-5xl font-bold">Login now!</h1>
                         </div>
-                        <div className="divider"></div>
-                        <fieldset className="fieldset">
-                            <label className="label">Email</label>
-                            <input type="email" className="input w-auto" placeholder="Email"/>
-                            <label className="label">Password</label>
-                            <input type="password" className="input w-auto" placeholder="Password"/>
+                        {/*<div className="divider"></div>*/}
+                        <FormContainer>
+                            <InputField fieldType='text' name='username' labelText='Username' withLabel={true}
+                                        placeholder='Username' classes='w-auto mb-2'/>
+                            <InputField fieldType='password' name='Password' labelText='Password' withLabel={true}
+                                        placeholder='Password' classes='w-auto mb-2'/>
                             <div><a className="link link-hover">Forgot password?</a></div>
-                            {/*<button className="btn btn-neutral mt-4" onClick={()=>{navigate(DASHBOARD_ROUTE_PATH)}}>Login</button>*/}
-                            <button className="btn btn-neutral mt-4" onClick={() => {
+                            <Button classes="btn-neutral  btn-primary mt-4" clickEvent={() => {
                                 navigate('/dashboard')
-                            }}>Login
-                            </button>
-                        </fieldset>
+                            }}>Login <LoginIcon classes="size-6"/>
+                            </Button>
+                        </FormContainer>
                     </div>
                 </div>
             </div>

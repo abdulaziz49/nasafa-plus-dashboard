@@ -2,12 +2,14 @@ import type {PropsWithChildren} from "react";
 
 interface FormContainerPropsypes extends PropsWithChildren {
     formTitle?: string
+    classes?: string
 }
 
-const FormContainer = ({children, formTitle = ''}: FormContainerPropsypes) => {
+const FormContainer = ({children, formTitle = '', classes = ''}: FormContainerPropsypes) => {
     return (
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            {formTitle?.length !== "" ?? <legend className="fieldset-legend">Page details</legend>}
+        <fieldset className={"fieldset bg-base-200 border-base-300 rounded-box border p-4 " + classes}>
+            {/* Conditionally render the legend only if formTitle is provided and not an empty string */}
+            {formTitle && <legend className="fieldset-legend">{formTitle}</legend>}
 
             {/* Content of form placed here */}
             {children}
