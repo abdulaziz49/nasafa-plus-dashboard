@@ -40,11 +40,11 @@
 import {lazy, type PropsWithChildren, Suspense} from "react";
 // import DrawerContainer from "./drawer/drawer_container.tsx";
 // import {useLocation} from "react-router-dom";
-import DrawerSkeleton from "./skeletons/drawer_skeleton.tsx";
-import getBrowserPageRoute from "../controllers/utils/get_browser_page_route.ts"; // Import useLocation
+import DrawerSkeleton from "../skeletons/drawer_skeleton.tsx";
+import getBrowserPageRoute from "../../controllers/utils/get_browser_page_route.ts"; // Import useLocation
 
 // Lazily load DrawerContainer
-const LazyDrawerContainer = lazy(() => import("./drawer/drawer_container.tsx"));
+const LazyDrawerContainer = lazy(() => import("../drawer/drawer_container.tsx"));
 
 const ViewTemplate = ({children}: PropsWithChildren) => {
     // const location = useLocation(); // Get the current location object
