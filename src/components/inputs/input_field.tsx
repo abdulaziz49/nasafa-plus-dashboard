@@ -12,7 +12,7 @@ const InputField = ({fieldType, withLabel = false, labelText = '', placeholder =
         <div className={'flex flex-col ' + classes}>
             {/* Conditionally render the label only if 'withLabel' is true */}
             {withLabel && <label className="label mb-2">{labelText}</label>}
-            <input type={fieldType} name={name} className="input" placeholder={placeholder}/>
+            <input type={fieldType} name={name} className="input w-auto" placeholder={placeholder}/>
         </div>
     )
 }

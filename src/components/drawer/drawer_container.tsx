@@ -7,9 +7,9 @@ const DrawerContainer = ({children}: PropsWithChildren) => {
         <>
             {/*<Suspense>*/}
 
-            <div className="drawer-side lg:p-4">
+            <div className="drawer-side lg:p-4 z-3">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <div className='bg-base-200 text-base-content h-full w-80 p-4 lg:rounded-xl overflow-y-auto'>
+                <div className='bg-base-100 text-base-content h-full w-80 p-4 lg:rounded-xl overflow-y-auto'>
                     <div className="divider"></div>
                     <Suspense fallback={<DrawerSkeleton classes={''}/>}>
                         <Accordion title={'group 1'}>

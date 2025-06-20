@@ -11,7 +11,7 @@ const Textarea = ({withLabel = false, labelText = '', placeholder = "", name, cl
         <div className={'flex flex-col ' + classes}>
             {/* Conditionally render the label only if 'withLabel' is true */}
             {withLabel && <label className="label mb-2">{labelText}</label>}
-            <textarea name={name} className="textarea" placeholder={placeholder}/>
+            <textarea name={name} className="textarea w-auto" placeholder={placeholder}/>
         </div>
     )
 }

@@ -1,10 +1,4 @@
-import type {MouseEventHandler, PropsWithChildren} from "react";
-
-interface ButtonType extends PropsWithChildren {
-    classes?: string,
-    type?: string,
-    clickEvent: MouseEventHandler<HTMLButtonElement>
-}
+import type {ButtonType} from "../../controllers/types/button_types.ts";
 
 const Button = ({children, classes = "", type = "button", clickEvent}: ButtonType) => {
     return (
