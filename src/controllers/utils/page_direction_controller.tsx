@@ -2,7 +2,7 @@ import type {PropsWithChildren, ReactElement} from "react";
 // import {browser} from "globals";
 
 const PageDirectionController = ({children}:PropsWithChildren):ReactElement => {
-    document.dir="ltr"
+    document.dir="rtl"
     return (
         <>
             {children}

@@ -4,6 +4,9 @@ interface SelectType extends PropsWithChildren {
     defaultValue?: string,
     isDisabledDefaultValue?: boolean,
     classes?: string,
+    labelText?: string,
+    withLabel?: boolean,
+    name: string
 }
 
 // /**
@@ -17,12 +20,23 @@ interface SelectType extends PropsWithChildren {
 //  * @param isDisabledDefaultValue is of type boolean, responsible for showing or hiding the defaultValue
 //  * @param classes send classes to className Property of react js
 //  */
-const Select = ({children, defaultValue = "", isDisabledDefaultValue = true, classes = ""}: SelectType) => {
+const Select = ({
+                    children,
+                    defaultValue,
+                    isDisabledDefaultValue = true,
+                    classes,
+                    labelText,
+                    withLabel = false,
+                    name
+                }: SelectType) => {
     return (
-        <select defaultValue={defaultValue} className={"select" + classes}>
-            <option disabled={isDisabledDefaultValue}>{defaultValue}</option>
-            {children}
-        </select>
+        <div className={'flex flex-col justify-start ' + classes}>
+            {withLabel && <label className="label mb-2">{labelText}</label>}
+            <select name={name} defaultValue={defaultValue} className="select w-full">
+                <option disabled={isDisabledDefaultValue}>{defaultValue}</option>
+                {children}
+            </select>
+        </div>
     )
 }
 
