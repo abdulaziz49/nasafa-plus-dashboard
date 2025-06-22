@@ -1,0 +1,13 @@
+{
+	"title": "إدارة مجموعات المستخدم",
+	"group-label": "اسم المجموعة",
+	"group-placeholder": "ادخل اسم المجموعة",
+	"desc-label": "وصف المحموعة",
+	"desc-placeholder": "ادخل وصف المجموعة",
+	"add-btn": "إضافة",
+	"del-btn": "حذف",
+	"edit-btn": "تعديل",
+	"print-btn": "طباعه",
+	"pdf-btn": "تصدير الى PDF",
+	"excel-btn": "تصدير الى Excel"
+}

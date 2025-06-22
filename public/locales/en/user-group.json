@@ -1,0 +1,13 @@
+{
+	"title": "User Group Management",
+	"group-label": "Group name",
+	"group-placeholder": "Enter group name",
+	"desc-label": "Group description",
+	"desc-placeholder": "Enter group Description",
+	"add-btn": "Save",
+	"del-btn": "Delete",
+	"edit-btn": "Edit",
+	"print-btn": "Print",
+	"pdf-btn": "Export to PDF",
+	"excel-btn": "Export to Excel"
+}

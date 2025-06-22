@@ -22,16 +22,16 @@
 //
 // export default Accordion
 
-import {type PropsWithChildren, useRef, useState} from "react";
+import {type ComponentPropsWithoutRef, type ReactNode, useRef, useState} from "react";
 
-interface AccordionPropsType extends PropsWithChildren {
-    title: string,
-    collapsed?: boolean, // Initial collapse state
-    classes?: string, // Additional CSS classes
-    name?: string // Optional: for grouping accordions
+interface AccordionPropsType extends ComponentPropsWithoutRef<"div"> {
+    title: string | undefined;
+    collapsed?: boolean; // Initial collapse state
+    classes?: string; // Additional CSS classes
+    icon?: ReactNode; // New prop for the icon component
 }
 
-const Accordion = ({children, title, collapsed = false, classes, name = "my-accordion"}: AccordionPropsType) => {
+const Accordion = ({children, title, collapsed = false, classes, icon}: AccordionPropsType) => {
     // State to manage the collapse status of this specific accordion item
     const [isCollapsed, setIsCollapsed] = useState(collapsed);
 
@@ -54,7 +54,6 @@ const Accordion = ({children, title, collapsed = false, classes, name = "my-acco
             <input
                 ref={inputRef}
                 type="radio"
-                name={name} // Use the provided name prop, default to "my-accordion"
                 checked={isCollapsed} // Controlled component: input's checked state is tied to isCollapsed
                 // onChange={handleInputChange} // Update state when radio button changes
                 // Add an onClick for the input itself to ensure state matches direct interaction
@@ -67,8 +66,9 @@ const Accordion = ({children, title, collapsed = false, classes, name = "my-acco
                 Let's stick with your current click method on the parent div for consistency with DaisyUI's pattern,
                 but ensure the internal state logic is sound.
             */}
-            <div className="collapse-title font-semibold" onClick={() => inputRef.current?.click()}>
-                {title}
+            <div className="collapse-title flex flex-row items-center space-x-2 justify-start w-full"
+                 onClick={() => inputRef.current?.click()}>
+                {icon} {title}
             </div>
             <div className="collapse-content text-sm">
                 {children}

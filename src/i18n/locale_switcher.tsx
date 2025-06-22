@@ -1,8 +1,8 @@
 // src/i18n/LocaleSwitcher.tsx
 
 import { useTranslation } from "react-i18next";
-import { supportedLngs } from "./i18n.ts";
 import Select from "../components/inputs/select.tsx";
+import supportedLngs from "./supported_langs.ts";
 
 export default function LocaleSwitcher() {
     const { t, i18n } = useTranslation();

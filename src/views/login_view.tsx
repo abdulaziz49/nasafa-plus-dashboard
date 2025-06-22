@@ -39,7 +39,7 @@ const LoginView = () => {
                             <InputField fieldType='password' name='Password' labelText={t('login-pass')} withLabel={true}
                                         placeholder={t('login-pass')} classes='w-auto mb-2'/>
                             <div><a className="link link-hover">{t('login-forget')}</a></div>
-                            <Button classes="btn-neutral  btn-primary mt-4" clickEvent={() => {
+                            <Button classes="btn-neutral  btn-primary mt-4" onClick={() => {
                                 navigate('/dashboard')
                             }}>{t('login-button')} <LoginIcon classes="size-6"/>
                             </Button>
