@@ -1,11 +1,16 @@
-import type {ButtonType} from "../../controllers/types/button_types.ts";
+import type { ButtonType } from '../../controllers/types/button_types.ts';
 
-const Button = ({children, classes = "", type = "button", clickEvent}: ButtonType) => {
-    return (
-        <button typeof={type} className={"btn " + classes} onClick={clickEvent}>
-            {children}
-        </button>
-    )
-}
+const Button = ({
+	children,
+	classes,
+	type,
+	...rest
+}: ButtonType) => {
+	return (
+		<button type={type} className={'btn ' + classes} {...rest} >
+			{children}
+		</button>
+	);
+};
 
-export default Button
+export default Button;

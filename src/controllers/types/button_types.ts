@@ -1,12 +1,12 @@
-import type {MouseEventHandler, PropsWithChildren} from "react";
+import type {ComponentPropsWithoutRef, MouseEventHandler} from "react";
 
 export interface CrudButtonType {
-    clickEvent: MouseEventHandler<HTMLButtonElement>
+    clickEvent: MouseEventHandler<HTMLButtonElement>,
+    text?:string
     classes?: string
 }
 
-export interface ButtonType extends PropsWithChildren {
+export interface ButtonType extends ComponentPropsWithoutRef<"button"> {
     classes?: string,
-    type?: string,
-    clickEvent: MouseEventHandler<HTMLButtonElement>
+    text?:string
 }

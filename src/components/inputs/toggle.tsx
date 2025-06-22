@@ -55,65 +55,87 @@
 //
 // export default Toggle
 
-import type {ReactElement, InputHTMLAttributes} from "react";
-import {useState} from "react"; // Don't forget to import useState
+import type { ReactElement, InputHTMLAttributes } from 'react';
+import { useState } from 'react'; // Don't forget to import useState
 
-interface ToggleType extends Omit<InputHTMLAttributes<HTMLInputElement>, 'checked' | 'onChange'> { // Extend InputHTMLAttributes for standard input props
-    name: string;
-    withCheckMark?: boolean; // Made optional if you're using custom icons
-    labelText?: string;
-    withLabel?: boolean;
-    classes?: string;
-    checkedIcon?: ReactElement;
-    uncheckedIcon?: ReactElement;
-    initialChecked?: boolean; // New prop for initial state
-    onToggleChange?: (isChecked: boolean) => void; // Callback for state change
+interface ToggleType
+	extends Omit<
+		InputHTMLAttributes<HTMLInputElement>,
+		'checked' | 'onChange'
+	> {
+	// Extend InputHTMLAttributes for standard input props
+	name: string;
+	withCheckMark?: boolean; // Made optional if you're using custom icons
+	labelText?: string;
+	labelClasses?: string; // Classes for the label
+	withLabel?: boolean;
+	classes?: string;
+	checkedIcon?: ReactElement;
+	uncheckedIcon?: ReactElement;
+	initialChecked?: boolean; // New prop for initial state
+	onToggleChange?: (isChecked: boolean) => void; // Callback for state change
 }
 
 const Toggle = ({
-                    name,
-                    withCheckMark = false, // Default to false
-                    labelText,
-                    classes,
-                    withLabel = false, // Default to false
-                    checkedIcon,
-                    uncheckedIcon,
-                    initialChecked = false, // Default initial state
-                    onToggleChange,
-                    ...rest // Capture other standard input props
-                }: ToggleType) => {
-    const [isChecked, setIsChecked] = useState(initialChecked);
+	name,
+	withCheckMark = false, // Default to false
+	labelText,
+	labelClasses = '', // Default to empty string for label classes
+	classes,
+	withLabel = false, // Default to false
+	checkedIcon,
+	uncheckedIcon,
+	initialChecked = false, // Default initial state
+	onToggleChange,
+	...rest // Capture other standard input props
+}: ToggleType) => {
+	const [isChecked, setIsChecked] = useState(initialChecked);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newState = event.target.checked;
-        setIsChecked(newState);
-        onToggleChange?.(newState); // Call the callback if provided
-    };
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const newState = event.target.checked;
+		setIsChecked(newState);
+		onToggleChange?.(newState); // Call the callback if provided
+	};
 
-    return (
-        <div className={`flex flex-row items-center p-0 ${classes || ''}`}> {/* Handle undefined classes */}
-            {withLabel && <label htmlFor={name}
-                                 className="label text-lg text-normal">{labelText}</label>} {/* Add htmlFor for accessibility */}
-            <label className="toggle toggle-sm text-base-content my-0 cursor-pointer"> {/* Added cursor-pointer */}
-                <input
-                    name={name}
-                    type="checkbox"
-                    checked={isChecked} // Control the checked state
-                    onChange={handleChange} // Handle changes
-                    className="toggle-hidden" // Optionally hide the default toggle appearance if your CSS framework needs it
-                    {...rest} // Pass down other input props
-                />
-                {/* Render icons based on internal state, or use a default if withCheckMark is true */}
-                {withCheckMark ? (
-                    isChecked ? checkedIcon || <span className="toggle-checkmark">✔</span> : uncheckedIcon ||
-                        <span className="toggle-cross">✖</span>
-                ) : (
-                    // If not using withCheckMark, and custom icons are provided, render them
-                    // You'd need to style these to appear correctly within your toggle
-                    isChecked ? checkedIcon : uncheckedIcon
-                )}
-
-                {/*
+	return (
+		<div className={`flex flex-row items-center p-0 ${classes || ''}`}>
+			{' '}
+			{/* Handle undefined classes */}
+			{withLabel && (
+				<label
+					htmlFor={name}
+					className={`label text-lg text-normal ${classes || ''}`}
+				>
+					{labelText}
+				</label>
+			)}{' '}
+			{/* Add htmlFor for accessibility */}
+			<label className="toggle toggle-sm text-base-content my-0 cursor-pointer">
+				{' '}
+				{/* Added cursor-pointer */}
+				<input
+					name={name}
+					type="checkbox"
+					checked={isChecked} // Control the checked state
+					onChange={handleChange} // Handle changes
+					className="toggle-hidden" // Optionally hide the default toggle appearance if your CSS framework needs it
+					{...rest} // Pass down other input props
+				/>
+				{/* Render icons based on internal state, or use a default if withCheckMark is true */}
+				{withCheckMark
+					? isChecked
+						? checkedIcon || (
+								<span className="toggle-checkmark">✔</span>
+						  )
+						: uncheckedIcon || (
+								<span className="toggle-cross">✖</span>
+						  )
+					: // If not using withCheckMark, and custom icons are provided, render them
+					// You'd need to style these to appear correctly within your toggle
+					isChecked
+					? checkedIcon
+					: uncheckedIcon}
+				{/*
                     If you want the SVGs to be part of the DaisyUI toggle *visual*,
                     you'd typically place them within the `toggle` label and use CSS
                     to show/hide them based on the input's :checked state.
@@ -121,9 +143,9 @@ const Toggle = ({
                     <span className="toggle-handle"></span> // DaisyUI often uses a span for the visual handle
                     {isChecked ? checkedIcon : uncheckedIcon} // Or your SVGs here with conditional CSS
                 */}
-            </label>
-        </div>
-    );
+			</label>
+		</div>
+	);
 };
 
 export default Toggle;

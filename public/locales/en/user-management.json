@@ -1,0 +1,15 @@
+{
+	"title": "Users Management",
+	"select-default-value": "Select a user's gourp",
+	"select-label": "User group",
+	"username-label": "Username",
+	"username-placeholder": "Enter username",
+	"is-active": "Deactivate user",
+	"change-password": "Force user to change password every (by day)",
+	"save-btn": "Save",
+	"del-btn": "Delete",
+	"edit-btn": "Edit",
+	"print-btn": "Print",
+	"pdf-btn": "Export to PDF",
+	"excel-btn": "Export to Excel"
+}

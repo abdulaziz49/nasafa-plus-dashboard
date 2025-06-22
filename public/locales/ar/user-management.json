@@ -1,0 +1,15 @@
+{
+	"title": "إدارة المستخدمين",
+	"select-default-value": "اختر مجموعة المستخدمين",
+	"select-label": "مجموعة المستخم",
+	"username-label": "اسم المستخدم",
+	"username-placeholder": "ادخل اسم المستخدم",
+	"is-active": "تعطيل المستخدم",
+	"change-password": "اجبار المستخدم على تغيير كلمة المرور كل (باليوم)",
+	"save-btn": "حفظ",
+	"del-btn": "حذف",
+	"edit-btn": "تعديل",
+	"print-btn": "طباعه",
+	"pdf-btn": "تصدير الى PDF",
+	"excel-btn": "تصدير الى Excel"
+}
