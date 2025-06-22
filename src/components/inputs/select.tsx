@@ -1,12 +1,9 @@
-import type {PropsWithChildren} from "react";
+import type {ComponentPropsWithoutRef, FC} from "react";
 
-interface SelectType extends PropsWithChildren {
-    defaultValue?: string,
-    isDisabledDefaultValue?: boolean,
+interface SelectType extends ComponentPropsWithoutRef<'select'> {
     classes?: string,
     labelText?: string,
     withLabel?: boolean,
-    name: string
 }
 
 // /**
@@ -20,20 +17,18 @@ interface SelectType extends PropsWithChildren {
 //  * @param isDisabledDefaultValue is of type boolean, responsible for showing or hiding the defaultValue
 //  * @param classes send classes to className Property of react js
 //  */
-const Select = ({
-                    children,
-                    defaultValue,
-                    isDisabledDefaultValue = true,
-                    classes,
-                    labelText,
-                    withLabel = false,
-                    name
-                }: SelectType) => {
+const Select: FC<SelectType> = ({
+                                    children,
+                                    classes,
+                                    labelText,
+                                    withLabel = false,
+                                    ...rest
+                                }) => {
     return (
         <div className={'flex flex-col justify-start ' + classes}>
             {withLabel && <label className="label mb-2">{labelText}</label>}
-            <select name={name} defaultValue={defaultValue} className="select w-full">
-                <option disabled={isDisabledDefaultValue}>{defaultValue}</option>
+            <select className="select w-full" {...rest}>
+                {/*<option disabled={isDisabledDefaultValue}>{defaultValue}</option>*/}
                 {children}
             </select>
         </div>

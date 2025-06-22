@@ -2,6 +2,7 @@ import {Route, Routes} from "react-router-dom";
 import {lazy, Suspense} from "react";
 import CircleLoading from "./components/loaders/circle_loading.tsx";
 import {DASHBOARD_ROUTE, USERS_GROUPS_MANAGEMENT_ROUTE, USERS_MANAGEMENT_ROUTE} from "./routes/routes.ts";
+import useLocalizeDocumentAttributes from "./i18n/use_localize_document_attributes.ts";
 
 const DashboardView = lazy(() => import("./views/dashboard_view.tsx"))
 const LoginView = lazy(() => import('./views/login_view.tsx'))
@@ -11,6 +12,8 @@ const UserGroupManagementView = lazy(() => import('./views/users/user_group_mana
 const View404 = lazy(() => import('./views/errors/view_404.tsx'))
 
 function App() {
+    useLocalizeDocumentAttributes()
+
     return (
         <>
             <Suspense fallback={<CircleLoading/>}>

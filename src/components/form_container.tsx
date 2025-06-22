@@ -7,7 +7,7 @@ interface FormContainerPropsypes extends PropsWithChildren {
 
 const FormContainer = ({children, formTitle = '', classes = ''}: FormContainerPropsypes) => {
     return (
-        <fieldset className={"fieldset border-base-300 rounded-box border p-4 " + classes}>
+        <fieldset className={"fieldset border-base-300 rounded-box border " + classes}>
             {/* Conditionally render the legend only if formTitle is provided and not an empty string */}
             {formTitle && <legend className="fieldset-legend">{formTitle}</legend>}
 
