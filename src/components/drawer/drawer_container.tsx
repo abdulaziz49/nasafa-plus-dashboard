@@ -156,27 +156,31 @@ const DrawerContainer = () => {
 
 	return (
 		<>
-			<div className="drawer-side lg:p-4 z-3 max-h-screen">
+			<div className="drawer-side lg:p-4 z-3 lg:z-1 h-screen">
 				<label
 					htmlFor="my-drawer-2"
 					aria-label="close sidebar"
 					className="drawer-overlay"
 				></label>
-				<div className="bg-base-100 text-base-content w-80 p-4 lg:rounded-xl h-dvh flex flex-col">
-					{' '}
+				<div className="bg-base-100 text-base-content w-80 p-4 lg:rounded-xl h-lvh">
 					{/* Added flex-col for better layout control */}
 					<div className="divider"></div>
 					{/* The scrollable area for menu items is now within Suspense */}
-					<ul className="menu w-full flex-grow overflow-y-auto">
-						{' '}
+					<ul className="menu w-full overflow-y-auto">
 						{/* Use flex-grow and overflow-y-auto */}
 						<Suspense fallback={<DrawerSkeleton classes={''} />}>
 							{RoutesSchema.map((route, index) => {
 								// Check for 'childs' property to determine if it's a direct link or an accordion
 								if (!route.hasOwnProperty('childs')) {
 									return (
-										<li key={index}>
-											<Link to={route.routeURL!}>
+										<li
+											key={index}
+											className="text-primary"
+										>
+											<Link
+												// className="text-primay"
+												to={route.routeURL!}
+											>
 												{route.routeIcon}{' '}
 												{t(route.routeName!)}
 											</Link>
@@ -186,7 +190,7 @@ const DrawerContainer = () => {
 								return (
 									<Accordion
 										key={index}
-										classes="collapse-arrow"
+										classes="collapse-arrow text-primary"
 										title={t(route.accordionName!)}
 										icon={route.accordionIcon}
 									>
@@ -209,12 +213,10 @@ const DrawerContainer = () => {
 							})}
 						</Suspense>
 					</ul>
-					<div className="divider"></div>
 					<div className="w-full flex items-center justify-between space-y-2 mt-auto">
-						{' '}
 						{/* Added mt-auto to push to bottom */}
 						<Button
-							classes="bg-transparent border-none shadow-none"
+							classes="bg-transparent border-none shadow-none text-primary"
 							onClick={() => {
 								window.location.href = '/'; // Consider using React Router's `Maps` for better SPA experience
 							}}
@@ -222,7 +224,7 @@ const DrawerContainer = () => {
 							Logout
 						</Button>
 						<Button
-							classes="bg-transparent border-none shadow-none"
+							classes="bg-transparent border-none shadow-none text-primary"
 							onClick={() => {
 								window.location.href = '/'; // Consider using React Router's `Maps` for better SPA experience
 							}}
