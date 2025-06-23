@@ -1,11 +1,11 @@
 interface DrawerSkeletonType {
-    classes: string
+    classes?: string
 }
 
 const DrawerSkeleton = ({classes}: DrawerSkeletonType) => {
     return (
         <div>
-            <span className={'skeleton lg:p-4 p-4 h-screen w-auto ' + classes}></span>
+            <span className={`skeleton p-4 ${classes}`}></span>
         </div>
     )
 }

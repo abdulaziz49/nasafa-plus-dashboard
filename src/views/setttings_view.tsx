@@ -1,4 +1,4 @@
-const DashboardView = () => {
+const SettingsView = () => {
     return (
         <div className="hero bg-base-200 max-h-screen">
             <div className="hero-content text-center">
@@ -16,4 +16,4 @@ const DashboardView = () => {
     )
 }
 
-export default DashboardView
+export default SettingsView

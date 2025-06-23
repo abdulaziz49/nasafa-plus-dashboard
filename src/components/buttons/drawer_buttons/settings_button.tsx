@@ -1,19 +1,19 @@
-import Button from "../button.tsx";
+import Button from "../button.tsx"
 import {useNavigate} from "react-router-dom";
-import LogoutIcon from "../../icons/drawer/logout_icon.tsx";
+import SettingsIcon from "../../icons/drawer/settings_icon.tsx";
 
-const LogoutButton = () => {
+const SettingsButton = () => {
     const navigate = useNavigate()
     return (
         <Button
             classes="bg-transparent border-none shadow-none text-primary-content"
             onClick={() => {
-                navigate('/');
+                navigate('/')
             }}
         >
-           <LogoutIcon /> Logout
+            <SettingsIcon/> Settings
         </Button>
     )
 }
 
-export default LogoutButton
+export default SettingsButton

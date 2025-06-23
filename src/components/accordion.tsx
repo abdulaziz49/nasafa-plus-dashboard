@@ -37,12 +37,12 @@ interface AccordionPropsType extends ComponentPropsWithoutRef<'div'> {
 }
 
 const Accordion = ({
-	children,
-	title,
-	collapsed = false,
-	classes,
-	icon,
-}: AccordionPropsType) => {
+					   children,
+					   title,
+					   collapsed = false,
+					   classes,
+					   icon,
+				   }: AccordionPropsType) => {
 	// State to manage the collapse status of this specific accordion item
 	const [isCollapsed, setIsCollapsed] = useState(collapsed);
 
@@ -65,6 +65,8 @@ const Accordion = ({
 			<input
 				ref={inputRef}
 				type="radio"
+				readOnly
+				// defaultChecked={collapsed}
 				checked={isCollapsed} // Controlled component: input's checked state is tied to isCollapsed
 				// onChange={handleInputChange} // Update state when radio button changes
 				// Add an onClick for the input itself to ensure state matches direct interaction
