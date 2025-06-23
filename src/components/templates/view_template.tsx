@@ -44,20 +44,7 @@ const ViewTemplate = ({ children }: PropsWithChildren) => {
 					>
 						{' '}
 						{/* Provide a fallback UI */}
-						<LazyDrawerContainer>
-							<li>
-								<a>Sidebar Item 1</a>
-							</li>
-							<li>
-								<a>Sidebar Item 3</a>
-							</li>
-							<li>
-								<a>Sidebar Item 4</a>
-							</li>
-							<li>
-								<a>Sidebar Item 2</a>
-							</li>
-						</LazyDrawerContainer>
+						<LazyDrawerContainer />
 					</Suspense>
 				)}
 			</div>

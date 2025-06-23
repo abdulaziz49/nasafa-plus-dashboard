@@ -16,7 +16,7 @@ const UsersManagementView = () => {
 	const { t } = useTranslation('user-management');
 
 	return (
-		<div className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 space-y-2">
+		<>
 			<FormContainer classes="w-full h-auto bg-base-100">
 				<h1 className="text-2xl lg:text-4xl text-center font-bold mb-0.5 mt-8 md:mt-0 lg:mb-4">
 					{t('title')}
@@ -45,14 +45,14 @@ const UsersManagementView = () => {
 							classes="w-full lg:col-span-7 lg:order-3"
 						/>
 						<Toggle
-							classes="justify-between md:col-span-2 lg:col-start-10 lg:order-2 lg:col-end-13"
+							classes="justify-between lg:flex-row-reverse md:col-span-2 lg:col-start-10 rtl:lg:col-start-8 text-sm md:text-md lg:text-lg lg:order-2 lg:col-end-13"
 							name="is_active"
 							withCheckMark={false}
 							labelText={t('is-active')}
 							withLabel={true}
 						/>
 						<Toggle
-							classes="justify-between md:col-span-2 lg:col-start-10 rtl:lg:col-start-8 rtl:lg:text-xl! lg:order-4 lg:col-end-13"
+							classes="justify-between lg:flex-row-reverse md:col-span-2 lg:col-start-10 rtl:lg:col-start-8 text-sm md:text-md lg:text-lg lg:order-4 lg:col-end-13"
 							name="change_password"
 							withCheckMark={false}
 							labelText={t('change-password')}
@@ -61,7 +61,7 @@ const UsersManagementView = () => {
 						/>
 					</div>
 					<br />
-					<div className="max-w-screen h-auto grid gap-x-4 grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 lg:grid-cols-6 lg:grid-rows-1">
+					<div className="max-w-screen h-auto grid gap-2 grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 lg:grid-cols-6 lg:grid-rows-1">
 						<AddButton
 							classes="btn-primary btn-wide btn-wide order-1"
 							text={t('save-btn')}
@@ -97,7 +97,7 @@ const UsersManagementView = () => {
 			</FormContainer>
 			<Table />
 			<Pagination />
-		</div>
+		</>
 	);
 };
 
