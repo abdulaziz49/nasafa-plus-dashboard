@@ -12,7 +12,7 @@ import Select from '../../components/inputs/select.tsx';
 import Toggle from '../../components/inputs/toggle.tsx';
 import { useTranslation } from 'react-i18next';
 
-const UsersManagementView = () => {
+const UserManagementView = () => {
 	const { t } = useTranslation('user-management/user');
 
 	document.title = t('title');
@@ -103,4 +103,4 @@ const UsersManagementView = () => {
 	);
 };
 
-export default UsersManagementView;
+export default UserManagementView;

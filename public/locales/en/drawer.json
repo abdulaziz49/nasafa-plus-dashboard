@@ -6,7 +6,19 @@
 	"user-permission": "Permissions Management",
 	"settings": "Settings",
 	"logout": "Logout",
-	"container-group": "Containers",
-	"container-group-management": "Container Groups Management",
-	"container-management": "Container Management"
+	"container-accordion": "Containers",
+	"container-group": "Container Groups Management",
+	"container-management": "Container Management",
+	"truck-accordion": "Trucks",
+	"truck-group": "Truck Group Management",
+	"truck-management": "Truck Management",
+	"maintenance-accordion": "Maintenance",
+	"maintenance-group": "Maintenance Group Management",
+	"maintenance-management": "Maintenance Management",
+	"contract-accordion": "Contracts",
+	"contract-group": "Contract Group Management",
+	"contract-management": "Contract Management",
+	"client-accordion": "Clients",
+	"client-group": "Client Group Management",
+	"client-management": "Client Management"
 }

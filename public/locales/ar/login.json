@@ -1,9 +1,9 @@
 {
-  "login-title": "تسجيل الدخول",
-  "login-button": "تسجيل الدخول",
-  "login-head": "تسجيل الدخول الان!",
-  "login-lang-switch": "اللغة",
-  "login-username": "أسم المستخدم",
-  "login-pass": "كلمة المرور",
-  "login-forget": "نسيت كلمة المرور"
+  "title": "تسجيل الدخول",
+  "button": "تسجيل الدخول",
+  "head": "تسجيل الدخول الان!",
+  "lang-switch": "اللغة",
+  "username": "أسم المستخدم",
+  "pass": "كلمة المرور",
+  "forget": "نسيت كلمة المرور"
 }

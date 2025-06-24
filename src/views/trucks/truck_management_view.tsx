@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
-const ContainerGroupView = () => {
-	const { t } = useTranslation('container-management/group');
+const TruckManagementView = () => {
+	const { t } = useTranslation('truck-management/truck');
 	document.title = t('title');
 	return (
 		<div className="hero bg-base-200 max-h-screen">
@@ -20,4 +20,4 @@ const ContainerGroupView = () => {
 	);
 };
 
-export default ContainerGroupView;
+export default TruckManagementView;

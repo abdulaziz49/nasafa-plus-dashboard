@@ -16,7 +16,7 @@ const checkStoredLang = (fallbackLang: string): string => {
 };
 
 export default function LocaleSwitcher(): ReactElement {
-	const { t, i18n } = useTranslation();
+	const { t, i18n } = useTranslation("login");
 
 	useEffect(() => {
 		i18n.changeLanguage(checkStoredLang(i18n.language));
@@ -33,7 +33,7 @@ export default function LocaleSwitcher(): ReactElement {
 	return (
 		<Select
 			withLabel={true}
-			labelText={t('login-lang-switch')}
+			labelText={t('lang-switch')}
 			defaultValue={i18n.language}
 			onChange={selectChangeEvent}
 		>
