@@ -12,7 +12,9 @@ import Pagination from '../../components/pagination.tsx';
 import { useTranslation } from 'react-i18next';
 
 const UserGroupManagementView = () => {
-	const { t } = useTranslation('user-group');
+	const { t } = useTranslation('user-management/group');
+
+	document.title = t('title');
 	return (
 		<>
 			<FormContainer classes="w-full h-auto bg-base-100">

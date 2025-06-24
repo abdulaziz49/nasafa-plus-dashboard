@@ -1,9 +1,9 @@
 {
-  "login-title": "Login",
-  "login-button": "Login",
-  "login-head": "Login Now!",
-  "login-lang-switch": "Language",
-  "login-username": "Username",
-  "login-pass": "Password",
-  "login-forget": "Forgot password?"
+	"title": "Login",
+	"button": "Login",
+	"head": "Login Now!",
+	"lang-switch": "Language",
+	"username": "Username",
+	"pass": "Password",
+	"forget": "Forgot password?"
 }

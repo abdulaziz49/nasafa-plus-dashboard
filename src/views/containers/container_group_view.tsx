@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
-const SettingsView = () => {
-	const { t } = useTranslation('settings');
+const ContainerGroupView = () => {
+	const { t } = useTranslation('container-management/group');
 	document.title = t('title');
 	return (
 		<div className="hero bg-base-200 max-h-screen">
@@ -20,4 +20,4 @@ const SettingsView = () => {
 	);
 };
 
-export default SettingsView;
+export default ContainerGroupView;

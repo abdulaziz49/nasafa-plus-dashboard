@@ -1,9 +1,12 @@
 {
 	"dashboard": "Dashboard",
 	"user-accordion": "Users & Permissions",
-	"user-group": "Users' Groups Management",
-	"user-management": "Users Management",
+	"user-group": "User Groups Management",
+	"user-management": "User Management",
 	"user-permission": "Permissions Management",
 	"settings": "Settings",
-	"logout": "Logout"
+	"logout": "Logout",
+	"container-group": "Containers",
+	"container-group-management": "Container Groups Management",
+	"container-management": "Container Management"
 }

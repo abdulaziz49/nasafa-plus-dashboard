@@ -5,5 +5,8 @@
 	"user-management": "إدارة المستخدمبن",
 	"user-permission": "إدارة الصلاحيات",
 	"settings": "الإعدادات",
-	"logout": "تجسيل الخروج"
+	"logout": "تسجيل الخروج",
+	"container-group": "الحاويات",
+	"container-group-management": "إدارة مجموعات الحاويات",
+	"container-management": "إدارة الحاويات"
 }

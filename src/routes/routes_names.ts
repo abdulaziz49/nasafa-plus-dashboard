@@ -4,3 +4,6 @@ export const USER_GROUP_MANAGEMENT_NAME = 'user-group';
 export const USER_MANAGEMENT_NAME = 'user-management';
 export const PERMISSION_MANAGEMENT_NAME = 'user-permission';
 export const SETTINGS_MANAGEMENT_NAME = 'settings-management';
+export const CONTAINER_GROUP_NAME = 'container-group';
+export const CONTAINER_GROUP_MANAGEMENT_NAME = 'container-group-management';
+export const CONTAINER_MANAGEMENT_NAME = 'container-management';

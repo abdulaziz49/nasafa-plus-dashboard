@@ -13,7 +13,9 @@ import Toggle from '../../components/inputs/toggle.tsx';
 import { useTranslation } from 'react-i18next';
 
 const UsersManagementView = () => {
-	const { t } = useTranslation('user-management');
+	const { t } = useTranslation('user-management/user');
+
+	document.title = t('title');
 
 	return (
 		<>
