@@ -3,5 +3,7 @@
 	"user-accordion": "المستخدمون والصلاحيات",
 	"user-group": "إدارة مجموعات المستخدمين",
 	"user-management": "إدارة المستخدمبن",
-	"user-permission": "إدارة الصلاحيات"
+	"user-permission": "إدارة الصلاحيات",
+	"settings": "الإعدادات",
+	"logout": "تجسيل الخروج"
 }

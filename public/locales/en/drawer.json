@@ -3,5 +3,7 @@
 	"user-accordion": "Users & Permissions",
 	"user-group": "Users' Groups Management",
 	"user-management": "Users Management",
-	"user-permission": "Permissions Management"
+	"user-permission": "Permissions Management",
+	"settings": "Settings",
+	"logout": "Logout"
 }

@@ -1,5 +1,6 @@
-export const DASHBOARD_NAME = 'dashboard'
-export const USER_PREMISSION_NAME = 'user-accordion'
-export const USER_GROUP_MANAGEMENT_NAME = 'user-group'
-export const USER_MANAGEMENT_NAME = 'user-management'
-export const PERMISSION_MANAGEMENT_NAME = 'user-permission'
+export const DASHBOARD_NAME = 'dashboard';
+export const USER_PREMISSION_NAME = 'user-accordion';
+export const USER_GROUP_MANAGEMENT_NAME = 'user-group';
+export const USER_MANAGEMENT_NAME = 'user-management';
+export const PERMISSION_MANAGEMENT_NAME = 'user-permission';
+export const SETTINGS_MANAGEMENT_NAME = 'settings-management';
