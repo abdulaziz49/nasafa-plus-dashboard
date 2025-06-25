@@ -32,10 +32,6 @@ import {
 	CLIENT_GROUP_MANAGEMENT_NAME, CLIENT_MANAGEMENT_NAME,
 } from '../../routes/routes_names.ts';
 import DashboardIcon from '../../components/icons/drawer/dashboard_icon.tsx';
-import UserAccordionIcon from '../../components/icons/drawer/user/user_accordion_icon.tsx';
-import UserGroupIcon from '../../components/icons/drawer/user/user_group_icon.tsx';
-import UserIcon from '../../components/icons/drawer/user/user_icon.tsx';
-import UserPermissionIcon from '../../components/icons/drawer/user/user_permission_icon.tsx';
 import {
 	ContainerGroupIcon,
 	ContainerGroupManagementIcon,
@@ -60,6 +56,12 @@ import {
 	ClientGroupManagementIcon,
 	ClientManagementIcon
 } from "../../components/icons/drawer/client_icons.tsx";
+import {
+	UserAccordionIcon,
+	UserGroupIcon,
+	UserIcon,
+	UserPermissionIcon
+} from "../../components/icons/drawer/user_icons.tsx";
 
 const RoutesSchema = [
 	{

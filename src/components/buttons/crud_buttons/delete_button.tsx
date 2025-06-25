@@ -1,6 +1,6 @@
 import Button from "../button.tsx";
 import type {CrudButtonType} from "../../../controllers/types/button_types.ts";
-import DeleteIcon from "../../icons/crud_icons/delete_icon.tsx";
+import {DeleteIcon} from "../../icons/crud_icons.tsx";
 
 export default function DeleteButton({clickEvent, classes, text}: CrudButtonType) {
     return (

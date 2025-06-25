@@ -1,6 +1,6 @@
 import Button from "../button.tsx";
-import EditIcon from "../../icons/crud_icons/edit_icon.tsx";
 import type {CrudButtonType} from "../../../controllers/types/button_types.ts";
+import {EditIcon} from "../../icons/crud_icons.tsx";
 
 export default function EditButton({clickEvent, classes, text}: CrudButtonType) {
     return (

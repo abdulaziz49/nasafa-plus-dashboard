@@ -5,10 +5,10 @@ import ImageSkeleton from '../components/skeletons/image_skeleton.tsx';
 import FormContainer from '../components/form_container.tsx';
 import Button from '../components/buttons/button.tsx';
 import InputField from '../components/inputs/input_field.tsx';
-import LoginIcon from '../components/icons/auth_icons/login_icon.tsx';
 import { useTranslation } from 'react-i18next';
 import LocaleSwitcher from '../i18n/locale_switcher.tsx';
 import Nasafa from '../assets/img/nasafa_plus_logo.png';
+import {LoginIcon} from "../components/icons/auth_icons.tsx";
 
 const LoginView = () => {
 	const { t } = useTranslation('login');
