@@ -1,3 +1,13 @@
 {
-	"title": "إدارة مجموعات الحاويات"
+	"title": "إدارة مجموعات الحاويات",
+	"add-btn": "إضافة",
+	"del-btn": "حذف",
+	"edit-btn": "تعديل",
+	"print-btn": "طباعه",
+	"pdf-btn": "تصدير الى PDF",
+	"excel-btn": "تصدير الى Excel",
+	"group-label": "مجموعة الحاوية",
+	"group-label-placeholder": "أدخل مجموعة الحاوية",
+	"group_code": "كود الحاوية",
+	"group-code-placeholder": "أدخل كود الحاوية"
 }
