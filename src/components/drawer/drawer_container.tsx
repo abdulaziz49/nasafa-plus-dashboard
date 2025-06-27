@@ -95,7 +95,7 @@ import {Link} from 'react-router-dom';
 // import {Suspense} from 'react';
 import {useTranslation} from 'react-i18next';
 import LogoutButton from "../buttons/drawer_buttons/logout_button.tsx";
-import SettingsButton from "../buttons/drawer_buttons/settings_button.tsx";
+import NotificationsButton from "../buttons/drawer_buttons/settings_button.tsx";
 import LazyImage from "../lazy_image.tsx";
 import Nasafa from '../../assets/img/nasafa_plus_logo.png'
 import {Suspense} from "react";
@@ -137,7 +137,7 @@ const DrawerContainer = () => {
                                 return (
                                     <Accordion
                                         key={index}
-                                        classes="collapse-arrow bg-primary text-primary-content"
+                                        classes="collapse-arrow bg-primary text-primary-content -mb-1"
                                         title={t(route.accordionName!)}
                                         icon={route.accordionIcon}
                                         // IMPORTANT: Pass a unique name for the radio group behavior
@@ -148,15 +148,13 @@ const DrawerContainer = () => {
                                         // If you want them to be independent (but still using radio),
                                         // then each needs a unique name as shown above.
                                     >
-                                        <ul className="menu w-full">
+                                        <ul className="menu w-full p-0">
                                             {route.childs?.map(
                                                 (child, childIndex) => (
                                                     <li key={childIndex}>
                                                         <Link
                                                             to={child.routeURL}
-                                                        >
-                                                            {child.routeIcon}{' '}
-                                                            {t(child.routeName)}
+                                                        >{t(child.routeName)}
                                                         </Link>
                                                     </li>
                                                 ),
@@ -169,7 +167,7 @@ const DrawerContainer = () => {
                         </ul>
                     </div>
                     <div className="w-full flex flex-row items-center justify-between">
-                        <SettingsButton/>
+                        <NotificationsButton/>
                         <LogoutButton/>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
-const PermissionManagementView = () => {
-	const { t } = useTranslation('user-management/permission');
+const UserSettingsView = () => {
+	const { t } = useTranslation('system-management/user-settings');
 	document.title = t('title');
 	return (
 		<div className="hero bg-base-200 max-h-screen">
@@ -20,4 +20,4 @@ const PermissionManagementView = () => {
 	);
 };
 
-export default PermissionManagementView;
+export default UserSettingsView;
