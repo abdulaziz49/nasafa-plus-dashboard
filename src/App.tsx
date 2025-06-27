@@ -11,7 +11,7 @@ import {
     DASHBOARD_ROUTE,
     LOGIN_ROUTE,
     MAINTENANCE_GROUP_MANAGEMENT_ROUTE,
-    MAINTENANCE_MANAGEMENT_ROUTE, MAINTENANCE_TYPE_MANAGEMENT_ROUTE,
+    MAINTENANCE_MANAGEMENT_ROUTE, MAINTENANCE_TYPE_MANAGEMENT_ROUTE, NOTIFICATIONS_ROUTE,
     SYSTEM_SETTINGS_MANAGEMENT_ROUTE,
     TRUCK_GROUP_MANAGEMENT_ROUTE,
     TRUCK_MANAGEMENT_ROUTE, TRUCK_TYPE_MANAGEMENT_ROUTE,
@@ -70,6 +70,9 @@ const MaintenanceManagementView = lazy(() => import("./views/maintenance/mainten
 // Load System Management Views
 const SystemSettingsView = lazy(() => import('./views/system/system_settings_view.tsx'));
 const UserSettingsView = lazy(() => import('./views/system/user_settings_view.tsx'));
+
+// Load Notificatoins Views
+const NotificationsView = lazy(() => import('./views/notifications_view.tsx'));
 
 // Load Error Views
 const View404 = lazy(() => import('./views/errors/view_404.tsx'));
@@ -177,6 +180,12 @@ function App() {
                     <Route
                         path={USER_SETTINGS_MANAGEMENT_ROUTE}
                         element={<UserSettingsView/>}
+                    />
+
+                    {/* Notifications */}
+                    <Route
+                        path={NOTIFICATIONS_ROUTE}
+                        element={<NotificationsView/>}
                     />
 
                     {/* Error Routes*/}
