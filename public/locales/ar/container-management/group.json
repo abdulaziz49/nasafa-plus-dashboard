@@ -6,8 +6,13 @@
 	"print-btn": "طباعه",
 	"pdf-btn": "تصدير الى PDF",
 	"excel-btn": "تصدير الى Excel",
-	"group-label": "مجموعة الحاوية",
-	"group-label-placeholder": "أدخل مجموعة الحاوية",
-	"group_code": "كود الحاوية",
-	"group-code-placeholder": "أدخل كود الحاوية"
+	"group-label": "اسم المجموعة",
+	"group-label-placeholder": "أدخل اسم مجموعة الحاويات",
+	"group_code": "رمز المجموعة",
+	"group-code-placeholder": "أدخل رمز مجموعة الحاويات",
+	"search-placeholder": "بحث عن ...",
+	"search-btn": "بحث",
+	"filter-name": "بالاسم",
+	"filter-code": "بالرمز"
+
 }

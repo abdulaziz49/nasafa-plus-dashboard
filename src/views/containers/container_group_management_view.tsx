@@ -12,7 +12,8 @@ import InputField from "../../components/inputs/input_field.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
 
 const ContainerGroupManagementView = () => {
-    const {t} = useTranslation('container-management/group');
+    const translateFilePath:string  = "container-management/group";
+    const {t} = useTranslation(translateFilePath);
     document.title = t('title');
     return (
         <>
@@ -94,9 +95,10 @@ const ContainerGroupManagementView = () => {
             {/*    withLabel={true}*/}
             {/*    classes="w-full px-2"*/}
             {/*/>*/}
-            <SearchForm/>
-
-            <br/>
+            <SearchForm translateFile={translateFilePath}>
+                <option selected>{t("filter-name")}</option>
+                <option>{t("filter-code")}</option>
+            </SearchForm>
             <Table/>
             <Pagination/>
         </>

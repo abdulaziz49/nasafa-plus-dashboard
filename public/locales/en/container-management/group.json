@@ -1,3 +1,17 @@
 {
-	"title": "Container Groups Management"
+	"title": "Container Groups Management",
+	"add-btn": "Add",
+	"del-btn": "Delete",
+	"edit-btn": "Edit",
+	"print-btn": "Print",
+	"pdf-btn": "Export to PDF",
+	"excel-btn": "Export to Excel",
+	"group-label": "Group Name",
+	"group-label-placeholder": "Enter container group name",
+	"group_code": "Group Code",
+	"group-code-placeholder": "Enter container group code",
+	"search-placeholder": "Search for ...",
+	"search-btn": "Search",
+	"filter-name": "by name",
+	"filter-code": "by code"
 }

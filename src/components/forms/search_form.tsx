@@ -1,29 +1,33 @@
 import InputField from "../inputs/input_field.tsx";
+import {useTranslation} from "react-i18next";
+import type {ComponentPropsWithoutRef} from "react";
 
+interface SearchFormType extends ComponentPropsWithoutRef<'div'> {
+    translateFile:string
+}
+const SearchForm = ({children,translateFile}:SearchFormType) => {
+    const {t} = useTranslation(translateFile);
 
-const SearchForm = () => {
-    return (<div className="join w-full ">
-        <div>
+    return (
+        <div className="join w-full">
+        <div className="w-full">
             <div>
                 {/*<input className="input join-item" placeholder="Search"/>*/}
                 <InputField
                     name="search_input"
                     // labelText={t('search-label')}
                     fieldType="text"
-                    // placeholder={t('search-placeholder')}
+                    placeholder={t('search-placeholder')}
                     withLabel={false}
-                    classes="w-full px-2 join-item"
+                    classes="w-full join-item m-0"S
                 />
             </div>
         </div>
-        <select className="select join-item ">
-            <option disabled selected>Filter</option>
-            <option>Sci-fi</option>
-            <option>Drama</option>
-            <option>Action</option>
+        <select className="select join-item bg-base-300">
+            {children}
         </select>
         <div className="indicator">
-            <button className="btn join-item">Search</button>
+            <button className="btn btn-primary join-item">{t("search-btn")}</button>
         </div>
     </div>)
 }
