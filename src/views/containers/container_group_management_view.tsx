@@ -12,7 +12,7 @@ import InputField from "../../components/inputs/input_field.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
 
 const ContainerGroupManagementView = () => {
-    const translateFilePath:string  = "container-management/group";
+    const translateFilePath: string = "container-management/group";
     const {t} = useTranslation(translateFilePath);
     document.title = t('title');
     return (
@@ -32,6 +32,8 @@ const ContainerGroupManagementView = () => {
                             placeholder={t('group-label-placeholder')}
                             withLabel={true}
                             classes="w-full w-full lg:col-span-6"
+                            changeEvent={() => {
+                            }}
                         />
                         <InputField
                             name="group_code"
@@ -40,6 +42,8 @@ const ContainerGroupManagementView = () => {
                             placeholder={t('group-code-placeholder')}
                             withLabel={true}
                             classes="w-full w-full lg:col-span-6"
+                            changeEvent={() => {
+                            }}
                         />
                     </div>
                     <br/>
