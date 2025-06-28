@@ -87,14 +87,7 @@ const ContainerGroupManagementView = () => {
 
                 </form>
             </FormContainer>
-            {/*<InputField*/}
-            {/*    name="search_input"*/}
-            {/*    labelText={t('search-label')}*/}
-            {/*    fieldType="text"*/}
-            {/*    placeholder={t('search-placeholder')}*/}
-            {/*    withLabel={true}*/}
-            {/*    classes="w-full px-2"*/}
-            {/*/>*/}
+
             <SearchForm translateFile={translateFilePath}>
                 <option selected>{t("filter-name")}</option>
                 <option>{t("filter-code")}</option>

@@ -1,4 +1,22 @@
 {
-	"title": "إدارة الحاويات"
-
+	"title": "إدارة الحاويات",
+	"container-name-label": "اسم الحاوية",
+	"container-name-placeholder": "أدخل اسم الحاوية",
+	"container-code-label": "رمز الحاوية",
+	"container-code-placeholder": "أدخل رمز الحاوية",
+	"container-group-label": "رمز مجموعة الحاويات",
+	"container-group-placeholder": "أدخل رمز مجموعة الحاويات",
+	"desc-label": "وصف الحاوية",
+	"desc-placeholder": "أدخل وصف الحاوية",
+	"add-btn": "إضافة",
+	"del-btn": "حذف",
+	"edit-btn": "تعديل",
+	"print-btn": "طباعه",
+	"pdf-btn": "تصدير الى PDF",
+	"excel-btn": "تصدير الى Excel",
+	"search-placeholder": "بحث عن ...",
+	"search-btn": "بحث",
+	"filter-name": "بالاسم",
+	"filter-code": "بالرمز",
+	"filter-group-code": "بالمجموعة"
 }

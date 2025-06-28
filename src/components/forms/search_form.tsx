@@ -19,7 +19,7 @@ const SearchForm = ({children,translateFile}:SearchFormType) => {
                     fieldType="text"
                     placeholder={t('search-placeholder')}
                     withLabel={false}
-                    classes="w-full join-item m-0"S
+                    classes="w-full join-item m-0"
                 />
             </div>
         </div>
