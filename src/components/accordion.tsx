@@ -42,6 +42,7 @@ const Accordion = ({
                        collapsed = false,
                        classes,
                        icon,
+    // accordionClickEvent
                    }: AccordionPropsType) => {
     // State to manage the collapse status of this specific accordion item
     const [isCollapsed, setIsCollapsed] = useState(collapsed);

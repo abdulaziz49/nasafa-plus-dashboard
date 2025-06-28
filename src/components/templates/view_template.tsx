@@ -1,4 +1,4 @@
-import { lazy, type PropsWithChildren, Suspense } from 'react';
+import {lazy, type PropsWithChildren, Suspense} from 'react';
 
 import getBrowserPageRoute from '../../controllers/utils/get_browser_page_route.ts';
 import DrawerButtonSkeleton from '../skeletons/drawer_button_skeleton.tsx';
@@ -11,7 +11,7 @@ const LazyDrawerContainer = lazy(
     () => import('../drawer/drawer_container.tsx'),
 );
 
-const ViewTemplate = ({ children }: PropsWithChildren) => {
+const ViewTemplate = ({children}: PropsWithChildren) => {
     const isRootRoute = getBrowserPageRoute('/');
 
     return (
@@ -25,26 +25,28 @@ const ViewTemplate = ({ children }: PropsWithChildren) => {
                 <div className="drawer-content flex flex-col items-center justify-center w-auto h-dvh m-0 p-0">
                     {/* Conditionally render DrawerContainer */}
                     {!isRootRoute && (
-                        <Suspense fallback={<DrawerButtonSkeleton />}>
-                            <DrawerButton />
+                        <Suspense fallback={<DrawerButtonSkeleton/>}>
+                            <DrawerButton/>
                         </Suspense>
                     )}
 
                     {/* Page content here */}
-                    <div className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 space-y-2">
+                    <div
+                        className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 space-y-2">
                         {children}
                     </div>
+                    <div className="fixed bottom-2 text-black ">Nasafa Plus</div>
                 </div>
                 {/* Conditionally render and lazy-load DrawerContainer */}
                 {!isRootRoute && (
                     <Suspense
                         fallback={
-                            <DrawerSkeleton classes={'w-full h-screen'} />
+                            <DrawerSkeleton classes={'w-full h-screen'}/>
                         }
                     >
                         {' '}
                         {/* Provide a fallback UI */}
-                        <LazyDrawerContainer />
+                        <LazyDrawerContainer/>
                     </Suspense>
                 )}
             </div>

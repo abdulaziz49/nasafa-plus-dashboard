@@ -10,6 +10,7 @@ import LocaleSwitcher from '../i18n/locale_switcher.tsx';
 import Nasafa from '../assets/img/nasafa_plus_logo.png';
 import LoginIcon from "../components/icons/login_icon.tsx";
 import {useState} from "react";
+import AppAxios from "../controllers/app_axios.ts";
 
 const LoginView = () => {
     const {t} = useTranslation('login');
@@ -17,7 +18,8 @@ const LoginView = () => {
     const [form, setForm] = useState({})
 
     const formSubmit = () => {
-        console.log("clicked")
+        // console.log("clicked")
+        AppAxios.get('/').then((response) => console.log(response))
         const formData = new FormData();
         // Loop over form state and append key-value pairs to FormData
         for (const key in form) {
