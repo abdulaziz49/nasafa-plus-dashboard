@@ -34,6 +34,8 @@ const ContainerManagementView = () => {
                             placeholder={t('container-name-placeholder')}
                             withLabel={true}
                             classes="w-full w-full lg:col-span-6"
+                            changeEvent={()=>{}}
+
                         />
                         <InputField
                             name="container_code"
@@ -42,6 +44,8 @@ const ContainerManagementView = () => {
                             placeholder={t('container-code-placeholder')}
                             withLabel={true}
                             classes="w-full w-full lg:col-span-6"
+                            changeEvent={()=>{}}
+
                         />
                         <Select name="group_id"
                                 labelText={t('container-group-label')}

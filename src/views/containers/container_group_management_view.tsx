@@ -32,14 +32,18 @@ const ContainerGroupManagementView = () => {
                             placeholder={t('group-label-placeholder')}
                             withLabel={true}
                             classes="w-full w-full lg:col-span-6"
+                            changeEvent={()=>{}}
+
                         />
                         <InputField
                             name="group_code"
-                            labelText={t('group_code')}
+                            labelText={t('group-code')}
                             fieldType="text"
                             placeholder={t('group-code-placeholder')}
                             withLabel={true}
                             classes="w-full w-full lg:col-span-6"
+                            changeEvent={()=>{}}
+
                         />
                     </div>
                     <br/>

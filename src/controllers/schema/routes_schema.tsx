@@ -1,6 +1,8 @@
 import {
-    CLIENT_GROUP_MANAGEMENT_ROUTE,
-    CLIENT_MANAGEMENT_ROUTE, CLIENT_TYPE_MANAGEMENT_ROUTE,
+    CLIENT_MANAGEMENT_ROUTE,
+    // CLIENT_GROUP_MANAGEMENT_ROUTE,
+    // CLIENT_MANAGEMENT_ROUTE,
+    // CLIENT_TYPE_MANAGEMENT_ROUTE,
     CONTAINER_GROUP_MANAGEMENT_ROUTE,
     CONTAINER_MANAGEMENT_ROUT,
     CONTAINER_TYPE_MANAGEMENT_ROUTE,
@@ -34,18 +36,21 @@ import {
     CONTRACT_ACCORDION_NAME,
     CONTRACT_GROUP_MANAGEMENT_NAME,
     CONTRACT_MANAGEMENT_NAME,
-    CLIENT_ACCORDION_NAME,
-    CLIENT_GROUP_MANAGEMENT_NAME,
+    // CLIENT_ACCORDION_NAME,
+    // CLIENT_GROUP_MANAGEMENT_NAME,
     CLIENT_MANAGEMENT_NAME,
     SYSTEM_ACCORDION_NAME,
     SYSTEM_SETTINGS_MANAGEMENT_NAME,
     USER_SETTINGS_MANAGEMENT_NAME,
     CONTAINER_TYPE_MANAGEMENT_NAME,
     TRUCK_TYPE_MANAGEMENT_NAME,
-    CLIENT_TYPE_MANAGEMENT_NAME, CONTRACT_TYPE_MANAGEMENT_NAME, MAINTENANCE_TYPE_MANAGEMENT_NAME,
+    // CLIENT_TYPE_MANAGEMENT_NAME,
+    CONTRACT_TYPE_MANAGEMENT_NAME,
+    MAINTENANCE_TYPE_MANAGEMENT_NAME,
+
 } from '../../routes/routes_names.ts';
 import {
-    ClientIcon,
+    // ClientIcon,
     ContainerIcon, ContractIcon,
     DashboardIcon,
     MaintenanceIcon, SettingsIcon,
@@ -121,24 +126,33 @@ const RoutesSchema = [
     },
 
     // Client Management Routing Schema
+
+    // {
+    //     accordionName: CLIENT_ACCORDION_NAME,
+    //     accordionIcon: <ClientIcon classes="m-0 -ms-2 me-2"/>,
+    //     childs: [
+    //         {
+    //             routeName: CLIENT_GROUP_MANAGEMENT_NAME,
+    //             routeURL: CLIENT_GROUP_MANAGEMENT_ROUTE,
+    //         },
+    //         {
+    //             routeName: CLIENT_TYPE_MANAGEMENT_NAME,
+    //             routeURL: CLIENT_TYPE_MANAGEMENT_ROUTE,
+    //         },
+    //         {
+    //             routeName: CLIENT_MANAGEMENT_NAME,
+    //             routeURL: CLIENT_MANAGEMENT_ROUTE,
+    //         },
+    //     ],
+    // },
+
+    // ---------------------
     {
-        accordionName: CLIENT_ACCORDION_NAME,
-        accordionIcon: <ClientIcon classes="m-0 -ms-2 me-2"/>,
-        childs: [
-            {
-                routeName: CLIENT_GROUP_MANAGEMENT_NAME,
-                routeURL: CLIENT_GROUP_MANAGEMENT_ROUTE,
-            },
-            {
-                routeName: CLIENT_TYPE_MANAGEMENT_NAME,
-                routeURL: CLIENT_TYPE_MANAGEMENT_ROUTE,
-            },
-            {
-                routeName: CLIENT_MANAGEMENT_NAME,
-                routeURL: CLIENT_MANAGEMENT_ROUTE,
-            },
-        ],
+        routeName: CLIENT_MANAGEMENT_NAME,
+        routeIcon: <DashboardIcon classes="-ms-1"/>,
+        routeURL: CLIENT_MANAGEMENT_ROUTE,
     },
+
 
     // Contract Management Routing Schema
     {

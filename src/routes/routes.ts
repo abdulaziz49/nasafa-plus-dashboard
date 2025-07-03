@@ -28,6 +28,7 @@ export const CLIENT_GROUP_MANAGEMENT_ROUTE = '/client-group';
 export const CLIENT_TYPE_MANAGEMENT_ROUTE = '/client-type';
 export const CLIENT_MANAGEMENT_ROUTE = '/client';
 
+
 // Maintenance Management Routes
 export const MAINTENANCE_GROUP_MANAGEMENT_ROUTE = '/maintenance-group';
 export const MAINTENANCE_TYPE_MANAGEMENT_ROUTE = '/maintenance-type';

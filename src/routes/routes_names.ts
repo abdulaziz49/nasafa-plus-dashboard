@@ -26,6 +26,9 @@ export const CLIENT_GROUP_MANAGEMENT_NAME = 'client-group';
 export const CLIENT_TYPE_MANAGEMENT_NAME = 'client-type';
 export const CLIENT_MANAGEMENT_NAME = 'client-management';
 
+export const CLIENT_NAME = 'client-view'
+
+
 // Contract Route Names
 export const CONTRACT_ACCORDION_NAME = 'contract-accordion';
 export const CONTRACT_GROUP_MANAGEMENT_NAME = 'contract-group';
