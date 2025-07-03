@@ -32,6 +32,7 @@ const ContractManagementView = () => {
 							placeholder={t('group-label-placeholder')}
 							withLabel={true}
 							classes="w-full w-full lg:col-span-6"
+							changeEvent={()=>{}}
 						/>
 						<InputField
 							name="group_code"
@@ -40,6 +41,7 @@ const ContractManagementView = () => {
 							placeholder={t('group-code-placeholder')}
 							withLabel={true}
 							classes="w-full w-full lg:col-span-6"
+							changeEvent={()=>{}}
 						/>
 					</div>
 					<br/>

@@ -20,6 +20,7 @@ const SearchForm = ({children,translateFile}:SearchFormType) => {
                     placeholder={t('search-placeholder')}
                     withLabel={false}
                     classes="w-full join-item m-0"
+                    changeEvent={()=>{}}
                 />
             </div>
         </div>
