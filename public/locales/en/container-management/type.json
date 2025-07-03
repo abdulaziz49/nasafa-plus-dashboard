@@ -1,3 +1,22 @@
 {
-  "title": "Container Type Management"
+  "title": "Container Type Management",
+  "add-btn": "Add",
+  "del-btn": "Delete",
+  "edit-btn": "Edit",
+  "print-btn": "Print",
+  "pdf-btn": "Export to PDF",
+  "excel-btn": "Export to Excel",
+
+  "type-name-label": "Container Type",
+  "type-name-placeholder": "Enter container type",
+  "type-code-label": "Type Code",
+  "type-code-placeholder": "Enter type code",
+  "type-description-label": "Type Description",
+  "type-description-placeholder": "Enter the type description",
+  "search-label": "Search",
+  "search-placeholder": "Search for ...",
+  "search-btn": "Search",
+
+  "type-name": "by name",
+  "type-code": "by code"
 }
