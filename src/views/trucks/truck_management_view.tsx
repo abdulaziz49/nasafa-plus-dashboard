@@ -1,22 +1,34 @@
 import { useTranslation } from 'react-i18next';
+import   { useState } from 'react';
+import SearchBar from '../../components/truckscomponent/SearchBar.tsx';
+import Pagination from '../../components/pagination.tsx';
+import TableManagement from '../../components/truckscomponent/table_management.tsx';
 
 const TruckManagementView = () => {
 	const { t } = useTranslation('truck-management/truck');
+	 const [search, setSearch] = useState<string>('');
 	document.title = t('title');
 	return (
-		<div className="hero bg-base-200 max-h-screen">
-			<div className="hero-content text-center">
-				<div className="max-w-md">
-					<h1 className="text-5xl font-bold">{t('title')}</h1>
-					<p className="py-6">
-						Provident cupiditate voluptatem et in. Quaerat fugiat ut
-						assumenda excepturi exercitationem quasi. In deleniti
-						eaque aut repudiandae et a id nisi.
-					</p>
-					<button className="btn btn-primary">Get Started</button>
-				</div>
-			</div>
+		<>
+		<h1 className="text-5xl font-bold">{t('title')}</h1>
+		
+		<div className="flex gap-6">
+							<label className="   p-l-0 text-white p-9 rounded" htmlFor="">البحث</label>
+
+			 <div className="p-4 flex gap-6">
+      <SearchBar
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        onClear={() => setSearch('')}
+      />
+    </div>
 		</div>
+		
+			<TableManagement/>
+			<Pagination />
+		
+		</>			
+		 
 	);
 };
 
