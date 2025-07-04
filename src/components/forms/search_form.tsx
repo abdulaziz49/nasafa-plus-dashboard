@@ -1,6 +1,6 @@
 import InputField from "../inputs/input_field.tsx";
 import {useTranslation} from "react-i18next";
-import type {ComponentPropsWithoutRef} from "react";
+import type {ChangeEvent, ComponentPropsWithoutRef} from "react";
 
 interface SearchFormType extends ComponentPropsWithoutRef<'div'> {
     translateFile:string
@@ -14,13 +14,14 @@ const SearchForm = ({children,translateFile}:SearchFormType) => {
             <div>
                 {/*<input className="input join-item" placeholder="Search"/>*/}
                 <InputField
-                    name="search_input"
-                    // labelText={t('search-label')}
-                    fieldType="text"
-                    placeholder={t('search-placeholder')}
-                    withLabel={false}
-                    classes="w-full join-item m-0"
-                />
+                        name="search_input"
+                        // labelText={t('search-label')}
+                        fieldType="text"
+                        placeholder={t('search-placeholder')}
+                        withLabel={false}
+                        classes="w-full join-item m-0" changeEvent={function (event: ChangeEvent<HTMLInputElement>): void {
+                            throw new Error("Function not implemented.");
+                        } }                />
             </div>
         </div>
         <select className="select join-item bg-base-300">
