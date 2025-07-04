@@ -35,7 +35,7 @@ i18n
 		// dev console.
 		debug: true,
 		// Define your namespaces. 'login' is a good start.
-		// ns: namespaces,
+		ns: namespaces,
 
 		// This is where i18next-http-backend takes over.
 		// You don't put file paths in 'resources'.

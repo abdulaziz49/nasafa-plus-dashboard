@@ -5,7 +5,7 @@ interface LazyImageType {
     alt: string,
     src: string,
     placeholder?: ReactElement,
-    classes?: string
+    classes?: string,
 }
 
 function LazyImage({alt, src, placeholder, classes}: LazyImageType) {

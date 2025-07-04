@@ -1,9 +1,23 @@
 # Nasafa Plus Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Packages
+- ViteJS >= v6.3.5
+- ReactJS >= v19.1.0
+- TypeScript >= v5.8.3 
+- TailwindCSS >= v4.1.10
+- Daisy UI >= v5.0.43
+- Axios >= v1.10.0
+- i18next >= v25.2.1
+- React Redux >= v9.2.0
+- React Router DOM >= v7.6.2
+- React Lazy Load Image >= v1.6.3
 
-Currently, two official plugins are available:
+## How to run this code on local dev environment
 
+```Bash
+npm install # Install packages required
+npm run dev # Run vite local server
+```
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
