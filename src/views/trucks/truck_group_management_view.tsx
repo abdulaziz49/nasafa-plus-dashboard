@@ -1,23 +1,42 @@
-import { useTranslation } from 'react-i18next';
+import SearchForm from "../../components/forms/search_form.tsx";
+import Pagination from "../../components/pagination.tsx";
+import { useTranslation } from "react-i18next";
+import TableGroup from "../../components/truckscomponent/table_group.tsx";
+import AddButton from "../../components/buttons/crud_buttons/add_button.tsx";
 
 const TruckGroupManagementView = () => {
-	const { t } = useTranslation('truck-management/group');
-	document.title = t('title');
-	return (
-		<div className="hero bg-base-200 max-h-screen">
-			<div className="hero-content text-center">
-				<div className="max-w-md">
-					<h1 className="text-5xl font-bold">{t('title')}</h1>
-					<p className="py-6">
-						Provident cupiditate voluptatem et in. Quaerat fugiat ut
-						assumenda excepturi exercitationem quasi. In deleniti
-						eaque aut repudiandae et a id nisi.
-					</p>
-					<button className="btn btn-primary">Get Started</button>
-				</div>
-			</div>
-		</div>
-	);
+  const { t } = useTranslation("truck-management/group");
+  const translateFilePath: string = "container-management/group";
+
+  document.title = t("title");
+  return (
+    <>
+      <h1 className="text-2xl lg:text-4xl text-center font-bold mb-0.5 mt-8 md:mt-4 lg:mb-2">
+        {t("title")}
+      </h1>
+      <br />
+      <div className="flex">
+        <div className="w-33 flex-none ...">
+          {" "}
+          <AddButton
+            classes="btn-primary btn-wide btn-wide order-1"
+            text={t(" اضافة مجموعة")}
+            clickEvent={() => {}}
+          />
+        </div>
+        <div className=" w-255 flex-1 ...">
+          {" "}
+          <SearchForm translateFile={translateFilePath}>
+            <option selected>{t("filter-name")}</option>
+            <option>{t("filter-code")}</option>
+          </SearchForm>
+        </div>
+      </div>
+
+      <TableGroup />
+      <Pagination />
+    </>
+  );
 };
 
 export default TruckGroupManagementView;

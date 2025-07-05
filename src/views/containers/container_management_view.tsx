@@ -14,7 +14,7 @@ import Textarea from "../../components/inputs/textarea.tsx";
 import Select from "../../components/inputs/select.tsx";
 
 const ContainerManagementView = () => {
-    const translateFilePath: string = 'container-management/container';
+    const translateFilePath:string = 'container-management/container';
     const {t} = useTranslation(translateFilePath);
     document.title = t('title');
     return (
@@ -49,12 +49,12 @@ const ContainerManagementView = () => {
                         />
                         <Select name="group_id"
                                 labelText={t('container-group-label')}
-                            // placeholder={t('container-group-placeholder')}
+                                // placeholder={t('container-group-placeholder')}
                                 withLabel={true}
                                 classes="w-full w-full lg:col-span-6">
-                            <option selected>group 1</option>
-                            <option>group 2</option>
-                            <option>group 3</option>
+                        <option selected >group 1</option>
+                        <option>group 2</option>
+                        <option>group 3</option>
                         </Select>
 
                         <Textarea

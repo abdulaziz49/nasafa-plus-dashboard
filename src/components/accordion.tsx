@@ -34,6 +34,7 @@ interface AccordionPropsType extends ComponentPropsWithoutRef<'div'> {
     collapsed?: boolean; // Initial collapse state
     classes?: string; // Additional CSS classes
     icon?: ReactNode; // New prop for the icon component
+    titleClasses?: string,
 }
 
 const Accordion = ({
@@ -42,7 +43,8 @@ const Accordion = ({
                        collapsed = false,
                        classes,
                        icon,
-    // accordionClickEvent
+                       titleClasses,
+                       // accordionClickEvent
                    }: AccordionPropsType) => {
     // State to manage the collapse status of this specific accordion item
     const [isCollapsed, setIsCollapsed] = useState(collapsed);
@@ -81,7 +83,7 @@ const Accordion = ({
                 but ensure the internal state logic is sound.
             */}
             <div
-                className="collapse-title flex flex-row items-center space-x-2 justify-start w-full"
+                className={`collapse-title flex flex-row items-center space-x-2 w-auto justify-start ${titleClasses}`}
                 onClick={() => inputRef.current?.click()}
             >
                 {icon}{title}

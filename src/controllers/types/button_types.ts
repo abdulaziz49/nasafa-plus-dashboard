@@ -1,6 +1,6 @@
 import type {ComponentPropsWithoutRef, MouseEventHandler} from "react";
 
-export interface CrudButtonType {
+export interface CrudButtonType{
     clickEvent: MouseEventHandler<HTMLButtonElement>,
     text?:string
     classes?: string

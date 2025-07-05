@@ -22,6 +22,7 @@ import {
 import useLocalizeDocumentAttributes from './i18n/use_localize_document_attributes.ts';
 
 import ViewTemplate from './components/templates/view_template.tsx';
+import {ToastContainer} from "react-toastify/unstyled";
 
 // Load General Views
 const DashboardView = lazy(() => import('./views/dashboard_view.tsx'));
@@ -192,6 +193,7 @@ function App() {
                     <Route path="*" element={<View404/>}/>
                 </Routes>
             </Suspense>
+            <ToastContainer/>
         </ViewTemplate>
     );
 }

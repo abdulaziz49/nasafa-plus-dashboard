@@ -113,7 +113,7 @@ const DrawerContainer = () => {
                     className="drawer-overlay"
                 ></label>
                 <div
-                    className="bg-primary text-base-content w-80 p-4 flex flex-col justify-between lg:rounded-xl h-full">
+                    className="bg-primary text-base-content w-80 p-4 flex flex-col justify-between lg:rounded-md h-full">
                     <LazyImage classes="mb-4" alt={'Nasafa plus logo'} src={Nasafa}/>
                     <div className="w-full flex-grow overflow-y-auto">
                         <ul className="menu w-full flex flex-col">

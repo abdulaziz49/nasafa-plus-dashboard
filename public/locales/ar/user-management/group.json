@@ -7,7 +7,11 @@
 	"add-btn": "إضافة",
 	"del-btn": "حذف",
 	"edit-btn": "تعديل",
+	"refresh-btn": "تحديث",
 	"print-btn": "طباعه",
-	"pdf-btn": "تصدير الى PDF",
-	"excel-btn": "تصدير الى Excel"
+	"export-dropdown": "تصدير الى",
+	"pdf-btn": "PDF",
+	"excel-btn": "Excel",
+	"search-placeholder": "بحث عن",
+	"filter-name": "بالاسم"
 }
