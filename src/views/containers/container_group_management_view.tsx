@@ -6,10 +6,11 @@ import DeleteButton from "../../components/buttons/crud_buttons/delete_button.ts
 import PrintButton from "../../components/buttons/crud_buttons/print_button.tsx";
 import PDFButton from "../../components/buttons/crud_buttons/pdf_button.tsx";
 import ExcelButton from "../../components/buttons/crud_buttons/excel_button.tsx";
-import Table from "../../components/table.tsx";
+import DataGrid from "../../components/data_grid.tsx";
 import Pagination from "../../components/pagination.tsx";
 import InputField from "../../components/inputs/input_field.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
+import {empColumnDefs, empRowData} from "../../data/employes.ts";
 
 const ContainerGroupManagementView = () => {
     const translateFilePath: string = "container-management/group";
@@ -96,7 +97,7 @@ const ContainerGroupManagementView = () => {
                 <option selected>{t("filter-name")}</option>
                 <option>{t("filter-code")}</option>
             </SearchForm>
-            <Table/>
+            <DataGrid columnDefs={empColumnDefs} rowData={empRowData}/>
             <Pagination/>
         </>
     );

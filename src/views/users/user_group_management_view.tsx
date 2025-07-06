@@ -1,7 +1,7 @@
 import FormContainer from '../../components/form_container.tsx';
 import InputField from '../../components/inputs/input_field.tsx';
 import Textarea from '../../components/inputs/textarea.tsx';
-import Table from '../../components/table.tsx';
+import DataGrid from '../../components/data_grid.tsx';
 import AddButton from '../../components/buttons/crud_buttons/add_button.tsx';
 import EditButton from '../../components/buttons/crud_buttons/edit_button.tsx';
 import DeleteButton from '../../components/buttons/crud_buttons/delete_button.tsx';
@@ -148,7 +148,7 @@ const UserGroupManagementView = () => {
                     </li>
                 </Dropdown>
             </div>
-            <Table/>
+            <DataGrid/>
             <Pagination/>
             <ToastContainer/>
         </>
