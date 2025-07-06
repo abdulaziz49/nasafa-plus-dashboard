@@ -1,9 +1,16 @@
+import {useRef} from "react";
+
 export default function ErrorMessageModal() {
+    const closeBtnRef = useRef(null)
+
     return (
         <>
-            <button className="btn" onClick={() => document.getElementById('error-modal').showModal()}>open modal
+            <button className="btn" onClick={() => {
+                // @ts-expect-error showModal Not recognizable
+                closeBtnRef.current!.showModal();
+            }}>open modal
             </button>
-            <dialog id="error-modal" className="modal modal-bottom sm:modal-middle">
+            <dialog ref={closeBtnRef} id="error-modal" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Hello!</h3>
                     <p className="py-4">Press ESC key or click the button below to close</p>

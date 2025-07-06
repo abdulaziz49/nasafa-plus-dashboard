@@ -88,7 +88,7 @@ function App() {
                 <Routes>
                     {/* General Routes*/}
                     <Route path={LOGIN_ROUTE} index element={<LoginView/>}/>
-                    <Route element={<ProtectedRouting allowedRoles={"admin"}/>}>
+                    <Route element={<ProtectedRouting/>}>
 
                         <Route path={DASHBOARD_ROUTE} element={<DashboardView/>}/>
 

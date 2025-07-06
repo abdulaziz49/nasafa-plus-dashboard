@@ -10,7 +10,7 @@ import LocaleSwitcher from '../i18n/locale_switcher.tsx';
 import Nasafa from '../assets/img/nasafa_plus_logo.png';
 import LoginIcon from "../components/icons/login_icon.tsx";
 import {useState} from "react";
-import AppAxios from "../controllers/app_axios.ts";
+// import AppAxios from "../controllers/app_axios.ts";
 
 const LoginView = () => {
     const {t} = useTranslation('login');
@@ -19,19 +19,21 @@ const LoginView = () => {
 
     const formSubmit = () => {
         // console.log("clicked")
-        AppAxios.get('/').then((response) => console.log(response))
-        const formData = new FormData();
-        // Loop over form state and append key-value pairs to FormData
-        for (const key in form) {
-            formData.append(key, form[key]);
-        }
-        // At this point, `formData` contains your username and password.
-        // You would typically send this data to an authentication API.
-        // For demonstration, let's log it:
-        // You can iterate over formData entries to see the data
-        for (const pair of formData.entries()) {
-            console.log(`${pair[0]}: ${pair[1]}`);
-        }
+        // AppAxios.get('/').then((response) => console.log(response))
+        // const formData = new FormData();
+        // // Loop over form state and append key-value pairs to FormData
+        // for (const key in form) {
+        //     formData.append(key, form[key]);
+        // }
+        // // At this point, `formData` contains your username and password.
+        // // You would typically send this data to an authentication API.
+        // // For demonstration, let's log it:
+        // // You can iterate over formData entries to see the data
+        // for (const pair of formData.entries()) {
+        //     console.log(`${pair[0]}: ${pair[1]}`);
+        // }
+
+        console.log(form)
 
         // After successful submission (e.g., API call returns success), navigate:
         navigate('/dashboard');

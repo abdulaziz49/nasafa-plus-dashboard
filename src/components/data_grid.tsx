@@ -782,7 +782,7 @@
 //
 // export default DataGrid
 
-import React, {type ReactElement} from "react"; // Only need React, no useState, useRef, useMemo, useCallback for this simplified version
+// import React, {type ReactElement} from "react"; // Only need React, no useState, useRef, useMemo, useCallback for this simplified version
 import {
     AllCommunityModule,
     ModuleRegistry,
@@ -791,7 +791,7 @@ import {
     themeQuartz
 } from "ag-grid-community";
 import {AgGridReact} from "ag-grid-react";
-import {empColumnDefs, empRowData, type UserData} from "../data/employes.ts";
+import {empColumnDefs, empRowData} from "../data/employes.ts";
 
 // Register AG Grid modules (important for functionality)
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -802,13 +802,14 @@ const themeLightCold = themeQuartz.withPart(colorSchemeLightCold);
 const themeDarkBlue = themeQuartz.withPart(colorSchemeDarkBlue);
 
 // Define the interface for the props DataGrid will accept
-interface DataGridProps {
-    columnDefs: object[]; // AG Grid's type for column definitions
-    rowData: object[]; // Using 'any[]' for generic row data, you can make this more specific if needed
-    // You could add other optional props here, like enableRtl, defaultColDef, etc.
-}
+// interface DataGridProps {
+//     columnDefs: object[]; // AG Grid's type for column definitions
+//     rowData: object[]; // Using 'any[]' for generic row data, you can make this more specific if needed
+//     // You could add other optional props here, like enableRtl, defaultColDef, etc.
+// }
 
-const DataGrid: React.FC<DataGridProps> = ({columnDefs, rowData}:DataGridProps):ReactElement => {
+// const DataGrid: React.FC<DataGridProps> = ({columnDefs, rowData}:DataGridProps):ReactElement => {
+const DataGrid = () => {
     // Default column definition for all columns, can be overridden by individual columnDefs
     const defaultColDef: object = {
         editable: false,

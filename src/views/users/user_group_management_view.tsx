@@ -4,7 +4,7 @@ import Textarea from '../../components/inputs/textarea.tsx';
 import DataGrid from '../../components/data_grid.tsx';
 import AddButton from '../../components/buttons/crud_buttons/add_button.tsx';
 import EditButton from '../../components/buttons/crud_buttons/edit_button.tsx';
-import DeleteButton from '../../components/buttons/crud_buttons/delete_button.tsx';
+// import DeleteButton from '../../components/buttons/crud_buttons/delete_button.tsx';
 import PrintButton from '../../components/buttons/crud_buttons/print_button.tsx';
 import PDFButton from '../../components/buttons/crud_buttons/pdf_button.tsx';
 import ExcelButton from '../../components/buttons/crud_buttons/excel_button.tsx';

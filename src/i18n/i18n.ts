@@ -33,7 +33,7 @@ i18n
 
 		// Enables useful output in the browser’s
 		// dev console.
-		debug: !process.env.NODE_ENV == "development" ? true : false,
+		debug: process.env.NODE_ENV != "development",
 		// Define your namespaces. 'login' is a good start.
 		ns: namespaces,
 

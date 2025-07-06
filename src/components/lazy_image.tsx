@@ -1,3 +1,4 @@
+// @ts-ignore
 import {LazyLoadImage} from 'react-lazy-load-image-component'
 import type {ReactElement} from "react";
 

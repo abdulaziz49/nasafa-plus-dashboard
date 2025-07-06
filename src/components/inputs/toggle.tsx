@@ -67,7 +67,7 @@ interface ToggleType
 	name: string;
 	withCheckMark?: boolean; // Made optional if you're using custom icons
 	labelText?: string;
-	labelClasses?: string; // Classes for the label
+	// labelClasses?: string; // Classes for the label
 	withLabel?: boolean;
 	classes?: string;
 	checkedIcon?: ReactElement;
@@ -80,7 +80,7 @@ const Toggle = ({
 	name,
 	withCheckMark = false, // Default to false
 	labelText,
-	labelClasses = '', // Default to empty string for label classes
+	// labelClasses, // Default to empty string for label classes
 	classes,
 	withLabel = false, // Default to false
 	checkedIcon,

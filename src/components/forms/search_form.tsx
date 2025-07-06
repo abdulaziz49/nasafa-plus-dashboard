@@ -2,7 +2,7 @@ import InputField from "../inputs/input_field.tsx";
 import {useTranslation} from "react-i18next";
 import type {ComponentPropsWithoutRef} from "react";
 import {SearchIcon} from "../icons/crud_icons.tsx";
-import Select from "../inputs/select.tsx";
+// import Select from "../inputs/select.tsx";
 
 interface SearchFormType extends ComponentPropsWithoutRef<'div'> {
     translateFile: string,

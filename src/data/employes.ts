@@ -1,12 +1,12 @@
-interface UserData {
-    id: number;
-    Name: string;
-    Job: string;
-    Company: string;
-    Location: string;
-    "Last Login": string;
-    "Favorite Color": string;
-}
+// interface UserData {
+//     id: number;
+//     Name: string;
+//     Job: string;
+//     Company: string;
+//     Location: string;
+//     "Last Login": string;
+//     "Favorite Color": string;
+// }
 
 export const empColumnDefs: object[] = [{field: "id"}, {field: "Name"}, {field: "Job"},{field: "Company"}, {field: "Location"}, {field: "Last Login"},{field: "Favorite Color"}];
 

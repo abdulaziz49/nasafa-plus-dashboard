@@ -10,7 +10,7 @@ import DataGrid from "../../components/data_grid.tsx";
 import Pagination from "../../components/pagination.tsx";
 import InputField from "../../components/inputs/input_field.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
-import {empColumnDefs, empRowData} from "../../data/employes.ts";
+// import {empColumnDefs, empRowData} from "../../data/employes.ts";
 
 const ContainerGroupManagementView = () => {
     const translateFilePath: string = "container-management/group";
@@ -97,7 +97,7 @@ const ContainerGroupManagementView = () => {
                 <option selected>{t("filter-name")}</option>
                 <option>{t("filter-code")}</option>
             </SearchForm>
-            <DataGrid columnDefs={empColumnDefs} rowData={empRowData}/>
+            <DataGrid/>
             <Pagination/>
         </>
     );

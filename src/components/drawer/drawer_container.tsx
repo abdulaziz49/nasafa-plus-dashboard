@@ -98,11 +98,11 @@ import LogoutButton from "../buttons/drawer_buttons/logout_button.tsx";
 import NotificationsButton from "../buttons/drawer_buttons/settings_button.tsx";
 import LazyImage from "../lazy_image.tsx";
 import Nasafa from '../../assets/img/nasafa_plus_logo.png'
-import {Suspense, useState} from "react";
+import {Suspense} from "react";
 
 const DrawerContainer = () => {
     const {t} = useTranslation('drawer');
-    const [drawerAccordionCollapseState, setDrawerAccordionCollapseState] = useState({})
+    // const [drawerAccordionCollapseState, setDrawerAccordionCollapseState] = useState({})
 
     return (
         <div className="drawer-side lg:p-4 z-3 lg:z-1 h-screen">

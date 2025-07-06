@@ -21,7 +21,7 @@ export default function LocaleSwitcher(): ReactElement {
 	useEffect(() => {
 		i18n.changeLanguage(checkStoredLang(i18n.language));
 		console.log(i18n.language);
-	}, []);
+	},[]);
 
 	const selectChangeEvent: ChangeEventHandler<HTMLSelectElement> = async (
 		e,
