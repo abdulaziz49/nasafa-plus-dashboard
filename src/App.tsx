@@ -23,6 +23,7 @@ import useLocalizeDocumentAttributes from './i18n/use_localize_document_attribut
 
 import ViewTemplate from './components/templates/view_template.tsx';
 import {ToastContainer} from "react-toastify/unstyled";
+import ProtectedRouting from "./controllers/auth/protected_routing.ts";
 
 // Load General Views
 const DashboardView = lazy(() => import('./views/dashboard_view.tsx'));
@@ -87,110 +88,113 @@ function App() {
                 <Routes>
                     {/* General Routes*/}
                     <Route path={LOGIN_ROUTE} index element={<LoginView/>}/>
-                    <Route path={DASHBOARD_ROUTE} element={<DashboardView/>}/>
+                    <Route element={<ProtectedRouting allowedRoles={"admin"}/>}>
 
-                    {/* User Routes*/}
-                    <Route
-                        path={USERS_GROUPS_MANAGEMENT_ROUTE}
-                        element={<UserGroupManagementView/>}
-                    />
-                    <Route
-                        path={USERS_MANAGEMENT_ROUTE}
-                        element={<UserManagementView/>}
-                    />
-                    <Route
-                        path={USERS_PERMISSION_MANAGEMENT_ROUTE}
-                        element={<UserPermissionManagementView/>}
-                    />
+                        <Route path={DASHBOARD_ROUTE} element={<DashboardView/>}/>
 
-                    {/* Container Routes*/}
-                    <Route
-                        path={CONTAINER_GROUP_MANAGEMENT_ROUTE}
-                        element={<ContainerGroupManagementView/>}
-                    />
-                    <Route
-                        path={CONTAINER_TYPE_MANAGEMENT_ROUTE}
-                        element={<ContainerTypeManagementView/>}
-                    />
-                    <Route
-                        path={CONTAINER_MANAGEMENT_ROUT}
-                        element={<ContainerManagementView/>}
-                    />
+                        {/* User Routes*/}
+                        <Route
+                            path={USERS_GROUPS_MANAGEMENT_ROUTE}
+                            element={<UserGroupManagementView/>}
+                        />
+                        <Route
+                            path={USERS_MANAGEMENT_ROUTE}
+                            element={<UserManagementView/>}
+                        />
+                        <Route
+                            path={USERS_PERMISSION_MANAGEMENT_ROUTE}
+                            element={<UserPermissionManagementView/>}
+                        />
 
-                    {/* Truck Routes*/}
-                    <Route
-                        path={TRUCK_GROUP_MANAGEMENT_ROUTE}
-                        element={<TruckGroupManagementView/>}
-                    />
-                    <Route
-                        path={TRUCK_TYPE_MANAGEMENT_ROUTE}
-                        element={<TruckTypeManagementView/>}
-                    />
-                    <Route
-                        path={TRUCK_MANAGEMENT_ROUTE}
-                        element={<TruckManagementView/>}
-                    />
+                        {/* Container Routes*/}
+                        <Route
+                            path={CONTAINER_GROUP_MANAGEMENT_ROUTE}
+                            element={<ContainerGroupManagementView/>}
+                        />
+                        <Route
+                            path={CONTAINER_TYPE_MANAGEMENT_ROUTE}
+                            element={<ContainerTypeManagementView/>}
+                        />
+                        <Route
+                            path={CONTAINER_MANAGEMENT_ROUT}
+                            element={<ContainerManagementView/>}
+                        />
 
-                    {/* Client Routes*/}
-                    <Route
-                        path={CLIENT_GROUP_MANAGEMENT_ROUTE}
-                        element={<ClientGroupManagementView/>}
-                    />
-                    <Route
-                        path={CLIENT_TYPE_MANAGEMENT_ROUTE}
-                        element={<ClientTypeManagementView/>}
-                    />
-                    <Route
-                        path={CLIENT_MANAGEMENT_ROUTE}
-                        element={<ClientManagementView/>}
-                    />
+                        {/* Truck Routes*/}
+                        <Route
+                            path={TRUCK_GROUP_MANAGEMENT_ROUTE}
+                            element={<TruckGroupManagementView/>}
+                        />
+                        <Route
+                            path={TRUCK_TYPE_MANAGEMENT_ROUTE}
+                            element={<TruckTypeManagementView/>}
+                        />
+                        <Route
+                            path={TRUCK_MANAGEMENT_ROUTE}
+                            element={<TruckManagementView/>}
+                        />
 
-                    {/* Contract Routes*/}
-                    <Route
-                        path={CONTRACT_GROUP_MANAGEMENT_ROUTE}
-                        element={<ContractGroupManagementView/>}
-                    />
-                    <Route
-                        path={CONTRACT_TYPE_MANAGEMENT_ROUTE}
-                        element={<ContractTypeManagementView/>}
-                    />
-                    <Route
-                        path={CONTRACT_MANAGEMENT_ROUTE}
-                        element={<ContractManagementView/>}
-                    />
+                        {/* Client Routes*/}
+                        <Route
+                            path={CLIENT_GROUP_MANAGEMENT_ROUTE}
+                            element={<ClientGroupManagementView/>}
+                        />
+                        <Route
+                            path={CLIENT_TYPE_MANAGEMENT_ROUTE}
+                            element={<ClientTypeManagementView/>}
+                        />
+                        <Route
+                            path={CLIENT_MANAGEMENT_ROUTE}
+                            element={<ClientManagementView/>}
+                        />
 
-                    {/* Maintenance Routes*/}
-                    <Route
-                        path={MAINTENANCE_GROUP_MANAGEMENT_ROUTE}
-                        element={<MaintenanceGroupManagementView/>}
-                    />
-                    <Route
-                        path={MAINTENANCE_TYPE_MANAGEMENT_ROUTE}
-                        element={<MaintenanceTypeManagementView/>}
-                    />
-                    <Route
-                        path={MAINTENANCE_MANAGEMENT_ROUTE}
-                        element={<MaintenanceManagementView/>}
-                    />
+                        {/* Contract Routes*/}
+                        <Route
+                            path={CONTRACT_GROUP_MANAGEMENT_ROUTE}
+                            element={<ContractGroupManagementView/>}
+                        />
+                        <Route
+                            path={CONTRACT_TYPE_MANAGEMENT_ROUTE}
+                            element={<ContractTypeManagementView/>}
+                        />
+                        <Route
+                            path={CONTRACT_MANAGEMENT_ROUTE}
+                            element={<ContractManagementView/>}
+                        />
 
-                    {/* System Management*/}
-                    <Route
-                        path={SYSTEM_SETTINGS_MANAGEMENT_ROUTE}
-                        element={<SystemSettingsView/>}
-                    />
-                    <Route
-                        path={USER_SETTINGS_MANAGEMENT_ROUTE}
-                        element={<UserSettingsView/>}
-                    />
+                        {/* Maintenance Routes*/}
+                        <Route
+                            path={MAINTENANCE_GROUP_MANAGEMENT_ROUTE}
+                            element={<MaintenanceGroupManagementView/>}
+                        />
+                        <Route
+                            path={MAINTENANCE_TYPE_MANAGEMENT_ROUTE}
+                            element={<MaintenanceTypeManagementView/>}
+                        />
+                        <Route
+                            path={MAINTENANCE_MANAGEMENT_ROUTE}
+                            element={<MaintenanceManagementView/>}
+                        />
 
-                    {/* Notifications */}
-                    <Route
-                        path={NOTIFICATIONS_ROUTE}
-                        element={<NotificationsView/>}
-                    />
+                        {/* System Management*/}
+                        <Route
+                            path={SYSTEM_SETTINGS_MANAGEMENT_ROUTE}
+                            element={<SystemSettingsView/>}
+                        />
+                        <Route
+                            path={USER_SETTINGS_MANAGEMENT_ROUTE}
+                            element={<UserSettingsView/>}
+                        />
 
-                    {/* Error Routes*/}
-                    <Route path="*" element={<View404/>}/>
+                        {/* Notifications */}
+                        <Route
+                            path={NOTIFICATIONS_ROUTE}
+                            element={<NotificationsView/>}
+                        />
+
+                        {/* Error Routes*/}
+                        <Route path="*" element={<View404/>}/>
+                    </Route>
                 </Routes>
             </Suspense>
             <ToastContainer/>
