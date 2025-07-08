@@ -791,7 +791,8 @@ import {
     themeQuartz
 } from "ag-grid-community";
 import {AgGridReact} from "ag-grid-react";
-import {empColumnDefs, empRowData} from "../data/employes.ts";
+// import {empColumnDefs, empRowData} from "../data/employes.ts";
+import type {FC, ReactElement} from "react";
 
 // Register AG Grid modules (important for functionality)
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -802,20 +803,23 @@ const themeLightCold = themeQuartz.withPart(colorSchemeLightCold);
 const themeDarkBlue = themeQuartz.withPart(colorSchemeDarkBlue);
 
 // Define the interface for the props DataGrid will accept
-// interface DataGridProps {
-//     columnDefs: object[]; // AG Grid's type for column definitions
-//     rowData: object[]; // Using 'any[]' for generic row data, you can make this more specific if needed
-//     // You could add other optional props here, like enableRtl, defaultColDef, etc.
-// }
+interface DataGridProps {
+    columnDefs: object[]; // AG Grid's type for column definitions
+    rowData: object[]; // Using 'any[]' for generic row data, you can make this more specific if needed
+    // gridRef: React.RefObject<AgGridReact | null>
+    fetchSelectedData: (data: []) => void
+    // You could add other optional props here, like enableRtl, defaultColDef, etc.
+}
 
-// const DataGrid: React.FC<DataGridProps> = ({columnDefs, rowData}:DataGridProps):ReactElement => {
-const DataGrid = () => {
+const DataGrid: FC<DataGridProps> = ({fetchSelectedData, columnDefs, rowData,}: DataGridProps):
+    ReactElement => {
+// const DataGrid = () => {
     // Default column definition for all columns, can be overridden by individual columnDefs
     const defaultColDef: object = {
         editable: false,
         flex: 1, // Columns will flex to fill available space
-        minWidth: 100,
-        filter: true, // Enable column filters by default
+        minWidth: 20,
+        filter: false, // Enable column filters by default
         // sortable: true, // Enable sorting by default
         // resizable: true, // Enable resizing by default
     };
@@ -826,17 +830,14 @@ const DataGrid = () => {
         ? themeLightCold
         : themeDarkBlue;
 
-    return (
-        // The outer div can still have its global styling
-        <div className="w-full md:m-1 lg:m-2 h-dvh bg-gray-100 dark:bg-gray-900 rounded-md shadow-lg flex flex-col">
-            <AgGridReact
-                theme={currentTheme} // Apply the determined theme
-                columnDefs={empColumnDefs} // Use columnDefs from props
-                rowData={empRowData} // Use rowData from props
-                enableRtl={document.dir === "rtl"} // Keep dynamic RTL support
-                defaultColDef={defaultColDef} // Apply default column definitions
-            />
-        </div>
+    return (<AgGridReact
+            theme={currentTheme} // Apply the determined theme
+            columnDefs={columnDefs} // Use columnDefs from props
+            rowData={rowData} // Use rowData from props
+            enableRtl={document.dir === "rtl"} // Keep dynamic RTL support
+            defaultColDef={defaultColDef} // Apply default column definitions
+            onRowSelected={(e) => fetchSelectedData(e.api.getSelectedRows() as [])}
+        />
     );
 };
 

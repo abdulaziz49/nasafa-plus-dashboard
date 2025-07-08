@@ -50,6 +50,7 @@ import {
 
 } from '../../routes/routes_names.ts';
 import {
+    ClientIcon,
     // ClientIcon,
     ContainerIcon, ContractIcon,
     DashboardIcon,
@@ -149,7 +150,7 @@ const RoutesSchema = [
     // ---------------------
     {
         routeName: CLIENT_MANAGEMENT_NAME,
-        routeIcon: <DashboardIcon classes="-ms-1"/>,
+        routeIcon: <ClientIcon classes="-ms-1"/>,
         routeURL: CLIENT_MANAGEMENT_ROUTE,
     },
 

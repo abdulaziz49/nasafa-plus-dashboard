@@ -21,7 +21,7 @@ export default function Dropdown({text, classes, bgColor, uniqueKey, children}: 
                 {text}
             </button>
 
-            <ul className={`dropdown menu w-52 p-0 rounded-box bg-${bgColor} shadow-sm`}
+            <ul className={`dropdown menu w-52 p-0 rounded-box bg-${bgColor}`}
                 popover="auto" id={uniqueKey} style={position}>
                 {children}
             </ul>

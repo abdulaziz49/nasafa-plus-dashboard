@@ -1,17 +1,18 @@
-interface TextPropsType {
+import type {ComponentPropsWithoutRef} from "react";
+
+interface TextPropsType extends ComponentPropsWithoutRef<"textarea"> {
     labelText?: string,
     withLabel?: boolean,
     placeholder?: string,
-    name: string,
-    classes?: string
+    classes?: string,
 }
 
-const Textarea = ({withLabel = false, labelText = '', placeholder = "", name, classes}: TextPropsType) => {
+const Textarea = ({withLabel = false, labelText = '', placeholder = "", classes, ...rest}: TextPropsType) => {
     return (
         <div className={'flex flex-col ' + classes}>
             {/* Conditionally render the label only if 'withLabel' is true */}
             {withLabel && <label className="label mb-2">{labelText}</label>}
-            <textarea name={name} className="textarea w-auto" placeholder={placeholder}/>
+            <textarea className="textarea w-auto" placeholder={placeholder} {...rest}/>
         </div>
     )
 }

@@ -22,7 +22,6 @@ import {
 import useLocalizeDocumentAttributes from './i18n/use_localize_document_attributes.ts';
 
 import ViewTemplate from './components/templates/view_template.tsx';
-import {ToastContainer} from "react-toastify/unstyled";
 import ProtectedRouting from "./controllers/auth/protected_routing.ts";
 
 // Load General Views
@@ -197,7 +196,6 @@ function App() {
                     </Route>
                 </Routes>
             </Suspense>
-            <ToastContainer/>
         </ViewTemplate>
     );
 }

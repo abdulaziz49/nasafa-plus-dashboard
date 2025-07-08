@@ -1,13 +1,12 @@
-import type {ChangeEventHandler} from "react";
+import type {   ComponentPropsWithoutRef} from "react";
 
-interface InputFieldPropsType {
+interface InputFieldPropsType extends ComponentPropsWithoutRef<"input"> {
     labelText?: string,
     withLabel?: boolean,
     fieldType: string,
     placeholder?: string,
     name: string,
     classes?: string,
-    changeEvent: ChangeEventHandler<HTMLInputElement>
 }
 
 const InputField = ({
@@ -17,14 +16,13 @@ const InputField = ({
                         placeholder,
                         name,
                         classes,
-                        changeEvent
+                        ...rest
                     }: InputFieldPropsType) => {
     return (
         <div className={'flex flex-col ' + classes}>
             {/* Conditionally render the label only if 'withLabel' is true */}
             {withLabel && <label className="label mb-2">{labelText}</label>}
-            <input type={fieldType} name={name} className="input w-auto" placeholder={placeholder}
-                   onChange={changeEvent}/>
+            <input type={fieldType} name={name} className="input w-auto" placeholder={placeholder} {...rest}/>
         </div>
     )
 }

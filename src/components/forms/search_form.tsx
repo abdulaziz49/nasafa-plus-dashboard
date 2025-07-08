@@ -2,6 +2,7 @@ import InputField from "../inputs/input_field.tsx";
 import {useTranslation} from "react-i18next";
 import type {ComponentPropsWithoutRef} from "react";
 import {SearchIcon} from "../icons/crud_icons.tsx";
+
 // import Select from "../inputs/select.tsx";
 
 interface SearchFormType extends ComponentPropsWithoutRef<'div'> {
@@ -25,12 +26,13 @@ const SearchForm = ({children, translateFile, containerClasses, filterChangeable
                     placeholder={t('search-placeholder')}
                     withLabel={false}
                     classes="w-full join-item"
-                    changeEvent={() => {
+                    onChange={() => {
                     }}
                 />
             </div>
             {/*</div>*/}
-            <select className="select join-item w-2/5 md:w-1/5 lg:w-2/7 xl:w-1/5 bg-base-300" disabled={filterChangeable}>
+            <select className="select join-item w-2/5 md:w-1/5 lg:w-2/7 xl:w-1/5 bg-base-300"
+                    disabled={filterChangeable}>
                 {children}
             </select>
             <div className="indicator">

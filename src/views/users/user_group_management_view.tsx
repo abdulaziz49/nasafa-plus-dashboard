@@ -16,10 +16,94 @@ import {ToastContainer} from "react-toastify/unstyled";
 import Dropdown from "../../components/dropdown.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
 import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.tsx";
+import {type ChangeEventHandler, type MouseEventHandler, useCallback, useState} from "react";
+import type {userGroupModel} from "../models/users_models.ts";
+import {userGroupTableColumn} from "../../controllers/tables_columns/users_tables_columns.ts";
+
+const initialFormState = {
+    id: 0,
+    group_name: "",
+    group_description: "",
+    user_creator: 1,
+}
 
 const UserGroupManagementView = () => {
     const translateFilePath = "user-management/group"
     const {t} = useTranslation(translateFilePath);
+
+    const [groupsData, setGroupsData] = useState<userGroupModel[]>([])
+    const [formData, setFormData] = useState<userGroupModel>(initialFormState)
+    // const gridRef = useRef(null)
+    // const [selectedID, setSelectedID] = useState<number>(0)
+
+    const inputChangeEvent: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
+        setFormData((formData) => ({...formData, [e.target.name]: e.target.value}))
+    }
+
+    // Use useCallback to memoize the onGridSelect function
+    const onGridSelect = useCallback((data: userGroupModel[]) => {
+        if (data.length > 0) {
+            // Set formData to the first selected item
+            setFormData(data[0]);
+            // Log the ID from the selected item
+            console.log("Selected ID:", data[0].id);
+        } else {
+            // If nothing is selected, clear the form or reset to initial state
+            setFormData(initialFormState);
+            console.log("No row selected.");
+        }
+    }, []); // Dependencies: initialFormState (if it could change, though it's constant)
+
+    const addGroupEvent: MouseEventHandler<HTMLButtonElement> = (e): boolean => {
+        e.preventDefault()
+        if (formData.group_name.trim().length > 0) {
+            console.log("added")
+            formData.id = groupsData.length + 1
+            setGroupsData((prevState) => ([...prevState, formData]))
+            setFormData(initialFormState)
+            toast.success("Added Successfully")
+            return true
+        }
+        return false
+    }
+
+    const editGroupEvent: MouseEventHandler<HTMLButtonElement> = useCallback((e): boolean => {
+        e.preventDefault();
+        // Ensure an item is selected and group_name is not empty
+        if (formData.id > 0 && formData.group_name.trim().length > 0) {
+            // --- FIX: Create a new array with the updated item ---
+            const updatedGroups = groupsData.map((element) => {
+                if (element.id === formData.id) {
+                    // Return a NEW object for the updated element
+                    return {
+                        ...element, // Keep existing properties
+                        group_name: formData.group_name,
+                        group_description: formData.group_description, // Corrected to formData.group_description
+                        user_creator: formData.user_creator,
+                    };
+                }
+                return element; // Return unchanged elements as they are
+            });
+            setGroupsData(updatedGroups); // Update state with the new array
+            setFormData(initialFormState); // Reset form
+            toast.success(t("edited_successfully"));
+            return true;
+        }
+        toast.error(t("select_item_and_fill_name")); // Provide user feedback for invalid action
+        return false;
+    }, [formData, groupsData, t]); // Dependencies: formData, groupsData, t for translation
+
+    // const deleteGroupEvent: MouseEventHandler<HTMLButtonElement> = (e: MouseEvent, id: number): boolean => {
+    //     e.preventDefault()
+    //     if (formData.group_name === "") {
+    //         groupsData.filter((element) => (element.id !== id))
+    //         setGroupsData(() => ([...groupsData]))
+    //         // setSelectedID(0)
+    //         toast("Deleted Successfully")
+    //         return true
+    //     }
+    //     return false
+    // }
 
     document.title = t('title');
     return (
@@ -39,9 +123,9 @@ const UserGroupManagementView = () => {
                             fieldType="text"
                             placeholder={t('group-placeholder')}
                             withLabel={true}
-                            classes="w-full "
-                            changeEvent={() => {
-                            }}
+                            classes="w-full"
+                            value={formData.group_name}
+                            onChange={inputChangeEvent}
                         />
                         <Textarea
                             name="group_description"
@@ -49,6 +133,8 @@ const UserGroupManagementView = () => {
                             withLabel={true}
                             labelText={t('desc-label')}
                             classes="w-full"
+                            value={formData.group_description}
+                            onChange={inputChangeEvent}
                         />
                     </div>
                     <br/>
@@ -58,18 +144,12 @@ const UserGroupManagementView = () => {
                             classes="btn-primary btn-wide order-1"
                             text={t('add-btn')}
                             // onClick={()=> {}}
-                            clickEvent={(e: React.MouseEvent<HTMLButtonElement>) => {
-                                e.preventDefault()
-                                console.log("clicked")
-                                // return <ErrorToast messageType="success"/>
-                                toast.success("success")
-                            }}
+                            clickEvent={addGroupEvent}
                         />
                         <EditButton
                             classes="btn-primary btn-wide order-3 md:order-2"
                             text={t('edit-btn')}
-                            clickEvent={() => {
-                            }}
+                            clickEvent={editGroupEvent}
                         />
                         {/*<DeleteButton*/}
                         {/*    classes="btn-primary btn-wide order-5  md:order-3"*/}
@@ -117,9 +197,9 @@ const UserGroupManagementView = () => {
                     }}
                 />
                 <SearchForm translateFile={translateFilePath}
-                            filterChangeable={false}
+                    // filterChangeable={false}
                             containerClasses="order-1 col-span-3 lg:order-2 lg:col-span-6 lg:col-end-9">
-                    <option selected>{t("filter-name")}</option>
+                    <option defaultChecked>{t("filter-name")}</option>
                     {/*<option>{t("filter-number")}</option>*/}
                 </SearchForm>
                 <PrintButton
@@ -148,7 +228,11 @@ const UserGroupManagementView = () => {
                     </li>
                 </Dropdown>
             </div>
-            <DataGrid/>
+
+            {/*The outer div can still have its global styling*/}
+            <div className="w-full md:m-1 lg:m-2 h-dvh bg-gray-100 dark:bg-gray-900 rounded-md shadow-lg flex flex-col">
+                <DataGrid fetchSelectedData={onGridSelect} columnDefs={userGroupTableColumn} rowData={groupsData}/>
+            </div>
             <Pagination/>
             <ToastContainer/>
         </>

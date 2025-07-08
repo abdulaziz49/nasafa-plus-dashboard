@@ -1,5 +1,17 @@
 ### GET request to example server
-GET http://localhost/nasafa-plus-api/public/index.php
-header: {
+GET https://nasafa-plus-api.test:8443/api/home
+
+###
+
+
+### POST request to example server for login
+POST https://nasafa-plus-api.test:8443/api/login/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
 }
+
 ###
