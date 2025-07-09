@@ -90,7 +90,7 @@
 
 import Accordion from '../accordion.tsx';
 import DrawerSkeleton from '../skeletons/drawer_skeleton.tsx';
-import RoutesSchema from '../../controllers/schema/routes_schema.tsx';
+import RoutesSchema from '../../routes/routes_schema.tsx';
 import {Link} from 'react-router-dom';
 // import {Suspense} from 'react';
 import {useTranslation} from 'react-i18next';

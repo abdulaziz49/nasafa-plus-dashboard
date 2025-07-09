@@ -150,7 +150,7 @@ import LocaleSwitcher from '../i18n/locale_switcher.tsx';
 import Nasafa from '../assets/img/nasafa_plus_logo.png';
 import LoginIcon from "../components/icons/login_icon.tsx";
 import {useState} from "react";
-import AppAxios, {unauthAxiosHeaderJson} from "../controllers/app_axios.ts"; // Import your custom Axios instance
+import AppAxios, {unauthAxiosHeaderJson} from "../utils/app_axios.ts"; // Import your custom Axios instance
 import axios from "axios"; // Keep if you use raw axios elsewhere, otherwise remove
 
 const LoginView = () => {

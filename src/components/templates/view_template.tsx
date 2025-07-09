@@ -1,6 +1,6 @@
 import {lazy, type PropsWithChildren, Suspense} from 'react';
 
-import getBrowserPageRoute from '../../controllers/utils/get_browser_page_route.ts';
+import getBrowserPageRoute from '../../utils/get_browser_page_route.ts';
 import DrawerButtonSkeleton from '../skeletons/drawer_button_skeleton.tsx';
 
 const DrawerButton = lazy(() => import('../menu/drawer_button.tsx')); // Import useLocation

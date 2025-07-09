@@ -1,7 +1,7 @@
 import FormContainer from '../../components/form_container.tsx';
 import InputField from '../../components/inputs/input_field.tsx';
 import Textarea from '../../components/inputs/textarea.tsx';
-import DataGrid from '../../components/data_grid.tsx';
+import DataGrid from '../../components/datagrid/datagrid.tsx';
 import AddButton from '../../components/buttons/crud_buttons/add_button.tsx';
 import EditButton from '../../components/buttons/crud_buttons/edit_button.tsx';
 // import DeleteButton from '../../components/buttons/crud_buttons/delete_button.tsx';
@@ -18,7 +18,7 @@ import SearchForm from "../../components/forms/search_form.tsx";
 import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.tsx";
 import {type ChangeEventHandler, type MouseEventHandler, useCallback, useState} from "react";
 import type {userGroupModel} from "../models/users_models.ts";
-import {userGroupTableColumn} from "../../controllers/tables_columns/users_tables_columns.ts";
+import {userGroupTableColumn} from "../../components/datagrid/column_definition/users_datagrid_columns.ts";
 
 const initialFormState = {
     id: 0,

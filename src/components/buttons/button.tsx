@@ -1,4 +1,4 @@
-import type { ButtonType } from '../../controllers/types/button_types.ts';
+import type { ButtonType } from '../../types/button_types.ts';
 
 const Button = ({
 	children,

@@ -18,11 +18,13 @@ import {
     USER_SETTINGS_MANAGEMENT_ROUTE,
     USERS_GROUPS_MANAGEMENT_ROUTE,
     USERS_MANAGEMENT_ROUTE, USERS_PERMISSION_MANAGEMENT_ROUTE,
-} from './routes/routes.ts';
+} from './routes/routes_paths.ts';
 import useLocalizeDocumentAttributes from './i18n/use_localize_document_attributes.ts';
 
 import ViewTemplate from './components/templates/view_template.tsx';
-import ProtectedRouting from "./controllers/auth/protected_routing.ts";
+// import ProtectedRoute from "./routes/auth/protected_route.tsx";
+// import {useDispatch, useSelector} from "react-redux";
+// import {fetchUser} from "./states/auth/auth_slice.ts";
 
 // Load General Views
 const DashboardView = lazy(() => import('./views/dashboard_view.tsx'));
@@ -81,13 +83,29 @@ const View404 = lazy(() => import('./views/errors/view_404.tsx'));
 function App() {
     useLocalizeDocumentAttributes();
 
+    // const dispatch = useDispatch();
+    // const {isAuthenticated, isLoading} = useSelector((state) => state.auth);
+
+    // Attempt to fetch user on initial app load to check existing session
+    // useEffect(() => {
+    //     // dispatch(fetchUser());
+    // }, [dispatch]);
+
+    // Simple PrivateRoute component
+    // const PrivateRoute = ({children}) => {
+    //     if (isLoading) {
+    //         return <div>Loading...</div>; // Or a spinner
+    //     }
+    //     return isAuthenticated ? children : <Navigate to="/login"/>;
+    // };
+
     return (
         <ViewTemplate>
             <Suspense fallback={<CircleLoading/>}>
                 <Routes>
                     {/* General Routes*/}
                     <Route path={LOGIN_ROUTE} index element={<LoginView/>}/>
-                    <Route element={<ProtectedRouting/>}>
+                    {/*<ProtectedRoute>*/}
 
                         <Route path={DASHBOARD_ROUTE} element={<DashboardView/>}/>
 
@@ -193,7 +211,7 @@ function App() {
 
                         {/* Error Routes*/}
                         <Route path="*" element={<View404/>}/>
-                    </Route>
+                    {/*</ProtectedRoute>*/}
                 </Routes>
             </Suspense>
         </ViewTemplate>

@@ -17,7 +17,7 @@ import {
     USER_SETTINGS_MANAGEMENT_ROUTE,
     USERS_GROUPS_MANAGEMENT_ROUTE,
     USERS_MANAGEMENT_ROUTE, USERS_PERMISSION_MANAGEMENT_ROUTE,
-} from '../../routes/routes_paths.ts';
+} from './routes_paths.ts';
 import {
     CONTAINER_GROUP_MANAGEMENT_NAME,
     CONTAINER_ACCORDION_NAME,
@@ -48,7 +48,7 @@ import {
     CONTRACT_TYPE_MANAGEMENT_NAME,
     MAINTENANCE_TYPE_MANAGEMENT_NAME,
 
-} from '../../routes/routes_names.ts';
+} from './routes_names.ts';
 import {
     ClientIcon,
     // ClientIcon,
@@ -57,7 +57,7 @@ import {
     MaintenanceIcon, SettingsIcon,
     TruckIcon,
     UserIcon
-} from "../../components/icons/drawer_icons.tsx";
+} from "../components/icons/drawer_icons.tsx";
 
 const RoutesSchema = [
     {

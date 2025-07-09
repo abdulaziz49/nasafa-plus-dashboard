@@ -8,7 +8,7 @@ import PrintButton from "../../components/buttons/crud_buttons/print_button.tsx"
 import PDFButton from "../../components/buttons/crud_buttons/pdf_button.tsx";
 import ExcelButton from "../../components/buttons/crud_buttons/excel_button.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
-import DataGrid from "../../components/data_grid.tsx";
+import DataGrid from "../../components/datagrid/datagrid.tsx";
 import Pagination from "../../components/pagination.tsx";
 import Textarea from "../../components/inputs/textarea.tsx";
 import Select from "../../components/inputs/select.tsx";

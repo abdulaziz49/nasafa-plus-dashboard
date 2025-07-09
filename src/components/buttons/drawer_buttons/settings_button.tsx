@@ -2,7 +2,7 @@ import Button from '../button.tsx';
 import {useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {NotificationIcon} from '../../icons/drawer_icons.tsx';
-import {NOTIFICATIONS_ROUTE} from "../../../routes/routes.ts";
+import {NOTIFICATIONS_ROUTE} from "../../../routes/routes_paths.ts";
 import {NOTIFICATIONS_NAME} from "../../../routes/routes_names.ts";
 
 const NotificationsButton = () => {
