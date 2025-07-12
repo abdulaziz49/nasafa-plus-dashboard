@@ -19,25 +19,7 @@ const groupData: Group[] = [
   { id: 10, code: "Zaneta Tewkesbury", name: "VP Marketing" },
   { id: 11, code: "Andy Tipple", name: "Librarian" },
 ];
-
-const ActionButtons = () => (
-  <div className="flex gap-8">
-    <button
-      className="bg-green-500 hover:bg-green-600 text-white p-2 rounded"
-      type="button"
-      title="تعديل"
-    >
-      <EditIcon />
-    </button>
-    <button
-      className="bg-red-500 hover:bg-red-600 text-white p-2 rounded"
-      type="button"
-      title="حذف"
-    >
-      <DeleteIcon />
-    </button>
-  </div>
-);
+ 
 
 const TableGroup = () => {
   return (
@@ -57,9 +39,7 @@ const TableGroup = () => {
               <th>{group.id}</th>
               <td>{group.code}</td>
               <td>{group.name}</td>
-              <td>
-                <ActionButtons />
-              </td>
+             <td>{group.name}</td>
             </tr>
           ))}
         </tbody>

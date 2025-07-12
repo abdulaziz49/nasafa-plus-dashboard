@@ -1,3 +1,21 @@
 {
-	"title": "إدارة الشاحنات"
+	"title": "إدارة الشاحنات",
+	"kruck-name-label": "اسم الشاحنة",
+	"kruck-name-placeholder": "أدخل اسم الشاحنة",
+	"kruck-code-label": "رمز الشاحنة",
+	"kruck-code-placeholder": "أدخل رمز الشاحنة",
+	"kruck-group-label": "رمز مجموعة الشاحنات",
+	"kruck-group-placeholder": "أدخل رمز مجموعة الشاحنات",
+	"desc-label": "وصف الشاحنة",
+	"desc-placeholder": "أدخل وصف الشاحنة",
+	"add-btn": "إضافة",
+	"edit-btn": "تعديل",
+	"print-btn": "طباعه",
+	"pdf-btn": "تصدير الى PDF",
+	"excel-btn": "تصدير الى Excel",
+	"search-placeholder": "بحث عن ...",
+	"search-btn": "بحث",
+	"filter-name": "بالاسم",
+	"filter-code": "بالرمز",
+	"filter-group-code": "بالمجموعة"
 }

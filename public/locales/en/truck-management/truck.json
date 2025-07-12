@@ -1,3 +1,26 @@
 {
-	"title": "Truck Management"
+	"title": "kruck Management",
+	"kruck-name-label": "kruck Name",
+	"kruck-name-placeholder": "Enter kruck name",
+	"kruck-code-label": "kruck Code",
+	"kruck-code-placeholder": "Enter kruck Code",
+	"kruck-group-label": "kruck Group Name",
+	"kruck-group-placeholder": "Enter kruck group name",
+	"desc-label": "kruck Description",
+	"desc-placeholder": "Enter kruck Description",
+	"add-btn": "Add",
+	"del-btn": "Delete",
+	"edit-btn": "Edit",
+	"print-btn": "Print",
+	"pdf-btn": "Export to PDF",
+	"excel-btn": "Export to Excel",
+	"group-label": "Group Name",
+	"group-label-placeholder": "Enter kruck group name",
+	"group_code": "Group Code",
+	"group-code-placeholder": "Enter kruck group code",
+	"search-placeholder": "Search for ...",
+	"search-btn": "Search",
+	"filter-name": "by name",
+	"filter-code": "by code",
+	"filter-group-code": "by group"
 }
