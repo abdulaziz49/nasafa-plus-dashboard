@@ -13,10 +13,10 @@ import namespaces from './namespaces.ts';
 // switcher.
 
 i18n
-	// Backend for loading translations
-	.use(Backend)
 	// Language detector
 	.use(LanguageDetector)
+	// Backend for loading translations
+	.use(Backend)
 	// Add React bindings as a plugin.
 	.use(initReactI18next)
 	// Initialize the i18next instance.
@@ -33,7 +33,7 @@ i18n
 
 		// Enables useful output in the browser’s
 		// dev console.
-		debug: process.env.NODE_ENV != "development",
+		debug: process.env.NODE_ENV === "development",
 		// Define your namespaces. 'login' is a good start.
 		ns: namespaces,
 
@@ -52,15 +52,15 @@ i18n
 		//     }
 		// },
 
-		backend: {
-			// This is the path where your translation files are located.
-			// i18next-http-backend will replace {{lng}} and {{ns}}
-			// to construct the full path.
-			// For example, if lng='ar' and ns='login', it might try to load:
-			// './locales/ar/login.json' or './public/locales/ar/login.json'
-			// Adjust this path based on where your translation JSON files actually reside.
-			loadPath: '/locales/{{lng}}/{{ns}}.json',
-		},
+		// backend: {
+		// 	// This is the path where your translation files are located.
+		// 	// i18next-http-backend will replace {{lng}} and {{ns}}
+		// 	// to construct the full path.
+		// 	// For example, if lng='ar' and ns='login', it might try to load:
+		// 	// './locales/ar/login.json' or './public/locales/ar/login.json'
+		// 	// Adjust this path based on where your translation JSON files actually reside.
+		// 	loadPath: '/locales/{{lng}}/{{ns}}.json',
+		// },
 
 		// Explicitly tell i18next our
 		// supported locales.
@@ -74,6 +74,9 @@ i18n
 		// it off in i18next.
 		interpolation: {
 			escapeValue: false,
+		},
+		react: {
+			useSuspense: true, // Enables React.Suspense for loading states
 		},
 	});
 

@@ -149,60 +149,44 @@ import {useTranslation} from 'react-i18next';
 import LocaleSwitcher from '../i18n/locale_switcher.tsx';
 import Nasafa from '../assets/img/nasafa_plus_logo.png';
 import LoginIcon from "../components/icons/login_icon.tsx";
-import {useState} from "react";
-import AppAxios, {unauthAxiosHeaderJson} from "../utils/app_axios.ts"; // Import your custom Axios instance
-import axios from "axios"; // Keep if you use raw axios elsewhere, otherwise remove
+import {type ChangeEvent, useEffect, useState} from "react";
+import {useAuthStore} from "../states/auth/auth_store.ts";
+// import AppAxios, {axiosHeaderJson} from "../utils/app_axios.ts"; // Import your custom Axios instance
+// import axios from "axios";
+// import {useAppDispatch, useAppSelector} from "../hooks/state_hooks.ts";
+// import {login} from "../states/auth/auth_slice.ts";
+// import {useAuthStore} from "../states/auth/auth_store.ts";
+// import AppAxios from "../utils/app_axios.ts"; // Keep if you use raw axios elsewhere, otherwise remove
 
 const LoginView = () => {
     const {t} = useTranslation('login');
     const navigate: NavigateFunction = useNavigate();
-    const [form, setForm] = useState({});
-    const [loading, setLoading] = useState(false); // State for loading
-    const [error, setError] = useState<string | null>(null); // State for errors
+    const [form, setForm] = useState({
+        username: "",
+        password: ""
+    });
+    // const [loading, setLoading] = useState(false); // State for loading
+    // const [error, setError] = useState<string | null>(null); // State for errors
+
+    // const dispatch = useAppDispatch();
+    // // const navigate = useNavigate();
+    //
+    // const {isAuthenticated, isLoading, error} = useAppSelector((state) => state.auth);
+    const { login, isAuthenticated, isLoading, error } = useAuthStore();
 
     const formSubmit = async () => { // Make this function async
-        setLoading(true); // Start loading
-        setError(null); // Clear previous errors
-
-        try {
-            // Correct way to make an Axios POST request:
-            // 1. URL (relative to baseURL if AppAxios has one)
-            // 2. Data payload (your 'form' state is already the correct object)
-            // 3. Optional config object (for specific headers or other Axios options for this request)
-            const response = await AppAxios.post('login', form, unauthAxiosHeaderJson); // Assuming your login endpoint is 'api/login' and baseURL ends with '/'
-
-            console.log("Login successful:", response.data);
-            localStorage.setItem("data", response.data.data)
-            // After successful submission, navigate:
-            // navigate('/dashboard');
-
-        } catch (err) {
-            // Enhanced error handling for Axios
-            if (axios.isAxiosError(err) && err.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.error("Login error response:", err.response.data);
-                console.error("Login error status:", err.response.status);
-                // Display error message from the server if available
-                setError(err.response.data.message || t('login_failed_generic'));
-            } else if (axios.isAxiosError(err)) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.error("Network error:", err.message);
-                setError(t('network_error'));
-            } else {
-                // Something else happened in setting up the request that triggered an Error
-                console.error("An unexpected error occurred:", err);
-                setError(t('unexpected_error'));
-            }
-        } finally {
-            navigate('/dashboard');
-            setLoading(false); // Stop loading regardless of success or failure
-        }
+        // await dispatch(login(form));
+        await login(form);
     };
 
-    const inputChangeValueEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/dashboard'); // Redirect to dashboard on successful login
+        }
+    }, [isAuthenticated, navigate]);
+
+
+    const inputChangeValueEvent = (e: ChangeEvent<HTMLInputElement>) => {
         // Corrected state update for input fields
         setForm((prev) => ({
             ...prev,
@@ -210,18 +194,14 @@ const LoginView = () => {
         }));
     };
 
-    // Corrected: use `password` as the name for consistency and common practice
-    // This will ensure form.password contains the value.
-    // If your backend expects 'Password', change it there or keep 'Password' here.
-    // However, lowercase is standard.
     document.title = t('title');
     return (
         <div className="bg-base-200 h-screen w-screen stack">
             <div className="h-full flex flex-col justify-center items-center lg:flex-row">
-                <div className="card bg-base-100 lg:max-w-sm w-5/6 shrink-0 shadow-2xl">
+                <div className="card bg-base-100 sm:max-w-md md:max-w-sm w-5/6 shrink-0 shadow-2xl">
                     <div className="card-body">
                         <div className="card-title flex justify-center mb-4">
-                            <LazyImage alt={'Nasafa plus logo'} src={Nasafa}/>
+                            <LazyImage alt='Nasafa plus logo' src={Nasafa}/>
                         </div>
                         <FormContainer classes='border-none'>
                             <InputField
@@ -230,8 +210,9 @@ const LoginView = () => {
                                 labelText={t('username')}
                                 withLabel={true}
                                 placeholder={t('username')}
+                                value={form.username}
                                 classes="w-auto mb-2"
-                                changeEvent={inputChangeValueEvent}
+                                onChange={inputChangeValueEvent}
                             />
                             <InputField
                                 fieldType="password"
@@ -239,8 +220,9 @@ const LoginView = () => {
                                 labelText={t('pass')}
                                 withLabel={true}
                                 placeholder={t('pass')}
+                                value={form.password}
                                 classes="w-auto mb-2"
-                                changeEvent={inputChangeValueEvent}
+                                onChange={inputChangeValueEvent}
                             />
                             <LocaleSwitcher/>
                             {error &&
@@ -248,10 +230,10 @@ const LoginView = () => {
                             <Button
                                 classes="btn-primary mt-4"
                                 onClick={formSubmit}
-                                disabled={loading} // Disable button while loading
+                                disabled={false && useAuthStore.getState().isLoading} // Disable button while loading
                             >
-                                {loading ? t('logging_in') : t('button')} {/* Show loading text */}
-                                {loading ? null : <LoginIcon size={5}/>}
+                                {t('button')}
+                                {isLoading ? null : <LoginIcon size={5}/>}
                             </Button>
                         </FormContainer>
                     </div>

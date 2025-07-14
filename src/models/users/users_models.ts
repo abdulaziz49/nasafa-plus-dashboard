@@ -4,8 +4,8 @@ export interface User {
     username: string;
     email: string;
     // Add other user properties you expect, e.g.,
-    isAdmin?: boolean;
-    roles: string[];
+    permissions: string[];
+    roles: object[];
 }
 
 export interface LoginCredentials {
@@ -13,9 +13,23 @@ export interface LoginCredentials {
     password: string;
 }
 
+// export interface LogoutCredentials {
+//     token: string;
+// }
+
 export interface AuthState {
-    user: User | null;
+    user: User;
     isAuthenticated: boolean;
     isLoading: boolean;
+    token: string;
     error: string | null;
+}
+
+export const emptyUser: User = {
+    id: 0,
+    name: "",
+    email: "",
+    permissions: [],
+    roles: [],
+    username: "",
 }

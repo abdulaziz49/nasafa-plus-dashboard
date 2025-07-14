@@ -1,23 +1,35 @@
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+// import {useAppSelector} from "../hooks/state_hooks.ts";
+import {useAuthStore} from "../states/auth/auth_store.ts";
+import {shallow, useShallow} from "zustand/shallow";
 
 const DashboardView = () => {
-	const { t } = useTranslation('dashboard');
-	document.title = t('title');
-	return (
-		<div className="hero bg-base-200 max-h-screen">
-			<div className="hero-content text-center">
-				<div className="max-w-md">
-					<h1 className="text-5xl font-bold">{t('title')}</h1>
-					<p className="py-6">
-						Provident cupiditate voluptatem et in. Quaerat fugiat ut
-						assumenda excepturi exercitationem quasi. In deleniti
-						eaque aut repudiandae et a id nisi.
-					</p>
-					<button className="btn btn-primary">Get Started</button>
-				</div>
-			</div>
-		</div>
-	);
+    const {t} = useTranslation('dashboard');
+    document.title = t('title');
+    // Use shallow as the third argument to compare the selected object
+    const {user, token} = useAuthStore(useShallow(state => ({
+        user: state.user,
+        token: state.token
+    }))); // <--- Add shallow here!
+
+    // const {user, token} = useAppSelector(({auth}) => auth);
+
+    return (
+        <div className="hero bg-base-200 max-h-screen">
+            <div className="hero-content text-center">
+                <div className="max-w-md">
+                    <h1 className="text-5xl font-bold">{t('title')}</h1>
+                    <p className="py-6">
+                        {user && user.username ? user.username : 'Guest'}
+                    </p>
+                    <p className="">
+                        {token}
+                    </p>
+                    <button className="btn btn-primary">Get Started</button>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default DashboardView;

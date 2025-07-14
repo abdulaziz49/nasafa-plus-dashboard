@@ -62,7 +62,7 @@ export const fetchAllUserGroups = createAsyncThunk<UserGroup[], void>( // Return
     async (_, {rejectWithValue}) => {
         try {
             // Assuming your API endpoint for fetching all user groups
-            const response = await AppAxios.get<UserGroup[]>('/api/user-groups');
+            const response = await AppAxios.get<UserGroup[]>('user-groups');
             return response.data;
         } catch (error: any) {
             console.error("Fetch all user groups failed:", error.response?.data || error.message);
