@@ -10,7 +10,7 @@ export const unauthAxiosHeaderJson = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
     },
-    withCredentials: true,
+    withCredentials: false,
 }
 
 interface AxionHeader extends AxiosRequestConfig {
@@ -25,7 +25,7 @@ export const getAuthAxiosConfig = (token?: string): AxionHeader => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        withCredentials: true,
+        withCredentials: false,
     }
 
     data.headers = token ? {...data.headers, "Authorization": `Bearer ${token}`} : data.headers
