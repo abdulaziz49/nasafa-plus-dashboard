@@ -2,7 +2,7 @@
 import {type FC} from 'react';
 import {Navigate, type RouteProps, useLocation} from 'react-router-dom';
 // import {useAppSelector} from '../../hooks/state_hooks.ts';
-import {useAuthStore} from "../../states/auth/auth_store.ts";
+import {useAuthStore} from "../../states/stores/auth_store.ts";
 import {useShallow} from "zustand/shallow"; // Use our typed useSelector
 
 const ProtectedRoute: FC<RouteProps> = ({children}) => {

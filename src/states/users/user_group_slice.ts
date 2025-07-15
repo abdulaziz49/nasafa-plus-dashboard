@@ -1,7 +1,7 @@
 // src/features/user_groups/userGroupSlice.ts
 import {createSlice, createAsyncThunk, type PayloadAction} from '@reduxjs/toolkit';
 import AppAxios from "../../utils/app_axios.ts";
-import type {UserGroup, UserGroupState} from "../../models/users/user_group_model.ts"; // Assuming this is your configured Axios instance
+import type {UserGroup, UserGroupState} from "../../models/users/user_role_model.ts"; // Assuming this is your configured Axios instance
 
 
 // --- Initial State ---

@@ -1,6 +1,6 @@
-const supportedLngs = {
+const supportedLangs = {
     ar: "العربية",
     en: "English",
 };
 
-export default supportedLngs
+export default supportedLangs

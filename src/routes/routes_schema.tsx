@@ -15,15 +15,15 @@ import {
     TRUCK_GROUP_MANAGEMENT_ROUTE,
     TRUCK_MANAGEMENT_ROUTE, TRUCK_TYPE_MANAGEMENT_ROUTE,
     USER_SETTINGS_MANAGEMENT_ROUTE,
-    USERS_GROUPS_MANAGEMENT_ROUTE,
-    USERS_MANAGEMENT_ROUTE, USERS_PERMISSION_MANAGEMENT_ROUTE,
+    USER_ROLE_MANAGEMENT_ROUTE,
+    USER_MANAGEMENT_ROUTE, USER_PERMISSION_MANAGEMENT_ROUTE,
 } from './routes_paths.ts';
 import {
     CONTAINER_GROUP_MANAGEMENT_NAME,
     CONTAINER_ACCORDION_NAME,
     DASHBOARD_NAME,
     USER_PERMISSION_MANAGEMENT_NAME,
-    USER_GROUP_MANAGEMENT_NAME,
+    USER_ROLE_MANAGEMENT_NAME,
     USER_MANAGEMENT_NAME,
     USER_ACCORDION_NAME,
     CONTAINER_MANAGEMENT_NAME,
@@ -70,18 +70,18 @@ const RoutesSchema = [
     {
         accordionName: USER_ACCORDION_NAME,
         accordionIcon: <UserIcon classes="m-0 -ms-2 me-2"/>,
-        childs: [
+        routes: [
             {
-                routeName: USER_GROUP_MANAGEMENT_NAME,
-                routeURL: USERS_GROUPS_MANAGEMENT_ROUTE,
+                routeName: USER_ROLE_MANAGEMENT_NAME,
+                routeURL: USER_ROLE_MANAGEMENT_ROUTE,
             },
             {
                 routeName: USER_MANAGEMENT_NAME,
-                routeURL: USERS_MANAGEMENT_ROUTE,
+                routeURL: USER_MANAGEMENT_ROUTE,
             },
             {
                 routeName: USER_PERMISSION_MANAGEMENT_NAME,
-                routeURL: USERS_PERMISSION_MANAGEMENT_ROUTE,
+                routeURL: USER_PERMISSION_MANAGEMENT_ROUTE,
             },
         ],
     },
@@ -90,7 +90,7 @@ const RoutesSchema = [
     {
         accordionName: CONTAINER_ACCORDION_NAME,
         accordionIcon: <ContainerIcon classes="m-0 -ms-2 me-2"/>,
-        childs: [
+        routes: [
             {
                 routeName: CONTAINER_GROUP_MANAGEMENT_NAME,
                 routeURL: CONTAINER_GROUP_MANAGEMENT_ROUTE,
@@ -110,7 +110,7 @@ const RoutesSchema = [
     {
         accordionName: TRUCK_ACCORDION_NAME,
         accordionIcon: <TruckIcon classes="m-0 -ms-2 me-2"/>,
-        childs: [
+        routes: [
             {
                 routeName: TRUCK_GROUP_MANAGEMENT_NAME,
                 routeURL: TRUCK_GROUP_MANAGEMENT_ROUTE,
@@ -131,7 +131,7 @@ const RoutesSchema = [
     // {
     //     accordionName: CLIENT_ACCORDION_NAME,
     //     accordionIcon: <ClientIcon classes="m-0 -ms-2 me-2"/>,
-    //     childs: [
+    //     routes: [
     //         {
     //             routeName: CLIENT_GROUP_MANAGEMENT_NAME,
     //             routeURL: CLIENT_GROUP_MANAGEMENT_ROUTE,
@@ -159,7 +159,7 @@ const RoutesSchema = [
     {
         accordionName: CONTRACT_ACCORDION_NAME,
         accordionIcon: <ContractIcon classes="m-0 -ms-2 me-2"/>,
-        childs: [
+        routes: [
             {
                 routeName: CONTRACT_GROUP_MANAGEMENT_NAME,
                 routeURL: CONTRACT_GROUP_MANAGEMENT_ROUTE,
@@ -179,7 +179,7 @@ const RoutesSchema = [
     {
         accordionName: MAINTENANCE_ACCORDION_NAME,
         accordionIcon: <MaintenanceIcon classes="m-0 -ms-2 me-2"/>,
-        childs: [
+        routes: [
             {
                 routeName: MAINTENANCE_GROUP_MANAGEMENT_NAME,
                 routeURL: MAINTENANCE_GROUP_MANAGEMENT_ROUTE,
@@ -199,7 +199,7 @@ const RoutesSchema = [
     {
         accordionName: SYSTEM_ACCORDION_NAME,
         accordionIcon: <SettingsIcon classes="m-0 -ms-2 me-2"/>,
-        childs: [
+        routes: [
             {
                 routeName: SYSTEM_SETTINGS_MANAGEMENT_NAME,
                 routeURL: SYSTEM_SETTINGS_MANAGEMENT_ROUTE,

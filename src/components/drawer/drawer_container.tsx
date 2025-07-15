@@ -31,8 +31,8 @@
 //                                 {/* Use flex-grow and overflow-y-auto */}
 //                                 <Suspense fallback={<DrawerSkeleton classes={''}/>}>
 //                                     {RoutesSchema.map((route, index) => {
-//                                         // Check for 'childs' property to determine if it's a direct link or an accordion
-//                                         if (!route.hasOwnProperty!('childs')) {
+//                                         // Check for 'routes' property to determine if it's a direct link or an accordion
+//                                         if (!route.hasOwnProperty!('routes')) {
 //                                             return (
 //                                                 <li
 //                                                     key={index}
@@ -56,7 +56,7 @@
 //                                                 icon={route.accordionIcon}
 //                                             >
 //                                                 <ul className="menu w-full">
-//                                                     {route.childs?.map(
+//                                                     {route.routes?.map(
 //                                                         (child, childIndex) => (
 //                                                             <li key={childIndex}>
 //                                                                 <Link
@@ -119,8 +119,8 @@ const DrawerContainer = () => {
                         <ul className="menu w-full flex flex-col">
                             {/*<Suspense fallback={<DrawerSkeleton classes={'w-full h-full'}/>}>*/}
                             {RoutesSchema.map((route, index) => {
-                                // Check for 'childs' property to determine if it's a direct link or an accordion
-                                if (!route.hasOwnProperty!('childs') || !route.childs) { // Added !route.childs check for robustness
+                                // Check for 'routes' property to determine if it's a direct link or an accordion
+                                if (!route.hasOwnProperty!('routes') || !route.routes) { // Added !route.routes check for robustness
                                     return (
                                         <li
                                             key={index}
@@ -150,12 +150,12 @@ const DrawerContainer = () => {
                                         // then each needs a unique name as shown above.
                                     >
                                         <ul className="menu w-full p-0">
-                                            {route.childs?.map(
-                                                (child, childIndex) => (
-                                                    <li key={childIndex}>
+                                            {route.routes?.map(
+                                                (childRoute, childRouteIndex) => (
+                                                    <li key={childRouteIndex}>
                                                         <Link
-                                                            to={child.routeURL}
-                                                        >{t(child.routeName)}
+                                                            to={childRoute.routeURL}
+                                                        >{t(childRoute.routeName)}
                                                         </Link>
                                                     </li>
                                                 ),

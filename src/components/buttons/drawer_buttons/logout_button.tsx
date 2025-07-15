@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {LogoutIcon} from "../../icons/drawer_icons.tsx";
 // import {useAppDispatch, useAppSelector} from "../../../hooks/state_hooks.ts";
 // import {logout} from "../../../states/auth/auth_slice.ts";
-import {useAuthStore} from "../../../states/auth/auth_store.ts";
+import {useAuthStore} from "../../../states/stores/auth_store.ts";
 import {useShallow} from "zustand/shallow";
 
 const LogoutButton = () => {

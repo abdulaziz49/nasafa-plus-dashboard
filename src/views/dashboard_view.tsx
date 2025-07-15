@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next';
 // import {useAppSelector} from "../hooks/state_hooks.ts";
-import {useAuthStore} from "../states/auth/auth_store.ts";
+import {useAuthStore} from "../states/stores/auth_store.ts";
 import {shallow, useShallow} from "zustand/shallow";
 
 const DashboardView = () => {

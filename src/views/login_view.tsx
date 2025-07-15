@@ -150,7 +150,7 @@ import LocaleSwitcher from '../i18n/locale_switcher.tsx';
 import Nasafa from '../assets/img/nasafa_plus_logo.png';
 import LoginIcon from "../components/icons/login_icon.tsx";
 import {type ChangeEvent, useEffect, useState} from "react";
-import {useAuthStore} from "../states/auth/auth_store.ts";
+import {useAuthStore} from "../states/stores/auth_store.ts";
 // import AppAxios, {axiosHeaderJson} from "../utils/app_axios.ts"; // Import your custom Axios instance
 // import axios from "axios";
 // import {useAppDispatch, useAppSelector} from "../hooks/state_hooks.ts";
@@ -172,10 +172,11 @@ const LoginView = () => {
     // // const navigate = useNavigate();
     //
     // const {isAuthenticated, isLoading, error} = useAppSelector((state) => state.auth);
-    const { login, isAuthenticated, isLoading, error } = useAuthStore();
+    const {login, isAuthenticated, isLoading, error} = useAuthStore();
 
     const formSubmit = async () => { // Make this function async
         // await dispatch(login(form));
+        // console.log(`url: ${d}`)
         await login(form);
     };
 
@@ -230,7 +231,7 @@ const LoginView = () => {
                             <Button
                                 classes="btn-primary mt-4"
                                 onClick={formSubmit}
-                                disabled={false && useAuthStore.getState().isLoading} // Disable button while loading
+                                disabled={isLoading} // Disable button while loading
                             >
                                 {t('button')}
                                 {isLoading ? null : <LoginIcon size={5}/>}

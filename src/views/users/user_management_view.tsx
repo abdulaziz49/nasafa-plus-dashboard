@@ -11,6 +11,7 @@ import Pagination from '../../components/pagination.tsx';
 import Select from '../../components/inputs/select.tsx';
 import Toggle from '../../components/inputs/toggle.tsx';
 import {useTranslation} from 'react-i18next';
+import {userGroupTableColumn} from "../../components/datagrid/column_definition/users_datagrid_columns.ts";
 
 const UserManagementView = () => {
     const {t} = useTranslation('user-management/user');
@@ -46,7 +47,7 @@ const UserManagementView = () => {
                             placeholder={t('username-placeholder')}
                             withLabel={true}
                             classes="w-full lg:col-span-7 lg:order-3"
-                            changeEvent={() => {
+                            onChange={() => {
                             }}
                         />
                         <Toggle
@@ -107,7 +108,10 @@ const UserManagementView = () => {
                     </div>
                 </form>
             </FormContainer>
-            <DataGrid/>
+            {/*The outer div can still have its global styling*/}
+            <div className="w-full md:m-1 lg:m-2 h-dvh bg-gray-100 dark:bg-gray-900 rounded-md shadow-lg flex flex-col">
+                <DataGrid/>
+            </div>
             <Pagination/>
         </>
     );

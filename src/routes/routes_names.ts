@@ -4,7 +4,7 @@ export const NOTIFICATIONS_NAME = "notifications"
 
 // User Route Names
 export const USER_ACCORDION_NAME = 'user-accordion';
-export const USER_GROUP_MANAGEMENT_NAME = 'user-group';
+export const USER_ROLE_MANAGEMENT_NAME = 'user-role';
 export const USER_MANAGEMENT_NAME = 'user-management';
 export const USER_PERMISSION_MANAGEMENT_NAME = 'user-permission';
 

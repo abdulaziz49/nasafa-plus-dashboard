@@ -1,11 +1,8 @@
-import axios from "axios"
-// import {object} from "yup";
+import axios, {type AxiosRequestConfig} from "axios"
 
 const AppAxios = axios.create({
     baseURL: import.meta.env.VITE_API_URL
 })
-
-// console.log(`api url: ${import.meta.env.VITE_API_URL}`)
 
 export const unauthAxiosHeaderJson = {
     headers: {
@@ -14,17 +11,14 @@ export const unauthAxiosHeaderJson = {
         'Content-Type': 'application/json',
     },
     withCredentials: true,
-    // withXSRFToken: true,
-    // xsrfCookieName: "XSRF-TOKEN",
-    // xsrfHeaderName: "X-XSRF-TOKEN",
 }
 
-interface AxionHeader {
+interface AxionHeader extends AxiosRequestConfig {
     headers: object
     withCredentials: boolean
 }
 
-export const getAxiosHeaderJson = (withToken: boolean, token?: string): AxionHeader => {
+export const getAuthAxiosConfig = (token?: string): AxionHeader => {
     const data: AxionHeader = {
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
@@ -34,7 +28,7 @@ export const getAxiosHeaderJson = (withToken: boolean, token?: string): AxionHea
         withCredentials: true,
     }
 
-    data.headers = withToken ? {...data.headers, "Authorization": `Bearer ${token}`} : data.headers
+    data.headers = token ? {...data.headers, "Authorization": `Bearer ${token}`} : data.headers
     return data
 }
 
@@ -72,3 +66,70 @@ export const getAxiosHeaderJson = (withToken: boolean, token?: string): AxionHea
 // });
 
 export default AppAxios
+
+// import axios, {type AxiosRequestConfig, type RawAxiosRequestHeaders} from "axios";
+//
+// // 1. Create an Axios instance with a base URL
+// //    The baseURL is essential for relative API calls.
+// const AppAxios = axios.create({
+//     baseURL: import.meta.env.VITE_API_URL,
+//     // withCredentials: true, // Generally, this should be set once for the instance if all requests need it.
+// });
+//
+// // 2. Define a more robust header type for clarity and type safety
+// interface CommonHeaders extends RawAxiosRequestHeaders {
+//     'X-Requested-With': 'XMLHttpRequest';
+//     'Accept': 'application/json';
+//     'Content-Type': 'application/json';
+//     'Authorization'?: string; // Make Authorization optional
+//     // "Origin"?: string,
+// }
+//
+// // 3. Define a type for AxiosRequestConfig that includes your custom headers
+// interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+//     headers?: CommonHeaders;
+// }
+//
+// // 4. Reusable headers for unauthenticated requests
+// //    This is useful for endpoints that don't require an auth token.
+// export const unauthAxiosHeaderJson: CustomAxiosRequestConfig = {
+//     headers: {
+//         'X-Requested-With': 'XMLHttpRequest',
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json',
+//     },
+//     withCredentials: true,
+// };
+//
+// /**
+//  * Generates Axios request configuration with common headers,
+//  * optionally including an Authorization token.
+//  *
+//  * @param token - The authentication token to be included in the Authorization header.
+//  * @returns An AxiosRequestConfig object with the appropriate headers.
+//  */
+// export const getAuthAxiosConfig = (token?: string): CustomAxiosRequestConfig => {
+//     const headers: CommonHeaders = {
+//         'X-Requested-With': 'XMLHttpRequest',
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json',
+//     };
+//
+//     if (token) {
+//         headers.Authorization = `Bearer ${token}`;
+//     }
+//
+//     // headers.Origin = (document.URL as string).substring(0, document.URL.length - 1)
+//
+//     return {
+//         headers: headers,
+//         withCredentials: true,
+//     };
+// };
+//
+// // 5. No Request Interceptor for CSRF Token in this version.
+// //    If your backend doesn't use CSRF tokens (e.g., if you're using JWT alone
+// //    and not session-based authentication like Laravel Sanctum),
+// //    then this interceptor is not needed.
+//
+// export default AppAxios;

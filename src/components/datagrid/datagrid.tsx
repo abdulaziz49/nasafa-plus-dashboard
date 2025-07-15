@@ -782,17 +782,19 @@
 //
 // export default DataGrid
 
-// import React, {type ReactElement} from "react"; // Only need React, no useState, useRef, useMemo, useCallback for this simplified version
 import {
     AllCommunityModule,
     ModuleRegistry,
     colorSchemeDarkBlue,
     colorSchemeLightCold,
-    themeQuartz
+    themeQuartz,
+    // type Theme
 } from "ag-grid-community";
 import {AgGridReact} from "ag-grid-react";
-// import {empColumnDefs, empRowData} from "../data/employes.ts";
-import type {FC, ReactElement} from "react";
+import {type FC, type ReactElement} from "react";
+import type {DataGridGenericType} from "./datagrid_generic_type.ts";
+import useUserSettingsStore from "../../states/stores/user_settings_store.ts";
+// import type {UserRole} from "../../models/users/user_role_model.ts";
 
 // Register AG Grid modules (important for functionality)
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -803,18 +805,24 @@ const themeLightCold = themeQuartz.withPart(colorSchemeLightCold);
 const themeDarkBlue = themeQuartz.withPart(colorSchemeDarkBlue);
 
 // Define the interface for the props DataGrid will accept
-interface DataGridProps {
+interface DataGridProps<DataGridGenericType> {
     columnDefs: object[]; // AG Grid's type for column definitions
-    rowData: object[]; // Using 'any[]' for generic row data, you can make this more specific if needed
+    rowData: DataGridGenericType[]; // Using 'any[]' for generic row data, you can make this more specific if needed
     // gridRef: React.RefObject<AgGridReact | null>
-    fetchSelectedData: (data: []) => void
+    fetchSelectedData: (data: DataGridGenericType[]) => void
     // You could add other optional props here, like enableRtl, defaultColDef, etc.
 }
 
-const DataGrid: FC<DataGridProps> = ({fetchSelectedData, columnDefs, rowData,}: DataGridProps):
-    ReactElement => {
-// const DataGrid = () => {
-    // Default column definition for all columns, can be overridden by individual columnDefs
+// interface DataGridStateType {
+//     theme: Theme,
+//     direction: boolean
+// }
+
+const DataGrid: FC<DataGridProps<DataGridGenericType>> = ({
+                                                              fetchSelectedData,
+                                                              columnDefs,
+                                                              rowData
+                                                          }: DataGridProps<DataGridGenericType>): ReactElement => {
     const defaultColDef: object = {
         editable: false,
         flex: 1, // Columns will flex to fill available space
@@ -824,19 +832,54 @@ const DataGrid: FC<DataGridProps> = ({fetchSelectedData, columnDefs, rowData,}: 
         // resizable: true, // Enable resizing by default
     };
 
+    const {isRTL, isDark} = useUserSettingsStore()
+
+    // State to store datagrid style
+    // const [dataGridStyleState, setDataGridStyleState] = useState<DataGridStateType>({
+    //     theme: themeLightCold,
+    //     direction: true,
+    // })
+
+    // useEffect(() => {
+    //     // Set initial direction based on document.dir
+    //     setDataGridStyleState((prevState) => ({
+    //         ...prevState,
+    //         direction: document.dir === "rtl",
+    //     }));
+    //
+    // }, [document.dir])
+    //
+    // document.addEventListener('change', (e)=>{
+    //     setDataGridStyleState((prevState) => ({
+    //         ...prevState,
+    //         direction: e.dir === "rtl",
+    //     }));
+    // })
+
+    // const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    // const handleChange = (event: MediaQueryListEvent) => {
+    //     setDataGridStyleState((prevState) => ({
+    //         ...prevState,
+    //         theme: event.matches ? themeDarkBlue : themeLightCold,
+    //     }));
+    // };
+    // // Add listener for changes
+    // mediaQuery.addEventListener('change', handleChange);
+
     // Determine the theme based on system preference
     // This logic stays inside if you want the grid to react to system preference changes
-    const currentTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
-        ? themeLightCold
-        : themeDarkBlue;
 
     return (<AgGridReact
-            theme={currentTheme} // Apply the determined theme
+            theme={isDark ? themeDarkBlue : themeLightCold} // Apply the determined theme
             columnDefs={columnDefs} // Use columnDefs from props
             rowData={rowData} // Use rowData from props
-            enableRtl={document.dir === "rtl"} // Keep dynamic RTL support
+            enableRtl={isRTL} // Keep dynamic RTL support
             defaultColDef={defaultColDef} // Apply default column definitions
-            onRowSelected={(e) => fetchSelectedData(e.api.getSelectedRows() as [])}
+            rowSelection="multiple"
+            onRowSelected={(e) => {
+                // console.log("selected from grids")
+                fetchSelectedData(e.api.getSelectedRows() as DataGridGenericType[])
+            }}
         />
     );
 };

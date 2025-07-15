@@ -17,8 +17,8 @@ import {
     TRUCK_GROUP_MANAGEMENT_ROUTE,
     TRUCK_MANAGEMENT_ROUTE, TRUCK_TYPE_MANAGEMENT_ROUTE,
     USER_SETTINGS_MANAGEMENT_ROUTE,
-    USERS_GROUPS_MANAGEMENT_ROUTE,
-    USERS_MANAGEMENT_ROUTE, USERS_PERMISSION_MANAGEMENT_ROUTE,
+    USER_ROLE_MANAGEMENT_ROUTE,
+    USER_MANAGEMENT_ROUTE, USER_PERMISSION_MANAGEMENT_ROUTE,
 } from './routes_paths.ts';
 
 // Define a type for a single route configuration
@@ -42,9 +42,9 @@ const DashboardView = lazy(() => import('../views/dashboard_view.tsx'));
 const LoginView = lazy(() => import('../views/login_view.tsx'));
 
 // User Management Views
-const UserGroupManagementView = lazy(() => import('../views/users/user_group_management_view.tsx'));
+const UserRoleManagementView = lazy(() => import('../views/users/user_role_management_view.tsx'));
 const UserManagementView = lazy(() => import('../views/users/user_management_view.tsx'));
-const UserPermissionManagementView = lazy(() => import("../views/users/user_permssion_management_view.tsx"));
+const UserPermissionManagementView = lazy(() => import("../views/users/user_permission_management_view.tsx"));
 
 // Container Management Views
 const ContainerGroupManagementView = lazy(() => import('../views/containers/container_group_management_view.tsx'));
@@ -93,9 +93,9 @@ export const appRoutes: AppRouteConfig[] = [
     {path: DASHBOARD_ROUTE, component: DashboardView, isProtected: true},
 
     // User Management
-    {path: USERS_GROUPS_MANAGEMENT_ROUTE, component: UserGroupManagementView, isProtected: true},
-    {path: USERS_MANAGEMENT_ROUTE, component: UserManagementView, isProtected: true},
-    {path: USERS_PERMISSION_MANAGEMENT_ROUTE, component: UserPermissionManagementView, isProtected: true},
+    {path: USER_ROLE_MANAGEMENT_ROUTE, component: UserRoleManagementView, isProtected: true},
+    {path: USER_MANAGEMENT_ROUTE, component: UserManagementView, isProtected: true},
+    {path: USER_PERMISSION_MANAGEMENT_ROUTE, component: UserPermissionManagementView, isProtected: true},
 
     // Container Management
     {path: CONTAINER_GROUP_MANAGEMENT_ROUTE, component: ContainerGroupManagementView, isProtected: true},

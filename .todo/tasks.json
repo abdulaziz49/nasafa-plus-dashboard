@@ -1,0 +1,49 @@
+[
+  {
+    "id": "TASK_1",
+    "priority": "MEDIUM",
+    "tags": [
+      "عمليات",
+      "واجهات"
+    ],
+    "description": "عمل حالة عند تسجيل الخروج يقوم باظهار شاشة loading تشير الى عملية تسجيل الخروج يتم اضافتها في ال protected Routing",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 14
+      },
+      "time": {
+        "hour": 17,
+        "minute": 16,
+        "second": 42,
+        "nano": 844203900
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2",
+    "priority": "CRITICAL",
+    "tags": [
+      "أخطاء"
+    ],
+    "description": "حل مشكلة تسجيل الخروج وتسجيل الدخول من خلال الsession بدل الtoken لظهور رسالة خطأ عند تسجيل الخروج باستخدام الtoken",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 14
+      },
+      "time": {
+        "hour": 17,
+        "minute": 19,
+        "second": 21,
+        "nano": 149042600
+      }
+    },
+    "isImported": false
+  }
+]

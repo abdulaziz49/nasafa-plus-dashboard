@@ -33,12 +33,12 @@
 //
 // // Load User Management Views
 // const UserGroupManagementView = lazy(
-//     () => import('./views/users/user_group_management_view.tsx'),
+//     () => import('./views/users/user_role_management_view.tsx'),
 // );
 // const UserManagementView = lazy(
 //     () => import('./views/users/user_management_view.tsx'),
 // );
-// const UserPermissionManagementView = lazy(() => import( "./views/users/user_permssion_management_view.tsx"));
+// const UserPermissionManagementView = lazy(() => import( "./views/users/user_permission_management_view.tsx"));
 //
 // // Load Container Management Views
 // const ContainerGroupManagementView = lazy(

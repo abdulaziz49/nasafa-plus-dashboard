@@ -5,7 +5,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import supportedLngs from './supported_langs.ts';
+import supportedLangs from './supported_langs.ts';
 import namespaces from './namespaces.ts';
 
 // Add names for each locale to
@@ -64,7 +64,7 @@ i18n
 
 		// Explicitly tell i18next our
 		// supported locales.
-		supportedLngs: Object.keys(supportedLngs),
+		supportedLngs: Object.keys(supportedLangs),
 
 		// Normally, we want `escapeValue: true` as it
 		// ensures that i18next escapes any code in

@@ -16,23 +16,33 @@ import {ToastContainer} from "react-toastify/unstyled";
 import Dropdown from "../../components/dropdown.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
 import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.tsx";
-import {type ChangeEventHandler, type MouseEventHandler, useCallback, useState} from "react";
-import type {userGroupModel} from "../models/users_models.ts";
+import {type ChangeEventHandler, type MouseEventHandler, useCallback, useReducer, useState} from "react";
+// import type {userGroupModel} from "../models/users_models.ts";
 import {userGroupTableColumn} from "../../components/datagrid/column_definition/users_datagrid_columns.ts";
+// import UserRolesReducer from "../../states/reducers/user_role_reducer.ts";
+import UserRoleReducer, {userRoleInitialState} from "../../states/reducers/user_role_reducer.ts";
+import type {UserRole} from "../../models/users/user_role_model.ts";
+import useUserSettingsStore from "../../states/stores/user_settings_store.ts";
+import {useAuthStore} from "../../states/stores/auth_store.ts";
 
-const initialFormState = {
+const initialFormState: UserRole = {
     id: 0,
-    group_name: "",
-    group_description: "",
-    user_creator: 1,
+    roleName: "",
+    description: "",
+    userCreatorId: 1,
 }
 
-const UserGroupManagementView = () => {
-    const translateFilePath = "user-management/group"
+const UserRoleManagementView = () => {
+    const translateFilePath = "user-management/role"
     const {t} = useTranslation(translateFilePath);
 
-    const [groupsData, setGroupsData] = useState<userGroupModel[]>([])
-    const [formData, setFormData] = useState<userGroupModel>(initialFormState)
+    const {lang, setLang} = useUserSettingsStore()
+    const {token} = useAuthStore()
+
+    const [state, dispatch] = useReducer(UserRoleReducer, userRoleInitialState);
+
+    // const [groupsData, setGroupsData] = useState<userGroupModel[]>([])
+    const [formData, setFormData] = useState<UserRole>(initialFormState)
     // const gridRef = useRef(null)
     // const [selectedID, setSelectedID] = useState<number>(0)
 
@@ -41,7 +51,8 @@ const UserGroupManagementView = () => {
     }
 
     // Use useCallback to memoize the onGridSelect function
-    const onGridSelect = useCallback((data: userGroupModel[]) => {
+    const onGridSelect = useCallback((data: UserRole[]) => {
+        console.log('clicked row')
         if (data.length > 0) {
             // Set formData to the first selected item
             setFormData(data[0]);
@@ -56,10 +67,10 @@ const UserGroupManagementView = () => {
 
     const addGroupEvent: MouseEventHandler<HTMLButtonElement> = (e): boolean => {
         e.preventDefault()
-        if (formData.group_name.trim().length > 0) {
+        if (formData.roleName.trim().length > 0) {
             console.log("added")
-            formData.id = groupsData.length + 1
-            setGroupsData((prevState) => ([...prevState, formData]))
+            // formData.id = groupsData.length + 1
+            // setGroupsData((prevState) => ([...prevState, formData]))
             setFormData(initialFormState)
             toast.success("Added Successfully")
             return true
@@ -70,28 +81,28 @@ const UserGroupManagementView = () => {
     const editGroupEvent: MouseEventHandler<HTMLButtonElement> = useCallback((e): boolean => {
         e.preventDefault();
         // Ensure an item is selected and group_name is not empty
-        if (formData.id > 0 && formData.group_name.trim().length > 0) {
+        if (formData.id > 0 && formData.roleName.trim().length > 0) {
             // --- FIX: Create a new array with the updated item ---
-            const updatedGroups = groupsData.map((element) => {
-                if (element.id === formData.id) {
-                    // Return a NEW object for the updated element
-                    return {
-                        ...element, // Keep existing properties
-                        group_name: formData.group_name,
-                        group_description: formData.group_description, // Corrected to formData.group_description
-                        user_creator: formData.user_creator,
-                    };
-                }
-                return element; // Return unchanged elements as they are
-            });
-            setGroupsData(updatedGroups); // Update state with the new array
+            // const updatedGroups = groupsData.map((element) => {
+            //     if (element.id === formData.id) {
+            //         // Return a NEW object for the updated element
+            //         return {
+            //             ...element, // Keep existing properties
+            //             group_name: formData.group_name,
+            //             group_description: formData.group_description, // Corrected to formData.group_description
+            //             user_creator: formData.user_creator,
+            //         };
+            //     }
+            //     return element; // Return unchanged elements as they are
+            // });
+            // setGroupsData(updatedGroups); // Update state with the new array
             setFormData(initialFormState); // Reset form
             toast.success(t("edited_successfully"));
             return true;
         }
         toast.error(t("select_item_and_fill_name")); // Provide user feedback for invalid action
         return false;
-    }, [formData, groupsData, t]); // Dependencies: formData, groupsData, t for translation
+    }, [formData, t]); // Dependencies: formData, groupsData, t for translation
 
     // const deleteGroupEvent: MouseEventHandler<HTMLButtonElement> = (e: MouseEvent, id: number): boolean => {
     //     e.preventDefault()
@@ -118,22 +129,22 @@ const UserGroupManagementView = () => {
                     <div
                         className="w-full h-auto grid grid-rows-2 grid-cols-1 md:grid-cols-2 md:grid-rows-1 md:gap-x-4 lg:gap-y-2">
                         <InputField
-                            name="group_name"
+                            name="roleName"
                             labelText={t('group-label')}
                             fieldType="text"
                             placeholder={t('group-placeholder')}
                             withLabel={true}
                             classes="w-full"
-                            value={formData.group_name}
+                            value={formData.roleName}
                             onChange={inputChangeEvent}
                         />
                         <Textarea
-                            name="group_description"
+                            name="description"
                             placeholder={t('desc-placeholder')}
                             withLabel={true}
                             labelText={t('desc-label')}
                             classes="w-full"
-                            value={formData.group_description}
+                            value={formData.description}
                             onChange={inputChangeEvent}
                         />
                     </div>
@@ -194,6 +205,7 @@ const UserGroupManagementView = () => {
                     classes="btn-primary w-auto order-2 lg:order-1 lg:col-span-2"
                     text={t('refresh-btn')}
                     clickEvent={() => {
+                        setLang(lang === "ar" ? "en" : "ar")
                     }}
                 />
                 <SearchForm translateFile={translateFilePath}
@@ -206,6 +218,7 @@ const UserGroupManagementView = () => {
                     classes="btn-primary order-3 order-3 md:order-4 lg:col-span-2"
                     text={t('print-btn')}
                     clickEvent={() => {
+                        dispatch({type: "GET_ROLE", payload: {token, id: 0}})
                     }}
                 />
                 <Dropdown text={t("export-dropdown")} bgColor="primary" uniqueKey="export-drop-menu"
@@ -231,7 +244,7 @@ const UserGroupManagementView = () => {
 
             {/*The outer div can still have its global styling*/}
             <div className="w-full md:m-1 lg:m-2 h-dvh bg-gray-100 dark:bg-gray-900 rounded-md shadow-lg flex flex-col">
-                <DataGrid fetchSelectedData={onGridSelect} columnDefs={userGroupTableColumn} rowData={groupsData}/>
+                <DataGrid fetchSelectedData={onGridSelect} columnDefs={userGroupTableColumn} rowData={state.userRoles}/>
             </div>
             <Pagination/>
             <ToastContainer/>
@@ -239,4 +252,4 @@ const UserGroupManagementView = () => {
     );
 };
 
-export default UserGroupManagementView;
+export default UserRoleManagementView;
