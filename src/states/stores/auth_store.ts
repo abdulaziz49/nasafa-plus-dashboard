@@ -84,7 +84,7 @@ export const useAuthStore = create<AuthState>()(
                     try {
                         try {
                             // Attempt SPA logout (web route) - session invalidation
-                            await AppAxios.post('logout', {}, getAuthAxiosConfig(token));
+                            await AppAxios.post('logout', {}, getAuthAxiosConfig(value));
                         } catch (err) {
                             console.warn("SPA logout failed or not applicable:", err);
                         }
