@@ -16,7 +16,7 @@ interface AuthState {
     error: string | null;
     token: string;
     login: (credentials: LoginCredentials) => Promise<void>;
-    logout: () => Promise<void>;
+    logout: (value: string) => Promise<void>;
     // fetchUser: () => Promise<void>;
     clearAuth: () => void;
 }
@@ -79,12 +79,12 @@ export const useAuthStore = create<AuthState>()(
                     }
                 },
 
-                logout: async () => {
+                logout: async (value) => {
                     set({isLoading: true, error: null});
                     try {
                         try {
                             // Attempt SPA logout (web route) - session invalidation
-                            await AppAxios.post('logout', {}, getAuthAxiosConfig());
+                            await AppAxios.post('logout', {}, getAuthAxiosConfig(token));
                         } catch (err) {
                             console.warn("SPA logout failed or not applicable:", err);
                         }

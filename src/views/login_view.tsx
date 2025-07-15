@@ -151,6 +151,8 @@ import Nasafa from '../assets/img/nasafa_plus_logo.png';
 import LoginIcon from "../components/icons/login_icon.tsx";
 import {type ChangeEvent, useEffect, useState} from "react";
 import {useAuthStore} from "../states/stores/auth_store.ts";
+import axios from "axios";
+import {getAuthAxiosConfig} from "../utils/app_axios.ts";
 // import AppAxios, {axiosHeaderJson} from "../utils/app_axios.ts"; // Import your custom Axios instance
 // import axios from "axios";
 // import {useAppDispatch, useAppSelector} from "../hooks/state_hooks.ts";
@@ -181,6 +183,7 @@ const LoginView = () => {
     };
 
     useEffect(() => {
+        axios.get("https://nasafa-plus-api.test/sanctum/csrf-cookie", getAuthAxiosConfig()).then(response => console.log(response))
         if (isAuthenticated) {
             navigate('/dashboard'); // Redirect to dashboard on successful login
         }

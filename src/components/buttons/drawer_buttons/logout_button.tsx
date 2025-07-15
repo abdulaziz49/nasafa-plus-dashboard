@@ -11,16 +11,17 @@ const LogoutButton = () => {
     const {t} = useTranslation('drawer');
     // const dispatch = useAppDispatch()
     // const {isAuthenticated, token} = useAppSelector(({auth}) => auth)
-    const {logout, isAuthenticated} = useAuthStore(useShallow(state => ({
+    const {logout, token} = useAuthStore(useShallow(state => ({
         logout: state.logout,
-        isAuthenticated: state.isAuthenticated
+        // isAuthenticated: state.isAuthenticated,
+        token: state.token
     })))
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const logoutButtonEvent = async () => {
         // e.preventDefault()
-        await logout()
-        if (!isAuthenticated) navigate('/');
+        await logout(token)
+        // if (!isAuthenticated) navigate('/');
     }
     return (
         <Button
