@@ -151,14 +151,6 @@ import Nasafa from '../assets/img/nasafa_plus_logo.png';
 import LoginIcon from "../components/icons/login_icon.tsx";
 import {type ChangeEvent, useEffect, useState} from "react";
 import {useAuthStore} from "../states/stores/auth_store.ts";
-import axios from "axios";
-import {getAuthAxiosConfig} from "../utils/app_axios.ts";
-// import AppAxios, {axiosHeaderJson} from "../utils/app_axios.ts"; // Import your custom Axios instance
-// import axios from "axios";
-// import {useAppDispatch, useAppSelector} from "../hooks/state_hooks.ts";
-// import {login} from "../states/auth/auth_slice.ts";
-// import {useAuthStore} from "../states/auth/auth_store.ts";
-// import AppAxios from "../utils/app_axios.ts"; // Keep if you use raw axios elsewhere, otherwise remove
 
 const LoginView = () => {
     const {t} = useTranslation('login');
@@ -183,7 +175,7 @@ const LoginView = () => {
     };
 
     useEffect(() => {
-        axios.get("https://nasafa-plus-api.test/sanctum/csrf-cookie", getAuthAxiosConfig()).then(response => console.log(response))
+        // axios.get("https://nasafa-plus-api.test/sanctum/csrf-cookie", getAuthAxiosConfig()).then(response => console.log(response))
         if (isAuthenticated) {
             navigate('/dashboard'); // Redirect to dashboard on successful login
         }
@@ -199,6 +191,7 @@ const LoginView = () => {
     };
 
     document.title = t('title');
+
     return (
         <div className="bg-base-200 h-screen w-screen stack">
             <div className="h-full flex flex-col justify-center items-center lg:flex-row">

@@ -791,7 +791,7 @@ import {
     // type Theme
 } from "ag-grid-community";
 import {AgGridReact} from "ag-grid-react";
-import {type FC, type ReactElement} from "react";
+import {type FC, type ReactElement, useMemo} from "react";
 import type {DataGridGenericType} from "./datagrid_generic_type.ts";
 import useUserSettingsStore from "../../states/stores/user_settings_store.ts";
 // import type {UserRole} from "../../models/users/user_role_model.ts";
@@ -825,7 +825,7 @@ const DataGrid: FC<DataGridProps<DataGridGenericType>> = ({
                                                           }: DataGridProps<DataGridGenericType>): ReactElement => {
     const defaultColDef: object = {
         editable: false,
-        flex: 1, // Columns will flex to fill available space
+        // flex: 1, // Columns will flex to fill available space
         minWidth: 20,
         filter: false, // Enable column filters by default
         // sortable: true, // Enable sorting by default
@@ -869,13 +869,27 @@ const DataGrid: FC<DataGridProps<DataGridGenericType>> = ({
     // Determine the theme based on system preference
     // This logic stays inside if you want the grid to react to system preference changes
 
+    const singleRowSelection = useMemo(() => {
+        return {
+            mode: 'singleRow',
+            enableClickSelection: true,
+            checkboxes: false,
+        };
+    }, []);
+
+
     return (<AgGridReact
             theme={isDark ? themeDarkBlue : themeLightCold} // Apply the determined theme
             columnDefs={columnDefs} // Use columnDefs from props
-            rowData={rowData} // Use rowData from props
+            rowData={rowData
+            } // Use rowData from props
             enableRtl={isRTL} // Keep dynamic RTL support
             defaultColDef={defaultColDef} // Apply default column definitions
-            rowSelection="multiple"
+            // rowSelection="multiple"
+            rowSelection={singleRowSelection}
+            // autoSizeStrategy={{
+            //     type: "fitCellContents",
+            // }}
             onRowSelected={(e) => {
                 // console.log("selected from grids")
                 fetchSelectedData(e.api.getSelectedRows() as DataGridGenericType[])

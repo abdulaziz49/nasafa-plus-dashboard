@@ -75,7 +75,7 @@
 // const SystemSettingsView = lazy(() => import('./views/system/system_settings_view.tsx'));
 // const UserSettingsView = lazy(() => import('./views/system/user_settings_view.tsx'));
 //
-// // Load Notificatoins Views
+// // Load Notifications Views
 // const NotificationsView = lazy(() => import('./views/notifications_view.tsx'));
 //
 // // Load Error Views
@@ -225,7 +225,6 @@
 import {Route, Routes} from 'react-router-dom';
 import {Suspense} from 'react';
 import CircleLoading from './components/loaders/circle_loading.tsx';
-import useLocalizeDocumentAttributes from './i18n/use_localize_document_attributes.ts';
 
 import ViewTemplate from './components/templates/view_template.tsx';
 import ProtectedRoute from "./routes/auth/protected_route.tsx";
@@ -233,13 +232,14 @@ import ProtectedRoute from "./routes/auth/protected_route.tsx";
 // import { emptyUser } from "./models/users/users_models.ts"; // Import emptyUser
 
 // Import your centralized route configuration
-import {appRoutes} from './routes/app_routes.ts';
+import {type AppRouteConfig, appRoutes} from './routes/app_routes.ts';
+import {ToastContainer} from "react-toastify";
+import useUserSettingsStore from "./states/stores/user_settings_store.ts";
 
 // Import the 404 View (since it's a special case, keep it here or handle in config)
-import View404 from './views/errors/view_404.tsx'; // Keep 404 import here if not in centralized config
+// import View404 from './views/errors/view_404.tsx'; // Keep 404 import here if not in centralized config
 
 function App() {
-    useLocalizeDocumentAttributes();
 
     // Get the initial token and fetchUser action from the store
     // const { fetchUser, token } = useAuthStore.getState();
@@ -259,33 +259,43 @@ function App() {
     const publicRoutes = appRoutes.filter(route => !route.isProtected);
     const protectedRoutes = appRoutes.filter(route => route.isProtected);
 
+    const {isRTL, isDark} = useUserSettingsStore()
+
     return (
         <ViewTemplate>
             <Suspense fallback={<CircleLoading/>}>
                 <Routes>
                     {/* Protected Routes (nested under ProtectedRoute) */}
                     {/*<Route element={<ProtectedRoute/>}>*/}
-                    {protectedRoutes.map((route) => (
+                    {protectedRoutes.map(({path, Component}: AppRouteConfig) => (
                         <Route
-                            key={route.path}
-                            path={route.path}
-                            element={<ProtectedRoute>
-                                <route.component/>
-                            </ProtectedRoute>} // Render the component from the config
+                            key={path}
+                            path={path}
+                            element={
+                                <ProtectedRoute>
+                                    <Component/>
+                                </ProtectedRoute>
+                            } // Render the component from the config
                         />
                     ))}
                     {/*</Route>*/}
 
                     {/* Public Routes */}
-                    {publicRoutes.map((route) => (
+                    {publicRoutes.map(({path, Component}) => (
                         <Route
-                            key={route.path}
-                            path={route.path}
-                            element={<route.component/>} // Render the component from the config
+                            key={path}
+                            path={path}
+                            element={<Component/>} // Render the component from the config
                         />
                     ))}
                 </Routes>
             </Suspense>
+            <ToastContainer
+                rtl={isRTL}
+                theme={isDark ? "dark" : "light"}
+                position={isRTL ? 'top-left' : "top-right"}
+                newestOnTop={true}
+            />
         </ViewTemplate>
     );
 }

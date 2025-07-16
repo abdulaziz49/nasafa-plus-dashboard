@@ -4,7 +4,7 @@ import App from './App.tsx'
 import {BrowserRouter} from "react-router-dom"
 import i18n from "./i18n/i18n.ts"
 import {I18nextProvider} from "react-i18next"
-import {ToastContainer} from "react-toastify/unstyled";
+import {Slide, ToastContainer} from "react-toastify";
 // import {Provider} from "react-redux";
 // import {store} from "./states/store.ts";
 // import {StrictMode} from "react";
@@ -17,7 +17,9 @@ createRoot(document.getElementById('root')!).render(
                 <App/>
             </BrowserRouter>
         </I18nextProvider>
-        <ToastContainer/>
+        <ToastContainer
+            transition={Slide}
+        />
         {/*</Provider>*/}
     </>
 )

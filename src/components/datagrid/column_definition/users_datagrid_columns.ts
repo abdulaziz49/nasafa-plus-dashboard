@@ -1,6 +1,6 @@
 export const userGroupTableColumn: object[] = [
-    {headerName: "ID",field: "id"},
-    {headerName: "Name",field: "roleName"},
-    {headerName: "Description",field: "description"},
-    {headerName: "User",field: "userCreatorId"},
+    {headerName: "ID",field: "id", minWidth:20},
+    {headerName: "Name",field: "name"},
+    {headerName: "Guard name",field: "guard_name"},
+    {headerName: "Created at",field: "created_at"},
 ]

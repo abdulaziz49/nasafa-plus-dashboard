@@ -21,6 +21,19 @@
         "nano": 844203900
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 16
+      },
+      "time": {
+        "hour": 8,
+        "minute": 6,
+        "second": 28,
+        "nano": 210543800
+      }
+    },
     "isImported": false
   },
   {
@@ -30,7 +43,7 @@
       "أخطاء"
     ],
     "description": "حل مشكلة تسجيل الخروج وتسجيل الدخول من خلال الsession بدل الtoken لظهور رسالة خطأ عند تسجيل الخروج باستخدام الtoken",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -42,6 +55,162 @@
         "minute": 19,
         "second": 21,
         "nano": 149042600
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 16
+      },
+      "time": {
+        "hour": 8,
+        "minute": 6,
+        "second": 41,
+        "nano": 961644300
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_5",
+    "priority": "CRITICAL",
+    "tags": [
+      "عمليات",
+      "واجهات"
+    ],
+    "description": "اضافة التحقق من الحقول",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 16
+      },
+      "time": {
+        "hour": 8,
+        "minute": 4,
+        "second": 50,
+        "nano": 817559600
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_6",
+    "priority": "CRITICAL",
+    "tags": [
+      "عمليات",
+      "واجهات"
+    ],
+    "description": "اضافة زر الحذف الى الجدول",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 16
+      },
+      "time": {
+        "hour": 8,
+        "minute": 5,
+        "second": 30,
+        "nano": 718455800
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_7",
+    "priority": "MEDIUM",
+    "tags": [
+      "أخطاء",
+      "واجهات"
+    ],
+    "description": "حل مشكلة عدم تغير اتجاه النص عند تغيير اللغة في الجدول",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 16
+      },
+      "time": {
+        "hour": 8,
+        "minute": 6,
+        "second": 12,
+        "nano": 960860200
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_8",
+    "priority": "HIGH",
+    "tags": [
+      "عمليات",
+      "واجهات"
+    ],
+    "description": "تصحيح رسائل النجاخ والفشل لكل عملية",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 16
+      },
+      "time": {
+        "hour": 8,
+        "minute": 7,
+        "second": 51,
+        "nano": 936615500
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_9",
+    "priority": "CRITICAL",
+    "tags": [
+      "عمليات",
+      "واجهات"
+    ],
+    "description": "تفعيل عملية الطباعه",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 16
+      },
+      "time": {
+        "hour": 8,
+        "minute": 8,
+        "second": 29,
+        "nano": 261642500
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_10",
+    "priority": "CRITICAL",
+    "tags": [
+      "عمليات"
+    ],
+    "description": "تفعيل عملية التصديرالى pdf و excel",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 16
+      },
+      "time": {
+        "hour": 8,
+        "minute": 10,
+        "second": 22,
+        "nano": 93315700
       }
     },
     "isImported": false

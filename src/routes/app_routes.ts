@@ -1,5 +1,5 @@
 // src/routes/app_routes_config.ts
-import {lazy, type LazyExoticComponent, type JSX, type ComponentType} from 'react';
+import {lazy, type LazyExoticComponent, type JSX} from 'react';
 
 // Import all your route path constants
 import {
@@ -22,12 +22,12 @@ import {
 } from './routes_paths.ts';
 
 // Define a type for a single route configuration
-interface AppRouteConfig {
+export interface AppRouteConfig {
     path: string;
-    // Use ComponentType<any> for lazily loaded components
+    // Use componentType<any> for lazily loaded components
     // as their exact prop types are not known at this point.
     // Or you can define a more specific type if all views share common props.
-    component: ComponentType<LazyExoticComponent<() => JSX.Element>>;
+    Component: LazyExoticComponent<() => JSX.Element>;
     isProtected: boolean;
     // Add other properties like 'requiredRole' or 'permissions' if you implement RBAC/PBAC
     // requiredRole?: 'admin' | 'user' | 'editor';
@@ -87,48 +87,48 @@ const View404 = lazy(() => import('../views/errors/view_404.tsx'));
 // -----------------------------------------------------------
 export const appRoutes: AppRouteConfig[] = [
     // Public Routes
-    {path: LOGIN_ROUTE, component: LoginView, isProtected: false},
+    {path: LOGIN_ROUTE, Component: LoginView, isProtected: false},
 
     // Protected Routes
-    {path: DASHBOARD_ROUTE, component: DashboardView, isProtected: true},
+    {path: DASHBOARD_ROUTE, Component: DashboardView, isProtected: true},
 
     // User Management
-    {path: USER_ROLE_MANAGEMENT_ROUTE, component: UserRoleManagementView, isProtected: true},
-    {path: USER_MANAGEMENT_ROUTE, component: UserManagementView, isProtected: true},
-    {path: USER_PERMISSION_MANAGEMENT_ROUTE, component: UserPermissionManagementView, isProtected: true},
+    {path: USER_ROLE_MANAGEMENT_ROUTE, Component: UserRoleManagementView, isProtected: true},
+    {path: USER_MANAGEMENT_ROUTE, Component: UserManagementView, isProtected: true},
+    {path: USER_PERMISSION_MANAGEMENT_ROUTE, Component: UserPermissionManagementView, isProtected: true},
 
     // Container Management
-    {path: CONTAINER_GROUP_MANAGEMENT_ROUTE, component: ContainerGroupManagementView, isProtected: true},
-    {path: CONTAINER_TYPE_MANAGEMENT_ROUTE, component: ContainerTypeManagementView, isProtected: true},
-    {path: CONTAINER_MANAGEMENT_ROUT, component: ContainerManagementView, isProtected: true},
+    {path: CONTAINER_GROUP_MANAGEMENT_ROUTE, Component: ContainerGroupManagementView, isProtected: true},
+    {path: CONTAINER_TYPE_MANAGEMENT_ROUTE, Component: ContainerTypeManagementView, isProtected: true},
+    {path: CONTAINER_MANAGEMENT_ROUT, Component: ContainerManagementView, isProtected: true},
 
     // Truck Management
-    {path: TRUCK_GROUP_MANAGEMENT_ROUTE, component: TruckGroupManagementView, isProtected: true},
-    {path: TRUCK_TYPE_MANAGEMENT_ROUTE, component: TruckTypeManagementView, isProtected: true},
-    {path: TRUCK_MANAGEMENT_ROUTE, component: TruckManagementView, isProtected: true},
+    {path: TRUCK_GROUP_MANAGEMENT_ROUTE, Component: TruckGroupManagementView, isProtected: true},
+    {path: TRUCK_TYPE_MANAGEMENT_ROUTE, Component: TruckTypeManagementView, isProtected: true},
+    {path: TRUCK_MANAGEMENT_ROUTE, Component: TruckManagementView, isProtected: true},
 
     // Client Management
-    {path: CLIENT_GROUP_MANAGEMENT_ROUTE, component: ClientGroupManagementView, isProtected: true},
-    {path: CLIENT_TYPE_MANAGEMENT_ROUTE, component: ClientTypeManagementView, isProtected: true},
-    {path: CLIENT_MANAGEMENT_ROUTE, component: ClientManagementView, isProtected: true},
+    {path: CLIENT_GROUP_MANAGEMENT_ROUTE, Component: ClientGroupManagementView, isProtected: true},
+    {path: CLIENT_TYPE_MANAGEMENT_ROUTE, Component: ClientTypeManagementView, isProtected: true},
+    {path: CLIENT_MANAGEMENT_ROUTE, Component: ClientManagementView, isProtected: true},
 
     // Contract Management
-    {path: CONTRACT_GROUP_MANAGEMENT_ROUTE, component: ContractGroupManagementView, isProtected: true},
-    {path: CONTRACT_TYPE_MANAGEMENT_ROUTE, component: ContractTypeManagementView, isProtected: true},
-    {path: CONTRACT_MANAGEMENT_ROUTE, component: ContractManagementView, isProtected: true},
+    {path: CONTRACT_GROUP_MANAGEMENT_ROUTE, Component: ContractGroupManagementView, isProtected: true},
+    {path: CONTRACT_TYPE_MANAGEMENT_ROUTE, Component: ContractTypeManagementView, isProtected: true},
+    {path: CONTRACT_MANAGEMENT_ROUTE, Component: ContractManagementView, isProtected: true},
 
     // Maintenance Management
-    {path: MAINTENANCE_GROUP_MANAGEMENT_ROUTE, component: MaintenanceGroupManagementView, isProtected: true},
-    {path: MAINTENANCE_TYPE_MANAGEMENT_ROUTE, component: MaintenanceTypeManagementView, isProtected: true},
-    {path: MAINTENANCE_MANAGEMENT_ROUTE, component: MaintenanceManagementView, isProtected: true},
+    {path: MAINTENANCE_GROUP_MANAGEMENT_ROUTE, Component: MaintenanceGroupManagementView, isProtected: true},
+    {path: MAINTENANCE_TYPE_MANAGEMENT_ROUTE, Component: MaintenanceTypeManagementView, isProtected: true},
+    {path: MAINTENANCE_MANAGEMENT_ROUTE, Component: MaintenanceManagementView, isProtected: true},
 
     // System Management
-    {path: SYSTEM_SETTINGS_MANAGEMENT_ROUTE, component: SystemSettingsView, isProtected: true},
-    {path: USER_SETTINGS_MANAGEMENT_ROUTE, component: UserSettingsView, isProtected: true},
+    {path: SYSTEM_SETTINGS_MANAGEMENT_ROUTE, Component: SystemSettingsView, isProtected: true},
+    {path: USER_SETTINGS_MANAGEMENT_ROUTE, Component: UserSettingsView, isProtected: true},
 
     // Notifications
-    {path: NOTIFICATIONS_ROUTE, component: NotificationsView, isProtected: true},
+    {path: NOTIFICATIONS_ROUTE, Component: NotificationsView, isProtected: true},
 
     // Fallback 404 route - this is typically handled as a catch-all route at the end.
-    {path: '*', component: View404, isProtected: false}, // Can be protected or not based on context
+    {path: '*', Component: View404, isProtected: false}, // Can be protected or not based on context
 ];

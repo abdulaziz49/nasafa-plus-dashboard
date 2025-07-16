@@ -89,9 +89,11 @@ interface UserSettingsState {
     theme: "dark" | "light" | "system";
     isDark: boolean; // Re-added: Will be updated by setTheme
     isRTL: boolean;   // Re-added: Will be updated by setLang
+    isNewNotificationOnTop: boolean,
     lang: "ar" | "en";
     setTheme: (value: "dark" | "light" | "system") => void;
     setLang: (value: "ar" | "en") => void;
+    setNotificationOnTop: (value: boolean) => void
 }
 
 // Helper to safely determine initial system dark mode for client-side
@@ -131,6 +133,7 @@ const useUserSettingsStore = create<UserSettingsState>()(
                 lang: "ar",      // Default language
                 isDark: getSystemDarkMode(), // Initial `isDark` based on system preference
                 isRTL: getInitialDocumentDir(), // Initial `isRTL` based on current document.dir
+                isNewNotificationOnTop: true,
 
                 setTheme: (value) => {
                     let newIsDark: boolean;
@@ -157,6 +160,11 @@ const useUserSettingsStore = create<UserSettingsState>()(
                     });
                     setDocumentDir(newIsRTL); // Apply document direction side effect
                 },
+                setNotificationOnTop: (value) => {
+                    set({
+                        isNewNotificationOnTop: value
+                    })
+                }
             }),
             {
                 name: "user-settings-storage",
@@ -166,6 +174,7 @@ const useUserSettingsStore = create<UserSettingsState>()(
                     isDark: state.isDark, // Re-added to persist
                     isRTL: state.isRTL,   // Re-added to persist
                     lang: state.lang,
+                    isNewNotificationOnTop: state.isNewNotificationOnTop
                 }),
                 storage: createJSONStorage(() => localStorage),
                 // Important: onRehydrate to recalculate derived state after hydration

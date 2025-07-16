@@ -2,12 +2,22 @@
 
 export interface UserRole {
     id: number; // Unique ID for the role
-    roleName: string;
-    description: string;
-    userCreatorId: number; // ID of the user who created this role
+    name: string;
+    guard_name: string;
+    permissions: string[]; // ID of the user who created this role
+    created_at?: string;
+    updated_at?: string;
 }
 
 export interface UserRolesState {
     userRoles: UserRole[];
-    searchTerm: string;
+    searchTerm: string | null;
+    fetching: boolean;
+    adding: boolean;
+    editing: boolean;
+    deleting:boolean;
+    searching: boolean;
+    exporting: boolean;
+    printing: boolean;
+    error: string | null;
 }
