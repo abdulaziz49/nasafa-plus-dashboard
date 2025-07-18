@@ -1,31 +1,25 @@
 // src/routes/auth/ProtectedRoute.tsx
 import {type FC} from 'react';
-import {Navigate, type RouteProps, useLocation} from 'react-router-dom';
+import {Navigate, type RouteProps} from 'react-router-dom';
 // import {useAppSelector} from '../../hooks/state_hooks.ts';
 import {useAuthStore} from "../../states/stores/auth_store.ts";
-import {useShallow} from "zustand/shallow"; // Use our typed useSelector
+import {useShallow} from "zustand/shallow";
+import CircleLoading from "../../components/loaders/circle_loading.tsx"; // Use our typed useSelector
 
 const ProtectedRoute: FC<RouteProps> = ({children}) => {
     // const {isAuthenticated, isLoading} = useAppSelector(({auth}) => auth);
-    const {isAuthenticated, isLoading} = useAuthStore(useShallow(state => ({
+    const {isAuthenticated, isAuthLoading} = useAuthStore(useShallow(state => ({
         isAuthenticated: state.isAuthenticated,
-        isLoading: state.isLoading
+        isAuthLoading: state.isAuthLoading
     })));
-    const location = useLocation();
 
-    if (useAuthStore.getState().isLoading) {
-        console.warn(`isloading: ${isLoading}`)
-        return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-            <p>Loading application...</p>
-        </div>;
-    }
+    if (isAuthLoading)
+        return <CircleLoading/>;
 
-    if (useAuthStore.getState().isAuthenticated) {
-        return <>{children}</>; // Render children if authenticated
-    }
+    if (!isAuthenticated)
+        return <Navigate to="/" replace/>;
 
-    console.warn(`is_auth: ${isAuthenticated}`)
-    return <Navigate to="/" state={{from: location}} replace/>;
+    return children // Render children if authenticated
 };
 
 export default ProtectedRoute;

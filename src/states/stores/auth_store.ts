@@ -12,7 +12,7 @@ import {
 interface AuthState {
     user: User;
     isAuthenticated: boolean;
-    isLoading: boolean;
+    isAuthLoading: boolean;
     error: string | null;
     token: string;
     login: (credentials: LoginCredentials) => Promise<void>;
@@ -41,14 +41,14 @@ export const useAuthStore = create<AuthState>()(
                 // Initial State
                 user: emptyUser,
                 isAuthenticated: false,
-                isLoading: true, // Initial check on app load
+                isAuthLoading: true, // Initial check on app load
                 error: null,
                 token: "", // Initialize token from localStorage if available
 
                 // --- Actions (replacing async thunks and reducers) ---
 
                 login: async (credentials) => {
-                    set({isLoading: true, error: null});
+                    set({isAuthLoading: true, error: null});
                     try {
                         const response = await AppAxios.post('login', {
                             username: credentials.username,
@@ -59,7 +59,7 @@ export const useAuthStore = create<AuthState>()(
                         // localStorage.setItem("data", JSON.stringify(response.data.data)); // Persist data
 
                         set({
-                            isLoading: false,
+                            isAuthLoading: false,
                             isAuthenticated: true,
                             user: user,
                             token: token,
@@ -70,7 +70,7 @@ export const useAuthStore = create<AuthState>()(
                         console.error("Login failed:", error.response?.data || error.message);
                         // localStorage.removeItem("data"); // Clear on failed login
                         set({
-                            isLoading: false,
+                            isAuthLoading: false,
                             isAuthenticated: false,
                             user: emptyUser,
                             token: "",
@@ -80,7 +80,7 @@ export const useAuthStore = create<AuthState>()(
                 },
 
                 logout: async (value) => {
-                    set({isLoading: true, error: null});
+                    set({isAuthLoading: true, error: null});
                     try {
                         try {
                             // Attempt SPA logout (web route) - session invalidation
@@ -90,7 +90,7 @@ export const useAuthStore = create<AuthState>()(
                         }
                         // localStorage.removeItem("data"); // Clear localStorage regardless of server logout success
                         set({
-                            isLoading: false,
+                            isAuthLoading: false,
                             isAuthenticated: false,
                             user: emptyUser,
                             token: "",
@@ -100,7 +100,7 @@ export const useAuthStore = create<AuthState>()(
                         console.error("Logout failed:", error.response?.data || error.message);
                         // localStorage.removeItem("data"); // Ensure localStorage is cleared even if error
                         set({
-                            isLoading: false,
+                            isAuthLoading: false,
                             isAuthenticated: false, // Ensure state is cleared on client-side
                             user: emptyUser,
                             token: "",
@@ -110,7 +110,7 @@ export const useAuthStore = create<AuthState>()(
                 },
 
                 // fetchUser: async () => {
-                //     set({isLoading: true, error: null});
+                //     set({isAuthLoading: true, error: null});
                 //     try {
                 //         // Retrieve token from localStorage for the request
                 //         // const stored = getStoredData();
@@ -129,7 +129,7 @@ export const useAuthStore = create<AuthState>()(
                 //         const user = response.data;
                 //
                 //         set({
-                //             isLoading: false,
+                //             isAuthLoading: false,
                 //             isAuthenticated: true,
                 //             user: user,
                 //             token: response.data.token, // Keep the existing token, assuming it's still valid
@@ -140,7 +140,7 @@ export const useAuthStore = create<AuthState>()(
                 //         // Clear auth state if unauthorized or failed to fetch
                 //         // localStorage.removeItem("data");
                 //         set({
-                //             isLoading: false,
+                //             isAuthLoading: false,
                 //             isAuthenticated: false,
                 //             user: emptyUser,
                 //             token: "",
@@ -154,7 +154,7 @@ export const useAuthStore = create<AuthState>()(
                     set({
                         user: emptyUser,
                         isAuthenticated: false,
-                        isLoading: false, // Should be false if manually clearing
+                        isAuthLoading: false, // Should be false if manually clearing
                         error: null,
                         token: "",
                     });
@@ -165,21 +165,22 @@ export const useAuthStore = create<AuthState>()(
                 // getStorage: () => localStorage, // (optional) by default it's localStorage
                 // Choose which parts of the state to persist.
                 // We'll persist 'user', 'isAuthenticated', 'token'
-                // 'isLoading' and 'error' are runtime states, not for persistence.
+                // 'isAuthLoading' and 'error' are runtime states, not for persistence.
                 partialize: (state) => ({
                     user: state.user,
                     isAuthenticated: state.isAuthenticated,
                     token: state.token,
+                    isAuthLoading: state.isAuthLoading
                 }),
                 // force using session storage instead of the default localstorage
                 storage: createJSONStorage(() => sessionStorage),
                 // Optional: Customize how the state is rehydrated
-                // This is important for 'isLoading' on initial load.
+                // This is important for 'isAuthLoading' on initial load.
                 onRehydrateStorage: (state) => {
                     if (state) {
-                        // Set isLoading to true initially when rehydrating
+                        // Set isAuthLoading to true initially when rehydrating
                         // This allows ProtectedRoute to show loading while fetchUser runs
-                        state.isLoading = false;
+                        state.isAuthLoading = false;
                     }
                     return (storedState, error) => {
                         if (error) {
@@ -190,12 +191,12 @@ export const useAuthStore = create<AuthState>()(
                             if (storedState.token) {
                                 // Important: We call fetchUser directly here after hydration.
                                 // This ensures the auth status is verified with the backend.
-                                // It will update isAuthenticated and isLoading correctly.
+                                // It will update isAuthenticated and isAuthLoading correctly.
                                 // storedState.fetchUser(); // Use `get()` to access current store actions
                             } else {
-                                // If no token persisted, immediately set isLoading to false
+                                // If no token persisted, immediately set isAuthLoading to false
                                 // as there's nothing to check.
-                                storedState.isLoading = false
+                                storedState.isAuthLoading = false
                                 storedState.isAuthenticated = false
                             }
                         }

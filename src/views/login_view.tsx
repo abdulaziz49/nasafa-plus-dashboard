@@ -151,6 +151,7 @@ import Nasafa from '../assets/img/nasafa_plus_logo.png';
 import LoginIcon from "../components/icons/login_icon.tsx";
 import {type ChangeEvent, useEffect, useState} from "react";
 import {useAuthStore} from "../states/stores/auth_store.ts";
+// import LoadingTemplate from "../components/templates/loading_template.tsx";
 
 const LoginView = () => {
     const {t} = useTranslation('login');
@@ -166,7 +167,7 @@ const LoginView = () => {
     // // const navigate = useNavigate();
     //
     // const {isAuthenticated, isLoading, error} = useAppSelector((state) => state.auth);
-    const {login, isAuthenticated, isLoading, error} = useAuthStore();
+    const {login, isAuthenticated, isAuthLoading, error} = useAuthStore();
 
     const formSubmit = async () => { // Make this function async
         // await dispatch(login(form));
@@ -181,7 +182,6 @@ const LoginView = () => {
         }
     }, [isAuthenticated, navigate]);
 
-
     const inputChangeValueEvent = (e: ChangeEvent<HTMLInputElement>) => {
         // Corrected state update for input fields
         setForm((prev) => ({
@@ -193,58 +193,60 @@ const LoginView = () => {
     document.title = t('title');
 
     return (
-        <div className="bg-base-200 h-screen w-screen stack">
-            <div className="h-full flex flex-col justify-center items-center lg:flex-row">
-                <div className="card bg-base-100 sm:max-w-md md:max-w-sm w-5/6 shrink-0 shadow-2xl">
-                    <div className="card-body">
-                        <div className="card-title flex justify-center mb-4">
-                            <LazyImage alt='Nasafa plus logo' src={Nasafa}/>
+        // <LoadingTemplate>
+            <div className="bg-base-200 h-screen w-screen stack">
+                <div className="h-full flex flex-col justify-center items-center lg:flex-row">
+                    <div className="card bg-base-100 sm:max-w-md md:max-w-sm w-5/6 shrink-0 shadow-2xl">
+                        <div className="card-body">
+                            <div className="card-title flex justify-center mb-4">
+                                <LazyImage alt='Nasafa plus logo' src={Nasafa}/>
+                            </div>
+                            <FormContainer classes='border-none'>
+                                <InputField
+                                    fieldType="text"
+                                    name="username" // Ensure this matches your backend's expected field name
+                                    labelText={t('username')}
+                                    withLabel={true}
+                                    placeholder={t('username')}
+                                    value={form.username}
+                                    classes="w-auto mb-2"
+                                    onChange={inputChangeValueEvent}
+                                />
+                                <InputField
+                                    fieldType="password"
+                                    name="password" // Changed from "Password" to "password" - RECOMMENDED!
+                                    labelText={t('pass')}
+                                    withLabel={true}
+                                    placeholder={t('pass')}
+                                    value={form.password}
+                                    classes="w-auto mb-2"
+                                    onChange={inputChangeValueEvent}
+                                />
+                                <LocaleSwitcher/>
+                                {error &&
+                                    <p className="text-red-500 text-sm mt-2">{error}</p>} {/* Display error message */}
+                                <Button
+                                    classes="btn-primary mt-4"
+                                    onClick={formSubmit}
+                                    disabled={isAuthLoading} // Disable button while loading
+                                >
+                                    {t('button')}
+                                    {isAuthLoading ? null : <LoginIcon size={5}/>}
+                                </Button>
+                            </FormContainer>
                         </div>
-                        <FormContainer classes='border-none'>
-                            <InputField
-                                fieldType="text"
-                                name="username" // Ensure this matches your backend's expected field name
-                                labelText={t('username')}
-                                withLabel={true}
-                                placeholder={t('username')}
-                                value={form.username}
-                                classes="w-auto mb-2"
-                                onChange={inputChangeValueEvent}
-                            />
-                            <InputField
-                                fieldType="password"
-                                name="password" // Changed from "Password" to "password" - RECOMMENDED!
-                                labelText={t('pass')}
-                                withLabel={true}
-                                placeholder={t('pass')}
-                                value={form.password}
-                                classes="w-auto mb-2"
-                                onChange={inputChangeValueEvent}
-                            />
-                            <LocaleSwitcher/>
-                            {error &&
-                                <p className="text-red-500 text-sm mt-2">{error}</p>} {/* Display error message */}
-                            <Button
-                                classes="btn-primary mt-4"
-                                onClick={formSubmit}
-                                disabled={isLoading} // Disable button while loading
-                            >
-                                {t('button')}
-                                {isLoading ? null : <LoginIcon size={5}/>}
-                            </Button>
-                        </FormContainer>
                     </div>
                 </div>
+                <LazyImage
+                    alt={'background'}
+                    placeholder={
+                        <ImageSkeleton classes="max-h-screen lg:max-h-full w-screen"/>
+                    }
+                    src={loginImage}
+                    classes="max-h-screen lg:max-h-full w-screen object-cover lg:object-none blur"
+                />
             </div>
-            <LazyImage
-                alt={'background'}
-                placeholder={
-                    <ImageSkeleton classes="max-h-screen lg:max-h-full w-screen"/>
-                }
-                src={loginImage}
-                classes="max-h-screen lg:max-h-full w-screen object-cover lg:object-none blur"
-            />
-        </div>
+        // </LoadingTemplate>
     );
 };
 

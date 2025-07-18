@@ -10,8 +10,9 @@ export interface UserRole {
 }
 
 export interface UserRolesState {
-    userRoles: UserRole[];
-    searchTerm: string | null;
+    mainStore: UserRole[];
+    secondaryStore: UserRole[];
+    // searchTerm: string | null;
     fetching: boolean;
     adding: boolean;
     editing: boolean;

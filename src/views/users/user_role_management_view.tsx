@@ -15,9 +15,18 @@ import {toast} from "react-toastify";
 import Dropdown from "../../components/dropdown.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
 import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.tsx";
-import {type ChangeEventHandler, type MouseEventHandler, useCallback, useEffect, useReducer, useState} from "react";
+import {
+    type ChangeEventHandler,
+    type KeyboardEventHandler,
+    type MouseEventHandler,
+    useCallback,
+    useEffect,
+    useReducer,
+    useRef,
+    useState
+} from "react";
 // import type {userGroupModel} from "../models/users_models.ts";
-import {userGroupTableColumn} from "../../components/datagrid/column_definition/users_datagrid_columns.ts";
+import getUserRoleTableColumn from "../../components/datagrid/column_definition/user_role_datagrid_columns.ts";
 // import UserRolesReducer from "../../states/reducers/user_role_reducer.ts";
 // import UserRoleReducer from "../../states/reducers/user_role_reducer.ts";
 import type {UserRole} from "../../models/users/user_role_model.ts";
@@ -25,13 +34,15 @@ import useUserSettingsStore from "../../states/stores/user_settings_store.ts";
 import {useAuthStore} from "../../states/stores/auth_store.ts";
 import {
     addUserRole,
-    // deleteUserRole,
+    deleteUserRole,
     editUserRole,
-    fetchUserRoles
+    fetchUserRoles,
+    searchUserRole
 } from "../../states/reducers/actions/user_role_service.ts";
 import DataGridSkeleton from "../../components/skeletons/datagrid_skeleton.tsx";
 // import {useUserRolesStore} from "../../states/stores/user_role_store.ts";
 import UserRoleReducer, {initialViewState} from "../../states/reducers/user_role_reducer.ts";
+// import LoadingTemplate from "../../components/templates/loading_template.tsx";
 
 const initialFormState: UserRole = {
     id: 0,
@@ -49,13 +60,22 @@ const UserRoleManagementView = () => {
 
     const {lang, setLang} = useUserSettingsStore()
     const {token} = useAuthStore()
+    const searchBtnRef = useRef<HTMLButtonElement>(null)
 
-    const [{userRoles, fetching, editing, adding}, dispatch] = useReducer(UserRoleReducer, initialViewState);
+    const [{
+        mainStore,
+        fetching,
+        editing,
+        adding,
+        // secondaryStore,
+        searching
+    }, dispatch] = useReducer(UserRoleReducer, initialViewState);
     // Use Zustand hook to access state and actions
     // const {userRoles, loading} = useUserRolesStore();
 
     // const [groupsData, setGroupsData] = useState<userGroupModel[]>([])
     const [formData, setFormData] = useState<UserRole>(initialFormState)
+    const [searchTerm, setSearchTerm] = useState<string>("")
     // const gridRef = useRef(null)
     // const [selectedID, setSelectedID] = useState<number>(0)
 
@@ -73,7 +93,7 @@ const UserRoleManagementView = () => {
     }
 
     // Use useCallback to memoize the onGridSelect function
-    const onGridSelect = useCallback((data: UserRole[]) => {
+    const onGridSelect = (data: UserRole[]) => {
         console.log('clicked row')
         if (data.length > 0) {
             // Set formData to the first selected item
@@ -85,7 +105,7 @@ const UserRoleManagementView = () => {
             setFormData(initialFormState);
             console.log("No row selected.");
         }
-    }, []); // Dependencies: initialFormState (if it could change, though it's constant)
+    } // Dependencies: initialFormState (if it could change, though it's constant)
 
     // Add Role Event
     const addRoleEvent: MouseEventHandler<HTMLButtonElement> = useCallback(async (e) => {
@@ -134,31 +154,51 @@ const UserRoleManagementView = () => {
         }
     }, [formData, token, dispatch, t]);
 
-    // Delete Role Event
-    // const deleteRoleEvent: MouseEventHandler<HTMLButtonElement> = useCallback(async (e) => {
-    //     e.preventDefault();
-    //     if (formData.id === 0) {
-    //         toast.error(t("select_item_to_delete")); // Translate this message
-    //         return;
-    //     }
-    //
-    //     if (window.confirm(t("confirm_delete_role", {roleName: formData.name}))) {
-    //         try {
-    //             await deleteUserRole(dispatch, token, formData.id);
-    //             setFormData(initialFormState); // Reset form on success
-    //             toast.success(t("deleted_successfully"));
-    //         } catch (err: any) {
-    //             const errorMessage = err.message || t("failed_to_delete");
-    //             toast.error(errorMessage);
-    //             console.error("Delete Role Error:", err);
-    //         }
-    //     }
-    // }, [formData, token, dispatch, t]);
+    const searchRoleEvent: MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
+        // console.log("pressed")
+        searchUserRole(dispatch, searchTerm, searching)
+        // Ensure an item is selected (ID > 0) and name is not empty
+    }
 
-    // Search input change handler
-    // const onSearchEventChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-    //     dispatch({type: 'SET_SEARCH_TERM', payload: {term: e.target.value}});
-    // }, [dispatch]);
+    // Delete Role Event
+    const deleteRoleEvent: MouseEventHandler<HTMLButtonElement> = useCallback(async (e) => {
+        e.preventDefault();
+        if (formData.id === 0) {
+            toast.error(t("select_item_to_delete")); // Translate this message
+            return;
+        }
+
+        if (window.confirm(t("confirm_delete_role", {roleName: formData.name}))) {
+            try {
+                await deleteUserRole(dispatch, token, formData.id);
+                setFormData(initialFormState); // Reset form on success
+                toast.success(t("deleted_successfully"));
+            } catch (err: any) {
+                const errorMessage = err.message || t("failed_to_delete");
+                toast.error(errorMessage);
+                // console.error("Delete Role Error:", err);
+            }
+        }
+    }, [formData, token, dispatch, t]);
+
+    const onInputFieldKeyPress: KeyboardEventHandler<HTMLInputElement> = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            searchBtnRef.current?.click()
+        }
+    }
+    const changeSearchFormEvent: ChangeEventHandler<HTMLInputElement> = (e) => {
+        e.preventDefault()
+        setSearchTerm(e.target.value); // Update the parent's state
+
+        // Trigger search button click if the input field is now empty (after user's input)
+        // We check value, not the 'term' prop from the current render.
+        // if (e.target.value === searchTerm && searching) {
+        // }
+    }
+
+    const GRID_COLUMNS_DEF = getUserRoleTableColumn(deleteRoleEvent)
 
     document.title = t('title');
     return (
@@ -256,6 +296,12 @@ const UserRoleManagementView = () => {
                     }}
                 />
                 <SearchForm translateFile={translateFilePath}
+                            clickEvent={searchRoleEvent}
+                            storeTerm={setSearchTerm}
+                            changeInputEvent={changeSearchFormEvent}
+                            reference={searchBtnRef}
+                            keyPressed={onInputFieldKeyPress}
+                    // term={searchTerm}
                     // filterChangeable={false}
                             containerClasses="order-1 col-span-3 lg:order-2 lg:col-span-6 lg:col-end-9">
                     <option defaultChecked>{t("filter-name")}</option>
@@ -293,10 +339,10 @@ const UserRoleManagementView = () => {
             {/*The outer div can still have its global styling*/}
             <div className="w-full md:m-1 lg:m-2 h-dvh bg-gray-100 dark:bg-gray-900 rounded-md flex flex-col">
                 {
-                    fetching ?
+                    fetching || mainStore.length === 0 ?
                         (<DataGridSkeleton/>) :
-                        (<DataGrid fetchSelectedData={onGridSelect} columnDefs={userGroupTableColumn}
-                                   rowData={userRoles}/>)
+                        (<DataGrid fetchSelectedData={onGridSelect} columnDefs={GRID_COLUMNS_DEF}
+                                   rowData={mainStore}/>)
                 }
             </div>
             <Pagination/>
@@ -325,7 +371,7 @@ export default UserRoleManagementView;
 // import SearchForm from "../../components/forms/search_form.tsx";
 // import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.tsx";
 // import {type ChangeEventHandler, type MouseEventHandler, useCallback, useEffect, useReducer, useState} from "react";
-// import {userGroupTableColumn} from "../../components/datagrid/column_definition/users_datagrid_columns.ts";
+// import {userGroupTableColumn} from "../../components/datagrid/column_definition/user_role_datagrid_columns.ts";
 // import UserRoleReducer from "../../states/reducers/user_role_reducer.ts";
 // import {type UserRole, type UserRolesState} from "../../models/users/user_role_model.ts"; // Import initialReducerState
 // import useUserSettingsStore from "../../states/stores/user_settings_store.ts";

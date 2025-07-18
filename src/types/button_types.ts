@@ -5,6 +5,7 @@ export interface CrudButtonType {
     text?: string
     classes?: string
     isDisabled?: boolean
+    iconClasses?:string
 }
 
 export interface ButtonType extends ComponentPropsWithoutRef<"button"> {

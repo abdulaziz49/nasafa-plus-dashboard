@@ -128,8 +128,8 @@
 //     }
 // }
 
-import type {UserRole, UserRolesState} from "../../models/users/user_role_model.ts";
-import type {DataActionTypes} from "./user_role_action_type.ts";
+import type {UserRolesState} from "../../models/users/user_role_model.ts";
+import type {DataActionTypes} from "./types/user_role_action_type.ts";
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
 // Async logic should happen outside the reducer.
 
@@ -137,8 +137,8 @@ import type {DataActionTypes} from "./user_role_action_type.ts";
 
 
 export const initialViewState: UserRolesState = {
-    userRoles: [],
-    searchTerm: "",
+    mainStore: [],
+    secondaryStore: [],
     fetching: false,
     adding: false,
     editing: false,
@@ -150,7 +150,7 @@ export const initialViewState: UserRolesState = {
 }
 
 // --- The Reducer Function (Pure and Immutable) ---
-export default function UserRoleReducer(state: UserRolesState, action: DataActionTypes<UserRole>): UserRolesState {
+export default function UserRoleReducer(state: UserRolesState, action: DataActionTypes): UserRolesState {
     switch (action.type) {
         // For fetching cases
         case 'FETCH_DATA_REQUEST':
@@ -164,14 +164,14 @@ export default function UserRoleReducer(state: UserRolesState, action: DataActio
                 ...state,
                 fetching: false,
                 error: null,
-                userRoles: action.payload, // Replace roles with fetched data
+                mainStore: action.payload, // Replace roles with fetched data
             };
         case 'FETCH_DATA_FAILURE':
             return {
                 ...state,
                 fetching: false,
                 error: action.payload, // Set the error message
-                userRoles: [], // Clear roles or keep old ones depending on desired UX
+                mainStore: [], // Clear roles or keep old ones depending on desired UX
             };
 
         // For adding cases
@@ -184,7 +184,7 @@ export default function UserRoleReducer(state: UserRolesState, action: DataActio
         case 'ADD_DATA_SUCCESS':
             return {
                 ...state,
-                userRoles: [...state.userRoles, action.payload],
+                mainStore: [...state.mainStore, action.payload],
                 adding: false,
                 error: null
             };
@@ -205,7 +205,7 @@ export default function UserRoleReducer(state: UserRolesState, action: DataActio
         case 'EDIT_DATA_SUCCESS':
             return {
                 ...state,
-                userRoles: state.userRoles.map((role) =>
+                mainStore: state.mainStore.map((role) =>
                     role.id === action.payload.id ? action.payload : role
                 ),
                 error: null,
@@ -228,7 +228,7 @@ export default function UserRoleReducer(state: UserRolesState, action: DataActio
         case 'DELETE_DATA_SUCCESS':
             return {
                 ...state,
-                userRoles: state.userRoles.filter((role) => action.payload.id !== role.id),
+                mainStore: state.mainStore.filter((role) => action.payload !== role.id),
                 deleting: false,
                 error: null
             };
@@ -243,22 +243,21 @@ export default function UserRoleReducer(state: UserRolesState, action: DataActio
         case 'SEARCH_DATA_REQUEST':
             return {
                 ...state,
-                searchTerm: action.payload.term,
-                searching: true
+                searching: true,
+                secondaryStore: state.mainStore
             };
         case 'SEARCH_DATA_SUCCESS':
             return {
                 ...state,
-                searching: false,
                 error: null,
-                userRoles: action.payload, // Replace roles with fetched data
+                mainStore: state.secondaryStore.filter(row => row.name.toLowerCase().includes(action.payload.toLowerCase())), // Replace roles with fetched data
             };
         case 'SEARCH_DATA_FAILURE':
             return {
                 ...state,
                 searching: false,
-                error: action.payload, // Set the error message
-                userRoles: [], // Clear roles or keep old ones depending on desired UX
+                mainStore: state.secondaryStore,
+                secondaryStore: []
             };
 
         default: {

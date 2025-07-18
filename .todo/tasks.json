@@ -214,5 +214,100 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_19",
+    "priority": "MEDIUM",
+    "tags": [
+      "واجهات"
+    ],
+    "description": "عدم ظهور التحميل عند التنقل بين الصفحات\nloading",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 17
+      },
+      "time": {
+        "hour": 23,
+        "minute": 0,
+        "second": 42,
+        "nano": 412693400
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_20",
+    "priority": "LOW",
+    "tags": [
+      "أخطاء",
+      "عمليات"
+    ],
+    "description": "حل مشكلة المدة الزمنية للطلب والاستجابة في السيرفر\nrequest and response timeout",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 17
+      },
+      "time": {
+        "hour": 23,
+        "minute": 2,
+        "second": 17,
+        "nano": 890422400
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_21",
+    "priority": "MEDIUM",
+    "tags": [
+      "أخطاء",
+      "عمليات",
+      "واجهات"
+    ],
+    "description": "تعطيل ازرار العمليات عند الضغط عليها حتى انتهاء الطلب لمنع تكرار العمليات\n\nمثل عند الضغط على زر التحديث يحدث تعطيل للزر لمنع الطلب المتكرر للبيانات",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 17
+      },
+      "time": {
+        "hour": 23,
+        "minute": 4,
+        "second": 44,
+        "nano": 521436900
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_33",
+    "priority": "LOW",
+    "tags": [
+      "أخطاء"
+    ],
+    "description": "تعديل التوثيق الخاص بالمشروع كفرونت وباك واظهار الية ضيط المشروع وقت التطوير وقت التشغيل الحقيقي",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 18
+      },
+      "time": {
+        "hour": 21,
+        "minute": 5,
+        "second": 0,
+        "nano": 37116300
+      }
+    },
+    "isImported": false
   }
 ]

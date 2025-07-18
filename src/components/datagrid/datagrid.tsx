@@ -784,11 +784,11 @@
 
 import {
     AllCommunityModule,
-    ModuleRegistry,
     colorSchemeDarkBlue,
     colorSchemeLightCold,
+    ModuleRegistry,
+    type RowSelectionOptions,
     themeQuartz,
-    // type Theme
 } from "ag-grid-community";
 import {AgGridReact} from "ag-grid-react";
 import {type FC, type ReactElement, useMemo} from "react";
@@ -869,7 +869,7 @@ const DataGrid: FC<DataGridProps<DataGridGenericType>> = ({
     // Determine the theme based on system preference
     // This logic stays inside if you want the grid to react to system preference changes
 
-    const singleRowSelection = useMemo(() => {
+    const singleRowSelection = useMemo<RowSelectionOptions | "single" | "multiple">(() => {
         return {
             mode: 'singleRow',
             enableClickSelection: true,
@@ -890,10 +890,13 @@ const DataGrid: FC<DataGridProps<DataGridGenericType>> = ({
             // autoSizeStrategy={{
             //     type: "fitCellContents",
             // }}
-            onRowSelected={(e) => {
-                // console.log("selected from grids")
+            cellSelection={false}
+            onRowClicked={(e)=>{
                 fetchSelectedData(e.api.getSelectedRows() as DataGridGenericType[])
             }}
+            // onRowSelected={(e) => {
+            //     fetchSelectedData(e.api.getSelectedRows() as DataGridGenericType[])
+            // }}
         />
     );
 };

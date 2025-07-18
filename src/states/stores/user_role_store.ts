@@ -20,7 +20,7 @@ type UserRolesStore = UserRolesState & UserRolesActions;
 
 export const useUserRolesStore = create<UserRolesStore>((set) => ({
     // Initial State
-    userRoles: [],
+    mainStore: [],
     fetching: false,
     error: null,
     searchTerm: '',

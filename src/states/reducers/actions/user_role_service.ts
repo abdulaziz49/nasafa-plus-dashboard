@@ -2,10 +2,10 @@
 import AppAxios, {getAuthAxiosConfig} from "../../../utils/app_axios.ts"
 import type {UserRole} from "../../../models/users/user_role_model.ts";
 import type {Dispatch} from "react";
-import type {DataActionTypes} from "../user_role_action_type.ts"; // For useReducer's dispatch type
+import type {DataActionTypes} from "../types/user_role_action_type.ts"; // For useReducer's dispatch type
 
 // --- Async Action Creators ---
-export const fetchUserRoles = async (dispatch: Dispatch<DataActionTypes<UserRole>>, token: string): Promise<void> => {
+export const fetchUserRoles = async (dispatch: Dispatch<DataActionTypes>, token: string): Promise<void> => {
     dispatch({type: 'FETCH_DATA_REQUEST'});
     try {
         const response = await AppAxios.get('roles', getAuthAxiosConfig(token));
@@ -17,7 +17,7 @@ export const fetchUserRoles = async (dispatch: Dispatch<DataActionTypes<UserRole
     }
 };
 
-export const addUserRole = async (dispatch: Dispatch<DataActionTypes<UserRole>>, token: string, newRoleData: Omit<UserRole, 'id' | 'created_at' | 'updated_at'>) => {
+export const addUserRole = async (dispatch: Dispatch<DataActionTypes>, token: string, newRoleData: Omit<UserRole, 'id' | 'created_at' | 'updated_at'>) => {
     // You might dispatch a 'ADD_ROLE_REQUEST' here too, for a loading state on the form
     dispatch({type: 'ADD_DATA_REQUEST'})
     try {
@@ -31,7 +31,7 @@ export const addUserRole = async (dispatch: Dispatch<DataActionTypes<UserRole>>,
     }
 };
 
-export const editUserRole = async (dispatch: Dispatch<DataActionTypes<UserRole>>, token: string, updatedRole: UserRole) => {
+export const editUserRole = async (dispatch: Dispatch<DataActionTypes>, token: string, updatedRole: UserRole) => {
     dispatch({type: 'EDIT_DATA_REQUEST'})
     try {
         // Assuming API endpoint is /api/roles/{id} for PUT/PATCH
@@ -45,17 +45,42 @@ export const editUserRole = async (dispatch: Dispatch<DataActionTypes<UserRole>>
     }
 };
 
-export const deleteUserRole = async (dispatch: Dispatch<DataActionTypes<UserRole>>, token: string, roleId: number) => {
+export const deleteUserRole = async (dispatch: Dispatch<DataActionTypes>, token: string, id: number) => {
     dispatch({type: 'DELETE_DATA_REQUEST'});
     try {
-        await AppAxios.delete(`roles/${roleId}`, getAuthAxiosConfig(token));
-        dispatch({type: 'DELETE_DATA_SUCCESS', payload: {id: roleId}});
+        await AppAxios.delete(`roles/${id}`, getAuthAxiosConfig(token));
+        dispatch({type: 'DELETE_DATA_SUCCESS', payload: id});
     } catch (error: any) {
         const errorMessage = error.response?.data?.message || error.message || 'Failed to delete role';
         dispatch({type: 'DELETE_DATA_FAILURE', payload: errorMessage})
         console.error('Delete role failed:', errorMessage);
-        throw new Error(errorMessage);
+        // throw new Error(errorMessage);
     }
+};
+
+export const searchUserRole = (dispatch: Dispatch<DataActionTypes>, searchTerm: string, stillSearch: boolean) => {
+    if (!stillSearch)
+        dispatch({type: 'SEARCH_DATA_REQUEST'});
+    // try {
+    // console.log(searchTerm)
+    // let filteredData: UserRole[]
+    if (searchTerm.length > 0) {
+        // filteredData = data.filter((row) => row.name.toString().toLowerCase().includes(searchTerm.toLowerCase()))
+        dispatch({type: 'SEARCH_DATA_SUCCESS', payload: searchTerm});
+    } else {
+        // filteredData = []
+        dispatch({type: 'SEARCH_DATA_FAILURE'});
+    }
+    // console.log(filteredData)
+    // else
+    //     filteredData = []
+    // await AppAxios.delete(`roles/${roleId}`, getAuthAxiosConfig(token));
+    // } catch (error: any) {
+    //     const errorMessage = error.response?.data?.message || error.message || 'Failed to delete role';
+    //     dispatch({type: 'DELETE_DATA_FAILURE', payload: errorMessage})
+    //     console.error('Delete role failed:', errorMessage);
+    //     throw new Error(errorMessage);
+    // }
 };
 
 // states/reducers/actions/user_role_service.ts (or src/actions/user_role_actions.ts)
@@ -69,7 +94,7 @@ export const deleteUserRole = async (dispatch: Dispatch<DataActionTypes<UserRole
 // export const fetchUserRoles = async (token: string): Promise<void> => {
 //     // Get store actions
 //     const {setLoading, setError, setUserRoles} = useUserRolesStore.getState();
-//
+//}
 //     setLoading(true);
 //     setError(null); // Clear any previous errors
 //     try {

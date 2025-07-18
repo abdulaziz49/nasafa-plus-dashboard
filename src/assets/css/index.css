@@ -80,5 +80,9 @@
     Font
 */
 body {
-    font-family: "Changa", "Readex Pro", "Tagawal", sans-serif;
+    font-family: "Markazi Text", sans-serif;
+}
+
+body:dir("ltr") {
+    font-family: "Inter", sans-serif;
 }
