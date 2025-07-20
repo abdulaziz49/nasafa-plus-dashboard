@@ -11,7 +11,6 @@ import Pagination from '../../components/pagination.tsx';
 import Select from '../../components/inputs/select.tsx';
 import Toggle from '../../components/inputs/toggle.tsx';
 import {useTranslation} from 'react-i18next';
-import {UserRoleTableColumn} from "../../components/datagrid/column_definition/user_role_datagrid_columns.ts";
 
 const UserManagementView = () => {
     const {t} = useTranslation('user-management/user');

@@ -3,13 +3,13 @@ import {type ComponentPropsWithoutRef, type ReactNode, useRef,} from 'react';
 // @ts-ignore
 interface AccordionPropsType extends ComponentPropsWithoutRef<'div'> {
     title: string | undefined;
-    collapsed: boolean; // This is a controlled prop, true if open, false if closed
+    collapsed?: boolean; // This is a controlled prop, true if open, false if closed
     classes?: string;
     icon?: ReactNode;
-    index: number;
+    index?: number;
     titleClasses?: string;
-    accordionName: string; // The radio group name (important for DaisyUI's radio behavior)
-    onToggle: (index: number) => void; // Callback to notify parent of a toggle
+    accordionName?: string; // The radio group name (important for DaisyUI's radio behavior)
+    onToggle?: (index: number) => void; // Callback to notify parent of a toggle
 }
 
 const Accordion = ({

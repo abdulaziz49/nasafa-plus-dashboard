@@ -1,4 +1,4 @@
-import type {   ComponentPropsWithoutRef} from "react";
+import type {ComponentPropsWithoutRef} from "react";
 
 interface InputFieldPropsType extends ComponentPropsWithoutRef<"input"> {
     labelText?: string,
@@ -7,6 +7,7 @@ interface InputFieldPropsType extends ComponentPropsWithoutRef<"input"> {
     placeholder?: string,
     name: string,
     classes?: string,
+    error?: string
 }
 
 const InputField = ({
@@ -16,6 +17,7 @@ const InputField = ({
                         placeholder,
                         name,
                         classes,
+                        error,
                         ...rest
                     }: InputFieldPropsType) => {
     return (
@@ -23,6 +25,14 @@ const InputField = ({
             {/* Conditionally render the label only if 'withLabel' is true */}
             {withLabel && <label className="label mb-2">{labelText}</label>}
             <input type={fieldType} name={name} className="input w-auto" placeholder={placeholder} {...rest}/>
+            {
+                error &&
+                (
+                    <p className="validator-hint hidden">
+                        {error}
+                    </p>
+                )
+            }
         </div>
     )
 }

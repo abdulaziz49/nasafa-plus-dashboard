@@ -23,10 +23,10 @@ export default function getUserRoleTableColumn(handleAction: MouseEventHandler<H
     ]
 }
 
-export const UserRoleTableColumn: object[] = [
-    {headerName: "ID", field: "id", minWidth: 60, width: 60},
-    {headerName: "Name", field: "name"},
-    {headerName: "Guard name", field: "guard_name"},
-    {headerName: "Created at", field: "created_at"},
-    {headerName: "", cellRenderer: DataGridDeleteColumnRenderer, minWidth: 80, width: 100},
-]
+// export const UserRoleTableColumn: object[] = [
+//     {headerName: "ID", field: "id", minWidth: 60, width: 60},
+//     {headerName: "Name", field: "name"},
+//     {headerName: "Guard name", field: "guard_name"},
+//     {headerName: "Created at", field: "created_at"},
+//     {headerName: "", cellRenderer: DataGridDeleteColumnRenderer, minWidth: 80, width: 100},
+// ]

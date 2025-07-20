@@ -6,6 +6,7 @@ import type {DataActionTypes} from "../types/user_role_action_type.ts"; // For u
 
 // --- Async Action Creators ---
 export const fetchUserRoles = async (dispatch: Dispatch<DataActionTypes>, token: string): Promise<void> => {
+    // if (fetching)
     dispatch({type: 'FETCH_DATA_REQUEST'});
     try {
         const response = await AppAxios.get('roles', getAuthAxiosConfig(token));
