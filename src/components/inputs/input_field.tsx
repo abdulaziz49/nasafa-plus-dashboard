@@ -1,40 +1,35 @@
-import type {ComponentPropsWithoutRef} from "react";
+import type { ComponentPropsWithoutRef } from 'react';
 
-interface InputFieldPropsType extends ComponentPropsWithoutRef<"input"> {
-    labelText?: string,
-    withLabel?: boolean,
-    fieldType: string,
-    placeholder?: string,
-    name: string,
-    classes?: string,
-    error?: string
+interface InputFieldPropsType extends ComponentPropsWithoutRef<'input'> {
+	labelText?: string;
+	withLabel?: boolean;
+	placeholder?: string;
+	containerClasses?: string;
+	errorMessage?: string;
 }
 
 const InputField = ({
-                        fieldType,
-                        withLabel = false,
-                        labelText,
-                        placeholder,
-                        name,
-                        classes,
-                        error,
-                        ...rest
-                    }: InputFieldPropsType) => {
-    return (
-        <div className={'flex flex-col ' + classes}>
-            {/* Conditionally render the label only if 'withLabel' is true */}
-            {withLabel && <label className="label mb-2">{labelText}</label>}
-            <input type={fieldType} name={name} className="input w-auto" placeholder={placeholder} {...rest}/>
-            {
-                error &&
-                (
-                    <p className="validator-hint hidden">
-                        {error}
-                    </p>
-                )
-            }
-        </div>
-    )
-}
+	withLabel = false,
+	labelText,
+	placeholder,
+	containerClasses,
+	errorMessage,
+	...rest
+}: InputFieldPropsType) => {
+	return (
+		<div className={'flex flex-col ' + containerClasses}>
+			{/* Conditionally render the label only if 'withLabel' is true */}
+			{withLabel && <label className="label mb-2">{labelText}</label>}
+			<input
+				className="input w-auto"
+				placeholder={placeholder}
+				{...rest}
+			/>
+			{errorMessage && (
+				<p className="validator-hint hidden">{errorMessage}</p>
+			)}
+		</div>
+	);
+};
 
-export default InputField
+export default InputField;

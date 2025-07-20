@@ -222,123 +222,100 @@
 // export default App;
 
 // src/App.tsx
-import {Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 // import {Suspense} from 'react';
 // import CircleLoading from './components/loaders/circle_loading.tsx';
 // import ProtectedRoute from "./routes/auth/protected_route.tsx";
 // import { useAuthStore } from "./states/auth/auth_store.ts";
 // import { emptyUser } from "./models/users/users_models.ts"; // Import emptyUser
 // Import your centralized route configuration
-import {type AppRouteConfig, appRoutes} from './routes/app_routes.ts';
-import {ToastContainer} from "react-toastify";
-import useUserSettingsStore from "./states/stores/user_settings_store.ts";
-import ProtectedRoute from "./routes/auth/protected_route.tsx";
-import CircleLoading from "./components/loaders/circle_loading.tsx";
-import {Suspense} from "react";
-import DrawerButtonSkeleton from "./components/skeletons/drawer_button_skeleton.tsx";
-import DrawerContainer from "./components/drawer/drawer_container.tsx";
-import {useAuthStore} from "./states/stores/auth_store.ts";
-import DrawerButton from "./components/menu/drawer_button.tsx";
+import { type AppRouteConfig, appRoutes } from './routes/app_routes.ts';
+import { ToastContainer } from 'react-toastify';
+import useUserSettingsStore from './states/stores/user_settings_store.ts';
+import ProtectedRoute from './routes/auth/protected_route.tsx';
+import CircleLoading from './components/loaders/circle_loading.tsx';
+import { Suspense } from 'react';
+import DrawerButtonSkeleton from './components/skeletons/drawer_button_skeleton.tsx';
+import DrawerContainer from './components/drawer/drawer_container.tsx';
+import { useAuthStore } from './states/stores/auth_store.ts';
+import DrawerButton from './components/menu/drawer_button.tsx';
 
 // Import the 404 View (since it's a special case, keep it here or handle in config)
 // import View404 from './views/errors/view_404.tsx'; // Keep 404 import here if not in centralized config
 
 function App() {
+	// Get the initial token and fetchUser action from the store
+	// const { fetchUser, token } = useAuthStore.getState();
 
-    // Get the initial token and fetchUser action from the store
-    // const { fetchUser, token } = useAuthStore.getState();
+	// useEffect(() => {
+	//     // This effect runs only once after the initial render to perform auth check
+	//     if (token) {
+	//         fetchUser(); // Attempt to fetch user to validate token
+	//     } else {
+	//         // If no token, then there's no session to check.
+	//         // Set isLoading to false immediately as there's nothing to load for auth.
+	//         useAuthStore.setState({ isLoading: false, isAuthenticated: false, user: emptyUser });
+	//     }
+	// }, [fetchUser, token]);
 
-    // useEffect(() => {
-    //     // This effect runs only once after the initial render to perform auth check
-    //     if (token) {
-    //         fetchUser(); // Attempt to fetch user to validate token
-    //     } else {
-    //         // If no token, then there's no session to check.
-    //         // Set isLoading to false immediately as there's nothing to load for auth.
-    //         useAuthStore.setState({ isLoading: false, isAuthenticated: false, user: emptyUser });
-    //     }
-    // }, [fetchUser, token]);
+	// Filter routes based on protection status
+	const publicRoutes = appRoutes.filter((route) => !route.isProtected);
+	const protectedRoutes = appRoutes.filter((route) => route.isProtected);
 
-    // Filter routes based on protection status
-    const publicRoutes = appRoutes.filter(route => !route.isProtected);
-    const protectedRoutes = appRoutes.filter(route => route.isProtected);
+	const { isRTL, isDark } = useUserSettingsStore();
+	const { isAuthenticated, isAuthLoading } = useAuthStore();
 
-    const {isRTL, isDark} = useUserSettingsStore()
-    const {isAuthenticated, isAuthLoading} = useAuthStore()
+	return (
+		<div className="drawer lg:drawer-open bg-base-200">
+			<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+			<div className="drawer-content flex flex-col items-center justify-center w-auto h-dvh m-0 p-0">
+				{/* Conditionally render DrawerContainer */}
+				{isAuthenticated && !isAuthLoading && (
+					<Suspense fallback={<DrawerButtonSkeleton />}>
+						<DrawerButton />
+					</Suspense>
+				)}
 
-    return (
-        <div className="drawer lg:drawer-open bg-base-200">
-            <input
-                id="my-drawer-2"
-                type="checkbox"
-                className="drawer-toggle"
-            />
-            <div className="drawer-content flex flex-col items-center justify-center w-auto h-dvh m-0 p-0">
-                {/* Conditionally render DrawerContainer */}
-                {(isAuthenticated && !isAuthLoading) && (
-                    <Suspense fallback={<DrawerButtonSkeleton/>}>
-                        <DrawerButton/>
-                    </Suspense>
-                )}
+				{/* Page content here */}
+				<div className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 space-y-2">
+					<Suspense fallback={<CircleLoading />}>
+						<Routes>
+							{protectedRoutes.map(
+								({ path, Component }: AppRouteConfig) => (
+									<Route
+										key={path}
+										path={path}
+										element={
+											<ProtectedRoute>
+												<Component />
+											</ProtectedRoute>
+										} // Render the component from the config
+									/>
+								),
+							)}
 
-                {/* Page content here */}
-                <div
-                    className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 space-y-2">
-                    {/*<Suspense fallback={<CircleLoading/>}>*/}
-                    <Suspense fallback={<CircleLoading/>}>
-                        <Routes>
-                            {/* Protected Routes (nested under ProtectedRoute) */}
-                            {/*<Route element={<ProtectedRoute/>}>*/}
-                            {protectedRoutes.map(({path, Component}: AppRouteConfig) => (
-                                <Route
-                                    key={path}
-                                    path={path}
-                                    element={
-                                        <ProtectedRoute>
-                                            <Component/>
-                                        </ProtectedRoute>
-                                    } // Render the component from the config
-                                />
-                            ))}
-                            {/*</Route>*/}
-
-                            {/* Public Routes */}
-                            {publicRoutes.map(({path, Component}) => (
-                                <Route
-                                    key={path}
-                                    path={path}
-                                    element={
-                                        <Component/>
-                                    } // Render the component from the config
-                                />
-                            ))}
-                        </Routes>
-                    </Suspense>
-                    <ToastContainer
-                        rtl={isRTL}
-                        theme={isDark ? "dark" : "light"}
-                        position={isRTL ? 'top-left' : "top-right"}
-                        newestOnTop={true}
-                    />
-                    {/*</Suspense>*/}
-                </div>
-                {/*<div className="fixed bottom-2 text-black ">Nasafa Plus</div>*/}
-            </div>
-            {/* Conditionally render and lazy-load DrawerContainer */}
-            {(isAuthenticated && !isAuthLoading) && (
-                // <Suspense
-                //     fallback={
-                //         <DrawerSkeleton classes={'w-full h-screen'}/>
-                //     }
-                // >
-                //     {' '}
-                //      Provide a fallback UI
-                //     <LazyDrawerContainer/>
-                <DrawerContainer/>
-                // </Suspense>
-            )}
-        </div>
-    );
+							{/* Public Routes */}
+							{publicRoutes.map(({ path, Component }) => (
+								<Route
+									key={path}
+									path={path}
+									element={<Component />} // Render the component from the config
+								/>
+							))}
+						</Routes>
+					</Suspense>
+					<ToastContainer
+						rtl={isRTL}
+						theme={isDark ? 'dark' : 'light'}
+						position={isRTL ? 'top-left' : 'top-right'}
+						newestOnTop={true}
+					/>
+				</div>
+			</div>
+			{/* Conditionally render DrawerContainer */}
+			{isAuthenticated && !isAuthLoading && <DrawerContainer />}
+		</div>
+	);
 }
 
 export default App;
