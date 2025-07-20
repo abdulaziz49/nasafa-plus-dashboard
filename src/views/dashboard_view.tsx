@@ -1,37 +1,37 @@
-import {useTranslation} from 'react-i18next';
-// import {useAppSelector} from "../hooks/state_hooks.ts";
-import {useAuthStore} from "../states/stores/auth_store.ts";
-import {useShallow} from "zustand/shallow";
-// import LoadingTemplate from "../components/templates/loading_template.tsx";
+import { useTranslation } from "react-i18next";
+import { useAuthStore } from "../states/stores/auth_store.ts";
+import { useShallow } from "zustand/shallow";
 
+/**
+ * DashboardView displays the main dashboard page.
+ * It shows the current user's username (or "Guest" if not logged in)
+ * and their authentication token. The page title is set using i18n.
+ */
 const DashboardView = () => {
-    const {t} = useTranslation('dashboard');
-    document.title = t('title');
-    // Use shallow as the third argument to compare the selected object
-    const {user, token} = useAuthStore(useShallow(state => ({
-        user: state.user,
-        token: state.token
-    }))); // <--- Add shallow here!
+    const { t } = useTranslation("dashboard");
+    document.title = t("title");
 
-    // const {user, token} = useAppSelector(({auth}) => auth);
+    // Select user and token from the auth store using shallow comparison
+    const { user, token } = useAuthStore(
+        useShallow((state) => ({
+            user: state.user,
+            token: state.token,
+        }))
+    );
 
     return (
-        // <LoadingTemplate>
-            <div className="hero bg-base-200 max-h-screen">
-                <div className="hero-content text-center">
-                    <div className="max-w-md">
-                        <h1 className="text-5xl font-bold">{t('title')}</h1>
-                        <p className="py-6">
-                            {user && user.username ? user.username : 'Guest'}
-                        </p>
-                        <p className="">
-                            {token}
-                        </p>
-                        <button className="btn btn-primary">Get Started</button>
-                    </div>
+        <div className="hero bg-base-200 max-h-dvh max-w-dvw">
+            <div className="hero-content text-center h-screen">
+                <div className="w-screen">
+                    <h1 className="text-5xl font-bold">{t("title")}</h1>
+                    <p className="py-6">
+                        {user?.username ? user.username : "Guest"}
+                    </p>
+                    <p className="wrap-break-word">{token}</p>
+                    <button className="btn btn-primary">Get Started</button>
                 </div>
             </div>
-        // </LoadingTemplate>
+        </div>
     );
 };
 

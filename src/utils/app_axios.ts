@@ -1,7 +1,7 @@
 import axios, {type AxiosRequestConfig} from "axios"
 
 const AppAxios = axios.create({
-    baseURL: import.meta.env.VITE_API_URL
+    baseURL: `https://${location.hostname}${import.meta.env.VITE_API_URL}`
 })
 
 export const unauthAxiosHeaderJson = {

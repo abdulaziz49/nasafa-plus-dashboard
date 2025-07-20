@@ -1,321 +1,88 @@
-// import {Route, Routes} from 'react-router-dom';
-// import {lazy, Suspense} from 'react';
-// import CircleLoading from './components/loaders/circle_loading.tsx';
-// import {
-//     CLIENT_GROUP_MANAGEMENT_ROUTE,
-//     CLIENT_MANAGEMENT_ROUTE, CLIENT_TYPE_MANAGEMENT_ROUTE,
-//     CONTAINER_GROUP_MANAGEMENT_ROUTE,
-//     CONTAINER_MANAGEMENT_ROUT, CONTAINER_TYPE_MANAGEMENT_ROUTE,
-//     CONTRACT_GROUP_MANAGEMENT_ROUTE,
-//     CONTRACT_MANAGEMENT_ROUTE, CONTRACT_TYPE_MANAGEMENT_ROUTE,
-//     DASHBOARD_ROUTE,
-//     LOGIN_ROUTE,
-//     MAINTENANCE_GROUP_MANAGEMENT_ROUTE,
-//     MAINTENANCE_MANAGEMENT_ROUTE, MAINTENANCE_TYPE_MANAGEMENT_ROUTE, NOTIFICATIONS_ROUTE,
-//     SYSTEM_SETTINGS_MANAGEMENT_ROUTE,
-//     TRUCK_GROUP_MANAGEMENT_ROUTE,
-//     TRUCK_MANAGEMENT_ROUTE, TRUCK_TYPE_MANAGEMENT_ROUTE,
-//     USER_SETTINGS_MANAGEMENT_ROUTE,
-//     USERS_GROUPS_MANAGEMENT_ROUTE,
-//     USERS_MANAGEMENT_ROUTE, USERS_PERMISSION_MANAGEMENT_ROUTE,
-// } from './routes/routes_paths.ts';
-// import useLocalizeDocumentAttributes from './i18n/use_localize_document_attributes.ts';
-//
-// import ViewTemplate from './components/templates/view_template.tsx';
-// import ProtectedRoute from "./routes/auth/protected_route.tsx";
-// // import ProtectedRoute from "./routes/auth/protected_route.tsx";
-// // import {useDispatch, useSelector} from "react-redux";
-// // import {fetchUser} from "./states/auth/auth_slice.ts";
-//
-// // Load General Views
-// const DashboardView = lazy(() => import('./views/dashboard_view.tsx'));
-// const LoginView = lazy(() => import('./views/login_view.tsx'));
-//
-// // Load User Management Views
-// const UserGroupManagementView = lazy(
-//     () => import('./views/users/user_role_management_view.tsx'),
-// );
-// const UserManagementView = lazy(
-//     () => import('./views/users/user_management_view.tsx'),
-// );
-// const UserPermissionManagementView = lazy(() => import( "./views/users/user_permission_management_view.tsx"));
-//
-// // Load Container Management Views
-// const ContainerGroupManagementView = lazy(
-//     () => import('./views/containers/container_group_management_view.tsx'),
-// );
-// const ContainerTypeManagementView = lazy(
-//     () => import('./views/containers/container_type_management_view.tsx'),
-// );
-// const ContainerManagementView = lazy(
-//     () => import('./views/containers/container_management_view.tsx'),
-// );
-//
-// // Load Truck Management Views
-// const TruckGroupManagementView = lazy(() => import( "./views/trucks/truck_group_management_view.tsx"))
-// const TruckTypeManagementView = lazy(() => import( "./views/trucks/truck_type_management_view.tsx"))
-// const TruckManagementView = lazy(() => import('./views/trucks/truck_management_view.tsx'))
-//
-// // Load Contract Management Views
-// const ContractGroupManagementView = lazy(() => import("./views/contracts/contract_group_management_view.tsx"))
-// const ContractTypeManagementView = lazy(() => import("./views/contracts/contract_type_management_view.tsx"))
-// const ContractManagementView = lazy(() => import("./views/contracts/contract_management_view.tsx"))
-//
-// // Load Client Management Views
-// const ClientGroupManagementView = lazy(() => import("./views/clients/client_group_management_view.tsx"))
-// const ClientTypeManagementView = lazy(() => import("./views/clients/client_type_management_view.tsx"))
-// const ClientManagementView = lazy(() => import("./views/clients/client_management_view.tsx"))
-//
-// // Load Maintenance Management Views
-// const MaintenanceGroupManagementView = lazy(() => import("./views/maintenance/maintenance_group_management_view.tsx"))
-// const MaintenanceTypeManagementView = lazy(() => import("./views/maintenance/maintenance_type_management_view.tsx"))
-// const MaintenanceManagementView = lazy(() => import("./views/maintenance/maintenance_management_view.tsx"))
-//
-// // Load System Management Views
-// const SystemSettingsView = lazy(() => import('./views/system/system_settings_view.tsx'));
-// const UserSettingsView = lazy(() => import('./views/system/user_settings_view.tsx'));
-//
-// // Load Notifications Views
-// const NotificationsView = lazy(() => import('./views/notifications_view.tsx'));
-//
-// // Load Error Views
-// const View404 = lazy(() => import('./views/errors/view_404.tsx'));
-//
-// function App() {
-//     useLocalizeDocumentAttributes();
-//
-//     // const dispatch = useDispatch();
-//     // const {isAuthenticated, isLoading} = useSelector((state) => state.auth);
-//
-//     // Attempt to fetch user on initial app load to check existing session
-//     // useEffect(() => {
-//     //     // dispatch(fetchUser());
-//     // }, [dispatch]);
-//
-//     // Simple PrivateRoute component
-//     // const PrivateRoute = ({children}) => {
-//     //     if (isLoading) {
-//     //         return <div>Loading...</div>; // Or a spinner
-//     //     }
-//     //     return isAuthenticated ? children : <Navigate to="/login"/>;
-//     // };
-//
-//     return (
-//         <ViewTemplate>
-//             <Suspense fallback={<CircleLoading/>}>
-//                 <Routes>
-//                     {/* General Routes*/}
-//                     <Route path={LOGIN_ROUTE} index element={<LoginView/>}/>
-//                     {/*<ProtectedRoute>*/}
-//                     {/*<Route element={<ProtectedRoute><ProtectedRoute>}>*/}
-//                     <Route path={DASHBOARD_ROUTE} element={<ProtectedRoute><DashboardView/></ProtectedRoute>}/>
-//
-//                     {/* User Routes*/}
-//                     <Route
-//                         path={USERS_GROUPS_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><UserGroupManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={USERS_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><UserManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={USERS_PERMISSION_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><UserPermissionManagementView/></ProtectedRoute>}
-//                     />
-//
-//                     {/* Container Routes*/}
-//                     <Route
-//                         path={CONTAINER_GROUP_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><ContainerGroupManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={CONTAINER_TYPE_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><ContainerTypeManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={CONTAINER_MANAGEMENT_ROUT}
-//                         element={<ProtectedRoute><ContainerManagementView/></ProtectedRoute>}
-//                     />
-//
-//                     {/* Truck Routes*/}
-//                     <Route
-//                         path={TRUCK_GROUP_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><TruckGroupManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={TRUCK_TYPE_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><TruckTypeManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={TRUCK_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><TruckManagementView/></ProtectedRoute>}
-//                     />
-//
-//                     {/* Client Routes*/}
-//                     <Route
-//                         path={CLIENT_GROUP_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><ClientGroupManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={CLIENT_TYPE_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><ClientTypeManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={CLIENT_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><ClientManagementView/></ProtectedRoute>}
-//                     />
-//
-//                     {/* Contract Routes*/}
-//                     <Route
-//                         path={CONTRACT_GROUP_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><ContractGroupManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={CONTRACT_TYPE_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><ContractTypeManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={CONTRACT_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><ContractManagementView/></ProtectedRoute>}
-//                     />
-//
-//                     {/* Maintenance Routes*/}
-//                     <Route
-//                         path={MAINTENANCE_GROUP_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><MaintenanceGroupManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={MAINTENANCE_TYPE_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><MaintenanceTypeManagementView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={MAINTENANCE_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><MaintenanceManagementView/></ProtectedRoute>}
-//                     />
-//
-//                     {/* System Management*/}
-//                     <Route
-//                         path={SYSTEM_SETTINGS_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><SystemSettingsView/></ProtectedRoute>}
-//                     />
-//                     <Route
-//                         path={USER_SETTINGS_MANAGEMENT_ROUTE}
-//                         element={<ProtectedRoute><UserSettingsView/></ProtectedRoute>}
-//                     />
-//
-//                     {/* Notifications */}
-//                     <Route
-//                         path={NOTIFICATIONS_ROUTE}
-//                         element={<ProtectedRoute><NotificationsView/></ProtectedRoute>}
-//                     />
-//
-//                     {/* Error Routes*/}
-//                     <Route path="*" element={<ProtectedRoute><View404/></ProtectedRoute>}/>
-//                     {/*</Route>*/}
-//                 </Routes>
-//             </Suspense>
-//         </ViewTemplate>
-//     );
-// }
-//
-// export default App;
-
 // src/App.tsx
-import { Route, Routes } from 'react-router-dom';
-// import {Suspense} from 'react';
-// import CircleLoading from './components/loaders/circle_loading.tsx';
-// import ProtectedRoute from "./routes/auth/protected_route.tsx";
-// import { useAuthStore } from "./states/auth/auth_store.ts";
-// import { emptyUser } from "./models/users/users_models.ts"; // Import emptyUser
-// Import your centralized route configuration
-import { type AppRouteConfig, appRoutes } from './routes/app_routes.ts';
-import { ToastContainer } from 'react-toastify';
-import useUserSettingsStore from './states/stores/user_settings_store.ts';
-import ProtectedRoute from './routes/auth/protected_route.tsx';
-import CircleLoading from './components/loaders/circle_loading.tsx';
-import { Suspense } from 'react';
-import DrawerButtonSkeleton from './components/skeletons/drawer_button_skeleton.tsx';
-import DrawerContainer from './components/drawer/drawer_container.tsx';
-import { useAuthStore } from './states/stores/auth_store.ts';
-import DrawerButton from './components/menu/drawer_button.tsx';
 
-// Import the 404 View (since it's a special case, keep it here or handle in config)
-// import View404 from './views/errors/view_404.tsx'; // Keep 404 import here if not in centralized config
+import { Route, Routes } from "react-router-dom";
+import { Suspense } from "react";
+import { ToastContainer } from "react-toastify";
 
+import { type AppRouteConfig, appRoutes } from "./routes/app_routes.ts";
+import useUserSettingsStore from "./states/stores/user_settings_store.ts";
+import ProtectedRoute from "./routes/auth/protected_route.tsx";
+import CircleLoading from "./components/loaders/circle_loading.tsx";
+import DrawerButtonSkeleton from "./components/skeletons/drawer_button_skeleton.tsx";
+import DrawerContainer from "./components/drawer/drawer_container.tsx";
+import { useAuthStore } from "./states/stores/auth_store.ts";
+import DrawerButton from "./components/menu/drawer_button.tsx";
+
+/**
+ * App is the root component of the application.
+ *
+ * - Handles route rendering using a centralized route configuration.
+ * - Separates protected and public routes for cleaner access control.
+ * - Integrates global UI elements such as the navigation drawer and toast notifications.
+ * - Applies user settings (RTL, dark mode) to the UI.
+ * - Uses Suspense for lazy-loaded components and skeletons for improved UX.
+ */
 function App() {
-	// Get the initial token and fetchUser action from the store
-	// const { fetchUser, token } = useAuthStore.getState();
+    // Get user settings and authentication state from stores
+    const { isRTL, isDark } = useUserSettingsStore();
+    const { isAuthenticated, isAuthLoading } = useAuthStore();
 
-	// useEffect(() => {
-	//     // This effect runs only once after the initial render to perform auth check
-	//     if (token) {
-	//         fetchUser(); // Attempt to fetch user to validate token
-	//     } else {
-	//         // If no token, then there's no session to check.
-	//         // Set isLoading to false immediately as there's nothing to load for auth.
-	//         useAuthStore.setState({ isLoading: false, isAuthenticated: false, user: emptyUser });
-	//     }
-	// }, [fetchUser, token]);
+    // Split routes into protected and public for rendering
+    const publicRoutes = appRoutes.filter((route) => !route.isProtected);
+    const protectedRoutes = appRoutes.filter((route) => route.isProtected);
 
-	// Filter routes based on protection status
-	const publicRoutes = appRoutes.filter((route) => !route.isProtected);
-	const protectedRoutes = appRoutes.filter((route) => route.isProtected);
+    return (
+        <div className="drawer lg:drawer-open bg-base-200 w-dvw h-dvh">
+            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content flex flex-col items-center justify-center w-auto h-dvh m-0 p-0">
+                {/* Show drawer button only when authenticated and not loading */}
+                {isAuthenticated && !isAuthLoading && (
+                    <Suspense fallback={<DrawerButtonSkeleton />}>
+                        <DrawerButton />
+                    </Suspense>
+                )}
 
-	const { isRTL, isDark } = useUserSettingsStore();
-	const { isAuthenticated, isAuthLoading } = useAuthStore();
+                {/* Main page content and routes */}
+                <div className="h-dvh w-dvw flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 space-y-2">
+                    <Suspense fallback={<CircleLoading />}>
+                        <Routes>
+                            {/* Protected routes require authentication */}
+                            {protectedRoutes.map(
+                                ({ path, Component }: AppRouteConfig) => (
+                                    <Route
+                                        key={path}
+                                        path={path}
+                                        element={
+                                            <ProtectedRoute>
+                                                <Component />
+                                            </ProtectedRoute>
+                                        }
+                                    />
+                                )
+                            )}
 
-	return (
-		<div className="drawer lg:drawer-open bg-base-200">
-			<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-			<div className="drawer-content flex flex-col items-center justify-center w-auto h-dvh m-0 p-0">
-				{/* Conditionally render DrawerContainer */}
-				{isAuthenticated && !isAuthLoading && (
-					<Suspense fallback={<DrawerButtonSkeleton />}>
-						<DrawerButton />
-					</Suspense>
-				)}
-
-				{/* Page content here */}
-				<div className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 space-y-2">
-					<Suspense fallback={<CircleLoading />}>
-						<Routes>
-							{protectedRoutes.map(
-								({ path, Component }: AppRouteConfig) => (
-									<Route
-										key={path}
-										path={path}
-										element={
-											<ProtectedRoute>
-												<Component />
-											</ProtectedRoute>
-										} // Render the component from the config
-									/>
-								),
-							)}
-
-							{/* Public Routes */}
-							{publicRoutes.map(({ path, Component }) => (
-								<Route
-									key={path}
-									path={path}
-									element={<Component />} // Render the component from the config
-								/>
-							))}
-						</Routes>
-					</Suspense>
-					<ToastContainer
-						rtl={isRTL}
-						theme={isDark ? 'dark' : 'light'}
-						position={isRTL ? 'top-left' : 'top-right'}
-						newestOnTop={true}
-					/>
-				</div>
-			</div>
-			{/* Conditionally render DrawerContainer */}
-			{isAuthenticated && !isAuthLoading && <DrawerContainer />}
-		</div>
-	);
+                            {/* Public routes accessible without authentication */}
+                            {publicRoutes.map(({ path, Component }) => (
+                                <Route
+                                    key={path}
+                                    path={path}
+                                    element={<Component />}
+                                />
+                            ))}
+                        </Routes>
+                    </Suspense>
+                    <ToastContainer
+                        rtl={isRTL}
+                        theme={isDark ? "dark" : "light"}
+                        position={isRTL ? "top-left" : "top-right"}
+                        newestOnTop={true}
+                    />
+                </div>
+            </div>
+            {/* Show navigation drawer only when authenticated and not loading */}
+            {isAuthenticated && !isAuthLoading && <DrawerContainer />}
+        </div>
+    );
 }
 
 export default App;
