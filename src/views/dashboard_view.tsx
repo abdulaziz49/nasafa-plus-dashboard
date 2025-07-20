@@ -20,18 +20,20 @@ const DashboardView = () => {
     );
 
     return (
-        <div className="hero bg-base-200 max-h-dvh max-w-dvw">
-            <div className="hero-content text-center h-screen">
-                <div className="w-screen">
-                    <h1 className="text-5xl font-bold">{t("title")}</h1>
-                    <p className="py-6">
-                        {user?.username ? user.username : "Guest"}
-                    </p>
-                    <p className="wrap-break-word">{token}</p>
-                    <button className="btn btn-primary">Get Started</button>
+        <>
+            <div className="p-0 m-0 h-dvh w-full bg-amber-500">
+                <h1 className="text-5xl font-bold text-center">{t("title")}</h1>
+                <div className="text-center h-auto w-full">
+                    <div className="w-full wrap-break-word">
+                        <p className="py-6">
+                            {user?.username ? user.username : "Guest"}
+                        </p>
+                        <p>{token}</p>
+                        <button className="btn btn-primary">Get Started</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -1,9 +1,9 @@
-import type {ComponentPropsWithoutRef, FC} from "react";
+import type { ComponentPropsWithoutRef, FC } from "react";
 
-interface SelectType extends ComponentPropsWithoutRef<'select'> {
-    classes?: string,
-    labelText?: string,
-    withLabel?: boolean,
+interface SelectType extends ComponentPropsWithoutRef<"select"> {
+    classes?: string;
+    labelText?: string;
+    withLabel?: boolean;
 }
 
 // /**
@@ -18,21 +18,21 @@ interface SelectType extends ComponentPropsWithoutRef<'select'> {
 //  * @param classes send classes to className Property of react js
 //  */
 const Select: FC<SelectType> = ({
-                                    children,
-                                    classes,
-                                    labelText,
-                                    withLabel = false,
-                                    ...rest
-                                }) => {
+    children,
+    classes,
+    labelText,
+    withLabel = false,
+    ...rest
+}) => {
     return (
-        <div className={'flex flex-col justify-start ' + classes}>
-            {withLabel && <label className="label mb-2">{labelText}</label>}
+        <div className={`mb-2 flex flex-col justify-start ${classes}`}>
+            {withLabel && <label className="label mb-1">{labelText}</label>}
             <select className="select w-full" {...rest}>
                 {/*<option disabled={isDisabledDefaultValue}>{defaultValue}</option>*/}
                 {children}
             </select>
         </div>
-    )
-}
+    );
+};
 
-export default Select
+export default Select;

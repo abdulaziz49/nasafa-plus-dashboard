@@ -48,13 +48,13 @@
 //     | { type: 'DELETE_ROLE'; payload: { id: number } }
 //     | { type: 'SET_SEARCH_TERM'; payload: { term: string } };
 //
-// const fetchData = (value: UserRolesState, token: string) => {
-//     const fetchingData = async () => {
+// const fetchUSER_ROLE = (value: UserRolesState, token: string) => {
+//     const fetchingUSER_ROLE = async () => {
 //         try {
 //             value.fetching = true
 //
 //             const response = await AppAxios.get('roles', getAuthAxiosConfig(token))
-//             value.userRoles = response.data
+//             value.userRoles = response.USER_ROLE
 //         } catch (error: any) {
 //             value.error = error.message
 //         } finally {
@@ -62,14 +62,14 @@
 //         }
 //         // return value
 //     }
-//     fetchingData()
-//     // value = fetchingData()
+//     fetchingUSER_ROLE()
+//     // value = fetchingUSER_ROLE()
 //     return value
 // }
-// // const fetchData = (value: UserRolesState, token: string): UserRolesState => {
+// // const fetchUSER_ROLE = (value: UserRolesState, token: string): UserRolesState => {
 // //     value.fetching = true
 // //     AppAxios.get('roles', getAuthAxiosConfig(token))
-// //         .then(response => value.userRoles = response.data)
+// //         .then(response => value.userRoles = response.USER_ROLE)
 // //         .catch((error: any) => value.error = error.message)
 // //         .then(() => value.fetching = false)
 // //     return value
@@ -82,10 +82,10 @@
 //             // try {
 //             //
 //             // }
-//             state = fetchData(state, action.payload.token)
+//             state = fetchUSER_ROLE(state, action.payload.token)
 //             // state.fetching = true
 //             // AppAxios.get('roles', getAuthAxiosConfig(action.payload.token))
-//             //     .then(response => state.userRoles = response.data)
+//             //     .then(response => state.userRoles = response.USER_ROLE)
 //             //     .catch((error: any) => state.error = error.message)
 //             //     .then(() => state.fetching = false)
 //             return state
@@ -128,13 +128,12 @@
 //     }
 // }
 
-import type {UserRolesState} from "../../models/users/user_role_model.ts";
-import type {DataActionTypes} from "./types/user_role_action_type.ts";
+import type { UserRolesState } from "../../../../models/user_system/user_role_model.ts";
+import type { UserRoleActionTypes } from "../../actions/types/user_system/user_role_action_type.ts";
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
 // Async logic should happen outside the reducer.
 
 // --- Define more granular actions for async operations ---
-
 
 export const initialViewState: UserRolesState = {
     mainStore: [],
@@ -146,27 +145,30 @@ export const initialViewState: UserRolesState = {
     deleting: false,
     printing: false,
     exporting: false,
-    error: null
-}
+    error: null,
+};
 
 // --- The Reducer Function (Pure and Immutable) ---
-export default function UserRoleReducer(state: UserRolesState, action: DataActionTypes): UserRolesState {
+export default function UserRoleReducer(
+    state: UserRolesState,
+    action: UserRoleActionTypes
+): UserRolesState {
     switch (action.type) {
         // For fetching cases
-        case 'FETCH_DATA_REQUEST':
+        case "FETCH_USER_ROLES_REQUEST":
             return {
                 ...state,
                 fetching: true,
                 error: null, // Clear any previous errors on new request
             };
-        case 'FETCH_DATA_SUCCESS':
+        case "FETCH_USER_ROLES_SUCCESS":
             return {
                 ...state,
                 fetching: false,
                 error: null,
-                mainStore: action.payload, // Replace roles with fetched data
+                mainStore: action.payload, // Replace roles with fetched USER_ROLE
             };
-        case 'FETCH_DATA_FAILURE':
+        case "FETCH_USER_ROLES_FAILURE":
             return {
                 ...state,
                 fetching: false,
@@ -175,34 +177,34 @@ export default function UserRoleReducer(state: UserRolesState, action: DataActio
             };
 
         // For adding cases
-        case 'ADD_DATA_REQUEST':
+        case "ADD_USER_ROLE_REQUEST":
             return {
                 ...state,
                 adding: true,
                 error: null, // Clear any previous errors on new request
             };
-        case 'ADD_DATA_SUCCESS':
+        case "ADD_USER_ROLE_SUCCESS":
             return {
                 ...state,
                 mainStore: [...state.mainStore, action.payload],
                 adding: false,
-                error: null
+                error: null,
             };
-        case 'ADD_DATA_FAILURE':
+        case "ADD_USER_ROLE_FAILURE":
             return {
                 ...state,
                 adding: false,
                 error: action.payload, // Set the error message
             };
 
-        // For editin cases
-        case 'EDIT_DATA_REQUEST':
+        // For editing cases
+        case "EDIT_USER_ROLE_REQUEST":
             return {
                 ...state,
                 editing: true,
                 error: null, // Clear any previous errors on new request
             };
-        case 'EDIT_DATA_SUCCESS':
+        case "EDIT_USER_ROLE_SUCCESS":
             return {
                 ...state,
                 mainStore: state.mainStore.map((role) =>
@@ -211,28 +213,30 @@ export default function UserRoleReducer(state: UserRolesState, action: DataActio
                 error: null,
                 editing: false,
             };
-        case 'EDIT_DATA_FAILURE':
+        case "EDIT_USER_ROLE_FAILURE":
             return {
                 ...state,
                 editing: false,
                 error: action.payload, // Set the error message
             };
 
-        // For editin cases
-        case 'DELETE_DATA_REQUEST':
+        // For deleting cases
+        case "DELETE_USER_ROLE_REQUEST":
             return {
                 ...state,
                 deleting: true,
                 error: null, // Clear any previous errors on new request
             };
-        case 'DELETE_DATA_SUCCESS':
+        case "DELETE_USER_ROLE_SUCCESS":
             return {
                 ...state,
-                mainStore: state.mainStore.filter((role) => action.payload !== role.id),
+                mainStore: state.mainStore.filter(
+                    (role) => action.payload !== role.id
+                ),
                 deleting: false,
-                error: null
+                error: null,
             };
-        case 'DELETE_DATA_FAILURE':
+        case "DELETE_USER_ROLE_FAILURE":
             return {
                 ...state,
                 deleting: false,
@@ -240,24 +244,28 @@ export default function UserRoleReducer(state: UserRolesState, action: DataActio
             };
 
         // For searching cases
-        case 'SEARCH_DATA_REQUEST':
+        case "SEARCH_USER_ROLES_REQUEST":
             return {
                 ...state,
                 searching: true,
-                secondaryStore: state.mainStore
+                secondaryStore: state.mainStore,
             };
-        case 'SEARCH_DATA_SUCCESS':
+        case "SEARCH_USER_ROLES_SUCCESS":
             return {
                 ...state,
                 error: null,
-                mainStore: state.secondaryStore.filter(row => row.name.toLowerCase().includes(action.payload.toLowerCase())), // Replace roles with fetched data
+                mainStore: state.secondaryStore.filter((row) =>
+                    row.name
+                        .toLowerCase()
+                        .includes(action.payload.toLowerCase())
+                ), // Replace roles with fetched USER_ROLE
             };
-        case 'SEARCH_DATA_FAILURE':
+        case "SEARCH_USER_ROLES_FAILURE":
             return {
                 ...state,
                 searching: false,
                 mainStore: state.secondaryStore,
-                secondaryStore: []
+                secondaryStore: [],
             };
 
         default: {

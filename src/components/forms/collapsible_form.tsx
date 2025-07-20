@@ -1,9 +1,9 @@
-import { type ComponentPropsWithoutRef } from 'react';
-import FormContainer from '../form_container';
-import Accordion from '../accordion';
+import { useCallback, useState, type ComponentPropsWithoutRef } from "react";
+import FormContainer from "../form_container";
+import Accordion from "../accordion";
 
-interface CollapsibleFormPropsType extends ComponentPropsWithoutRef<'div'> {
-	title: string;
+interface CollapsibleFormPropsType extends ComponentPropsWithoutRef<"div"> {
+    title: string;
 }
 /**
  * Renders a collapsible form section using an accordion UI.
@@ -15,18 +15,26 @@ interface CollapsibleFormPropsType extends ComponentPropsWithoutRef<'div'> {
  * @returns {JSX.Element} The rendered collapsible form container.
  */
 export default function CollapsibleForm({
-	title,
-	children,
+    title,
+    children,
 }: CollapsibleFormPropsType) {
-	return (
-		<FormContainer classes="w-full h-auto bg-base-100">
-			<Accordion
-				title={title}
-				titleClasses={'text-lg ms-7 lg:text-2xl lg:ms-0 m-0'}
-				classes="collapse-arrow h-auto"
-			>
-				{children}
-			</Accordion>
-		</FormContainer>
-	);
+    const [collapseForm, setCollapseForm] = useState<boolean>(false);
+
+    const toggleCollapse = useCallback(() => {
+        setCollapseForm((prev) => !prev);
+    }, [setCollapseForm]);
+
+    return (
+        <FormContainer classes="w-full h-auto shadow">
+            <Accordion
+                collapsed={collapseForm}
+                title={title}
+                onToggle={toggleCollapse}
+                titleClasses={"text-lg m-0 py-3 ms-7 lg:text-2xl lg:ms-0"}
+                classes="collapse-arrow h-auto"
+            >
+                {children}
+            </Accordion>
+        </FormContainer>
+    );
 }

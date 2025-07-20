@@ -11,7 +11,6 @@ import Nasafa from "../assets/img/nasafa_plus_logo.png";
 import LoginIcon from "../components/icons/login_icon.tsx";
 import { type ChangeEvent, useEffect, useState } from "react";
 import { useAuthStore } from "../states/stores/auth_store.ts";
-import AppAxios from "../utils/app_axios.ts";
 
 /**
  * LoginView component renders the login form for the application.

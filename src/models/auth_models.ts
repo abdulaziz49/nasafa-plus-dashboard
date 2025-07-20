@@ -1,4 +1,4 @@
-export interface User {
+export interface Auth {
     id: number;
     name: string;
     username: string;
@@ -18,14 +18,14 @@ export interface LoginCredentials {
 // }
 
 export interface AuthState {
-    user: User;
+    authUser: Auth;
     isAuthenticated: boolean;
     isLoading: boolean;
     token: string;
     error: string | null;
 }
 
-export const emptyUser: User = {
+export const emptyUser: Auth = {
     id: 0,
     name: "",
     email: "",

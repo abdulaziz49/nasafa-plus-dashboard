@@ -1,110 +1,169 @@
-import FormContainer from '../../components/form_container.tsx';
-import InputField from '../../components/inputs/input_field.tsx';
-import AddButton from '../../components/buttons/crud_buttons/add_button.tsx';
-import EditButton from '../../components/buttons/crud_buttons/edit_button.tsx';
-import DeleteButton from '../../components/buttons/crud_buttons/delete_button.tsx';
-import PrintButton from '../../components/buttons/crud_buttons/print_button.tsx';
-import PDFButton from '../../components/buttons/crud_buttons/pdf_button.tsx';
-import ExcelButton from '../../components/buttons/crud_buttons/excel_button.tsx';
-import DataGrid from '../../components/datagrid/datagrid.tsx';
-import Pagination from '../../components/pagination.tsx';
-import Select from '../../components/inputs/select.tsx';
-import Toggle from '../../components/inputs/toggle.tsx';
-import { useTranslation } from 'react-i18next';
+import DataGrid from "../../components/datagrid/datagrid.tsx";
+import Pagination from "../../components/pagination.tsx";
+// import Toggle from "../../components/inputs/toggle.tsx";
+import { useTranslation } from "react-i18next";
+import UserForm from "../../components/forms/system_user/user_form.tsx";
+import { useCallback, useReducer, useState } from "react";
+import type { User } from "../../models/user_system/user_models.ts";
+import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.tsx";
+import SearchForm from "../../components/forms/search_form.tsx";
+import Dropdown from "../../components/dropdown.tsx";
+import PDFButton from "../../components/buttons/crud_buttons/pdf_button.tsx";
+import ExcelButton from "../../components/buttons/crud_buttons/excel_button.tsx";
+// import DataGridSkeleton from "../../components/skeletons/datagrid_skeleton.tsx";
+import { useAuthStore } from "../../states/stores/auth_store.ts";
+import UserReducer, {
+    initialUserViewState,
+} from "../../states/reducers/storage/user_system/user_reducer.ts";
+import { fetchUsers } from "../../states/reducers/actions/services/user_system/user_service.ts";
+import getUserTableColumn from "../../components/datagrid/column_definition/user_system/user_datagrid_column_renderer.ts";
+import DataGridSkeleton from "../../components/skeletons/datagrid_skeleton.tsx";
+import type { DataGridGenericType } from "../../components/datagrid/datagrid_generic_type.ts";
+
+const initialUserFormState: User = {
+    id: 0,
+    name: "",
+    username: "",
+    email: "",
+    created_at: "",
+    is_activated: false,
+    status: "",
+    updated_at: "",
+    status_text: "",
+    force_change_password: false,
+    last_login: "",
+    password_changed_at: "",
+    failed_login_attempts: 0,
+    locked_until: null,
+    is_locked: false,
+    remaining_lockout_time: null,
+    needs_password_change: false,
+    roles: [],
+    group: {
+        id: 0,
+        group_name: "",
+    },
+    creator: {
+        id: 0,
+        username: "",
+        name: "",
+    },
+};
 
 const UserManagementView = () => {
-	const { t } = useTranslation('user-management/user');
+    const TRANSLATE_FILE_PATH = "user-management/user";
+    const { t } = useTranslation(TRANSLATE_FILE_PATH);
 
-	document.title = t('title');
+    const { token } = useAuthStore();
 
-	return (
-		<>
-			<FormContainer classes="w-full h-auto bg-base-100">
-				<h1 className="text-2xl lg:text-4xl text-center font-bold mb-0.5 mt-8 md:mt-0 lg:mb-4">
-					{t('title')}
-				</h1>
-				<form className="w-full h-auto p-1 lg:p-2">
-					<div className="w-full grid grid-rows-4 grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-12 lg:grid-rows-2 md:gap-x-8 lg:gap-y-2">
-						<Select
-							classes="w-full lg:col-span-7 lg:order-1"
-							defaultValue={t('select-default-value')}
-							name="group_name"
-							labelText={t('select-label')}
-							withLabel={true}
-						>
-							<option disabled>
-								{t('select-default-value')}
-							</option>
-							<option>Admins</option>
-							<option>Drivers</option>
-						</Select>
-						<InputField
-							name="username"
-							labelText={t('username-label')}
-							fieldType="text"
-							placeholder={t('username-placeholder')}
-							withLabel={true}
-							containerClasses="w-full lg:col-span-7 lg:order-3"
-							onChange={() => {}}
-						/>
-						<Toggle
-							classes="justify-between lg:flex-row-reverse md:col-span-2 lg:col-start-10 rtl:lg:col-start-8 text-sm md:text-md lg:text-lg lg:order-2 lg:col-end-13"
-							name="is_active"
-							withCheckMark={false}
-							labelText={t('is-active')}
-							withLabel={true}
-						/>
-						<Toggle
-							classes="justify-between lg:flex-row-reverse md:col-span-2 lg:col-start-10 rtl:lg:col-start-8 text-sm md:text-md lg:text-lg lg:order-4 lg:col-end-13"
-							name="change_password"
-							withCheckMark={false}
-							labelText={t('change-password')}
-							withLabel={true}
-							className="rtl:lg:text-md"
-						/>
-					</div>
-					<br />
-					<div className="max-w-screen h-auto grid gap-2 grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-2 lg:grid-cols-6 lg:grid-rows-1">
-						<AddButton
-							classes="btn-primary btn-wide btn-wide order-1"
-							text={t('save-btn')}
-							clickEvent={() => {}}
-						/>
-						<EditButton
-							classes="btn-primary btn-wide btn-wide order-3 md:order-2"
-							text={t('edit-btn')}
-							clickEvent={() => {}}
-						/>
-						<DeleteButton
-							classes="btn-primary btn-wide btn-wide order-5  md:order-3"
-							text={t('del-btn')}
-							clickEvent={() => {}}
-						/>
-						<PrintButton
-							classes="btn-primary btn-wide btn-wide order-2  md:order-4"
-							text={t('print-btn')}
-							clickEvent={() => {}}
-						/>
-						<PDFButton
-							classes="btn-primary btn-wide btn-wide order-4  md:order-5"
-							text={t('pdf-btn')}
-							clickEvent={() => {}}
-						/>
-						<ExcelButton
-							classes="btn-primary btn-wide btn-wide order-6  md:order-6"
-							text={t('excel-btn')}
-							clickEvent={() => {}}
-						/>
-					</div>
-				</form>
-			</FormContainer>
-			{/*The outer div can still have its global styling*/}
-			<div className="w-full md:m-1 lg:m-2 h-dvh bg-gray-100 dark:bg-gray-900 rounded-md shadow-lg flex flex-col">
-				<DataGrid />
-			</div>
-			<Pagination />
-		</>
-	);
+    const [{ mainStore, fetching }, dispatch] = useReducer(
+        UserReducer,
+        initialUserViewState
+    );
+
+    document.title = t("title");
+    const [userFormData, setUserFormData] =
+        useState<User>(initialUserFormState);
+
+    // Fetch all user roles from the backend
+    const fetchData = useCallback(async () => {
+        await fetchUsers(dispatch, token);
+        setUserFormData(initialUserFormState);
+        console.log("Users: ", mainStore);
+    }, [dispatch, token, mainStore]);
+    // }, [token]);
+
+    // Handle row selection in the data grid
+    const onGridSelect = (data: DataGridGenericType[]) => {
+        if (data.length > 0) {
+            setUserFormData(data[0] as User);
+        } else {
+            setUserFormData(initialUserFormState);
+        }
+    };
+
+    const GRID_COLUMNS_DEF = getUserTableColumn(); // getUserTableColumn({ handleDeleteAction: () => {}, translateFile: TRANSLATE_FILE_PATH });
+
+    return (
+        <>
+            <UserForm
+                formData={userFormData}
+                addEventHandler={() => {}}
+                editEventHandler={() => {}}
+                inputChangeEvent={() => {}}
+                isAdding={false}
+                isEditing={false}
+                translateFile={TRANSLATE_FILE_PATH}
+                roles={[]}
+            />
+
+            {/* Search, export, refresh, and print controls */}
+            <div className="w-full bg-base-100 grid! grid-cols-6 grid-rows-2 lg:grid-rows-1 lg:grid-cols-10 gap-1">
+                <RefreshButton
+                    classes="btn-primary w-auto col-span-3  order-2 lg:order-1 lg:col-span-2"
+                    text={t("refresh-btn")}
+                    clickEvent={() => {
+                        fetchData();
+                    }}
+                    // isDisabled={fetching}
+                />
+                <SearchForm
+                    placeHolder={t("search-placeholder")}
+                    // clickEvent={searchRoleEvent}
+                    clickEvent={() => {}}
+                    filterChangeable={true}
+                    // changeInputEvent={changeSearchFormEvent}
+                    changeInputEvent={() => {}}
+                    containerClasses="order-1 col-span-6 lg:order-2 lg:col-span-6 lg:col-end-9 w-full mb-0"
+                >
+                    <option defaultChecked value={0}>
+                        {t("filter-name")}
+                    </option>
+                    <option value={1}>{t("filter-role")}</option>
+                </SearchForm>
+                <Dropdown
+                    text={t("export-dropdown")}
+                    bgColor="primary"
+                    uniqueKey="export-drop-menu"
+                    classes={
+                        "btn-primary col-span-3 order-4 lg:order-4 shadow-md lg:col-span-2"
+                    }
+                >
+                    <li>
+                        <PDFButton
+                            classes="btn-primary"
+                            text={t("pdf-btn")}
+                            clickEvent={() => {}}
+                        />
+                    </li>
+                    <li>
+                        <ExcelButton
+                            classes="btn-primary"
+                            text={t("excel-btn")}
+                            clickEvent={() => {}}
+                        />
+                    </li>
+                </Dropdown>
+            </div>
+
+            {/* Data grid for displaying user roles */}
+            <div className="w-full md:m-1 lg:m-2 h-dvh bg-gray-100 dark:bg-gray-900 rounded-md flex flex-col">
+                {fetching || mainStore.length === 0 ? (
+                    <DataGridSkeleton />
+                ) : (
+                    <DataGrid
+                        // fetchSelectedData={onGridSelect}
+                        fetchSelectedData={onGridSelect}
+                        columnDefs={GRID_COLUMNS_DEF}
+                        // columnDefs={[]}
+                        rowData={mainStore}
+                        // rowData={[]}
+                    />
+                )}
+            </div>
+            <Pagination />
+        </>
+    );
 };
 
 export default UserManagementView;

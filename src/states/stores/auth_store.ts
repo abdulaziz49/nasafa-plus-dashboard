@@ -5,12 +5,12 @@ import AppAxios, { getAuthAxiosConfig } from '../../utils/app_axios.ts';
 import {
 	emptyUser,
 	type LoginCredentials,
-	type User,
-} from '../../models/users/users_models.ts';
+	type Auth,
+} from '../../models/auth_models.ts';
 
 // Define the state shape for your auth store
 interface AuthState {
-	user: User;
+	user: Auth;
 	isAuthenticated: boolean;
 	isAuthLoading: boolean;
 	error: string | null;

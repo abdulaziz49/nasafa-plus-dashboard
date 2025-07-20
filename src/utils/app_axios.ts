@@ -1,36 +1,38 @@
-import axios, {type AxiosRequestConfig} from "axios"
+import axios, { type AxiosRequestConfig } from "axios";
 
 const AppAxios = axios.create({
-    baseURL: `https://${location.hostname}${import.meta.env.VITE_API_URL}`
-})
+    baseURL: `https://${location.hostname}${import.meta.env.VITE_API_URL}`,
+});
 
 export const unauthAxiosHeaderJson = {
     headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        "X-Requested-With": "XMLHttpRequest",
+        Accept: "application/json",
+        "Content-Type": "application/json",
     },
-    withCredentials: false,
-}
+    withCredentials: true,
+};
 
 interface AxionHeader extends AxiosRequestConfig {
-    headers: object
-    withCredentials: boolean
+    headers: object;
+    withCredentials: boolean;
 }
 
 export const getAuthAxiosConfig = (token?: string): AxionHeader => {
     const data: AxionHeader = {
         headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            "X-Requested-With": "XMLHttpRequest",
+            Accept: "application/json",
+            "Content-Type": "application/json",
         },
-        withCredentials: false,
-    }
+        withCredentials: true,
+    };
 
-    data.headers = token ? {...data.headers, "Authorization": `Bearer ${token}`} : data.headers
-    return data
-}
+    data.headers = token
+        ? { ...data.headers, Authorization: `Bearer ${token}` }
+        : data.headers;
+    return data;
+};
 
 // Request interceptor to automatically attach X-XSRF-TOKEN
 // AppAxios.interceptors.request.use(async (config) => {
@@ -65,7 +67,7 @@ export const getAuthAxiosConfig = (token?: string): AxionHeader => {
 //     return Promise.reject(error);
 // });
 
-export default AppAxios
+export default AppAxios;
 
 // import axios, {type AxiosRequestConfig, type RawAxiosRequestHeaders} from "axios";
 //

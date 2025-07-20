@@ -1,11 +1,11 @@
 // Core i18next library.
-import i18n from 'i18next';
+import i18n from "i18next";
 // Bindings for React: allow components to
 // re-render when language changes.
-import {initReactI18next} from 'react-i18next';
-import Backend from 'i18next-http-backend';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import supportedLangs from './supported_langs.ts';
+import { initReactI18next } from "react-i18next";
+import Backend from "i18next-http-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
+import supportedLangs from "./supported_langs.ts";
 // import namespaces from './namespaces.ts';
 
 // Add names for each locale to
@@ -25,17 +25,17 @@ i18n
 
         // Specifies the default language (locale) used
         // when a user visits our site for the first time.
-        lng: 'ar',
+        lng: "ar",
 
         // Fallback locale used when a translation is
         // missing in the active locale.
-        fallbackLng: 'en',
+        fallbackLng: "en",
 
         // Enables useful output in the browser’s
         // dev console.
         debug: process.env.NODE_ENV === "development",
         // Define your namespaces. 'login' is a good start.
-        // ns: namespaces,
+        ns: "login",
 
         // This is where i18next-http-backend takes over.
         // You don't put file paths in 'resources'.
@@ -53,12 +53,12 @@ i18n
         // },
 
         // backend: {
-            // 	// This is the path where your translation files are located.
-            // 	// i18next-http-backend will replace {{lng}} and {{ns}}
-            // 	// to construct the full path.
-            // 	// For example, if lng='ar' and ns='login', it might try to load:
-            // 	// './locales/ar/login.json' or './public/locales/ar/login.json'
-            // 	// Adjust this path based on where your translation JSON files actually reside.
+        // 	// This is the path where your translation files are located.
+        // 	// i18next-http-backend will replace {{lng}} and {{ns}}
+        // 	// to construct the full path.
+        // 	// For example, if lng='ar' and ns='login', it might try to load:
+        // 	// './locales/ar/login.json' or './public/locales/ar/login.json'
+        // 	// Adjust this path based on where your translation JSON files actually reside.
         //     loadPath: '/locales/{{lng}}/{{ns}}.json',
         // },
 

@@ -1,0 +1,277 @@
+// import type {UserRole, UserRolesState} from "../../models/users/USER_model.ts";
+// import AppAxios, {getAuthAxiosConfig} from "../../utils/app_axios.ts";
+//
+// // export const userRoleInitialState: UserRolesState = {
+// //     userRoles: [
+// //         {
+// //             id: 1,
+// //             name: 'Admin',
+// //             guard_name: 'Full access to the system',
+// //             permissions: ["101"],
+// //             created_at: Date().toString(),
+// //             updated_at: Date().toString()
+// //         },
+// //         {
+// //             id: 2,
+// //             name: 'Editor',
+// //             guard_name: 'Can create and edit content',
+// //             permissions: ["101"],
+// //             created_at: Date().toString(),
+// //             updated_at: Date().toString()
+// //         },
+// //         {
+// //             id: 3,
+// //             name: 'Viewer',
+// //             guard_name: 'Can view content only',
+// //             permissions: ["101"],
+// //             created_at: Date().toString(),
+// //             updated_at: Date().toString()
+// //         },
+// //         {
+// //             id: 4,
+// //             name: 'Moderator',
+// //             guard_name: 'Manages user comments and forums',
+// //             permissions: ["101"],
+// //             created_at: Date().toString(),
+// //             updated_at: Date().toString()
+// //         },
+// //     ],
+// //     searchTerm: '',
+// //     fetching: false,
+// //     error: null
+// // };
+//
+// type UserRolesAction =
+//     | { type: 'GET_ROLE'; payload: { token: string, id: number } }
+//     | { type: 'ADD_ROLE'; payload: Omit<UserRole, 'id'> } // Omit 'id' because it will be generated
+//     | { type: 'EDIT_ROLE'; payload: UserRole }
+//     | { type: 'DELETE_ROLE'; payload: { id: number } }
+//     | { type: 'SET_SEARCH_TERM'; payload: { term: string } };
+//
+// const fetchUSER = (value: UserRolesState, token: string) => {
+//     const fetchingUSER = async () => {
+//         try {
+//             value.fetching = true
+//
+//             const response = await AppAxios.get('roles', getAuthAxiosConfig(token))
+//             value.userRoles = response.USER
+//         } catch (error: any) {
+//             value.error = error.message
+//         } finally {
+//             value.fetching = false
+//         }
+//         // return value
+//     }
+//     fetchingUSER()
+//     // value = fetchingUSER()
+//     return value
+// }
+// // const fetchUSER = (value: UserRolesState, token: string): UserRolesState => {
+// //     value.fetching = true
+// //     AppAxios.get('roles', getAuthAxiosConfig(token))
+// //         .then(response => value.userRoles = response.USER)
+// //         .catch((error: any) => value.error = error.message)
+// //         .then(() => value.fetching = false)
+// //     return value
+// //
+// // }
+//
+// export default function UserRoleReducer(state: UserRolesState, action: UserRolesAction): UserRolesState {
+//     switch (action.type) {
+//         case 'GET_ROLE': {
+//             // try {
+//             //
+//             // }
+//             state = fetchUSER(state, action.payload.token)
+//             // state.fetching = true
+//             // AppAxios.get('roles', getAuthAxiosConfig(action.payload.token))
+//             //     .then(response => state.userRoles = response.USER)
+//             //     .catch((error: any) => state.error = error.message)
+//             //     .then(() => state.fetching = false)
+//             return state
+//         }
+//
+//         case 'ADD_ROLE': {
+//             // Generate a simple unique ID (for a real app, use a robust ID generator like uuid)
+//             const newRole: UserRole = {
+//                 ...action.payload,
+//                 id: Date.now(), // Simple unique ID
+//             };
+//             return {
+//                 ...state,
+//                 userRoles: [...state.userRoles, newRole],
+//             };
+//         }
+//         case 'EDIT_ROLE':
+//             return {
+//                 ...state,
+//                 userRoles: state.userRoles.map((role) =>
+//                     role.id === action.payload.id ? action.payload : role
+//                 ),
+//             };
+//
+//         case 'DELETE_ROLE':
+//             return {
+//                 ...state,
+//                 userRoles: state.userRoles.filter((role) => action.payload.id !== role.id),
+//             };
+//
+//         case 'SET_SEARCH_TERM':
+//             return {
+//                 ...state,
+//                 searchTerm: action.payload.term,
+//             };
+//
+//         default:
+//             // It's good practice to throw an error for unknown action types
+//             throw new Error(`Unhandled action type: ${(action as UserRolesAction).type}`);
+//     }
+// }
+
+import type { UsersState } from "../../../../models/user_system/user_models.ts";
+import type { UserActionTypes } from "../../actions/types/user_system/user_action_type.ts";
+// AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
+// Async logic should happen outside the reducer.
+
+// --- Define more granular actions for async operations ---
+
+export const initialUserViewState: UsersState = {
+    mainStore: [],
+    secondaryStore: [],
+    fetching: false,
+    adding: false,
+    editing: false,
+    searching: false,
+    deleting: false,
+    printing: false,
+    exporting: false,
+    error: null,
+};
+
+// --- The Reducer Function (Pure and Immutable) ---
+export default function UserReducer(
+    state: UsersState,
+    action: UserActionTypes
+): UsersState {
+    switch (action.type) {
+        // For fetching cases
+        case "FETCH_USERS_REQUEST":
+            return {
+                ...state,
+                fetching: true,
+                error: null, // Clear any previous errors on new request
+            };
+        case "FETCH_USERS_SUCCESS":
+            return {
+                ...state,
+                fetching: false,
+                error: null,
+                mainStore: action.payload, // Replace roles with fetched USER
+            };
+        case "FETCH_USERS_FAILURE":
+            return {
+                ...state,
+                fetching: false,
+                error: action.payload, // Set the error message
+                mainStore: [], // Clear roles or keep old ones depending on desired UX
+            };
+
+        // For adding cases
+        case "ADD_USER_REQUEST":
+            return {
+                ...state,
+                adding: true,
+                error: null, // Clear any previous errors on new request
+            };
+        case "ADD_USER_SUCCESS":
+            return {
+                ...state,
+                mainStore: [...state.mainStore, action.payload],
+                adding: false,
+                error: null,
+            };
+        case "ADD_USER_FAILURE":
+            return {
+                ...state,
+                adding: false,
+                error: action.payload, // Set the error message
+            };
+
+        // For editing cases
+        case "EDIT_USER_REQUEST":
+            return {
+                ...state,
+                editing: true,
+                error: null, // Clear any previous errors on new request
+            };
+        case "EDIT_USER_SUCCESS":
+            return {
+                ...state,
+                mainStore: state.mainStore.map((role) =>
+                    role.id === action.payload.id ? action.payload : role
+                ),
+                error: null,
+                editing: false,
+            };
+        case "EDIT_USER_FAILURE":
+            return {
+                ...state,
+                editing: false,
+                error: action.payload, // Set the error message
+            };
+
+        // For deleting cases
+        case "DELETE_USER_REQUEST":
+            return {
+                ...state,
+                deleting: true,
+                error: null, // Clear any previous errors on new request
+            };
+        case "DELETE_USER_SUCCESS":
+            return {
+                ...state,
+                mainStore: state.mainStore.filter(
+                    (role) => action.payload !== role.id
+                ),
+                deleting: false,
+                error: null,
+            };
+        case "DELETE_USER_FAILURE":
+            return {
+                ...state,
+                deleting: false,
+                error: action.payload, // Set the error message
+            };
+
+        // For searching cases
+        case "SEARCH_USERS_REQUEST":
+            return {
+                ...state,
+                searching: true,
+                secondaryStore: state.mainStore,
+            };
+        case "SEARCH_USERS_SUCCESS":
+            return {
+                ...state,
+                error: null,
+                mainStore: state.secondaryStore.filter((row) =>
+                    row.name
+                        .toLowerCase()
+                        .includes(action.payload.toLowerCase())
+                ), // Replace roles with fetched USER
+            };
+        case "SEARCH_USERS_FAILURE":
+            return {
+                ...state,
+                searching: false,
+                mainStore: state.secondaryStore,
+                secondaryStore: [],
+            };
+
+        default: {
+            // Ensure all action types are handled, or throw for unhandled ones
+            const exhaustiveCheck: any = action;
+            throw new Error(`Unhandled action type: ${exhaustiveCheck.type}`);
+        }
+    }
+}

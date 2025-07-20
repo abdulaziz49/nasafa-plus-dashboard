@@ -313,61 +313,72 @@
 //
 // export default DrawerContainer;
 
-import Accordion from '../accordion.tsx';
-import DrawerSkeleton from '../skeletons/drawer_skeleton.tsx';
-import RoutesSchema from '../../routes/routes_schema.tsx';
-import {Link} from 'react-router-dom';
-import {type JSX, Suspense, useCallback, useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
+import Accordion from "../accordion.tsx";
+import DrawerSkeleton from "../skeletons/drawer_skeleton.tsx";
+import RoutesSchema from "../../routes/routes_schema.tsx";
+import { Link } from "react-router-dom";
+import { type JSX, Suspense, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import LogoutButton from "../buttons/drawer_buttons/logout_button.tsx";
 import NotificationsButton from "../buttons/drawer_buttons/settings_button.tsx";
 import LazyImage from "../lazy_image.tsx";
-import Nasafa from '../../assets/img/nasafa_plus_logo.png'
+import Nasafa from "../../assets/img/nasafa_plus_logo.png";
 
 const DrawerContainer = (): JSX.Element => {
-    const {t} = useTranslation('drawer');
+    const { t } = useTranslation("drawer");
 
     // State to keep track of the currently open accordion's index.
     // -1 means no accordion is open.
     const [openAccordionIndex, setOpenAccordionIndex] = useState<number>(-1);
 
-    useEffect(() => {
-    }, [openAccordionIndex])
+    useEffect(() => {}, [openAccordionIndex]);
 
     // Function to handle accordion toggles.
     // If the clicked accordion is already open, close it. Otherwise, open it.
     // const handleAccordionToggle = (e: MouseEventHandler<HTMLButtonElement>, index: number) => {
     const handleAccordionToggle = useCallback<any>((index: number) => {
-        setOpenAccordionIndex(prevIndex => {
+        setOpenAccordionIndex((prevIndex) => {
             const newIndex = prevIndex === index ? -1 : index;
-            console.log(`DrawerContainer: Toggling Accordion ${index}. New openAccordionIndex: ${newIndex}`); // Add this log
+            console.log(
+                `DrawerContainer: Toggling Accordion ${index}. New openAccordionIndex: ${newIndex}`
+            ); // Add this log
             return newIndex;
         });
-    }, [openAccordionIndex]);
+    }, []);
 
     return (
         <div className="drawer-side lg:p-4 z-3 lg:z-1 h-screen">
-            <Suspense fallback={<DrawerSkeleton classes="h-screen"/>}>
+            <Suspense fallback={<DrawerSkeleton classes="h-screen" />}>
                 <label
                     htmlFor="my-drawer-2"
                     aria-label="close sidebar"
                     className="drawer-overlay"
                 ></label>
 
-                <div
-                    className="bg-primary text-base-content w-80 p-4 flex flex-col justify-between lg:rounded-md h-full">
-
-                    <LazyImage classes="mb-4" alt={'Nasafa plus logo'} src={Nasafa}/>
+                <div className="bg-primary text-base-content w-80 p-4 flex flex-col justify-between lg:rounded-md h-full">
+                    <LazyImage
+                        classes="mb-4"
+                        alt={"Nasafa plus logo"}
+                        src={Nasafa}
+                    />
 
                     <div className="w-full flex-grow overflow-y-auto">
                         <ul className="menu w-full flex flex-col">
                             {RoutesSchema.map((route, index) => {
-                                if (!route.hasOwnProperty!('routes') || !route.routes) {
+                                if (
+                                    !route.hasOwnProperty!("routes") ||
+                                    !route.routes
+                                ) {
                                     return (
                                         <li key={index}>
-                                            <Link className='text-primary-content' to={route.routeURL!}
-                                                  onClick={() => setOpenAccordionIndex(-1)}>
-                                                {route.routeIcon}{' '}
+                                            <Link
+                                                className="text-primary-content"
+                                                to={route.routeURL!}
+                                                onClick={() =>
+                                                    setOpenAccordionIndex(-1)
+                                                }
+                                            >
+                                                {route.routeIcon}{" "}
                                                 {t(route.routeName!)}
                                             </Link>
                                         </li>
@@ -388,13 +399,22 @@ const DrawerContainer = (): JSX.Element => {
                                     >
                                         <ul className="menu w-full p-0">
                                             {route.routes?.map(
-                                                (childRoute, childRouteIndex) => (
+                                                (
+                                                    childRoute,
+                                                    childRouteIndex
+                                                ) => (
                                                     <li key={childRouteIndex}>
-                                                        <Link to={childRoute.routeURL}>
-                                                            {t(childRoute.routeName)}
+                                                        <Link
+                                                            to={
+                                                                childRoute.routeURL
+                                                            }
+                                                        >
+                                                            {t(
+                                                                childRoute.routeName
+                                                            )}
                                                         </Link>
                                                     </li>
-                                                ),
+                                                )
                                             )}
                                         </ul>
                                     </Accordion>
@@ -404,8 +424,8 @@ const DrawerContainer = (): JSX.Element => {
                     </div>
 
                     <div className="w-full flex flex-row items-center justify-between">
-                        <NotificationsButton/>
-                        <LogoutButton/>
+                        <NotificationsButton />
+                        <LogoutButton />
                     </div>
                 </div>
             </Suspense>

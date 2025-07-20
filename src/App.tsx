@@ -32,55 +32,61 @@ function App() {
     const protectedRoutes = appRoutes.filter((route) => route.isProtected);
 
     return (
-        <div className="drawer lg:drawer-open bg-base-200 w-dvw h-dvh">
-            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col items-center justify-center w-auto h-dvh m-0 p-0">
-                {/* Show drawer button only when authenticated and not loading */}
-                {isAuthenticated && !isAuthLoading && (
-                    <Suspense fallback={<DrawerButtonSkeleton />}>
-                        <DrawerButton />
-                    </Suspense>
-                )}
+        <div className="w-dvw h-dvh p-0 m-0">
+            <div className="drawer lg:drawer-open bg-base-200 w-full h-full">
+                <input
+                    id="my-drawer-2"
+                    type="checkbox"
+                    className="drawer-toggle"
+                />
+                <div className="drawer-content flex flex-col items-center justify-center w-full h-full">
+                    {/* Show drawer button only when authenticated and not loading */}
+                    {isAuthenticated && !isAuthLoading && (
+                        <Suspense fallback={<DrawerButtonSkeleton />}>
+                            <DrawerButton />
+                        </Suspense>
+                    )}
 
-                {/* Main page content and routes */}
-                <div className="h-dvh w-dvw flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 space-y-2">
-                    <Suspense fallback={<CircleLoading />}>
-                        <Routes>
-                            {/* Protected routes require authentication */}
-                            {protectedRoutes.map(
-                                ({ path, Component }: AppRouteConfig) => (
+                    {/* Main page content and routes */}
+                    <div className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:py-4 lg:ps-0 space-y-2">
+                        <Suspense fallback={<CircleLoading />}>
+                            <Routes>
+                                {/* Protected routes require authentication */}
+                                {protectedRoutes.map(
+                                    ({ path, Component }: AppRouteConfig) => (
+                                        <Route
+                                            key={path}
+                                            path={path}
+                                            element={
+                                                <ProtectedRoute>
+                                                    <Component />
+                                                </ProtectedRoute>
+                                            }
+                                        />
+                                    )
+                                )}
+
+                                {/* Public routes accessible without authentication */}
+                                {publicRoutes.map(({ path, Component }) => (
                                     <Route
                                         key={path}
                                         path={path}
-                                        element={
-                                            <ProtectedRoute>
-                                                <Component />
-                                            </ProtectedRoute>
-                                        }
+                                        element={<Component />}
                                     />
-                                )
-                            )}
-
-                            {/* Public routes accessible without authentication */}
-                            {publicRoutes.map(({ path, Component }) => (
-                                <Route
-                                    key={path}
-                                    path={path}
-                                    element={<Component />}
-                                />
-                            ))}
-                        </Routes>
-                    </Suspense>
-                    <ToastContainer
-                        rtl={isRTL}
-                        theme={isDark ? "dark" : "light"}
-                        position={isRTL ? "top-left" : "top-right"}
-                        newestOnTop={true}
-                    />
+                                ))}
+                            </Routes>
+                        </Suspense>
+                        <ToastContainer
+                            rtl={isRTL}
+                            theme={isDark ? "dark" : "light"}
+                            position={isRTL ? "top-left" : "top-right"}
+                            newestOnTop={true}
+                        />
+                    </div>
                 </div>
+                {/* Show navigation drawer only when authenticated and not loading */}
+                {isAuthenticated && !isAuthLoading && <DrawerContainer />}
             </div>
-            {/* Show navigation drawer only when authenticated and not loading */}
-            {isAuthenticated && !isAuthLoading && <DrawerContainer />}
         </div>
     );
 }

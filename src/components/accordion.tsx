@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, type ReactNode, useRef } from 'react';
+import { type ComponentPropsWithoutRef, type JSX, type ReactNode, useRef } from 'react';
 
 // @ts-expect-error
 interface AccordionPropsType extends ComponentPropsWithoutRef<'div'> {
@@ -9,7 +9,7 @@ interface AccordionPropsType extends ComponentPropsWithoutRef<'div'> {
 	index?: number;
 	titleClasses?: string;
 	accordionName?: string; // The radio group name (important for DaisyUI's radio behavior)
-	onToggle?: (index: number) => void; // Callback to notify parent of a toggle
+	onToggle?: (index?: number) => void; // Callback to notify parent of a toggle
 }
 
 /**
@@ -51,7 +51,7 @@ const Accordion = ({
 	index,
 	onToggle, // This prop is called when the accordion is clicked
 	...rest
-}: AccordionPropsType) => {
+}: AccordionPropsType): JSX.Element => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	return (
