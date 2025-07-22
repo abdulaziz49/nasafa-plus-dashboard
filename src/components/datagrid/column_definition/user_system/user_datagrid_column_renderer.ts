@@ -1,5 +1,5 @@
 // import { useTranslation } from "react-i18next";
-import DataGridDeleteColumnRenderer from "../../datagrid_delete_column_renderer.tsx";
+// import DataGridDeleteColumnRenderer from "../../datagrid_column_renderers/datagrid_delete_column_renderer";
 // import { type MouseEventHandler } from "react";
 
 // interface UserTableColumnType {
@@ -16,7 +16,14 @@ export default function getUserTableColumn(): object[] {
     // }: UserTableColumnType): object[]
     // const { t } = useTranslation(translateFile);
     return [
-        { headerName: "ID", field: "id", minWidth: 60, width: 60 },
+        { headerName: "ID", field: "id", minWidth: 60, width: 60, hide: false },
+        {
+            headerName: "Num",
+            field: "",
+            minWidth: 60,
+            width: 60,
+            valueGetter: (params: any) => params.node.rowIndex + 1,
+        },
         { headerName: "Name", field: "name" },
         { headerName: "Username", field: "username" },
         { headerName: "E-mail", field: "email" },

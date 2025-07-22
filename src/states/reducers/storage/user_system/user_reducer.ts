@@ -129,7 +129,24 @@
 // }
 
 import type { UsersState } from "../../../../models/user_system/user_models.ts";
-import type { UserActionTypes } from "../../actions/types/user_system/user_action_type.ts";
+import {
+    AUF_STRING,
+    AUR_STRING,
+    AUS_STRING,
+    DUF_STRING,
+    DUR_STRING,
+    DUS_STRING,
+    EUF_STRING,
+    EUR_STRING,
+    EUS_STRING,
+    FUF_STRING,
+    FUR_STRING,
+    FUS_STRING,
+    SUF_STRING,
+    SUR_STRING,
+    SUS_STRING,
+    type UserActionTypes,
+} from "../../actions/types/user_system/user_action_type.ts";
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
 // Async logic should happen outside the reducer.
 
@@ -155,20 +172,20 @@ export default function UserReducer(
 ): UsersState {
     switch (action.type) {
         // For fetching cases
-        case "FETCH_USERS_REQUEST":
+        case FUR_STRING:
             return {
                 ...state,
                 fetching: true,
                 error: null, // Clear any previous errors on new request
             };
-        case "FETCH_USERS_SUCCESS":
+        case FUS_STRING:
             return {
                 ...state,
                 fetching: false,
                 error: null,
                 mainStore: action.payload, // Replace roles with fetched USER
             };
-        case "FETCH_USERS_FAILURE":
+        case FUF_STRING:
             return {
                 ...state,
                 fetching: false,
@@ -177,20 +194,20 @@ export default function UserReducer(
             };
 
         // For adding cases
-        case "ADD_USER_REQUEST":
+        case AUR_STRING:
             return {
                 ...state,
                 adding: true,
                 error: null, // Clear any previous errors on new request
             };
-        case "ADD_USER_SUCCESS":
+        case AUS_STRING:
             return {
                 ...state,
                 mainStore: [...state.mainStore, action.payload],
                 adding: false,
                 error: null,
             };
-        case "ADD_USER_FAILURE":
+        case AUF_STRING:
             return {
                 ...state,
                 adding: false,
@@ -198,13 +215,13 @@ export default function UserReducer(
             };
 
         // For editing cases
-        case "EDIT_USER_REQUEST":
+        case EUR_STRING:
             return {
                 ...state,
                 editing: true,
                 error: null, // Clear any previous errors on new request
             };
-        case "EDIT_USER_SUCCESS":
+        case EUS_STRING:
             return {
                 ...state,
                 mainStore: state.mainStore.map((role) =>
@@ -213,7 +230,7 @@ export default function UserReducer(
                 error: null,
                 editing: false,
             };
-        case "EDIT_USER_FAILURE":
+        case EUF_STRING:
             return {
                 ...state,
                 editing: false,
@@ -221,13 +238,13 @@ export default function UserReducer(
             };
 
         // For deleting cases
-        case "DELETE_USER_REQUEST":
+        case DUR_STRING:
             return {
                 ...state,
                 deleting: true,
                 error: null, // Clear any previous errors on new request
             };
-        case "DELETE_USER_SUCCESS":
+        case DUS_STRING:
             return {
                 ...state,
                 mainStore: state.mainStore.filter(
@@ -236,7 +253,7 @@ export default function UserReducer(
                 deleting: false,
                 error: null,
             };
-        case "DELETE_USER_FAILURE":
+        case DUF_STRING:
             return {
                 ...state,
                 deleting: false,
@@ -244,13 +261,13 @@ export default function UserReducer(
             };
 
         // For searching cases
-        case "SEARCH_USERS_REQUEST":
+        case SUR_STRING:
             return {
                 ...state,
                 searching: true,
                 secondaryStore: state.mainStore,
             };
-        case "SEARCH_USERS_SUCCESS":
+        case SUS_STRING:
             return {
                 ...state,
                 error: null,
@@ -260,7 +277,7 @@ export default function UserReducer(
                         .includes(action.payload.toLowerCase())
                 ), // Replace roles with fetched USER
             };
-        case "SEARCH_USERS_FAILURE":
+        case SUF_STRING:
             return {
                 ...state,
                 searching: false,

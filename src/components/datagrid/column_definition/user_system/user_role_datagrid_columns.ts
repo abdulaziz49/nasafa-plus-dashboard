@@ -1,4 +1,4 @@
-import DataGridDeleteColumnRenderer from "../../datagrid_delete_column_renderer.tsx";
+import DataGridDeleteColumnRenderer from "../../datagrid_column_renderers/datagrid_delete_column_renderer.tsx";
 import type { MouseEventHandler } from "react";
 
 // interface UserRoleTableColumnType {

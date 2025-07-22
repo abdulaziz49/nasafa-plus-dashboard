@@ -1,14 +1,14 @@
-import {type MouseEventHandler} from 'react';
-import {type ICellRendererParams} from 'ag-grid-community';
-import DeleteIconButton from "../buttons/icon_buttons/delete_icon_button.tsx";
+import { type MouseEventHandler } from "react";
+import { type ICellRendererParams } from "ag-grid-community";
+import DeleteIconButton from "../../buttons/icon_buttons/delete_icon_button";
 
 interface ActionsColumnTypes extends ICellRendererParams {
     // You can define specific props here if your parent component needs to pass more context
     // For example, handlers that are specific to the grid's data context.
-    handleDelete: MouseEventHandler<HTMLButtonElement>
+    handleDelete: MouseEventHandler<HTMLButtonElement>;
 }
 
-const DataGridDeleteColumnRenderer = ({handleDelete}: ActionsColumnTypes) => {
+const DataGridDeleteColumnRenderer = ({ handleDelete }: ActionsColumnTypes) => {
     return (
         <div className="flex h-full w-full justify-center items-center py-0.5">
             <DeleteIconButton

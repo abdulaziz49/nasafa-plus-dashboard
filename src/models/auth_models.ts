@@ -3,7 +3,6 @@ export interface Auth {
     name: string;
     username: string;
     email: string;
-    // Add other user properties you expect, e.g.,
     permissions: string[];
     roles: object[];
 }
@@ -12,10 +11,6 @@ export interface LoginCredentials {
     username: string;
     password: string;
 }
-
-// export interface LogoutCredentials {
-//     token: string;
-// }
 
 export interface AuthState {
     authUser: Auth;
@@ -32,4 +27,4 @@ export const emptyUser: Auth = {
     permissions: [],
     roles: [],
     username: "",
-}
+};

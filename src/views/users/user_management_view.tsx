@@ -1,16 +1,14 @@
 import DataGrid from "../../components/datagrid/datagrid.tsx";
 import Pagination from "../../components/pagination.tsx";
-// import Toggle from "../../components/inputs/toggle.tsx";
 import { useTranslation } from "react-i18next";
 import UserForm from "../../components/forms/system_user/user_form.tsx";
-import { useCallback, useReducer, useState } from "react";
-import type { User } from "../../models/user_system/user_models.ts";
+import { useCallback, useEffect, useReducer, useState } from "react";
+import { initialUserFormState, type User } from "../../models/user_system/user_models.ts";
 import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
 import Dropdown from "../../components/dropdown.tsx";
 import PDFButton from "../../components/buttons/crud_buttons/pdf_button.tsx";
 import ExcelButton from "../../components/buttons/crud_buttons/excel_button.tsx";
-// import DataGridSkeleton from "../../components/skeletons/datagrid_skeleton.tsx";
 import { useAuthStore } from "../../states/stores/auth_store.ts";
 import UserReducer, {
     initialUserViewState,
@@ -20,38 +18,10 @@ import getUserTableColumn from "../../components/datagrid/column_definition/user
 import DataGridSkeleton from "../../components/skeletons/datagrid_skeleton.tsx";
 import type { DataGridGenericType } from "../../components/datagrid/datagrid_generic_type.ts";
 
-const initialUserFormState: User = {
-    id: 0,
-    name: "",
-    username: "",
-    email: "",
-    created_at: "",
-    is_activated: false,
-    status: "",
-    updated_at: "",
-    status_text: "",
-    force_change_password: false,
-    last_login: "",
-    password_changed_at: "",
-    failed_login_attempts: 0,
-    locked_until: null,
-    is_locked: false,
-    remaining_lockout_time: null,
-    needs_password_change: false,
-    roles: [],
-    group: {
-        id: 0,
-        group_name: "",
-    },
-    creator: {
-        id: 0,
-        username: "",
-        name: "",
-    },
-};
 
 const UserManagementView = () => {
     const TRANSLATE_FILE_PATH = "user-management/user";
+
     const { t } = useTranslation(TRANSLATE_FILE_PATH);
 
     const { token } = useAuthStore();
@@ -61,17 +31,13 @@ const UserManagementView = () => {
         initialUserViewState
     );
 
-    document.title = t("title");
     const [userFormData, setUserFormData] =
         useState<User>(initialUserFormState);
 
-    // Fetch all user roles from the backend
+    // Fetch all users from the backend
     const fetchData = useCallback(async () => {
         await fetchUsers(dispatch, token);
-        setUserFormData(initialUserFormState);
-        console.log("Users: ", mainStore);
-    }, [dispatch, token, mainStore]);
-    // }, [token]);
+    }, [token]);
 
     // Handle row selection in the data grid
     const onGridSelect = (data: DataGridGenericType[]) => {
@@ -82,7 +48,12 @@ const UserManagementView = () => {
         }
     };
 
-    const GRID_COLUMNS_DEF = getUserTableColumn(); // getUserTableColumn({ handleDeleteAction: () => {}, translateFile: TRANSLATE_FILE_PATH });
+    const GRID_COLUMNS_DEF = getUserTableColumn();
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    document.title = t("title");
 
     return (
         <>
@@ -102,10 +73,7 @@ const UserManagementView = () => {
                 <RefreshButton
                     classes="btn-primary w-auto col-span-3  order-2 lg:order-1 lg:col-span-2"
                     text={t("refresh-btn")}
-                    clickEvent={() => {
-                        fetchData();
-                    }}
-                    // isDisabled={fetching}
+                    clickEvent={() => fetchData()}
                 />
                 <SearchForm
                     placeHolder={t("search-placeholder")}

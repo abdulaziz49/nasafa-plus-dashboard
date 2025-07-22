@@ -12,7 +12,6 @@ export interface UserRole {
 export interface UserRolesState {
     mainStore: UserRole[];
     secondaryStore: UserRole[];
-    // searchTerm: string | null;
     fetching: boolean;
     adding: boolean;
     editing: boolean;

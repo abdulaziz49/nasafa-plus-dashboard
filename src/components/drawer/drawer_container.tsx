@@ -313,7 +313,6 @@
 //
 // export default DrawerContainer;
 
-import Accordion from "../accordion.tsx";
 import DrawerSkeleton from "../skeletons/drawer_skeleton.tsx";
 import RoutesSchema from "../../routes/routes_schema.tsx";
 import { Link } from "react-router-dom";
@@ -323,6 +322,7 @@ import LogoutButton from "../buttons/drawer_buttons/logout_button.tsx";
 import NotificationsButton from "../buttons/drawer_buttons/settings_button.tsx";
 import LazyImage from "../lazy_image.tsx";
 import Nasafa from "../../assets/img/nasafa_plus_logo.png";
+import DrawerAccordion from "./drawer_accordion.tsx";
 
 const DrawerContainer = (): JSX.Element => {
     const { t } = useTranslation("drawer");
@@ -336,13 +336,9 @@ const DrawerContainer = (): JSX.Element => {
     // Function to handle accordion toggles.
     // If the clicked accordion is already open, close it. Otherwise, open it.
     // const handleAccordionToggle = (e: MouseEventHandler<HTMLButtonElement>, index: number) => {
-    const handleAccordionToggle = useCallback<any>((index: number) => {
+    const handleAccordionToggle = useCallback((index: number) => {
         setOpenAccordionIndex((prevIndex) => {
-            const newIndex = prevIndex === index ? -1 : index;
-            console.log(
-                `DrawerContainer: Toggling Accordion ${index}. New openAccordionIndex: ${newIndex}`
-            ); // Add this log
-            return newIndex;
+            return prevIndex === index ? -1 : index;
         });
     }, []);
 
@@ -385,11 +381,10 @@ const DrawerContainer = (): JSX.Element => {
                                     );
                                 }
                                 return (
-                                    <Accordion
+                                    <DrawerAccordion
                                         key={index}
                                         classes="collapse-arrow bg-primary text-primary-content -mb-1"
                                         title={t(route.accordionName!)}
-                                        accordionName="drawer-accordion-group" // All accordions share the same name for radio group behavior
                                         icon={route.accordionIcon}
                                         // Pass the collapsed state based on whether this accordion's index matches the openAccordionIndex
                                         collapsed={openAccordionIndex === index}
@@ -417,7 +412,7 @@ const DrawerContainer = (): JSX.Element => {
                                                 )
                                             )}
                                         </ul>
-                                    </Accordion>
+                                    </DrawerAccordion>
                                 );
                             })}
                         </ul>

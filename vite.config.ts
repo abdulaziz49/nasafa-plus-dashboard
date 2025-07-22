@@ -9,8 +9,8 @@ export default defineConfig({
         tailwindcss(),
         process.env.NODE_ENV === "development" && basicSsl(), // Conditionally include basicSsl()
     ].filter(Boolean), // Filter out `false` values if basicSsl() is not included
-    // server: {
-    //     host: true,
-    //     // https: true,
-    // },
+    server: {
+        host: true,
+        // https: Ser,
+    },
 });
