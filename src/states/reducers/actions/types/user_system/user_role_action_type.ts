@@ -1,5 +1,5 @@
 // For CRUD operations (assuming these will also be API calls eventually)
-import type { UserRole } from "../../../../../models/user_system/user_role_model";
+import type {UserRole} from "../../../../../models/user_system/user_role_model";
 
 // fetch user role strings
 export const FURR_STRING: string = "FETCH_USER_ROLES_REQUEST";
@@ -27,27 +27,27 @@ export const SURS_STRING: string = "SEARCH_USER_ROLES_SUCCESS";
 export const SURF_STRING: string = "SEARCH_USER_ROLES_FAILURE";
 
 export type UserRoleActionTypes =
-    // For fetching user roles
-    | { type: FURR_STRING }
-    | { type: FURS_STRING; payload: UserRole[] }
-    | { type: FURF_STRING; payload: string }
+// For fetching user roles
+    | { name: FURR_STRING }
+    | { name: FURS_STRING; payload: UserRole[] }
+    | { name: FURF_STRING; payload: string }
 
     // For adding user role
-    | { type: AURR_STRING }
-    | { type: AURS_STRING; payload: UserRole }
-    | { type: AURF_STRING; payload: string }
+    | { name: AURR_STRING }
+    | { name: AURS_STRING; payload: UserRole }
+    | { name: AURF_STRING; payload: string }
 
     // For editing user role
-    | { type: EURR_STRING }
-    | { type: EURS_STRING; payload: UserRole }
-    | { type: EURF_STRING; payload: string }
+    | { name: EURR_STRING }
+    | { name: EURS_STRING; payload: UserRole }
+    | { name: EURF_STRING; payload: string }
 
     // For deleting user role
-    | { type: DURR_STRING }
-    | { type: DURS_STRING; payload: number }
-    | { type: DURF_STRING; payload: string }
+    | { name: DURR_STRING }
+    | { name: DURS_STRING; payload: number }
+    | { name: DURF_STRING; payload: string }
 
     // For searching user roles
-    | { type: SURR_STRING }
-    | { type: SURS_STRING; payload: string }
-    | { type: SURF_STRING };
+    | { name: SURR_STRING }
+    | { name: SURS_STRING; payload: string }
+    | { name: SURF_STRING };

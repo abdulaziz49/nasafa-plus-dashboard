@@ -121,6 +121,11 @@ const setDocumentDir = (isRTL: boolean) => {
 
 const setDocumentLang = (value: string) => {
     i18n.changeLanguage(value)
+    if (value === "ar") {
+        setDocumentDir(true)
+    } else {
+        setDocumentDir(false)
+    }
 }
 
 

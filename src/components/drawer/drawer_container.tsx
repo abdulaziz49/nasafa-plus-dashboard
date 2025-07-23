@@ -343,7 +343,7 @@ const DrawerContainer = (): JSX.Element => {
     }, []);
 
     return (
-        <div className="drawer-side lg:p-4 z-3 lg:z-1 h-screen">
+        <div className="drawer-side lg:py-4 lg:ps-4 z-3 lg:z-1 h-screen">
             <Suspense fallback={<DrawerSkeleton classes="h-screen" />}>
                 <label
                     htmlFor="my-drawer-2"
@@ -351,9 +351,9 @@ const DrawerContainer = (): JSX.Element => {
                     className="drawer-overlay"
                 ></label>
 
-                <div className="bg-primary text-base-content w-80 p-4 flex flex-col justify-between lg:rounded-md h-full">
+                <div className="bg-primary text-base-content w-80 flex flex-col justify-between lg:rounded-md h-full">
                     <LazyImage
-                        classes="mb-4"
+                        classes="m-4 mt-6"
                         alt={"Nasafa plus logo"}
                         src={Nasafa}
                     />

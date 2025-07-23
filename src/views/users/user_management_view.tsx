@@ -3,7 +3,10 @@ import Pagination from "../../components/pagination.tsx";
 import { useTranslation } from "react-i18next";
 import UserForm from "../../components/forms/system_user/user_form.tsx";
 import { useCallback, useEffect, useReducer, useState } from "react";
-import { initialUserFormState, type User } from "../../models/user_system/user_models.ts";
+import {
+    initialUserFormState,
+    type User,
+} from "../../models/user_system/user_models.ts";
 import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.tsx";
 import SearchForm from "../../components/forms/search_form.tsx";
 import Dropdown from "../../components/dropdown.tsx";
@@ -17,7 +20,6 @@ import { fetchUsers } from "../../states/reducers/actions/services/user_system/u
 import getUserTableColumn from "../../components/datagrid/column_definition/user_system/user_datagrid_column_renderer.ts";
 import DataGridSkeleton from "../../components/skeletons/datagrid_skeleton.tsx";
 import type { DataGridGenericType } from "../../components/datagrid/datagrid_generic_type.ts";
-
 
 const UserManagementView = () => {
     const TRANSLATE_FILE_PATH = "user-management/user";

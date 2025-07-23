@@ -46,7 +46,6 @@ const Accordion = ({
 	classes,
 	icon,
 	titleClasses,
-	accordionName,
 	index,
 	onToggle, // This prop is called when the accordion is clicked
 	...rest
@@ -63,7 +62,7 @@ const Accordion = ({
 			<input
 				ref={inputRef}
 				type="radio"
-				name={accordionName}
+				// name={accordionName}
 				checked={collapsed} // Directly controlled by the 'collapsed' prop from parent
 				readOnly
 				onClick={() => onToggle!(index!)}

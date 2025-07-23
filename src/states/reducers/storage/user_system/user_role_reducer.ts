@@ -153,7 +153,7 @@ export default function UserRoleReducer(
     state: UserRolesState,
     action: UserRoleActionTypes
 ): UserRolesState {
-    switch (action.type) {
+    switch (action.name) {
         // For fetching cases
         case FURR_STRING:
             return {

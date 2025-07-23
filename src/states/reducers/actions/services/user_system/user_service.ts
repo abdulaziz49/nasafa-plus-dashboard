@@ -2,8 +2,8 @@
 import AppAxios, {
     getAuthAxiosConfig,
 } from "../../../../../utils/app_axios.ts";
-// import type { User } from "../../../../../models/user_system/user_models.ts";
-import type { Dispatch } from "react";
+// import name { User } from "../../../../../models/user_system/user_models.ts";
+import type {Dispatch} from "react";
 import {
     AUF_STRING,
     AUR_STRING,
@@ -21,8 +21,8 @@ import {
     SUR_STRING,
     SUS_STRING,
     type UserActionTypes,
-} from "../../types/user_system/user_action_type.ts"; // For useReducer's dispatch type
-import type { User } from "../../../../../models/user_system/user_models.ts";
+} from "../../types/user_system/user_action_type.ts"; // For useReducer's dispatch name
+import type {User} from "../../../../../models/user_system/user_models.ts";
 
 // --- Async Action Creators ---
 export const fetchUsers = async (
@@ -30,17 +30,19 @@ export const fetchUsers = async (
     token: string
 ): Promise<void> => {
     // if (fetching)
-    dispatch({ type: FUR_STRING });
+    dispatch({name: FUR_STRING});
     try {
         const response = await AppAxios.get("users", getAuthAxiosConfig(token));
         dispatch({
-            type: FUS_STRING,
+            name: FUS_STRING,
             payload: response.data.data,
         });
     } catch (error: unknown) {
         // Axios errors have a 'response' property
         let errorMessage = "Failed to fetch roles";
-        if (typeof error === "object" && error !== null) {
+        if (typeof error === "object" && error !== null
+    )
+        {
             const err = error as {
                 response?: { USER?: { message?: string } };
                 message?: string;
@@ -50,7 +52,7 @@ export const fetchUsers = async (
                 err.message ||
                 "Failed to fetch roles";
         }
-        dispatch({ type: FUF_STRING, payload: errorMessage });
+        dispatch({name: FUF_STRING, payload: errorMessage});
     }
 };
 
@@ -60,20 +62,20 @@ export const addUser = async (
     newRoleUSER: Omit<User, "id" | "created_at" | "updated_at">
 ) => {
     // You might dispatch a 'ADD_ROLE_REQUEST' here too, for a loading state on the form
-    dispatch({ type: AUR_STRING });
+    dispatch({name: AUR_STRING});
     try {
         const response = await AppAxios.post(
             "users",
             newRoleUSER,
             getAuthAxiosConfig(token)
         );
-        dispatch({ type: AUS_STRING, payload: response.data }); // Backend should return the created role with ID
+        dispatch({name: AUS_STRING, payload: response.data}); // Backend should return the created role with ID
     } catch (error: any) {
         const errorMessage =
             error.response?.USER?.message ||
             error.message ||
             "Failed to add role";
-        dispatch({ type: AUF_STRING, payload: errorMessage });
+        dispatch({name: AUF_STRING, payload: errorMessage});
         console.error("Add role failed:", errorMessage);
         // throw new Error(errorMessage); // Re-throw to handle in component if needed
     }
@@ -84,7 +86,7 @@ export const editUser = async (
     token: string,
     updatedRole: User
 ) => {
-    dispatch({ type: EUR_STRING });
+    dispatch({name: EUR_STRING});
     try {
         // Assuming API endpoint is /api/roles/{id} for PUT/PATCH
         const response = await AppAxios.put(
@@ -92,13 +94,13 @@ export const editUser = async (
             updatedRole,
             getAuthAxiosConfig(token)
         );
-        dispatch({ type: EUS_STRING, payload: response.data });
+        dispatch({name: EUS_STRING, payload: response.data});
     } catch (error: any) {
         const errorMessage =
             error.response?.USER?.message ||
             error.message ||
             "Failed to edit role";
-        dispatch({ type: EUF_STRING, payload: errorMessage });
+        dispatch({name: EUF_STRING, payload: errorMessage});
         console.error("Edit role failed:", errorMessage);
         // throw new Error(errorMessage);
     }
@@ -109,16 +111,16 @@ export const deleteUser = async (
     token: string,
     id: number
 ) => {
-    dispatch({ type: DUR_STRING });
+    dispatch({name: DUR_STRING});
     try {
         await AppAxios.delete(`users/${id}`, getAuthAxiosConfig(token));
-        dispatch({ type: DUS_STRING, payload: id });
+        dispatch({name: DUS_STRING, payload: id});
     } catch (error: any) {
         const errorMessage =
             error.response?.USER?.message ||
             error.message ||
             "Failed to delete role";
-        dispatch({ type: DUF_STRING, payload: errorMessage });
+        dispatch({name: DUF_STRING, payload: errorMessage});
         console.error("Delete role failed:", errorMessage);
         // throw new Error(errorMessage);
     }
@@ -129,16 +131,16 @@ export const searchUser = (
     searchTerm: string,
     stillSearch: boolean
 ) => {
-    if (!stillSearch) dispatch({ type: SUR_STRING });
+    if (!stillSearch) dispatch({name: SUR_STRING});
     // try {
     // console.log(searchTerm)
     // let filteredUSER: UserRole[]
     if (searchTerm.length > 0) {
         // filteredUSER = USER.filter((row) => row.name.toString().toLowerCase().includes(searchTerm.toLowerCase()))
-        dispatch({ type: SUS_STRING, payload: searchTerm });
+        dispatch({name: SUS_STRING, payload: searchTerm});
     } else {
         // filteredUSER = []
-        dispatch({ type: SUF_STRING });
+        dispatch({name: SUF_STRING});
     }
     // console.log(filteredUSER)
     // else
@@ -146,7 +148,7 @@ export const searchUser = (
     // await AppAxios.delete(`roles/${roleId}`, getAuthAxiosConfig(token));
     // } catch (error: any) {
     //     const errorMessage = error.response?.USER?.message || error.message || 'Failed to delete role';
-    //     dispatch({type: 'DELETE_USER_FAILURE', payload: errorMessage})
+    //     dispatch({name: 'DELETE_USER_FAILURE', payload: errorMessage})
     //     console.error('Delete role failed:', errorMessage);
     //     throw new Error(errorMessage);
     // }
@@ -154,7 +156,7 @@ export const searchUser = (
 
 // states/reducers/actions/USER_service.ts (or src/actions/USER_actions.ts)
 // import AppAxios, {getAuthAxiosConfig} from "../../../utils/app_axios.ts"
-// import type {UserRole} from "../../../models/users/USER_model.ts";
+// import name {UserRole} from "../../../models/users/USER_model.ts";
 // import {useUserRolesStore} from "../../stores/USER_store.ts";
 // // import {useUserRolesStore} from '../../states/stores/USERs_store.ts'; // Import the Zustand store
 //

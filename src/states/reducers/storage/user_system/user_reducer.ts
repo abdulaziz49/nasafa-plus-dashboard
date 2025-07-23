@@ -128,7 +128,7 @@
 //     }
 // }
 
-import type { UsersState } from "../../../../models/user_system/user_models.ts";
+import type {UsersState} from "../../../../models/user_system/user_models.ts";
 import {
     AUF_STRING,
     AUR_STRING,
@@ -170,7 +170,7 @@ export default function UserReducer(
     state: UsersState,
     action: UserActionTypes
 ): UsersState {
-    switch (action.type) {
+    switch (action.name) {
         // For fetching cases
         case FUR_STRING:
             return {

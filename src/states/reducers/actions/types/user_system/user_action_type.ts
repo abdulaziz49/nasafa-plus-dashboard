@@ -1,5 +1,5 @@
 // For CRUD operations (assuming these will also be API calls eventually)
-import type { User } from "../../../../../models/user_system/user_models";
+import type {User} from "../../../../../models/user_system/user_models";
 
 // fetch user strings
 export const FUR_STRING: string = "FETCH_USERS_REQUEST";
@@ -27,27 +27,27 @@ export const SUS_STRING: string = "SEARCH_USERS_SUCCESS";
 export const SUF_STRING: string = "SEARCH_USERS_FAILURE";
 
 export type UserActionTypes =
-    // For fetching users
-    | { type: FUR_STRING }
-    | { type: FUS_STRING; payload: User[] }
-    | { type: FUF_STRING; payload: string }
+// For fetching users
+    | { name: FUR_STRING }
+    | { name: FUS_STRING; payload: User[] }
+    | { name: FUF_STRING; payload: string }
 
     // For adding user
-    | { type: AUR_STRING }
-    | { type: AUS_STRING; payload: User }
-    | { type: AUF_STRING; payload: string }
+    | { name: AUR_STRING }
+    | { name: AUS_STRING; payload: User }
+    | { name: AUF_STRING; payload: string }
 
     // For editing user
-    | { type: EUR_STRING }
-    | { type: EUS_STRING; payload: User }
-    | { type: EUF_STRING; payload: string }
+    | { name: EUR_STRING }
+    | { name: EUS_STRING; payload: User }
+    | { name: EUF_STRING; payload: string }
 
     // For deleting user
-    | { type: DUR_STRING }
-    | { type: DUS_STRING; payload: number }
-    | { type: DUF_STRING; payload: string }
+    | { name: DUR_STRING }
+    | { name: DUS_STRING; payload: number }
+    | { name: DUF_STRING; payload: string }
 
     // For searching users
-    | { type: SUR_STRING }
-    | { type: SUS_STRING; payload: string }
-    | { type: SUF_STRING };
+    | { name: SUR_STRING }
+    | { name: SUS_STRING; payload: string }
+    | { name: SUF_STRING };

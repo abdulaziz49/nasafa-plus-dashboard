@@ -16,7 +16,7 @@ export default function getUserTableColumn(): object[] {
     // }: UserTableColumnType): object[]
     // const { t } = useTranslation(translateFile);
     return [
-        { headerName: "ID", field: "id", minWidth: 60, width: 60, hide: false },
+        { headerName: "ID", field: "id", minWidth: 60, width: 60, hide: true },
         {
             headerName: "Num",
             field: "",
