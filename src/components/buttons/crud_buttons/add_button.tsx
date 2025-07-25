@@ -1,11 +1,15 @@
-import Button from '../button.tsx';
-import type {CrudButtonType} from '../../../types/button_types.ts';
-import {AddIcon} from "../../icons/crud_icons.tsx";
+import Button from "../button.tsx";
+import { AddIcon } from "../../icons/crud_icons.tsx";
+import type { CrudButtonType } from "./crud_button_type.ts";
 
-export default function AddButton({clickEvent, classes, text}: CrudButtonType) {
+export default function AddButton({
+    clickEvent,
+    classes,
+    text,
+}: CrudButtonType) {
     return (
         <Button type="button" classes={classes} onClick={clickEvent}>
-            {text} <AddIcon/>
+            {text} <AddIcon />
         </Button>
     );
 }

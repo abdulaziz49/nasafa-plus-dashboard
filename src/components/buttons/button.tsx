@@ -1,13 +1,12 @@
-import type {ButtonType} from '../../types/button_types.ts';
+import type { ComponentPropsWithoutRef } from "react";
 
-const Button = ({
-                    children,
-                    classes,
-                    type,
-                    ...rest
-                }: ButtonType) => {
+export interface ButtonType extends ComponentPropsWithoutRef<"button"> {
+    classes?: string;
+}
+
+const Button = ({ children, classes, ...rest }: ButtonType) => {
     return (
-        <button type={type} className={`btn ${classes}`} {...rest} >
+        <button className={`btn ${classes}`} {...rest}>
             {children}
         </button>
     );
