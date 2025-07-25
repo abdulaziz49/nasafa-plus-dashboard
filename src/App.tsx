@@ -48,8 +48,8 @@ function App() {
                     )}
 
                     {/* Main page content and routes */}
-                    <div className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:p-4 space-y-2">
-                        <Suspense fallback={<CircleLoading />}>
+                    <Suspense fallback={<CircleLoading />}>
+                        <div className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:p-4 space-y-2">
                             <Routes>
                                 {/* Protected routes require authentication */}
                                 {protectedRoutes.map(
@@ -75,14 +75,14 @@ function App() {
                                     />
                                 ))}
                             </Routes>
-                        </Suspense>
-                        <ToastContainer
-                            rtl={isRTL}
-                            theme={isDark ? "dark" : "light"}
-                            position={isRTL ? "top-left" : "top-right"}
-                            newestOnTop={true}
-                        />
-                    </div>
+                            <ToastContainer
+                                rtl={isRTL}
+                                theme={isDark ? "dark" : "light"}
+                                position={isRTL ? "top-left" : "top-right"}
+                                newestOnTop={true}
+                            />
+                        </div>
+                    </Suspense>
                 </div>
                 {/* Show navigation drawer only when authenticated and not loading */}
                 {isAuthenticated && !isAuthLoading && <DrawerContainer />}
