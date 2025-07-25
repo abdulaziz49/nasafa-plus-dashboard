@@ -1,16 +1,16 @@
 // src/App.tsx
 
-import {Route, Routes} from "react-router-dom";
-import {Suspense} from "react";
-import {ToastContainer} from "react-toastify";
+import { Route, Routes } from "react-router-dom";
+import { Suspense } from "react";
+import { ToastContainer } from "react-toastify";
 
-import {type AppRouteConfig, appRoutes} from "./routes/app_routes.ts";
+import { type AppRouteConfig, appRoutes } from "./routes/app_routes.ts";
 import useUserSettingsStore from "./states/stores/user_settings_store.ts";
 import ProtectedRoute from "./routes/auth/protected_route.tsx";
 import CircleLoading from "./components/loaders/circle_loading.tsx";
 import DrawerButtonSkeleton from "./components/skeletons/drawer_button_skeleton.tsx";
 import DrawerContainer from "./components/drawer/drawer_container.tsx";
-import {useAuthStore} from "./states/stores/auth_store.ts";
+import { useAuthStore } from "./states/stores/auth_store.ts";
 import DrawerButton from "./components/menu/drawer_button.tsx";
 
 /**
@@ -24,8 +24,8 @@ import DrawerButton from "./components/menu/drawer_button.tsx";
  */
 function App() {
     // Get user settings and authentication state from stores
-    const {isRTL, isDark} = useUserSettingsStore();
-    const {isAuthenticated, isAuthLoading} = useAuthStore();
+    const { isRTL, isDark } = useUserSettingsStore();
+    const { isAuthenticated, isAuthLoading } = useAuthStore();
 
     // Split routes into protected and public for rendering
     const publicRoutes = appRoutes.filter((route) => !route.isProtected);
@@ -42,25 +42,24 @@ function App() {
                 <div className="drawer-content flex flex-col items-center justify-center w-full h-full">
                     {/* Show drawer button only when authenticated and not loading */}
                     {isAuthenticated && !isAuthLoading && (
-                        <Suspense fallback={<DrawerButtonSkeleton/>}>
-                            <DrawerButton/>
+                        <Suspense fallback={<DrawerButtonSkeleton />}>
+                            <DrawerButton />
                         </Suspense>
                     )}
 
                     {/* Main page content and routes */}
-                    <div
-                        className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:p-4 space-y-2">
-                        <Suspense fallback={<CircleLoading/>}>
+                    <div className="h-dvh w-full flex flex-col items-center justify-center overflow-none p-2.5 lg:p-4 space-y-2">
+                        <Suspense fallback={<CircleLoading />}>
                             <Routes>
                                 {/* Protected routes require authentication */}
                                 {protectedRoutes.map(
-                                    ({path, Component}: AppRouteConfig) => (
+                                    ({ path, Component }: AppRouteConfig) => (
                                         <Route
                                             key={path}
                                             path={path}
                                             element={
                                                 <ProtectedRoute>
-                                                    <Component/>
+                                                    <Component />
                                                 </ProtectedRoute>
                                             }
                                         />
@@ -68,11 +67,11 @@ function App() {
                                 )}
 
                                 {/* Public routes accessible without authentication */}
-                                {publicRoutes.map(({path, Component}) => (
+                                {publicRoutes.map(({ path, Component }) => (
                                     <Route
                                         key={path}
                                         path={path}
-                                        element={<Component/>}
+                                        element={<Component />}
                                     />
                                 ))}
                             </Routes>
@@ -86,7 +85,7 @@ function App() {
                     </div>
                 </div>
                 {/* Show navigation drawer only when authenticated and not loading */}
-                {isAuthenticated && !isAuthLoading && <DrawerContainer/>}
+                {isAuthenticated && !isAuthLoading && <DrawerContainer />}
             </div>
         </div>
     );

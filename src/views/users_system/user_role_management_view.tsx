@@ -37,8 +37,9 @@ import type { DataGridGenericType } from "../../components/datagrid/datagrid_gen
 const initialFormState: UserRole = {
     id: 0,
     name: "",
-    guard_name: "",
+    description: "",
     permissions: [],
+    is_locked: false,
     updated_at: "",
     created_at: "",
 };
@@ -104,13 +105,13 @@ const UserRoleManagementView = () => {
     const addRoleEvent: MouseEventHandler<HTMLButtonElement> = useCallback(
         async (e) => {
             e.preventDefault();
-            if (!formData.name.trim() || !formData.guard_name.trim()) {
+            if (!formData.name.trim()) {
                 toast.error(t("name_and_description_required"));
                 return;
             }
             const newRoleData = {
                 name: formData.name.trim(),
-                guard_name: formData.guard_name.trim(),
+                description: formData.description.trim(),
                 permissions: formData.permissions,
             };
             try {
@@ -136,7 +137,7 @@ const UserRoleManagementView = () => {
             if (
                 formData.id === 0 ||
                 !formData.name.trim() ||
-                !formData.guard_name.trim()
+                !formData.description.trim()
             ) {
                 toast.error(t("select_item_and_fill_name_and_description"));
                 return;

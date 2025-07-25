@@ -136,8 +136,8 @@ const useUserSettingsStore = create<UserSettingsState>()(
                 // Initial State
                 theme: "system", // Start with 'system' as default
                 lang: "ar",      // Default language
-                isDark: getSystemDarkMode(), // Initial `isDark` based on system preference
-                isRTL: getInitialDocumentDir(), // Initial `isRTL` based on current document.dir
+                isDark: false, // Initial `isDark` based on system preference
+                isRTL: true, // Initial `isRTL` based on current document.dir
                 isNewNotificationOnTop: true,
 
                 setTheme: (value) => {
