@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import LocaleSwitcher from "../i18n/locale_switcher.tsx";
 import Nasafa from "../assets/img/nasafa_plus_logo.png";
 import LoginIcon from "../components/icons/login_icon.tsx";
-import { type ChangeEvent, useEffect, useState } from "react";
+import { type ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useAuthStore } from "../states/stores/auth_store.ts";
 
 /**
@@ -55,12 +55,15 @@ const LoginView = () => {
     /**
      * Handles input field changes and updates form state.
      */
-    const inputChangeValueEvent = (e: ChangeEvent<HTMLInputElement>) => {
-        setForm((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }));
-    };
+    const inputChangeValueEvent = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            setForm((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+            }));
+        },
+        [setForm]
+    );
 
     document.title = t("title");
 
