@@ -161,7 +161,7 @@ export default function UserRoleReducer(
                 fetching: true,
                 error: null, // Clear any previous errors on new request
             };
-        case FURS_STRING:
+        case FURS_STRING: 
             return {
                 ...state,
                 fetching: false,

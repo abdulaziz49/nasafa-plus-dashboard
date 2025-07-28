@@ -33,25 +33,32 @@ export const fetchUsers = async (
     dispatch({name: FUR_STRING});
     try {
         const response = await AppAxios.get("users", getAuthAxiosConfig(token));
+        console.log(response.data.data);
         dispatch({
             name: FUS_STRING,
             payload: response.data.data,
         });
     } catch (error: unknown) {
+        console.error(1111);
         // Axios errors have a 'response' property
-        let errorMessage = "Failed to fetch roles";
-        if (typeof error === "object" && error !== null
-    )
-        {
-            const err = error as {
-                response?: { USER?: { message?: string } };
-                message?: string;
-            };
-            errorMessage =
-                err.response?.USER?.message ||
-                err.message ||
-                "Failed to fetch roles";
-        }
+        // let errorMessage = "Failed to fetch roles";
+        const errorMessage =
+            error.response?.USER?.message ||
+            error.message ||
+            "Failed to add role";
+    //     if (typeof error === "object" && error !== null
+    // )
+    //     {
+            // const err = error as {
+            //     response?: { USER?: { message?: string } };
+            //     message?: string;
+            // };
+            // errorMessage =
+            //     err.response?.USER?.message ||
+            //     err.message ||
+            //     "Failed to fetch roles";
+                console.log(error.message);
+        // }
         dispatch({name: FUF_STRING, payload: errorMessage});
     }
 };

@@ -5,7 +5,7 @@ export interface UserRole {
     name: string;
     is_locked: boolean;
     description: string;
-    permissions: string[]; // ID of the user who created this role
+    // permissions: string[]; // ID of the user who created this role
     created_at: string;
     updated_at: string;
 }

@@ -11,6 +11,7 @@ import RefreshButton from "../../components/buttons/crud_buttons/refresh_button.
 import {
     type ChangeEventHandler,
     type MouseEventHandler,
+    use,
     useCallback,
     useEffect,
     useReducer,
@@ -38,7 +39,7 @@ const initialFormState: UserRole = {
     id: 0,
     name: "",
     description: "",
-    permissions: [],
+    // permissions: [],
     is_locked: false,
     updated_at: "",
     created_at: "",
@@ -70,6 +71,7 @@ const UserRoleManagementView = () => {
         useReducer(UserRoleReducer, initialViewState);
 
     const [formData, setFormData] = useState<UserRole>(initialFormState);
+    const [isFormCollapsed, setIsFormCollapsed] = useState<boolean>(false);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     // Fetch all user roles from the backend
@@ -82,20 +84,32 @@ const UserRoleManagementView = () => {
         fetchData();
     }, [fetchData]);
 
+    // TODO - handle open and close collapse on user select row from datagrid using useEffect
+    useEffect(() => {
+        if (formData === initialFormState) {
+            setIsFormCollapsed(false);
+        } else {
+            setIsFormCollapsed(true);
+        }
+    }, [formData]);
+
     // Handle input changes for the form fields
     const inputChangeEvent: ChangeEventHandler<
         HTMLInputElement | HTMLTextAreaElement
     > = useCallback((e) => {
         setFormData((formData) => ({
             ...formData,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value.trim(),
         }));
     }, []);
 
     // Handle row selection in the data grid
     const onGridSelect = (data: DataGridGenericType[]) => {
         if (data.length > 0) {
-            setFormData(data[0] as UserRole);
+            const userRole: UserRole | undefined = mainStore.find(
+                (role) => role.id === data[0].id
+            );
+            setFormData(userRole!);
         } else {
             setFormData(initialFormState);
         }
@@ -105,14 +119,14 @@ const UserRoleManagementView = () => {
     const addRoleEvent: MouseEventHandler<HTMLButtonElement> = useCallback(
         async (e) => {
             e.preventDefault();
-            if (!formData.name.trim()) {
-                toast.error(t("name_and_description_required"));
+            if (formData.name.length > 0 || formData.is_locked) {
+                toast.error(t("")); //FIXME - translate error message
                 return;
             }
             const newRoleData = {
-                name: formData.name.trim(),
-                description: formData.description.trim(),
-                permissions: formData.permissions,
+                name: formData.name,
+                description: formData.description,
+                // permissions: formData.permissions,
             };
             try {
                 await addUserRole(dispatch, token, newRoleData);
@@ -134,25 +148,27 @@ const UserRoleManagementView = () => {
     const editRoleEvent: MouseEventHandler<HTMLButtonElement> = useCallback(
         async (e) => {
             e.preventDefault();
-            if (
-                formData.id === 0 ||
-                !formData.name.trim() ||
-                !formData.description.trim()
-            ) {
-                toast.error(t("select_item_and_fill_name_and_description"));
-                return;
-            }
-            try {
-                await editUserRole(dispatch, token, formData);
-                setFormData(initialFormState);
-                toast.success(t("edited_successfully"));
-            } catch (err: unknown) {
-                const errorMessage =
-                    typeof err === "object" && err !== null && "message" in err
-                        ? (err as { message?: string }).message ||
-                          t("failed_to_edit")
-                        : t("failed_to_edit");
-                toast.error(errorMessage);
+            console.log(formData);
+            if (formData.id === 0) {
+                toast.error(t("no_selected_role_edit_error")); // FIXME - translate this error
+            } else if (formData.name.length > 0) {
+                toast.error(t("fill_name_edit_error")); // FIXME  - translate this error
+            } else {
+                try {
+                    await editUserRole(dispatch, token, formData);
+                    setFormData(initialFormState);
+                    toast.success(t("edited_successfully"));
+                } catch (err: unknown) {
+                    // FIXME : correct to handle this error
+                    const errorMessage =
+                        typeof err === "object" &&
+                        err !== null &&
+                        "message" in err
+                            ? (err as { message?: string }).message ||
+                              t("failed_to_edit")
+                            : t("failed_to_edit");
+                    toast.error(errorMessage);
+                }
             }
         },
         [formData, token, dispatch, t]
@@ -168,10 +184,12 @@ const UserRoleManagementView = () => {
     const deleteRoleEvent: MouseEventHandler<HTMLButtonElement> = useCallback(
         async (e) => {
             e.preventDefault();
-            if (formData.id === 0) {
-                toast.error(t("select_item_to_delete"));
-                return;
-            }
+            // if (formData.id === 0) {
+            //     toast.error(t("select_item_to_delete"));
+            //     return;
+            // }
+
+            // TODO - Add modal to confirm the delete process that can be done using enter key
             if (
                 window.confirm(
                     t("confirm_delete_role", { roleName: formData.name })
@@ -202,6 +220,10 @@ const UserRoleManagementView = () => {
         setSearchTerm(e.target.value);
     };
 
+    // TODO - handle keyboard shortcut to add process ENTER
+    // TODO - handle keyboard shortcut to edit process SHIFT + ENTER
+    // TODO - handle keyboard shortcut to delete selected role process SHIFT + Delete
+
     const GRID_COLUMNS_DEF = getUserRoleTableColumn(deleteRoleEvent);
 
     document.title = t("title");
@@ -216,6 +238,7 @@ const UserRoleManagementView = () => {
                 isEditing={editing}
                 isAdding={adding}
                 translateFile={translateFilePath}
+                isCollapsed={isFormCollapsed}
             />
 
             {/* Search, export, refresh, and print controls */}

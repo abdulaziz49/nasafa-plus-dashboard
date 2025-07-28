@@ -5,6 +5,8 @@ import DeleteIconButton from "../../buttons/icon_buttons/delete_icon_button";
 interface ActionsColumnTypes extends ICellRendererParams {
     // You can define specific props here if your parent component needs to pass more context
     // For example, handlers that are specific to the grid's data context.
+
+    // FIXME - make this handler accepts id of the role
     handleDelete: MouseEventHandler<HTMLButtonElement>;
 }
 

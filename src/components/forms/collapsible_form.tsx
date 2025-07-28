@@ -1,9 +1,15 @@
-import { useCallback, useState, type ComponentPropsWithoutRef } from "react";
+import {
+    useCallback,
+    useEffect,
+    useState,
+    type ComponentPropsWithoutRef,
+} from "react";
 import FormContainer from "../form_container";
 import Accordion from "../accordion";
 
 interface CollapsibleFormPropsType extends ComponentPropsWithoutRef<"div"> {
     title: string;
+    collapse?: boolean;
 }
 /**
  * Renders a collapsible form section using an accordion UI.
@@ -16,9 +22,18 @@ interface CollapsibleFormPropsType extends ComponentPropsWithoutRef<"div"> {
  */
 export default function CollapsibleForm({
     title,
+    collapse = false,
     children,
 }: CollapsibleFormPropsType) {
     const [collapseForm, setCollapseForm] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (collapse) {
+            setCollapseForm(true);
+        } else {
+            setCollapseForm(false);
+        }
+    }, [collapse]);
 
     const toggleCollapse = useCallback(() => {
         setCollapseForm((prev) => !prev);

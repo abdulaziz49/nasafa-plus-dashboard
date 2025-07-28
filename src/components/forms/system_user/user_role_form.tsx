@@ -14,6 +14,7 @@ interface UserRoleFormTypes {
     inputChangeEvent: ChangeEventHandler<HTMLInputElement>;
     isAdding: boolean;
     isEditing: boolean;
+    isCollapsed?: boolean;
 }
 
 /**
@@ -39,12 +40,13 @@ export default function UserRoleForm({
     inputChangeEvent,
     isAdding,
     isEditing,
+    isCollapsed = false,
 }: UserRoleFormTypes): JSX.Element {
     const { t } = useTranslation(translateFile);
 
     return (
-        <CollapsibleForm title={t("title")}>
-            <div className="max-w-full h-auto grid grid-rows-2 grid-cols-1 md:grid-cols-2 md:grid-rows-1 md:gap-x-2 lg:gap-y-2 mb-2">
+        <CollapsibleForm collapse={isCollapsed} title={t("title")}>
+            <form className="max-w-full h-auto grid grid-rows-2 grid-cols-1 md:grid-cols-2 md:grid-rows-1 md:gap-x-2 lg:gap-y-2 mb-2">
                 <InputField
                     name="name"
                     labelText={t("group-label")}
@@ -62,16 +64,16 @@ export default function UserRoleForm({
                 <InputField
                     type="text"
                     multiple={true}
-                    name="guard_name"
+                    name="description"
                     placeholder={t("desc-placeholder")}
                     withLabel={true}
                     pattern="^[a-zA-Z][a-zA-Z0-9 _]+$"
                     labelText={t("desc-label")}
                     containerClasses="w-full"
-                    value={formData.guard_name}
+                    value={formData.description}
                     onChange={inputChangeEvent}
                 />
-            </div>
+            </form>
             <div className="max-w-screen h-auto grid gap-1 grid-cols-2 grid-rows-1 md:grid-cols-4 md:grid-rows-1 lg:grid-cols-4 lg:grid-rows-1 p-0">
                 <AddButton
                     classes="btn-primary btn-wide order-1"

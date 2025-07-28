@@ -31,7 +31,7 @@ export const fetchUserRoles = async (
     // if (fetching)
     dispatch({ name: FURR_STRING });
     try {
-        const response = await AppAxios.get("roles", getAuthAxiosConfig(token));
+        const response = await AppAxios.get("roles/without-permissions", getAuthAxiosConfig(token));
         dispatch({
             name: FURS_STRING,
             payload: response.data.data,
@@ -64,8 +64,8 @@ export const addUserRole = async (
             newRole,
             getAuthAxiosConfig(token)
         );
-        dispatch({ name: AURS_STRING, payload: response.data }); // Backend should return the created role with ID
-    } catch (error: any) {
+        dispatch({ name: AURS_STRING, payload: response.data.data }); // Backend should return the created role with ID
+    } catch (error: unknown) {
         const errorMessage =
             error.response?.USER_ROLE?.message ||
             error.message ||
