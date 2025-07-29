@@ -91,3 +91,9 @@ export default function UserRoleForm({
         </CollapsibleForm>
     );
 }
+
+// FIXME - handle data submittion in add and edit process by useHookForm and yup for regex.
+
+// FIXME - try to handle focus and blur on the form with these coditions:
+// 1- if the use clicked on row in the datagrid form opens.
+// 2- if there is no row selected in the datagrid form collapsed.

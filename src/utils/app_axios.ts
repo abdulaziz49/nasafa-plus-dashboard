@@ -164,7 +164,7 @@ AppAxios.interceptors.response.use(
           errorMessage = data?.message || "Bad Request: The request was malformed or invalid.";
           break;
         case 401: // Unauthorized
-          errorMessage = data?.message || "Unauthorized: Your session has expired or is invalid. Please log in again.";
+          errorMessage = "Unauthorized: Your session has expired or is invalid. Please log in again.";
           shouldClearAuth = true; // Mark for clearing auth
           break;
         case 403: // Forbidden
@@ -228,3 +228,5 @@ AppAxios.interceptors.response.use(
 );
 
 export default AppAxios;
+
+// FIXME - correct error handling and make the AppAxios instance handles general errors like 401, 403, 500 and ...etc.

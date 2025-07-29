@@ -89,3 +89,6 @@ const DataGrid: FC<DataGridProps<DataGridGenericType>> = ({
 };
 
 export default DataGrid;
+
+
+// FIXME - make the datagrid a generic component

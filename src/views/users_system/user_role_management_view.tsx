@@ -260,6 +260,7 @@ const UserRoleManagementView = () => {
                 >
                     <option defaultChecked>{t("filter-name")}</option>
                 </SearchForm>
+                {/* TODO - handle the print operation */}
                 <PrintButton
                     classes="btn-primary order-3 order-3 md:order-4 lg:col-span-2"
                     text={t("print-btn")}
@@ -267,6 +268,7 @@ const UserRoleManagementView = () => {
                         setLang(lang === "ar" ? "en" : "ar");
                     }}
                 />
+                {/* TODO - fix and handle export for pdf and excel */}
                 <Dropdown
                     text={t("export-dropdown")}
                     bgColor="primary"
