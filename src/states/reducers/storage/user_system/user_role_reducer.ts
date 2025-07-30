@@ -129,7 +129,8 @@
 // }
 
 import type { UserRolesState } from "../../../../models/user_system/user_role_model.ts";
-import { AURF_STRING, AURR_STRING, AURS_STRING, DURF_STRING, DURR_STRING, DURS_STRING, EURF_STRING, EURR_STRING, EURS_STRING, FURF_STRING, FURR_STRING, FURS_STRING, SURF_STRING, SURR_STRING, SURS_STRING, type UserRoleActionTypes } from "../../actions/types/user_system/user_role_action_type.ts";
+import { type UserRoleActionTypes } from "../../actions/types/user_system/user_role_action_type.ts";
+import { RequestStrings } from "../../actions/request_strings.ts";
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
 // Async logic should happen outside the reducer.
 
@@ -155,20 +156,20 @@ export default function UserRoleReducer(
 ): UserRolesState {
     switch (action.name) {
         // For fetching cases
-        case FURR_STRING:
+        case RequestStrings.FDR_STRING:
             return {
                 ...state,
                 fetching: true,
                 error: null, // Clear any previous errors on new request
             };
-        case FURS_STRING: 
+        case RequestStrings.FDS_STRING:
             return {
                 ...state,
                 fetching: false,
                 error: null,
                 mainStore: action.payload, // Replace roles with fetched USER_ROLE
             };
-        case FURF_STRING:
+        case RequestStrings.FDF_STRING:
             return {
                 ...state,
                 fetching: false,
@@ -177,20 +178,20 @@ export default function UserRoleReducer(
             };
 
         // For adding cases
-        case AURR_STRING:
+        case RequestStrings.ADR_STRING:
             return {
                 ...state,
                 adding: true,
                 error: null, // Clear any previous errors on new request
             };
-        case AURS_STRING:
+        case RequestStrings.ADS_STRING:
             return {
                 ...state,
                 mainStore: [...state.mainStore, action.payload],
                 adding: false,
                 error: null,
             };
-        case AURF_STRING:
+        case RequestStrings.ADF_STRING:
             return {
                 ...state,
                 adding: false,
@@ -198,13 +199,13 @@ export default function UserRoleReducer(
             };
 
         // For editing cases
-        case EURR_STRING:
+        case RequestStrings.EDR_STRING:
             return {
                 ...state,
                 editing: true,
                 error: null, // Clear any previous errors on new request
             };
-        case EURS_STRING:
+        case RequestStrings.EDS_STRING:
             return {
                 ...state,
                 mainStore: state.mainStore.map((role) =>
@@ -213,7 +214,7 @@ export default function UserRoleReducer(
                 error: null,
                 editing: false,
             };
-        case EURF_STRING:
+        case RequestStrings.EDF_STRING:
             return {
                 ...state,
                 editing: false,
@@ -221,13 +222,13 @@ export default function UserRoleReducer(
             };
 
         // For deleting cases
-        case DURR_STRING:
+        case RequestStrings.DDR_STRING:
             return {
                 ...state,
                 deleting: true,
                 error: null, // Clear any previous errors on new request
             };
-        case DURS_STRING:
+        case RequestStrings.DDS_STRING:
             return {
                 ...state,
                 mainStore: state.mainStore.filter(
@@ -236,7 +237,7 @@ export default function UserRoleReducer(
                 deleting: false,
                 error: null,
             };
-        case DURF_STRING:
+        case RequestStrings.DDF_STRING:
             return {
                 ...state,
                 deleting: false,
@@ -244,13 +245,13 @@ export default function UserRoleReducer(
             };
 
         // For searching cases
-        case SURR_STRING:
+        case RequestStrings.SDR_STRING:
             return {
                 ...state,
                 searching: true,
                 secondaryStore: state.mainStore,
             };
-        case SURS_STRING:
+        case RequestStrings.SDS_STRING:
             return {
                 ...state,
                 error: null,
@@ -260,7 +261,7 @@ export default function UserRoleReducer(
                         .includes(action.payload.toLowerCase())
                 ), // Replace roles with fetched USER_ROLE
             };
-        case SURF_STRING:
+        case RequestStrings.SDF_STRING:
             return {
                 ...state,
                 searching: false,
@@ -270,8 +271,8 @@ export default function UserRoleReducer(
 
         default: {
             // Ensure all action types are handled, or throw for unhandled ones
-            const exhaustiveCheck: any = action;
-            throw new Error(`Unhandled action type: ${exhaustiveCheck.type}`);
+            const exhaustiveCheck: unknown = action;
+            throw new Error(`Unhandled action type: ${exhaustiveCheck}`);
         }
     }
 }

@@ -130,23 +130,24 @@
 
 import type { TruckTypeState } from "../../../../models/truck/truck_type_models.ts";
 import {
-    ATTF_STRING,
-    ATTR_STRING,
-    ATTS_STRING,
-    DTTF_STRING,
-    DTTR_STRING,
-    DTTS_STRING,
-    ETTF_STRING,
-    ETTR_STRING,
-    ETTS_STRING,
-    FTTF_STRING,
-    FTTR_STRING,
-    FTTS_STRING,
-    STTF_STRING,
-    STTR_STRING,
-    STTS_STRING,
+    // ADF_STRING,
+    // ADR_STRING,
+    // ADS_STRING,
+    // DDF_STRING,
+    // DDR_STRING,
+    // DDS_STRING,
+    // EDF_STRING,
+    // EDR_STRING,
+    // EDS_STRING,
+    // FDF_STRING,
+    // FDR_STRING,
+    // FDS_STRING,
+    // SDF_STRING,
+    // SDR_STRING,
+    // SDS_STRING,
     type TruckTypeActionTypes,
 } from "../../actions/types/truck/truck_type_action_type.ts";
+import { RequestStrings } from "../../actions/request_strings.ts";
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
 // Async logic should happen outside the reducer.
 
@@ -172,20 +173,20 @@ export default function TruckTypeReducer(
 ): TruckTypeState {
     switch (action.name) {
         // For fetching cases
-        case FTTR_STRING:
+        case RequestStrings.FDR_STRING:
             return {
                 ...state,
                 fetching: true,
                 error: null, // Clear any previous errors on new request
             };
-        case FTTS_STRING:
+        case RequestStrings.FDS_STRING:
             return {
                 ...state,
                 fetching: false,
                 error: null,
                 mainStore: action.payload, // Replace roles with fetched USER_ROLE
             };
-        case FTTF_STRING:
+        case RequestStrings.FDF_STRING:
             return {
                 ...state,
                 fetching: false,
@@ -194,20 +195,20 @@ export default function TruckTypeReducer(
             };
 
         // For adding cases
-        case ATTR_STRING:
+        case RequestStrings.ADR_STRING:
             return {
                 ...state,
                 adding: true,
                 error: null, // Clear any previous errors on new request
             };
-        case ATTS_STRING:
+        case RequestStrings.ADS_STRING:
             return {
                 ...state,
                 mainStore: [...state.mainStore, action.payload],
                 adding: false,
                 error: null,
             };
-        case ATTF_STRING:
+        case RequestStrings.ADF_STRING:
             return {
                 ...state,
                 adding: false,
@@ -215,13 +216,13 @@ export default function TruckTypeReducer(
             };
 
         // For editing cases
-        case ETTR_STRING:
+        case RequestStrings.EDR_STRING:
             return {
                 ...state,
                 editing: true,
                 error: null, // Clear any previous errors on new request
             };
-        case ETTS_STRING:
+        case RequestStrings.EDS_STRING:
             return {
                 ...state,
                 mainStore: state.mainStore.map((truckType) =>
@@ -232,7 +233,7 @@ export default function TruckTypeReducer(
                 error: null,
                 editing: false,
             };
-        case ETTF_STRING:
+        case RequestStrings.EDF_STRING:
             return {
                 ...state,
                 editing: false,
@@ -240,13 +241,13 @@ export default function TruckTypeReducer(
             };
 
         // For deleting cases
-        case DTTR_STRING:
+        case RequestStrings.DDR_STRING:
             return {
                 ...state,
                 deleting: true,
                 error: null, // Clear any previous errors on new request
             };
-        case DTTS_STRING:
+        case RequestStrings.DDS_STRING:
             return {
                 ...state,
                 mainStore: state.mainStore.filter(
@@ -255,7 +256,7 @@ export default function TruckTypeReducer(
                 deleting: false,
                 error: null,
             };
-        case DTTF_STRING:
+        case RequestStrings.DDF_STRING:
             return {
                 ...state,
                 deleting: false,
@@ -263,13 +264,13 @@ export default function TruckTypeReducer(
             };
 
         // For searching cases
-        case STTR_STRING:
+        case RequestStrings.SDR_STRING:
             return {
                 ...state,
                 searching: true,
                 secondaryStore: state.mainStore,
             };
-        case STTS_STRING:
+        case RequestStrings.SDS_STRING:
             return {
                 ...state,
                 error: null,
@@ -279,7 +280,7 @@ export default function TruckTypeReducer(
                         .includes(action.payload.toLowerCase())
                 ), // Replace roles with fetched USER_ROLE
             };
-        case STTF_STRING:
+        case RequestStrings.SDF_STRING:
             return {
                 ...state,
                 searching: false,

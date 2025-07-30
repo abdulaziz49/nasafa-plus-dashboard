@@ -130,23 +130,24 @@
 
 import type {UsersState} from "../../../../models/user_system/user_models.ts";
 import {
-    AUF_STRING,
-    AUR_STRING,
-    AUS_STRING,
-    DUF_STRING,
-    DUR_STRING,
-    DUS_STRING,
-    EUF_STRING,
-    EUR_STRING,
-    EUS_STRING,
-    FUF_STRING,
-    FUR_STRING,
-    FUS_STRING,
-    SUF_STRING,
-    SUR_STRING,
-    SUS_STRING,
+    // AUF_STRING,
+    // AUR_STRING,
+    // AUS_STRING,
+    // DUF_STRING,
+    // DUR_STRING,
+    // DUS_STRING,
+    // EUF_STRING,
+    // EUR_STRING,
+    // EUS_STRING,
+    // FUF_STRING,
+    // FUR_STRING,
+    // FUS_STRING,
+    // SUF_STRING,
+    // SUR_STRING,
+    // SUS_STRING,
     type UserActionTypes,
 } from "../../actions/types/user_system/user_action_type.ts";
+import { RequestStrings } from "../../actions/request_strings.ts";
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
 // Async logic should happen outside the reducer.
 
@@ -172,20 +173,20 @@ export default function UserReducer(
 ): UsersState {
     switch (action.name) {
         // For fetching cases
-        case FUR_STRING:
+        case RequestStrings.FDR_STRING:
             return {
                 ...state,
                 fetching: true,
                 error: null, // Clear any previous errors on new request
             };
-        case FUS_STRING:
+        case RequestStrings.FDS_STRING:
             return {
                 ...state,
                 fetching: false,
                 error: null,
                 mainStore: action.payload, // Replace roles with fetched USER
             };
-        case FUF_STRING:
+        case RequestStrings.FDF_STRING:
             return {
                 ...state,
                 fetching: false,
@@ -194,20 +195,20 @@ export default function UserReducer(
             };
 
         // For adding cases
-        case AUR_STRING:
+        case RequestStrings.ADR_STRING:
             return {
                 ...state,
                 adding: true,
                 error: null, // Clear any previous errors on new request
             };
-        case AUS_STRING:
+        case RequestStrings.ADS_STRING:
             return {
                 ...state,
                 mainStore: [...state.mainStore, action.payload],
                 adding: false,
                 error: null,
             };
-        case AUF_STRING:
+        case RequestStrings.ADF_STRING:
             return {
                 ...state,
                 adding: false,
@@ -215,13 +216,13 @@ export default function UserReducer(
             };
 
         // For editing cases
-        case EUR_STRING:
+        case RequestStrings.EDR_STRING:
             return {
                 ...state,
                 editing: true,
                 error: null, // Clear any previous errors on new request
             };
-        case EUS_STRING:
+        case RequestStrings.EDS_STRING:
             return {
                 ...state,
                 mainStore: state.mainStore.map((role) =>
@@ -230,7 +231,7 @@ export default function UserReducer(
                 error: null,
                 editing: false,
             };
-        case EUF_STRING:
+        case RequestStrings.EDF_STRING:
             return {
                 ...state,
                 editing: false,
@@ -238,13 +239,13 @@ export default function UserReducer(
             };
 
         // For deleting cases
-        case DUR_STRING:
+        case RequestStrings.DDR_STRING:
             return {
                 ...state,
                 deleting: true,
                 error: null, // Clear any previous errors on new request
             };
-        case DUS_STRING:
+        case RequestStrings.DDS_STRING:
             return {
                 ...state,
                 mainStore: state.mainStore.filter(
@@ -253,7 +254,7 @@ export default function UserReducer(
                 deleting: false,
                 error: null,
             };
-        case DUF_STRING:
+        case RequestStrings.DDF_STRING:
             return {
                 ...state,
                 deleting: false,
@@ -261,13 +262,13 @@ export default function UserReducer(
             };
 
         // For searching cases
-        case SUR_STRING:
+        case RequestStrings.SDR_STRING:
             return {
                 ...state,
                 searching: true,
                 secondaryStore: state.mainStore,
             };
-        case SUS_STRING:
+        case RequestStrings.SDS_STRING:
             return {
                 ...state,
                 error: null,
@@ -277,7 +278,7 @@ export default function UserReducer(
                         .includes(action.payload.toLowerCase())
                 ), // Replace roles with fetched USER
             };
-        case SUF_STRING:
+        case RequestStrings.SDF_STRING:
             return {
                 ...state,
                 searching: false,
@@ -287,8 +288,8 @@ export default function UserReducer(
 
         default: {
             // Ensure all action types are handled, or throw for unhandled ones
-            const exhaustiveCheck: any = action;
-            throw new Error(`Unhandled action type: ${exhaustiveCheck.type}`);
+            const exhaustiveCheck: unknown = action;
+            throw new Error(`Unhandled action type: ${exhaustiveCheck}`);
         }
     }
 }

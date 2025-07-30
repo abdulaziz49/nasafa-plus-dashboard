@@ -1,4 +1,4 @@
-export default function trimDataObjectStrings<T extends Record<string, any>>(data: T): T  {
+export default function trimDataObjectStrings<T extends object>(data: T): T  {
   const trimmedData: T = { ...data };
   for (const key in trimmedData) {
     if (typeof trimmedData[key] === "string") {

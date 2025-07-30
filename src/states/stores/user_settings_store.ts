@@ -105,12 +105,12 @@ const getSystemDarkMode = () => {
 };
 
 // Helper to safely determine initial document direction for client-side
-const getInitialDocumentDir = () => {
-    if (typeof document !== 'undefined') {
-        return document.dir === "rtl";
-    }
-    return false; // Default to LTR on server
-};
+// const getInitialDocumentDir = () => {
+//     if (typeof document !== 'undefined') {
+//         return document.dir === "rtl";
+//     }
+//     return false; // Default to LTR on server
+// };
 
 // Helper to safely set document direction on client-side
 const setDocumentDir = (isRTL: boolean) => {
