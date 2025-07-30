@@ -112,10 +112,13 @@ export const useAuthStore = create<AuthState>()(
                         // AppAxios handles most network/server errors with toasts
                         // Only set a generic error message in store if AppAxios doesn't provide one
                         if (axios.isAxiosError(error) && error.response) {
-                            const errorMessage = error.response.data?.message || "Login failed.";
+                            const errorMessage =
+                                error.response.data?.message || "Login failed.";
                             set({ error: errorMessage });
                         } else {
-                            set({ error: "An unknown error occurred during login." });
+                            set({
+                                error: "An unknown error occurred during login.",
+                            });
                         }
                     }
                 },
@@ -161,7 +164,9 @@ export const useAuthStore = create<AuthState>()(
                         } else {
                             // If server responds with an unexpected success status, log a warning
                             // Client state is not cleared due to ambiguity.
-                            console.warn(`Server logout responded with unexpected status ${response.status}. Client state not cleared.`);
+                            console.warn(
+                                `Server logout responded with unexpected status ${response.status}. Client state not cleared.`
+                            );
                             set({
                                 isAuthLoading: false,
                                 error: "Logout failed due to unexpected server response.",
@@ -171,7 +176,9 @@ export const useAuthStore = create<AuthState>()(
                         // AppAxios handles the toast notification for network/server errors.
                         // Client-side state is NOT cleared here, adhering to the requirement
                         // to only clear on successful server logout.
-                        set({ isAuthLoading: false });
+                        if (axios.isAxiosError(error)) {
+                            set({ isAuthLoading: false });
+                        }
                         // Only log specific warnings if AppAxios doesn't fully handle them
                         // if (axios.isAxiosError(error) && error.response?.status !== 401) {
                         //     console.warn("Server logout request failed, local state might remain active.", error);
@@ -231,7 +238,9 @@ export const useAuthStore = create<AuthState>()(
                             set({ intervalID: nextIntervalID });
                             // toast.info(`Next auto-token refresh in ${MAIN_REFRESH_INTERVAL / 60000} minutes.`); // Removed: less crucial for auto-refresh
                         } catch (error: unknown) {
-                            set({ isAuthLoading: false }); // Turn off loading
+                            if (axios.isAxiosError(error)) {
+                                set({ isAuthLoading: false }); // Turn off loading
+                            }
                             // if (
                             //     axios.isAxiosError(error) &&
                             //     error.response?.status === 401
@@ -253,7 +262,8 @@ export const useAuthStore = create<AuthState>()(
                             );
                             set({ retryIntervalID: nextRetryIntervalID });
                             // Keep this toast as it's important feedback for auto-retries
-                            toast.error(  // TODO - translate this message
+                            toast.error(
+                                // TODO - translate this message
                                 `Token refresh failed. Retrying in ${
                                     RETRY_INTERVAL / 60000
                                 } minute.`
@@ -317,7 +327,10 @@ export const useAuthStore = create<AuthState>()(
                     return (storedState, error) => {
                         if (error) {
                             // Log error to console only for dev/debugging
-                            console.error("An error occurred during hydration", error);
+                            console.error(
+                                "An error occurred during hydration",
+                                error
+                            );
                             useAuthStore.setState({
                                 isAuthenticated: false,
                                 isAuthLoading: false,
@@ -330,7 +343,7 @@ export const useAuthStore = create<AuthState>()(
                             toast.error(
                                 "Authentication data corrupted, please log in again."
                             );
-                        } else if (storedState && storedState.token) {
+                        } else if (storedState?.token) {
                             // If a token was rehydrated, set isAuthenticated to true.
                             // isAuthLoading is set to false here as hydration is complete.
                             // The `App.tsx` useEffect will handle starting `startTokenAutoRefresh`.

@@ -4,25 +4,9 @@ import AppAxios, {
 } from "../../../../../utils/app_axios.ts";
 import type { TruckType } from "../../../../../models/truck/truck_type_models.ts";
 import type { Dispatch } from "react";
-import {
-    ATTF_STRING,
-    ATTR_STRING,
-    ATTS_STRING,
-    DTTF_STRING,
-    DTTR_STRING,
-    DTTS_STRING,
-    ETTF_STRING,
-    ETTR_STRING,
-    ETTS_STRING,
-    FTTF_STRING,
-    FTTR_STRING,
-    FTTS_STRING,
-    STTF_STRING,
-    STTR_STRING,
-    STTS_STRING,
-    type TruckTypeActionTypes,
-} from "../../types/truck/truck_type_action_type.ts";
+import { type TruckTypeActionTypes } from "../../types/truck/truck_type_action_type.ts";
 import axios from "axios";
+import { RequestStrings } from "../../request_strings.ts";
 
 // --- Async Action Creators ---
 export const fetchTruckTypes = async (
@@ -30,14 +14,14 @@ export const fetchTruckTypes = async (
     token: string
 ): Promise<void> => {
     // if (fetching)
-    dispatch({ name: FTTR_STRING });
+    dispatch({ name: RequestStrings.FDR_STRING });
     try {
         const response = await AppAxios.get(
             "types/class/trucks",
             getAuthAxiosConfig(token)
         );
         dispatch({
-            name: FTTS_STRING,
+            name: RequestStrings.FDS_STRING,
             payload: response.data.data,
         });
         // console.log(`truck types: ${response.data}`);
@@ -49,7 +33,7 @@ export const fetchTruckTypes = async (
                 error.response?.statusText ||
                 error.message ||
                 "Failed to fetch truck types";
-            dispatch({ name: FTTF_STRING, payload: errorMessage });
+            dispatch({ name: RequestStrings.FDF_STRING, payload: errorMessage });
         }
     }
 };
@@ -63,23 +47,23 @@ export const addTrucKType = async (
     >
 ) => {
     // You might dispatch a 'ADD_truck type_REQUEST' here too, for a loading state on the form
-    dispatch({ name: ATTR_STRING });
+    dispatch({ name: RequestStrings.ADR_STRING });
     try {
         newTruckType.code = "trucks";
-        newTruckType['class'] = "trucks1";
+        newTruckType["class"] = "trucks1";
         const response = await AppAxios.post(
             "types",
             newTruckType,
             getAuthAxiosConfig(token)
         );
-        dispatch({ name: ATTS_STRING, payload: response.data.data }); // Backend should return the created truck type with ID
+        dispatch({ name: RequestStrings.ADS_STRING, payload: response.data.data }); // Backend should return the created truck type with ID
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
             const errorMessage =
                 error.response!.statusText ||
                 error.message ||
                 "Failed to add truck type";
-            dispatch({ name: ATTF_STRING, payload: errorMessage });
+            dispatch({ name: RequestStrings.ADF_STRING, payload: errorMessage });
             console.error("Add truck type failed:", errorMessage);
         }
         // throw new Error(errorMessage); // Re-throw to handle in component if needed
@@ -91,7 +75,7 @@ export const editTrucKType = async (
     token: string,
     updatedTruckType: TruckType
 ) => {
-    dispatch({ name: ETTR_STRING });
+    dispatch({ name: RequestStrings.EDR_STRING });
     try {
         // Assuming API endpoint is /api/truck types/{id} for PUT/PATCH
         const response = await AppAxios.put(
@@ -99,14 +83,14 @@ export const editTrucKType = async (
             updatedTruckType,
             getAuthAxiosConfig(token)
         );
-        dispatch({ name: ETTS_STRING, payload: response.data });
+        dispatch({ name: RequestStrings.EDS_STRING, payload: response.data });
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
             const errorMessage =
                 error.response?.statusText ||
                 error.message ||
                 "Failed to edit truck type";
-            dispatch({ name: ETTF_STRING, payload: errorMessage });
+            dispatch({ name: RequestStrings.EDF_STRING, payload: errorMessage });
             console.error("Edit truck type failed:", errorMessage);
         }
         // throw new Error(errorMessage);
@@ -118,17 +102,17 @@ export const deleteTrucKType = async (
     token: string,
     id: number
 ) => {
-    dispatch({ name: DTTR_STRING });
+    dispatch({ name: RequestStrings.DDR_STRING });
     try {
         await AppAxios.delete(`types/${id}`, getAuthAxiosConfig(token));
-        dispatch({ name: DTTS_STRING, payload: id });
+        dispatch({ name: RequestStrings.DDS_STRING, payload: id });
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
             const errorMessage =
                 error.response?.statusText ||
                 error.message ||
                 "Failed to delete truck type";
-            dispatch({ name: DTTF_STRING, payload: errorMessage });
+            dispatch({ name: RequestStrings.DDF_STRING, payload: errorMessage });
             console.error("Delete truck type failed:", errorMessage);
         }
         // throw new Error(errorMessage);
@@ -140,16 +124,16 @@ export const searchTrucKType = (
     searchTerm: string,
     stillSearch: boolean
 ) => {
-    if (!stillSearch) dispatch({ name: STTR_STRING });
+    if (!stillSearch) dispatch({ name: RequestStrings.SDR_STRING });
     // try {
     // console.log(searchTerm)
     // let filteredUSER_truck type: TrucKType[]
     if (searchTerm.length > 0) {
         // filteredUSER_truck type = USER_truck type.filter((row) => row.name.toString().toLowerCase().includes(searchTerm.toLowerCase()))
-        dispatch({ name: STTS_STRING, payload: searchTerm });
+        dispatch({ name: RequestStrings.SDS_STRING, payload: searchTerm });
     } else {
         // filteredUSER_truck type = []
-        dispatch({ name: STTF_STRING });
+        dispatch({ name: RequestStrings.SDF_STRING });
     }
     // console.log(filteredUSER_truck type)
     // else

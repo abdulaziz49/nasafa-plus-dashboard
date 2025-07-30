@@ -342,6 +342,7 @@ const initialFormState: TruckType = {
     code: "", // Assuming 'code' is part of TruckType and needs trimming
     updated_at: "",
     created_at: "",
+    class: "",
 };
 
 const TruckTypeManagementView = () => {

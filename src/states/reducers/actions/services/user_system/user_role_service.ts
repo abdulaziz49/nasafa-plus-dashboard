@@ -4,25 +4,9 @@ import AppAxios, {
 } from "../../../../../utils/app_axios.ts";
 import type { UserRole } from "../../../../../models/user_system/user_role_model.ts";
 import type { Dispatch } from "react";
-import {
-    AURF_STRING,
-    AURR_STRING,
-    AURS_STRING,
-    DURF_STRING,
-    DURR_STRING,
-    DURS_STRING,
-    EURF_STRING,
-    EURR_STRING,
-    EURS_STRING,
-    FURF_STRING,
-    FURR_STRING,
-    FURS_STRING,
-    SURF_STRING,
-    SURR_STRING,
-    SURS_STRING,
-    type UserRoleActionTypes,
-} from "../../types/user_system/user_role_action_type.ts"; // For useReducer's dispatch name
+import { type UserRoleActionTypes } from "../../types/user_system/user_role_action_type.ts"; // For useReducer's dispatch name
 import axios from "axios";
+import { RequestStrings } from "../../request_strings.ts";
 
 // --- Async Action Creators ---
 export const fetchUserRoles = async (
@@ -30,11 +14,14 @@ export const fetchUserRoles = async (
     token: string
 ): Promise<void> => {
     // if (fetching)
-    dispatch({ name: FURR_STRING });
+    dispatch({ name: RequestStrings.FDR_STRING });
     try {
-        const response = await AppAxios.get("roles/without-permissions", getAuthAxiosConfig(token));
+        const response = await AppAxios.get(
+            "roles/without-permissions",
+            getAuthAxiosConfig(token)
+        );
         dispatch({
-            name: FURS_STRING,
+            name: RequestStrings.FDS_STRING,
             payload: response.data.data,
         });
         // console.log(`roles: ${response.data}`);
@@ -46,7 +33,10 @@ export const fetchUserRoles = async (
                 error.response?.statusText ||
                 error.message ||
                 "Failed to fetch roles";
-            dispatch({ name: FURF_STRING, payload: errorMessage });
+            dispatch({
+                name: RequestStrings.FDF_STRING,
+                payload: errorMessage,
+            });
         }
     }
 };
@@ -60,21 +50,27 @@ export const addUserRole = async (
     >
 ) => {
     // You might dispatch a 'ADD_ROLE_REQUEST' here too, for a loading state on the form
-    dispatch({ name: AURR_STRING });
+    dispatch({ name: RequestStrings.ADR_STRING });
     try {
         const response = await AppAxios.post(
             "roles",
             newRole,
             getAuthAxiosConfig(token)
         );
-        dispatch({ name: AURS_STRING, payload: response.data.data }); // Backend should return the created role with ID
+        dispatch({
+            name: RequestStrings.ADS_STRING,
+            payload: response.data.data,
+        }); // Backend should retDn the created role with ID
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
             const errorMessage =
                 error.response?.statusText ||
                 error.message ||
                 "Failed to add role";
-            dispatch({ name: AURF_STRING, payload: errorMessage });
+            dispatch({
+                name: RequestStrings.ADF_STRING,
+                payload: errorMessage,
+            });
             console.error("Add role failed:", errorMessage);
         }
         // throw new Error(errorMessage); // Re-throw to handle in component if needed
@@ -86,7 +82,7 @@ export const editUserRole = async (
     token: string,
     updatedRole: UserRole
 ) => {
-    dispatch({ name: EURR_STRING });
+    dispatch({ name: RequestStrings.EDR_STRING });
     try {
         // Assuming API endpoint is /api/roles/{id} for PUT/PATCH
         const response = await AppAxios.put(
@@ -94,14 +90,17 @@ export const editUserRole = async (
             updatedRole,
             getAuthAxiosConfig(token)
         );
-        dispatch({ name: EURS_STRING, payload: response.data });
+        dispatch({ name: RequestStrings.EDS_STRING, payload: response.data });
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
             const errorMessage =
                 error.response?.statusText ||
                 error.message ||
                 "Failed to edit role";
-            dispatch({ name: EURF_STRING, payload: errorMessage });
+            dispatch({
+                name: RequestStrings.EDF_STRING,
+                payload: errorMessage,
+            });
             console.error("Edit role failed:", errorMessage);
         }
         // throw new Error(errorMessage);
@@ -113,17 +112,20 @@ export const deleteUserRole = async (
     token: string,
     id: number
 ) => {
-    dispatch({ name: DURR_STRING });
+    dispatch({ name: RequestStrings.DDR_STRING });
     try {
         await AppAxios.delete(`roles/${id}`, getAuthAxiosConfig(token));
-        dispatch({ name: DURS_STRING, payload: id });
+        dispatch({ name: RequestStrings.DDS_STRING, payload: id });
     } catch (error: unknown) {
-        if(axios.isAxiosError(error)) {
+        if (axios.isAxiosError(error)) {
             const errorMessage =
                 error.response?.statusText ||
                 error.message ||
                 "Failed to delete role";
-            dispatch({ name: DURF_STRING, payload: errorMessage });
+            dispatch({
+                name: RequestStrings.DDF_STRING,
+                payload: errorMessage,
+            });
             console.error("Delete role failed:", errorMessage);
         }
         // throw new Error(errorMessage);
@@ -135,16 +137,16 @@ export const searchUserRole = (
     searchTerm: string,
     stillSearch: boolean
 ) => {
-    if (!stillSearch) dispatch({ name: SURR_STRING });
+    if (!stillSearch) dispatch({ name: RequestStrings.SDR_STRING });
     // try {
     // console.log(searchTerm)
     // let filteredUSER_ROLE: UserRole[]
     if (searchTerm.length > 0) {
         // filteredUSER_ROLE = USER_ROLE.filter((row) => row.name.toString().toLowerCase().includes(searchTerm.toLowerCase()))
-        dispatch({ name: SURS_STRING, payload: searchTerm });
+        dispatch({ name: RequestStrings.SDS_STRING, payload: searchTerm });
     } else {
         // filteredUSER_ROLE = []
-        dispatch({ name: SURF_STRING });
+        dispatch({ name: RequestStrings.SDF_STRING });
     }
     // console.log(filteredUSER_ROLE)
     // else
