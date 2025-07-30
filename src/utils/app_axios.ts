@@ -98,7 +98,7 @@ import { toast } from "react-toastify"; // Make sure react-toastify is imported
 
 const AppAxios = axios.create({
   baseURL: `https://${location.hostname}${import.meta.env.VITE_API_URL}`,
-  timeout: 15000, // Good practice to set a timeout (e.g., 15 seconds)
+  timeout: 15_000, // Good practice to set a timeout (e.g., 15 seconds)
 });
 
 export const unauthAxiosHeaderJson = {
@@ -113,7 +113,7 @@ export const unauthAxiosHeaderJson = {
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   headers?: {
     [key: string]: string;
-    Authorization?: string;
+    // Authorization: string;
   };
   withCredentials?: boolean;
 }
@@ -153,6 +153,7 @@ AppAxios.interceptors.response.use(
       errorMessage = "Network Error: Please check your internet connection and try again.";
       console.error("Axios Network Error:", error);
       toast.error(errorMessage);
+      toast.error(error.status);
     } else if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx

@@ -22,6 +22,7 @@ import {
     SURS_STRING,
     type UserRoleActionTypes,
 } from "../../types/user_system/user_role_action_type.ts"; // For useReducer's dispatch name
+import axios from "axios";
 
 // --- Async Action Creators ---
 export const fetchUserRoles = async (
@@ -38,13 +39,15 @@ export const fetchUserRoles = async (
         });
         // console.log(`roles: ${response.data}`);
         console.log(response.data.data);
-    } catch (error: any) {
+    } catch (error: unknown) {
         // Axios errors have a 'response' property
-        const errorMessage =
-            error.response?.USER_ROLE?.message ||
-            error.message ||
-            "Failed to fetch roles";
-        dispatch({ name: FURF_STRING, payload: errorMessage });
+        if (axios.isAxiosError(error)) {
+            const errorMessage =
+                error.response?.statusText ||
+                error.message ||
+                "Failed to fetch roles";
+            dispatch({ name: FURF_STRING, payload: errorMessage });
+        }
     }
 };
 
@@ -66,12 +69,14 @@ export const addUserRole = async (
         );
         dispatch({ name: AURS_STRING, payload: response.data.data }); // Backend should return the created role with ID
     } catch (error: unknown) {
-        const errorMessage =
-            error.response?.USER_ROLE?.message ||
-            error.message ||
-            "Failed to add role";
-        dispatch({ name: AURF_STRING, payload: errorMessage });
-        console.error("Add role failed:", errorMessage);
+        if (axios.isAxiosError(error)) {
+            const errorMessage =
+                error.response?.statusText ||
+                error.message ||
+                "Failed to add role";
+            dispatch({ name: AURF_STRING, payload: errorMessage });
+            console.error("Add role failed:", errorMessage);
+        }
         // throw new Error(errorMessage); // Re-throw to handle in component if needed
     }
 };
@@ -90,13 +95,15 @@ export const editUserRole = async (
             getAuthAxiosConfig(token)
         );
         dispatch({ name: EURS_STRING, payload: response.data });
-    } catch (error: any) {
-        const errorMessage =
-            error.response?.USER_ROLE?.message ||
-            error.message ||
-            "Failed to edit role";
-        dispatch({ name: EURF_STRING, payload: errorMessage });
-        console.error("Edit role failed:", errorMessage);
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            const errorMessage =
+                error.response?.statusText ||
+                error.message ||
+                "Failed to edit role";
+            dispatch({ name: EURF_STRING, payload: errorMessage });
+            console.error("Edit role failed:", errorMessage);
+        }
         // throw new Error(errorMessage);
     }
 };
@@ -110,13 +117,15 @@ export const deleteUserRole = async (
     try {
         await AppAxios.delete(`roles/${id}`, getAuthAxiosConfig(token));
         dispatch({ name: DURS_STRING, payload: id });
-    } catch (error: any) {
-        const errorMessage =
-            error.response?.USER_ROLE?.message ||
-            error.message ||
-            "Failed to delete role";
-        dispatch({ name: DURF_STRING, payload: errorMessage });
-        console.error("Delete role failed:", errorMessage);
+    } catch (error: unknown) {
+        if(axios.isAxiosError(error)) {
+            const errorMessage =
+                error.response?.statusText ||
+                error.message ||
+                "Failed to delete role";
+            dispatch({ name: DURF_STRING, payload: errorMessage });
+            console.error("Delete role failed:", errorMessage);
+        }
         // throw new Error(errorMessage);
     }
 };

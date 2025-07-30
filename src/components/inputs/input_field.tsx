@@ -21,7 +21,7 @@ const InputField = ({
             {/* Conditionally render the label only if 'withLabel' is true */}
             {withLabel && <label className="label mb-1">{labelText}</label>}
             <input
-                className="input w-auto"
+                className="input my-0 w-auto"
                 placeholder={placeholder}
                 {...rest}
             />

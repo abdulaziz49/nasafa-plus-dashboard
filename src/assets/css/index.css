@@ -85,8 +85,10 @@
 */
 body {
     font-family: "Alexandria", sans-serif;
+    --ag-font-family: "Alexandria", sans-serif;
 }
 
 body:dir("ltr") {
     font-family: "Roboto", sans-serif;
+    --ag-font-family: "Roboto", sans-serif;
 }
