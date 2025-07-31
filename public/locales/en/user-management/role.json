@@ -8,9 +8,15 @@
     "del-btn": "Delete",
     "edit-btn": "Edit",
     "refresh-btn": "Refresh",
+    "search-placeholder": "Search for",
+    "filter-name": "By name",
+    "print-btn": "Print",
     "export-dropdown": "Export to",
     "pdf-btn": "PDF",
     "excel-btn": "Excel",
-    "search-placeholder": "Search for",
-    "filter-name": "By name"
+    "name-col":"Role name",
+    "desc-col":"Description",
+    "create-col": "Enter date",
+    "update-col":"Update date",
+    "date_locale": "en-US"
 }

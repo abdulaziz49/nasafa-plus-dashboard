@@ -1,22 +1,50 @@
-// import { useTranslation } from "react-i18next";
-// import DataGridDeleteColumnRenderer from "../../datagrid_column_renderers/datagrid_delete_column_renderer";
-// import { type MouseEventHandler } from "react";
+// import type { TFunction } from "i18next";
+// import DataGridDeleteColumnRenderer from "../../datagrid_column_renderers/datagrid_delete_column_renderer.tsx";
+// import type { MouseEventHandler } from "react";
 
-// interface UserTableColumnType {
-//     translateFile: string;
-//     handleDeleteAction: MouseEventHandler<HTMLButtonElement>;
-//     handleResetPasswordAction: MouseEventHandler<HTMLButtonElement>;
+// export default function getTruckTypeTableColumn(
+//     handleAction: MouseEventHandler<HTMLButtonElement>,
+//     translate:TFunction,
+// ): object[] {
+//     return [
+//         {
+//             headerName: translate("num-col"),
+//             field: "",
+//             minWidth: 60,
+//             width: 60,
+//             valueGetter: (params: any) => params.node.rowIndex + 1,
+//         },
+//         { headerName: "ID", field: "id", minWidth: 60, width: 60, hide: true },
+//         { headerName: translate("name-col"), field: "name" },
+//         { headerName: translate("desc-col"), field: "description" },
+//         // { headerName: "Locked", field: "is_locked", width: 80,  },
+//         {
+//             headerName: translate("create-col"),
+//             field: "created_at",
+//             // FIXME - remove time from it and show the date only
+//         },
+//         {
+//             headerName: "",
+//             cellRenderer: DataGridDeleteColumnRenderer,
+//             minWidth: 80,
+//             width: 100,
+//             cellRendererParams: {
+//                 // FIXME - make this handler accepts id of the truck type
+//                 handleDelete: handleAction,
+//             },
+//         },
+//     ];
 // }
 
 import type { TFunction } from "i18next"; // Using i18next's TFunction type directly
+import DataGridDeleteColumnRenderer from "../datagrid_column_renderers/datagrid_delete_column_renderer.tsx";
 import type { ICellRendererParams } from "ag-grid-community"; // Assuming ag-Grid or similar, common type for cell renderer params
-import DataGridDeleteColumnRenderer from "../../datagrid_column_renderers/datagrid_delete_column_renderer";
 
 // Define a type for the delete handler that accepts an ID
 type DeleteActionHandler = (id: number) => void;
 
-// export default function getUserTableColumn({
-export default function getUserTableColumn( // Renamed for clarity: `onDeleteClick` is a more descriptive name for a prop that triggers deletion
+export default function getTypeTableColumn(
+    // Renamed for clarity: `onDeleteClick` is a more descriptive name for a prop that triggers deletion
     // This function will now directly accept the ID of the truck type to be deleted.
     onDeleteClick: DeleteActionHandler,
     translate: TFunction
@@ -38,28 +66,15 @@ export default function getUserTableColumn( // Renamed for clarity: `onDeleteCli
             filter: false,
             resizable: false,
         },
+        // Hidden ID column, useful for internal logic like selecting or deleting
         { headerName: "ID", field: "id", minWidth: 60, width: 60, hide: true },
-        { headerName: translate("name-col"), field: "name" },
-        { headerName: translate("user-col"), field: "username" },
-        { headerName: translate("mail-col"), field: "email" },
+        { headerName: translate("name-col"), field: "name" }, // Translated header
+        { headerName: translate("desc-col"), field: "description" }, // Translated header
+        // { headerName: "Locked", field: "is_locked", width: 80, }, // Uncomment if needed
+
         {
             headerName: translate("create-col"), // Translated header
             field: "created_at",
-            // FIXME - remove time from it and show the date only
-            valueFormatter: (params: ICellRendererParams) => {
-                if (params.value) {
-                    // Assuming params.value is a string that can be parsed by Date
-                    const date = new Date(params.value);
-                    // Use toLocaleDateString for a user-friendly date format
-                    // You might want to specify locale (e.g., 'en-US', 'ar-EG')
-                    return date.toLocaleDateString(translate("date_locale"));
-                }
-                return "";
-            },
-        },
-        {
-            headerName: translate("update-col"), // Translated header
-            field: "updated_at",
             // FIXME - remove time from it and show the date only
             valueFormatter: (params: ICellRendererParams) => {
                 if (params.value) {
@@ -87,36 +102,5 @@ export default function getUserTableColumn( // Renamed for clarity: `onDeleteCli
             filter: false,
             resizable: false,
         },
-        // {
-        //     headerName: "Status",
-        //     field: "status",
-        //     cellRenderer: (params: any) => {
-        //         const { t } = useTranslation(translateFile);
-        //         return t(`user-status.${params.value}`);
-        //     },
-        // },
-        // {
-        //     headerName: "Is Activated",
-        //     field: "is_activated",
-        //     cellRenderer: (params: any) => (params.value ? "Yes" : "No"),
-        // },
-        // {
-        //     headerName: "Delete",
-        //     cellRenderer: DataGridDeleteColumnRenderer,
-        //     minWidth: 80,
-        //     width: 100,
-        //     cellRendererParams: {
-        //         handleDelete: handleDeleteAction,
-        //     },
-        // },
-        // {
-        //     headerName: "ٌReset Password",
-        //     cellRenderer: DataGridDeleteColumnRenderer,
-        //     minWidth: 80,
-        //     width: 100,
-        //     cellRendererParams: {
-        //         handleDelete: handleResetPasswordAction,
-        //     },
-        // },
     ];
 }

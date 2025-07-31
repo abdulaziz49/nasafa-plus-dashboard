@@ -16,10 +16,45 @@ import { useAuthStore } from "../../states/stores/auth_store.ts";
 import UserReducer, {
     initialUserViewState,
 } from "../../states/reducers/storage/user_system/user_reducer.ts";
-import { fetchUsers } from "../../states/reducers/actions/services/user_system/user_service.ts";
+import {
+    deleteUser,
+    fetchUsers,
+} from "../../states/reducers/actions/services/user_system/user_service.ts";
 import getUserTableColumn from "../../components/datagrid/column_definition/user_system/user_datagrid_column_renderer.ts";
 import DataGridSkeleton from "../../components/skeletons/datagrid_skeleton.tsx";
 import type { DataGridGenericType } from "../../components/datagrid/datagrid_generic_type.ts";
+import { toast } from "react-toastify";
+
+const initialFormState: User = {
+    id: 0,
+    name: "",
+    // permissions: [],
+    is_locked: false,
+    updated_at: "",
+    created_at: "",
+    username: "",
+    email: "",
+    is_activated: false,
+    status: "",
+    status_text: "",
+    force_change_password: false,
+    last_login: "",
+    password_changed_at: "",
+    failed_login_attempts: 0,
+    locked_until: null,
+    remaining_lockout_time: null,
+    needs_password_change: false,
+    roles: [],
+    group: {
+        id: 0,
+        group_name: "",
+    },
+    creator: {
+        id: 0,
+        username: "",
+        name: "",
+    },
+};
 
 const UserManagementView = () => {
     const TRANSLATE_FILE_PATH = "user-management/user";
@@ -50,7 +85,40 @@ const UserManagementView = () => {
         }
     };
 
-    const GRID_COLUMNS_DEF = getUserTableColumn();
+    // Delete a user
+    const deleteUserEvent = useCallback(
+        async (id: number) => {
+            // if (formData.id === 0) {
+            //     toast.error(t("select_item_to_delete"));
+            //     return;
+            // }
+
+            // TODO - Add modal to confirm the delete process that can be done using enter key
+            if (
+                window.confirm(
+                    t("confirm_delete_user", { roleName: userFormData.name })
+                )
+            ) {
+                try {
+                    await deleteUser(dispatch, token, id);
+                    setUserFormData(initialFormState);
+                    toast.success(t("deleted_successfully"));
+                } catch (err: unknown) {
+                    const errorMessage =
+                        typeof err === "object" &&
+                        err !== null &&
+                        "message" in err
+                            ? (err as { message?: string }).message ||
+                              t("failed_to_delete")
+                            : t("failed_to_delete");
+                    toast.error(errorMessage);
+                }
+            }
+        },
+        [userFormData, token, dispatch, t]
+    );
+
+    const GRID_COLUMNS_DEF = getUserTableColumn(deleteUserEvent, t);
     useEffect(() => {
         fetchData();
     }, [fetchData]);

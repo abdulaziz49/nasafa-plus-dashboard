@@ -128,7 +128,7 @@
 //     }
 // }
 
-import type { TruckTypeState } from "../../../../models/truck/truck_type_models.ts";
+import type { TruckTypeState } from "../../../models/truck/truck_type_models.ts";
 import {
     // ADF_STRING,
     // ADR_STRING,
@@ -146,8 +146,8 @@ import {
     // SDR_STRING,
     // SDS_STRING,
     type TruckTypeActionTypes,
-} from "../../actions/types/truck/truck_type_action_type.ts";
-import { RequestStrings } from "../../request_strings.ts";
+} from "../actions/types/truck/truck_type_action_type.ts";
+import { RequestStrings } from "../request_strings.ts";
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
 // Async logic should happen outside the reducer.
 

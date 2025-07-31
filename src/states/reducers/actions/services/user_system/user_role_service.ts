@@ -6,7 +6,7 @@ import type { UserRole } from "../../../../../models/user_system/user_role_model
 import type { Dispatch } from "react";
 import { type UserRoleActionTypes } from "../../types/user_system/user_role_action_type.ts"; // For useReducer's dispatch name
 import axios from "axios";
-import { RequestStrings } from "../../request_strings.ts";
+import { RequestStrings } from "../../../request_strings.ts";
 
 // --- Async Action Creators ---
 export const fetchUserRoles = async (

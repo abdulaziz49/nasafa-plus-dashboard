@@ -72,8 +72,6 @@ export default function getTruckTypeTableColumn(
     { headerName: "ID", field: "id", minWidth: 60, width: 60, hide: true },
     { headerName: translate("name-col"), field: "name" }, // Translated header
     { headerName: translate("desc-col"), field: "description" }, // Translated header
-    // { headerName: "Locked", field: "is_locked", width: 80, }, // Uncomment if needed
-
     {
       headerName: translate("create-col"), // Translated header
       field: "created_at",

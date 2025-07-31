@@ -331,32 +331,36 @@ export const useAuthStore = create<AuthState>()(
                                 "An error occurred during hydration",
                                 error
                             );
-                            useAuthStore.setState({
-                                isAuthenticated: false,
-                                isAuthLoading: false,
-                                user: emptyUser,
-                                token: "",
-                                error: "Authentication data corrupted, please log in again.",
-                                intervalID: undefined,
-                                retryIntervalID: undefined,
-                            });
+                            // storedState = ini
+                            // useAuthStore.setState({
+                            storedState!.isAuthenticated = false;
+                            storedState!.isAuthLoading = false;
+                            storedState!.user = emptyUser;
+                            storedState!.token = "";
+                            storedState!.error =
+                                "Authentication data corrupted, please log in again.";
+                            storedState!.intervalID = undefined;
+                            storedState!.retryIntervalID = undefined;
+                            // });
                             toast.error(
                                 "Authentication data corrupted, please log in again."
                             );
-                        } else if (storedState?.token) {
+                            return;
+                        }
+                        if (storedState?.token) {
                             // If a token was rehydrated, set isAuthenticated to true.
                             // isAuthLoading is set to false here as hydration is complete.
                             // The `App.tsx` useEffect will handle starting `startTokenAutoRefresh`.
-                            useAuthStore.setState({
-                                isAuthLoading: false,
-                                isAuthenticated: true,
-                            });
+                            // useAuthStore.setState({
+                            storedState!.isAuthLoading = false;
+                            storedState!.isAuthenticated = true;
+                            // });
                         } else {
                             // No token rehydrated, ensure not loading and not authenticated
-                            useAuthStore.setState({
-                                isAuthLoading: false,
-                                isAuthenticated: false,
-                            });
+                            // useAuthStore.setState({
+                            storedState!.isAuthLoading = false;
+                            storedState!.isAuthenticated = false;
+                            // });
                         }
                     };
                 },

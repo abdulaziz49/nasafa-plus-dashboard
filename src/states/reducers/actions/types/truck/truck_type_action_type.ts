@@ -27,7 +27,7 @@ import type { TruckType } from "../../../../../models/truck/truck_type_models";
 // export const STTR_STRING: string = "SEARCH_TRUCK_TYPES_REQUEST";
 // export const STTS_STRING: string = "SEARCH_TRUCK_TYPES_SUCCESS";
 // export const STTF_STRING: string = "SEARCH_TRUCK_TYPES_FAILURE";
-import { RequestStrings } from "../../request_strings";
+import { RequestStrings } from "../../../request_strings";
 
 export type TruckTypeActionTypes =
     // For fetching truck types

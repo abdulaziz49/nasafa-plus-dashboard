@@ -1,6 +1,6 @@
 // import {object} from "yup";
 
-export interface TruckType {
+export interface TypeModel {
     id: number; // Unique ID for the role
     name: string;
     // is_locked: boolean;
@@ -12,9 +12,9 @@ export interface TruckType {
     updated_at: string;
 }
 
-export interface TruckTypeState {
-    mainStore: TruckType[];
-    secondaryStore: TruckType[];
+export interface TypeStateModel {
+    mainStore: TypeModel[];
+    secondaryStore: TypeModel[];
     fetching: boolean;
     adding: boolean;
     editing: boolean;

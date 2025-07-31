@@ -8,7 +8,7 @@ import {
     type UserActionTypes,
 } from "../../types/user_system/user_action_type.ts"; // For useReducer's dispatch name
 import type { User } from "../../../../../models/user_system/user_models.ts";
-import { RequestStrings } from "../../request_strings.ts";
+import { RequestStrings } from "../../../request_strings.ts";
 import axios from "axios";
 
 // --- Async Action Creators ---

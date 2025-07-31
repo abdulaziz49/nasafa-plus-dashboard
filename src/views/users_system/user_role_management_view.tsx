@@ -180,9 +180,8 @@ const UserRoleManagementView = () => {
     };
 
     // Delete a role
-    const deleteRoleEvent: MouseEventHandler<HTMLButtonElement> = useCallback(
-        async (e) => {
-            e.preventDefault();
+    const deleteRoleEvent = useCallback(
+        async (id: number) => {
             // if (formData.id === 0) {
             //     toast.error(t("select_item_to_delete"));
             //     return;
@@ -195,7 +194,7 @@ const UserRoleManagementView = () => {
                 )
             ) {
                 try {
-                    await deleteUserRole(dispatch, token, formData.id);
+                    await deleteUserRole(dispatch, token, id);
                     setFormData(initialFormState);
                     toast.success(t("deleted_successfully"));
                 } catch (err: unknown) {
@@ -223,7 +222,7 @@ const UserRoleManagementView = () => {
     // TODO - handle keyboard shortcut to edit process SHIFT + ENTER
     // TODO - handle keyboard shortcut to delete selected role process SHIFT + Delete
 
-    const GRID_COLUMNS_DEF = getUserRoleTableColumn(deleteRoleEvent);
+    const GRID_COLUMNS_DEF = getUserRoleTableColumn(deleteRoleEvent, t);
 
     document.title = t("title");
     return (

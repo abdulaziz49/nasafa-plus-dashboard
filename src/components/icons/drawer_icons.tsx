@@ -13,8 +13,8 @@ export const DashboardIcon = ({ classes, size = 5 }: IconsType) => {
     );
 };
 
-// FIXME - Replace user system icon
-export const UserIcon = ({ classes, size = 5 }: IconsType) => {
+// FIXME - Replaced user with system icon (gear icon)
+export const SystemIcon = ({ classes, size = 5 }: IconsType) => {
     return (
         <svg
             className={`size-${size} ${classes}`}
@@ -23,8 +23,14 @@ export const UserIcon = ({ classes, size = 5 }: IconsType) => {
             fill="currentColor"
             viewBox="0 0 24 24"
         >
-            <path d="M6 2c-1.10457 0-2 .89543-2 2v4c0 .55228.44772 1 1 1s1-.44772 1-1V4h12v7h-2c-.5523 0-1 .4477-1 1v2h-1c-.5523 0-1 .4477-1 1s.4477 1 1 1h5c.5523 0 1-.4477 1-1V3.85714C20 2.98529 19.3667 2 18.268 2H6Z" />
-            <path d="M6 11.5C6 9.567 7.567 8 9.5 8S13 9.567 13 11.5 11.433 15 9.5 15 6 13.433 6 11.5ZM4 20c0-2.2091 1.79086-4 4-4h3c2.2091 0 4 1.7909 4 4 0 1.1046-.8954 2-2 2H6c-1.10457 0-2-.8954-2-2Z" />
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <circle cx="10" cy="8" r="4" />
+            {/* Gear (system) icon path data */}
+            <path
+                // fillRule="evenodd"
+                d="M10.67 13.02c-.22-.01-.44-.02-.67-.02-2.42 0-4.68.67-6.61 1.82-.88.52-1.39 1.5-1.39 2.53V20h9.26a6.963 6.963 0 0 1-.59-6.98zM20.75 16c0-.22-.03-.42-.06-.63l1.14-1.01-1-1.73-1.45.49c-.32-.27-.68-.48-1.08-.63L18 11h-2l-.3 1.49c-.4.15-.76.36-1.08.63l-1.45-.49-1 1.73 1.14 1.01c-.03.21-.06.41-.06.63s.03.42.06.63l-1.14 1.01 1 1.73 1.45-.49c.32.27.68.48 1.08.63L16 21h2l.3-1.49c.4-.15.76-.36 1.08-.63l1.45.49 1-1.73-1.14-1.01c.03-.21.06-.41.06-.63zM17 18c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
+                // clipRule="evenodd"
+            />
         </svg>
     );
 };
@@ -183,5 +189,72 @@ export const LogoutIcon = ({ classes, size = 5 }: IconsType) => {
 };
 
 // TODO - Add User Report Icon
+export const UserReportIcon = ({ classes, size = 5 }: IconsType) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1024 1024"
+            fill="currentColor"
+            className={`size-${size} ${classes}`} // Removed rtl:rotate-y-180 as it's not typically semantic for this icon
+            aria-hidden="true"
+        >
+            {/* Path for a generic user (head and shoulders) */}
+            <path
+                fillRule="evenodd"
+                d="M512 244c176.18 0 319 142.82 319 319v233a32 32 0 0 1-32 32H225a32 32 0 0 1-32-32V563c0-176.18 142.82-319 319-319zM484 68h56a8 8 0 0 1 8 8v96a8 8 0 0 1-8 8h-56a8 8 0 0 1-8-8V76a8 8 0 0 1 8-8zM177.25 191.66a8 8 0 0 1 11.32 0l67.88 67.88a8 8 0 0 1 0 11.31l-39.6 39.6a8 8 0 0 1-11.31 0l-67.88-67.88a8 8 0 0 1 0-11.31l39.6-39.6zm669.6 0l39.6 39.6a8 8 0 0 1 0 11.3l-67.88 67.9a8 8 0 0 1-11.32 0l-39.6-39.6a8 8 0 0 1 0-11.32l67.89-67.88a8 8 0 0 1 11.31 0zM192 892h640a32 32 0 0 1 32 32v24a8 8 0 0 1-8 8H168a8 8 0 0 1-8-8v-24a32 32 0 0 1 32-32zm148-317v253h64V575h-64z"
+                clipRule="evenodd"
+            />
+
+            {/* Path for an exclamation mark icon, positioned near the user's shoulder/head */}
+            {/* <path
+                d="M17.7 7.7a.75.75 0 0 0-1.1-1l-3 3a.75.75 0 0 0 1.1 1l3-3Z" // Top part of exclamation mark
+                transform="translate(1, -2)" // Adjust position to place it on the user
+            /> */}
+            {/* <circle cx="17" cy="14.5" r="0.75" /> Dot of exclamation mark */}
+        </svg>
+    );
+};
+
 // TODO - Add Drivers Icon
+export const DriverIcon = ({ classes, size = 5 }: IconsType) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 256 256"
+            fill="currentColor"
+            // The `rtl:rotate-y-180` is kept as it might be a global styling convention,
+            // but might not be visually necessary for a driver icon unless its meaning
+            // needs to be flipped for RTL languages. You might consider removing it
+            // if the icon's direction isn't semantic.
+            className={`size-${size} ${classes}`}
+        >
+            {/* Path for a person's head and upper body */}
+            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM49.63,168H90.45l17,45.58A88.35,88.35,0,0,1,49.63,168ZM128,156a16,16,0,1,1,16-16A16,16,0,0,1,128,156Zm20.46,57.59L165.55,168h40.82A88.34,88.34,0,0,1,148.46,213.59ZM128,96a136.38,136.38,0,0,0-88,32.33V128a88,88,0,0,1,176,0v.33A136.38,136.38,0,0,0,128,96Z" />
+        </svg>
+    );
+};
+
 // TODO - Add Supervisor Icon
+export const SupervisorIcon = ({ classes, size = 5 }: IconsType) => {
+    return (
+        <svg
+            className={`size-${size} ${classes}`}
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+        >
+            {/* Base person icon (similar to a standard user icon) */}
+            <path d="M6 2c-1.10457 0-2 .89543-2 2v4c0 .55228.44772 1 1 1s1-.44772 1-1V4h12v7h-2c-.5523 0-1 .4477-1 1v2h-1c-.5523 0-1 .4477-1 1s.4477 1 1 1h5c.5523 0 1-.4477 1-1V3.85714C20 2.98529 19.3667 2 18.268 2H6Z" />
+            <path d="M6 11.5C6 9.567 7.567 8 9.5 8S13 9.567 13 11.5 11.433 15 9.5 15 6 13.433 6 11.5ZM4 20c0-2.2091 1.79086-4 4-4h3c2.2091 0 4 1.7909 4 4 0 1.1046-.8954 2-2 2H6c-1.10457 0-2-.8954-2-2Z" />
+
+            {/* Small star/badge overlay to signify supervisor status */}
+            {/* This star is positioned to be on the person's upper body/shoulder area */}
+            <path
+                d="M19.7 7.3c-.2-.5-.7-.8-1.2-.8-.6 0-1.1.2-1.5.7l-1.3 1.3-1.3-1.3c-.4-.4-1-.7-1.5-.7-.6 0-1.1.3-1.4.8-.4.5-.4 1.1-.1 1.6l2 2c.2.2.5.3.8.3s.6-.1.8-.3l2-2c.3-.5.3-1.1-.1-1.6Z"
+                transform="translate(-3, 1)"
+                fill="currentColor" // Adjust translate to position the star
+            />
+        </svg>
+    );
+};

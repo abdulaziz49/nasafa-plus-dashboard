@@ -26,7 +26,7 @@ import type {UserRole} from "../../../../../models/user_system/user_role_model";
 // export const SURS_STRING: string = "SEARCH_USER_ROLES_SUCCESS";
 // export const SURF_STRING: string = "SEARCH_USER_ROLES_FAILURE";
 
-import { RequestStrings } from "../../request_strings";
+import { RequestStrings } from "../../../request_strings";
 
 export type UserRoleActionTypes =
 // For fetching user roles

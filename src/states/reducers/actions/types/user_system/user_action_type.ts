@@ -25,7 +25,7 @@ import type {User} from "../../../../../models/user_system/user_models";
 // export const SUR_STRING: string = "SEARCH_USERS_REQUEST";
 // export const SUS_STRING: string = "SEARCH_USERS_SUCCESS";
 // export const SUF_STRING: string = "SEARCH_USERS_FAILURE";
-import { RequestStrings } from "../../request_strings";
+import { RequestStrings } from "../../../request_strings";
 
 export type UserActionTypes =
 // For fetching users

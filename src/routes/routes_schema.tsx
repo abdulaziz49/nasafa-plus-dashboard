@@ -119,10 +119,13 @@ import {
     ContainerIcon,
     ContractIcon,
     DashboardIcon,
+    DriverIcon,
+    SupervisorIcon,
     // MaintenanceIcon,
     // SettingsIcon,
     TruckIcon,
-    UserIcon,
+    SystemIcon,
+    UserReportIcon,
 } from "../components/icons/drawer_icons.tsx";
 
 const RoutesSchema = [
@@ -135,7 +138,7 @@ const RoutesSchema = [
     // User & Settings Management Routing Schema
     {
         accordionName: USER_ACCORDION_NAME,
-        accordionIcon: <UserIcon classes="m-0 -ms-2 me-2" />,
+        accordionIcon: <SystemIcon classes="m-0 -ms-2 me-2" />,
         routes: [
             {
                 routeName: USER_ROLE_MANAGEMENT_NAME,
@@ -167,14 +170,14 @@ const RoutesSchema = [
     // Supervisor Management Routing Scheme
     {
         routeName: SUPERVISOR_MANAGEMENT_NAME,
-        routeIcon: <ContractIcon classes="-ms-1" />,
+        routeIcon: <SupervisorIcon classes="-ms-1" />,
         routeURL: SUPERVISOR_MANAGEMENT_ROUTE,
     },
 
     // Driver Management Routing Scheme
     {
         routeName: DRIVER_MANAGEMENT_NAME,
-        routeIcon: <ContractIcon classes="-ms-1" />,
+        routeIcon: <DriverIcon classes="-ms-1" />,
         routeURL: DRIVER_MANAGEMENT_ROUTE,
     },
 
@@ -370,7 +373,7 @@ const RoutesSchema = [
     },
     {
         routeName: USERS_REPORT_NAME,
-        routeIcon: <ContractIcon classes="-ms-1" />,
+        routeIcon: <UserReportIcon classes="-ms-1" />,
         routeURL: USERS_REPORT_ROUTE,
     },
 

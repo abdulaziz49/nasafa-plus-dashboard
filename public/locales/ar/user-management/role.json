@@ -13,5 +13,10 @@
 	"pdf-btn": "PDF",
 	"excel-btn": "Excel",
 	"search-placeholder": "بحث عن",
-	"filter-name": "بالاسم"
+	"filter-name": "بالاسم",
+    "name-col":"اسم الدور",
+    "desc-col":"الوصف",
+    "create-col": "تاريخ الادخال",
+    "update-col":"تاريخ التعديل",
+    "date_locale": "ar-SA"
 }

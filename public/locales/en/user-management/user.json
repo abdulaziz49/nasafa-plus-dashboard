@@ -21,5 +21,12 @@
     "excel-btn": "Excel",
     "search-placeholder": "Search for",
     "filter-name": "By name",
-    "filter-role": "By role"
+    "filter-role": "By role",
+    "num-col":"Number",
+    "name-col":"Name",
+    "user-col":"Username",
+    "mail-col" : "E-mail",
+    "create-col": "Enter date",
+    "update-col":"Update date",
+    "date_locale": "en-US"
 }

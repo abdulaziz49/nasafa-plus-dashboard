@@ -130,7 +130,7 @@
 
 import type { UserRolesState } from "../../../../models/user_system/user_role_model.ts";
 import { type UserRoleActionTypes } from "../../actions/types/user_system/user_role_action_type.ts";
-import { RequestStrings } from "../../actions/request_strings.ts";
+import { RequestStrings } from "../../request_strings.ts";
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
 // Async logic should happen outside the reducer.
 

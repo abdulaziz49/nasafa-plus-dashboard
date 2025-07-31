@@ -1,23 +1,22 @@
 // states/reducers/actions/user_truck type_service.ts (or src/actions/user_truck type_actions.ts)
-import AppAxios, {
-    getAuthAxiosConfig,
-} from "../../../../../utils/app_axios.ts";
-import type { TruckType } from "../../../../../models/truck/truck_type_models.ts";
+import AppAxios, { getAuthAxiosConfig } from "../../../../utils/app_axios.ts";
 import type { Dispatch } from "react";
-import { type TruckTypeActionTypes } from "../../types/truck/truck_type_action_type.ts";
 import axios from "axios";
-import { RequestStrings } from "../../../request_strings.ts";
+import { RequestStrings } from "../../request_strings.ts";
+import type { AppActionType } from "../../app_action_type.ts";
+import type { TypeModel } from "../../../../models/type_models.ts";
 
 // --- Async Action Creators ---
-export const fetchTruckTypes = async (
-    dispatch: Dispatch<TruckTypeActionTypes>,
-    token: string
+export const fetchTypes = async (
+    dispatch: Dispatch<AppActionType<TypeModel>>,
+    token: string,
+    classification: string
 ): Promise<void> => {
     // if (fetching)
-    dispatch({ name: RequestStrings.FDR_STRING });
+    dispatch({ name: RequestStrings.FDR_STRING, payload: undefined });
     try {
         const response = await AppAxios.get(
-            "types/class/trucks",
+            `types/class/${classification}`,
             getAuthAxiosConfig(token)
         );
         dispatch({
@@ -41,19 +40,20 @@ export const fetchTruckTypes = async (
     }
 };
 
-export const addTrucKType = async (
-    dispatch: Dispatch<TruckTypeActionTypes>,
+export const addType = async (
+    dispatch: Dispatch<AppActionType<TypeModel>>,
     token: string,
+    classification: string,
     newTruckType: Omit<
-        TruckType,
+        TypeModel,
         "id" | "created_at" | "updated_at" | "description"
     >
 ) => {
     // You might dispatch a 'ADD_truck type_REQUEST' here too, for a loading state on the form
-    dispatch({ name: RequestStrings.ADR_STRING });
+    dispatch({ name: RequestStrings.ADR_STRING, payload: undefined });
     try {
         newTruckType.code = "trucks";
-        newTruckType.classify = "trucks";
+        newTruckType.classify = classification;
         const response = await AppAxios.post(
             "types",
             newTruckType,
@@ -79,12 +79,12 @@ export const addTrucKType = async (
     }
 };
 
-export const editTrucKType = async (
-    dispatch: Dispatch<TruckTypeActionTypes>,
+export const editType = async (
+    dispatch: Dispatch<AppActionType<TypeModel>>,
     token: string,
-    updatedTruckType: TruckType
+    updatedTruckType: TypeModel
 ) => {
-    dispatch({ name: RequestStrings.EDR_STRING });
+    dispatch({ name: RequestStrings.EDR_STRING, payload: undefined });
     try {
         // Assuming API endpoint is /api/truck types/{id} for PUT/PATCH
         await AppAxios.put(
@@ -112,12 +112,12 @@ export const editTrucKType = async (
     }
 };
 
-export const deleteTrucKType = async (
-    dispatch: Dispatch<TruckTypeActionTypes>,
+export const deleteType = async (
+    dispatch: Dispatch<AppActionType<TypeModel>>,
     token: string,
     id: number
 ) => {
-    dispatch({ name: RequestStrings.DDR_STRING });
+    dispatch({ name: RequestStrings.DDR_STRING, payload: undefined });
     try {
         await AppAxios.delete(`types/${id}`, getAuthAxiosConfig(token));
         dispatch({ name: RequestStrings.DDS_STRING, payload: id });
@@ -137,12 +137,13 @@ export const deleteTrucKType = async (
     }
 };
 
-export const searchTrucKType = (
-    dispatch: Dispatch<TruckTypeActionTypes>,
+export const searchType = (
+    dispatch: Dispatch<AppActionType<TypeModel>>,
     searchTerm: string,
     stillSearch: boolean
 ) => {
-    if (!stillSearch) dispatch({ name: RequestStrings.SDR_STRING });
+    if (!stillSearch)
+        dispatch({ name: RequestStrings.SDR_STRING, payload: undefined });
     // try {
     // console.log(searchTerm)
     // let filteredUSER_truck type: TrucKType[]
@@ -151,7 +152,10 @@ export const searchTrucKType = (
         dispatch({ name: RequestStrings.SDS_STRING, payload: searchTerm });
     } else {
         // filteredUSER_truck type = []
-        dispatch({ name: RequestStrings.SDF_STRING });
+        dispatch({
+            name: RequestStrings.SDF_STRING,
+            payload: "nothing found",
+        });
     }
     // console.log(filteredUSER_truck type)
     // else

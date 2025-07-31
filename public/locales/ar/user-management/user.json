@@ -20,5 +20,12 @@
     "excel-btn": "Excel",
     "search-placeholder": "بحث عن",
     "filter-name": "بالاسم",
-    "filter-role": "بالدور"
+    "filter-role": "بالدور",
+    "num-col":"الرقم",
+    "name-col":"الاسم",
+    "user-col":"اسم المستخدم",
+    "mail-col" : "البريد الالكتروني",
+    "create-col": "تاريخ الادخال",
+    "update-col":"تاريخ التعديل",
+    "date_locale": "ar-SA"
 }

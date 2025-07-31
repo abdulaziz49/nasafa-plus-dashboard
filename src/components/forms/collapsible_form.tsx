@@ -40,7 +40,7 @@ export default function CollapsibleForm({
     }, [setCollapseForm]);
 
     return (
-        <FormContainer classes="w-full h-auto shadow">
+        <FormContainer classes="w-full h-auto shadow border-0 pt-0">
             <Accordion
                 collapsed={collapseForm}
                 title={title}

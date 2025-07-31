@@ -1,0 +1,20 @@
+{
+  "title": "إدارة أنواع الحاويات",
+  "add-btn": "إضافة",
+  "del-btn": "حذف",
+  "edit-btn": "تعديل",
+  "print-btn": "طباعه",
+  "pdf-btn": "تصدير الى PDF",
+  "excel-btn": "تصدير الى Excel",
+  "type-name-label": "نوع الحاوية",
+  "type-name-placeholder": "أدخل نوع الحاوية",
+  "type-code-label": "رمز النوع",
+  "type-code-placeholder": "أدخل رمز النوع",
+  "type-description-label": "وصف النوع",
+  "type-description-placeholder": "أدخل وصف النوع",
+  "search-label": "لبحث",
+  "search-placeholder": "بحث عن ...",
+  "search-btn": "بحث",
+  "type-name": "بالاسم",
+  "type-code": "بالرمز"
+}
