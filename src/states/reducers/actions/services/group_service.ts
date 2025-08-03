@@ -4,11 +4,11 @@ import type { Dispatch } from 'react';
 import axios from 'axios';
 import { RequestStrings } from '../../request_strings.ts';
 import type { AppActionType } from '../../app_action_type.ts';
-import type { TypeModel } from '../../../../models/type_models.ts';
+import type { GroupModel } from '../../../../models/group_models.ts';
 
 // --- Async Action Creators ---
-export const fetchTypes = async (
-	dispatch: Dispatch<AppActionType<TypeModel>>,
+export const fetchGroups = async (
+	dispatch: Dispatch<AppActionType<GroupModel>>,
 	token: string,
 	classification: string,
 ): Promise<void> => {
@@ -16,14 +16,14 @@ export const fetchTypes = async (
 	dispatch({ name: RequestStrings.FDR_STRING, payload: undefined });
 	try {
 		const response = await AppAxios.get(
-			`types/classify/${classification}`,
+			`groups/classify/${classification}`,
 			getAuthAxiosConfig(token),
 		);
 		dispatch({
 			name: RequestStrings.FDS_STRING,
 			payload: response.data.data,
 		});
-		// console.log(`truck types: ${response.data}`);
+		// console.log(`truck groups: ${response.data}`);
 		console.log(response.data.data);
 	} catch (error: unknown) {
 		// Axios errors have a 'response' property
@@ -31,7 +31,7 @@ export const fetchTypes = async (
 			const errorMessage =
 				error.response?.statusText ||
 				error.message ||
-				'Failed to fetch truck types';
+				'Failed to fetch truck groups';
 			dispatch({
 				name: RequestStrings.FDF_STRING,
 				payload: errorMessage,
@@ -40,22 +40,22 @@ export const fetchTypes = async (
 	}
 };
 
-export const addType = async (
-	dispatch: Dispatch<AppActionType<TypeModel>>,
+export const addGroup = async (
+	dispatch: Dispatch<AppActionType<GroupModel>>,
 	token: string,
 	classification: string,
 	newTruckType: Omit<
-		TypeModel,
+		GroupModel,
 		'id' | 'created_at' | 'updated_at' | 'description'
 	>,
 ) => {
 	// You might dispatch a 'ADD_truck type_REQUEST' here too, for a loading state on the form
 	dispatch({ name: RequestStrings.ADR_STRING, payload: undefined });
 	try {
-		newTruckType.code = 'trucks';
+		newTruckType.code = 'groups';
 		newTruckType.classify = classification;
 		const response = await AppAxios.post(
-			'types',
+			'groups',
 			newTruckType,
 			getAuthAxiosConfig(token),
 		);
@@ -79,22 +79,22 @@ export const addType = async (
 	}
 };
 
-export const editType = async (
-	dispatch: Dispatch<AppActionType<TypeModel>>,
+export const editGroup = async (
+	dispatch: Dispatch<AppActionType<GroupModel>>,
 	token: string,
-	updatedTruckType: TypeModel,
+	updatedGroup: GroupModel,
 ) => {
 	dispatch({ name: RequestStrings.EDR_STRING, payload: undefined });
 	try {
-		// Assuming API endpoint is /api/truck types/{id} for PUT/PATCH
+		// Assuming API endpoint is /api/truck groups/{id} for PUT/PATCH
 		await AppAxios.put(
-			`types/${updatedTruckType.id}`,
-			updatedTruckType,
+			`groups/${updatedGroup.id}`,
+			updatedGroup,
 			getAuthAxiosConfig(token),
 		);
 		dispatch({
 			name: RequestStrings.EDS_STRING,
-			payload: updatedTruckType,
+			payload: updatedGroup,
 		});
 	} catch (error: unknown) {
 		if (axios.isAxiosError(error)) {
@@ -112,14 +112,14 @@ export const editType = async (
 	}
 };
 
-export const deleteType = async (
-	dispatch: Dispatch<AppActionType<TypeModel>>,
+export const deleteGroup = async (
+	dispatch: Dispatch<AppActionType<GroupModel>>,
 	token: string,
 	id: number,
 ) => {
 	dispatch({ name: RequestStrings.DDR_STRING, payload: undefined });
 	try {
-		await AppAxios.delete(`types/${id}`, getAuthAxiosConfig(token));
+		await AppAxios.delete(`groups/${id}`, getAuthAxiosConfig(token));
 		dispatch({ name: RequestStrings.DDS_STRING, payload: id });
 	} catch (error: unknown) {
 		if (axios.isAxiosError(error)) {
@@ -137,8 +137,8 @@ export const deleteType = async (
 	}
 };
 
-export const searchType = (
-	dispatch: Dispatch<AppActionType<TypeModel>>,
+export const searchGroups = (
+	dispatch: Dispatch<AppActionType<GroupModel>>,
 	searchTerm: string,
 	stillSearch: boolean,
 ) => {
@@ -160,7 +160,7 @@ export const searchType = (
 	// console.log(filteredUSER_truck type)
 	// else
 	//     filteredUSER_truck type = []
-	// await AppAxios.delete(`truck types/${truck typeId}`, getAuthAxiosConfig(token));
+	// await AppAxios.delete(`truck groups/${truck typeId}`, getAuthAxiosConfig(token));
 	// } catch (error: any) {
 	//     const errorMessage = error.response?.USER_truck type?.message || error.message || 'Failed to delete truck type';
 	//     dispatch({name: 'DELETE_USER_truck type_FAILURE', payload: errorMessage})

@@ -39,7 +39,7 @@ import {
     editGroup,
     fetchGroups,
     searchGroups,
-} from "../states/reducers/actions/services/type_service copy";
+} from "../states/reducers/actions/services/group_service";
 
 /**
  * Defines the initial state for the TypeModel form.
