@@ -7,8 +7,8 @@ import DeleteButton from '../../components/buttons/crud_buttons/delete_button.ts
 import PrintButton from '../../components/buttons/crud_buttons/print_button.tsx';
 import PDFButton from '../../components/buttons/crud_buttons/pdf_button.tsx';
 import ExcelButton from '../../components/buttons/crud_buttons/excel_button.tsx';
-import SearchForm from '../../components/forms/search_form.tsx';
-import DataGrid from '../../components/datagrid/datagrid.tsx';
+// import SearchForm from '../../components/forms/search_form.tsx';
+// import DataGrid from '../../components/datagrid/datagrid.tsx';
 import Pagination from '../../components/pagination.tsx';
 import Textarea from '../../components/inputs/textarea.tsx';
 import Select from '../../components/inputs/select.tsx';
@@ -28,20 +28,20 @@ const ContainerManagementView = () => {
 						<InputField
 							name="container_name"
 							labelText={t('container-name-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('container-name-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 						<InputField
 							name="container_code"
 							labelText={t('container-code-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('container-code-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 						<Select
 							name="group_id"
@@ -108,12 +108,12 @@ const ContainerManagementView = () => {
 			{/*    classes="w-full px-2"*/}
 			{/*/>*/}
 
-			<SearchForm translateFile={translateFilePath}>
+			{/* <SearchForm translateFile={translateFilePath}>
 				<option selected>{t('filter-name')}</option>
 				<option>{t('filter-code')}</option>
 				<option>{t('filter-group-code')}</option>
 			</SearchForm>
-			<DataGrid />
+			<DataGrid /> */}
 			<Pagination />
 		</>
 	);

@@ -1,7 +1,7 @@
 // components/ActionButtonsRenderer.tsx
 import {type FC} from 'react';
 import {type ICellRendererParams} from 'ag-grid-community';
-import PrintButton from "../buttons/crud_buttons/print_button.tsx"; // Import necessary types if you're using TypeScript
+import PrintButton from "../../buttons/crud_buttons/print_button.tsx"; // Import necessary types if you're using TypeScript
 // Assuming you have SVG or custom icon components for Delete and Print
 // For example:
 // import { RiDeleteBin6Line, RiPrinterLine } from 'react-icons/ri'; // If using react-icons
@@ -12,7 +12,7 @@ import PrintButton from "../buttons/crud_buttons/print_button.tsx"; // Import ne
 interface ActionsColumnTypes extends ICellRendererParams {
     // You can define specific props here if your parent component needs to pass more context
     // For example, handlers that are specific to the grid's data context.
-    onPrintClick: (rowData: any) => void;
+    onPrintClick: (rowData: unknown) => void;
 }
 
 const DataGridPrintColumnRenderer: FC<ActionsColumnTypes> = (props) => {

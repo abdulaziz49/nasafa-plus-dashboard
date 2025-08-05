@@ -1,6 +1,8 @@
 export default interface AppStateModel<T> {
-    mainStore: T[];
-    secondaryStore: T[];
+    cache: object[];        // store ui data like select input data
+    mainStore: T[];         // data coming from the server and showed on the datagrid
+    secondaryStore: T[];    // helps in the search process
+    caching: boolean;
     fetching: boolean;
     adding: boolean;
     editing: boolean;

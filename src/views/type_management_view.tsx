@@ -730,7 +730,6 @@ import {
 
 // Type Imports
 import type { TypeModel } from "../models/type_models";
-import type { DataGridGenericType } from "../components/datagrid/datagrid_generic_type";
 
 // Utility Imports
 import trimDataObjectStrings from "../utils/trim_data_object_strings";
@@ -854,7 +853,7 @@ const TypeManagementView = ({ classifyID }: TypeManagementViewProps) => {
      * If no row is selected or found, `formData` is reset.
      */
     const onGridSelect = useCallback(
-        (data: DataGridGenericType[]) => {
+        (data: TypeModel[]) => {
             if (data.length > 0) {
                 // Assuming `DataGridGenericType` always contains an `id` that matches `TypeModel.id`.
                 const selectedTypeModel = mainStore.find(

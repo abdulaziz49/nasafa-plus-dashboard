@@ -1,20 +1,20 @@
 // import {object} from "yup";
 
-export interface GroupModel {
+export interface TruckModel {
     id: number; // Unique ID for the role
-    name: string;
     // is_locked: boolean;
-    description: string;
     code:string;
-    classify: string
+    plate_number: string
+    description: string;
+    status: string;
     // permissions: string[]; // ID of the user who created this role
     created_at: string;
     updated_at: string;
 }
 
-// export interface GroupStateModel {
-//     mainStore: GroupModel[];
-//     secondaryStore: GroupModel[];
+// export interface TruckTypeState {
+//     mainStore: TruckType[];
+//     secondaryStore: TruckType[];
 //     fetching: boolean;
 //     adding: boolean;
 //     editing: boolean;

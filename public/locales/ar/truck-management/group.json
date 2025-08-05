@@ -1,3 +1,24 @@
 {
-	"title": "إدارة مجموعات الشاحنات"
+	"title": "إدارة مجموعات الشاحنات",
+	"code-label": "الرمز",
+    "code-placeholder": "ادخل رمز المجموعة",
+    "group-label": "اسم المجموعة",
+    "group-placeholder": "ادخل اسم المجموعة",
+    "desc-label": "وصف النوع",
+    "desc-placeholder": "ادخل وصف النوع",
+    "add-btn": "إضافة",
+    "del-btn": "حذف",
+    "edit-btn": "تعديل",
+    "refresh-btn": "تحديث",
+    "print-btn": "طباعه",
+    "export-dropdown": "تصدير الى",
+    "pdf-btn": "PDF",
+    "excel-btn": "Excel",
+    "search-placeholder": "بحث عن",
+    "filter-name": "بالاسم",
+    "num-col": "الرقم",
+    "name-col": "الاسم",
+    "desc-col": "الوصف",
+    "create-col": "تاريخ الادخال",
+    "date_locale":"ar-SA"
 }

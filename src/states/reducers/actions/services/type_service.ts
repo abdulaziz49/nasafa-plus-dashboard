@@ -16,7 +16,7 @@ export const fetchTypes = async (
     dispatch({ name: RequestStrings.FDR_STRING, payload: undefined });
     try {
         const response = await AppAxios.get(
-            `types/class/${classification}`,
+            `types/classify/${classification}`,
             getAuthAxiosConfig(token)
         );
         dispatch({

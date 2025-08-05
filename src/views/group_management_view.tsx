@@ -19,7 +19,7 @@ import Dropdown from "../components/dropdown";
 import PrintButton from "../components/buttons/crud_buttons/print_button";
 import SearchForm from "../components/forms/search_form";
 import RefreshButton from "../components/buttons/crud_buttons/refresh_button";
-import TypeForm from "../components/forms/type_form"; // Corrected import from GroupModelForm to TypeForm
+// import TypeForm from "../components/forms/type_form"; // Corrected import from GroupModelForm to TypeForm
 import getTypeTableColumn from "../components/datagrid/column_definition/type_datagrid_columns";
 
 // State Management Imports
@@ -29,7 +29,7 @@ import AppReducer, { getInitialAppState } from "../states/reducers/app_reducer";
 
 // Type Imports
 import type { GroupModel } from "../models/group_models";
-import type { DataGridGenericType } from "../components/datagrid/datagrid_generic_type";
+// import type { DataGridGenericType } from "../components/datagrid/datagrid_generic_type";
 
 // Utility Imports
 import trimDataObjectStrings from "../utils/trim_data_object_strings";
@@ -39,7 +39,8 @@ import {
     editGroup,
     fetchGroups,
     searchGroups,
-} from "../states/reducers/actions/services/type_service copy";
+} from "../states/reducers/actions/services/group_service";
+import GroupForm from "../components/forms/group_form";
 
 /**
  * Defines the initial state for the TypeModel form.
@@ -160,7 +161,7 @@ const GroupManagementView = ({ classifyID }: TypeManagementViewProps) => {
      * If no row is selected or found, `formData` is reset.
      */
     const onGridSelect = useCallback(
-        (data: DataGridGenericType[]) => {
+        (data: GroupModel[]) => {
             if (data.length > 0) {
                 // Assuming `DataGridGenericType` always contains an `id` that matches `GroupModel.id`.
                 const selectedGroups = mainStore.find(
@@ -321,7 +322,7 @@ const GroupManagementView = ({ classifyID }: TypeManagementViewProps) => {
     return (
         <>
             {/* Form for adding/editing Type Models */}
-            <TypeForm
+            <GroupForm
                 formData={formData}
                 editEventHandler={editGroupEvent}
                 addEventHandler={addGroupEvent}

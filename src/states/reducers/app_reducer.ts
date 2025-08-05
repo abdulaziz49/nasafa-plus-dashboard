@@ -4,7 +4,7 @@ import { RequestStrings } from "./request_strings.ts";
 
 export interface IdentifiableAndNameable {
     id: number; // Use 'number' or 'string' if your IDs are consistently typed
-    name: string;
+    name?: string;
 }
 
 // AppAxios and getAuthAxiosConfig are NOT imported directly into the reducer.
@@ -16,8 +16,10 @@ export function getInitialAppState<
     T extends IdentifiableAndNameable
 >(): AppStateModel<T> {
     return {
+        cache: [],
         mainStore: [],
         secondaryStore: [],
+        caching: false,
         fetching: false,
         adding: false,
         editing: false,
@@ -36,6 +38,28 @@ export default function AppReducer<T extends IdentifiableAndNameable>(
     action: AppActionType<T>
 ): AppStateModel<T> {
     switch (action.name) {
+        // For caching cases
+        case RequestStrings.FCR_STRING:
+            return {
+                ...state,
+                caching: true,
+                error: null, // Clear any previous errors on new request
+            };
+        case RequestStrings.FCS_STRING:
+            return {
+                ...state,
+                fetching: false,
+                error: null,
+                cache: action.payload, // Assert payload type
+            };
+        case RequestStrings.FCF_STRING:
+            return {
+                ...state,
+                fetching: false,
+                error: action.payload as string, // Assert payload type
+                cache: [], // Clear roles or keep old ones depending on desired UX
+            };
+
         // For fetching cases
         case RequestStrings.FDR_STRING:
             return {
@@ -144,7 +168,7 @@ export default function AppReducer<T extends IdentifiableAndNameable>(
                 // Access `name` property, which is guaranteed by `IdentifiableAndNameable`
                 mainStore: state.secondaryStore.filter(
                     (row) =>
-                        row.name
+                        row.name!
                             .toLowerCase()
                             .includes((action.payload as string).toLowerCase()) // Assert payload type
                 ),
@@ -159,11 +183,36 @@ export default function AppReducer<T extends IdentifiableAndNameable>(
                 error: action.payload as string | null, // Assert payload type
             };
 
+        // For searching server cases
+        case RequestStrings.SSDR_STRING:
+            return {
+                ...state,
+                searching: true,
+                error: null, // Clear any previous errors on new request
+            };
+        case RequestStrings.SSDS_STRING:
+            return {
+                ...state,
+                error: null,
+                // Access `name` property, which is guaranteed by `IdentifiableAndNameable`
+                secondaryStore: state.mainStore,
+                mainStore: action.payload as T[],
+                searching: false, // Searching is complete
+            };
+        case RequestStrings.SSDF_STRING:
+            return {
+                ...state,
+                searching: false,
+                mainStore: state.secondaryStore, // Restore mainStore on search failure/completion
+                secondaryStore: [],
+                error: action.payload as string | null, // Assert payload type
+            };
+
         default: {
             // This ensures that all action types are handled, or throws an error
             // action.name is of type RequestStringLiteral, so using `never` here is appropriate
             // as it should be exhaustive if all cases are covered.
-            const exhaustiveCheck: never = action;
+            const exhaustiveCheck: unknown = action;
             throw new Error(`Unhandled action type: ${exhaustiveCheck}`);
         }
     }

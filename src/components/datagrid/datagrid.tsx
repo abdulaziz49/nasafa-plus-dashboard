@@ -101,10 +101,11 @@ import {
     themeQuartz,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import { type ReactElement, useMemo } from "react";
+import { useMemo } from "react";
 // No need to import DataGridGenericType directly here if it's just a placeholder
 // We'll define the generic type parameter on the component itself.
 import useUserSettingsStore from "../../states/stores/user_settings_store.ts";
+import type { JSX } from "react/jsx-runtime";
 
 // Register AG Grid modules (required for AG Grid features)
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -138,7 +139,7 @@ interface DataGridProps<TData> {
  * It supports single row selection and notifies the parent with selected data.
  *
  * @param {DataGridProps<TData>} props - The component props.
- * @returns {ReactElement} The rendered AG Grid component.
+ * @returns {JSX.Element} The rendered AG Grid component.
  */
 // Explicitly declare the generic type parameter <TData> on the FC
 const DataGrid = <TData,>({
@@ -146,7 +147,7 @@ const DataGrid = <TData,>({
     fetchSelectedData,
     columnDefs,
     rowData,
-}: DataGridProps<TData>): ReactElement => {
+}: DataGridProps<TData>): JSX.Element => {
     // Use DataGridProps<TData>
     // Default column definition for all columns
     const defaultColDef: object = {

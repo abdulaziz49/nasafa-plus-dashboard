@@ -7,8 +7,8 @@ import DeleteButton from '../../components/buttons/crud_buttons/delete_button.ts
 import PrintButton from '../../components/buttons/crud_buttons/print_button.tsx';
 import PDFButton from '../../components/buttons/crud_buttons/pdf_button.tsx';
 import ExcelButton from '../../components/buttons/crud_buttons/excel_button.tsx';
-import SearchForm from '../../components/forms/search_form.tsx';
-import DataGrid from '../../components/datagrid/datagrid.tsx';
+// import SearchForm from '../../components/forms/search_form.tsx';
+// import DataGrid from '../../components/datagrid/datagrid.tsx';
 import Pagination from '../../components/pagination.tsx';
 
 const ContractManagementView = () => {
@@ -26,20 +26,20 @@ const ContractManagementView = () => {
 						<InputField
 							name="group_name"
 							labelText={t('group-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('group-label-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 						<InputField
 							name="group_code"
 							labelText={t('group_code')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('group-code-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 					</div>
 					<br />
@@ -79,11 +79,11 @@ const ContractManagementView = () => {
 				</form>
 			</FormContainer>
 
-			<SearchForm translateFile={translateFilePath}>
-				<option selected>{t('filter-name')}</option>
+			{/* <SearchForm translateFile={translateFilePath}> */}
+				{/* <option selected>{t('filter-name')}</option>
 				<option>{t('filter-code')}</option>
-			</SearchForm>
-			<DataGrid />
+			</SearchForm> */}
+			{/* <DataGrid /> */}
 			<Pagination />
 		</>
 	);

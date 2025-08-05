@@ -4,11 +4,11 @@ import EditButton from "../../buttons/crud_buttons/edit_button.tsx";
 import { useTranslation } from "react-i18next";
 import type { ChangeEventHandler, JSX, MouseEventHandler } from "react";
 import CollapsibleForm from "../collapsible_form.tsx";
-import type { TruckType } from "../../../models/truck/truck_type_models.ts";
+import type { TruckModel } from "../../../models/truck/truck_model.ts";
 
-interface TruckTypeFormTypes {
+interface TruckFormTypes {
     translateFile: string;
-    formData: TruckType;
+    formData: TruckModel;
     addEventHandler: MouseEventHandler<HTMLButtonElement>;
     editEventHandler: MouseEventHandler<HTMLButtonElement>;
     inputChangeEvent: ChangeEventHandler<HTMLInputElement>;
@@ -32,7 +32,7 @@ interface TruckTypeFormTypes {
  *
  * @returns {JSX.Element} The rendered UserRoleForm component.
  */
-export default function TruckTypeForm({
+export default function TruckForm({
     translateFile,
     formData,
     addEventHandler,
@@ -41,7 +41,7 @@ export default function TruckTypeForm({
     isAdding,
     isEditing,
     isCollapsed = false,
-}: TruckTypeFormTypes): JSX.Element {
+}: TruckFormTypes): JSX.Element {
     const { t } = useTranslation(translateFile);
 
     return (
@@ -54,7 +54,21 @@ export default function TruckTypeForm({
                     placeholder={t("group-placeholder")}
                     withLabel={true}
                     containerClasses="w-full"
-                    value={formData.name}
+                    value={formData.code}
+                    onChange={inputChangeEvent}
+                    // pattern="^[a-zA-Z][a-zA-Z0-9 _]+$"
+                    minLength={5}
+                    maxLength={128}
+                    required={true}
+                />
+                <InputField
+                    name="name"
+                    labelText={t("group-label")}
+                    type="text"
+                    placeholder={t("group-placeholder")}
+                    withLabel={true}
+                    containerClasses="w-full"
+                    value={formData.plate_number}
                     onChange={inputChangeEvent}
                     // pattern="^[a-zA-Z][a-zA-Z0-9 _]+$"
                     minLength={5}

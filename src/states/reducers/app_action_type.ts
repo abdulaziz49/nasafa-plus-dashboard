@@ -30,6 +30,10 @@
 import { RequestStrings, type RequestStringLiteral } from "./request_strings";
 
 type AppActionPayload<T>     = {
+    [RequestStrings.FCR_STRING]: undefined;
+    [RequestStrings.FCS_STRING]: object[];
+    [RequestStrings.FCF_STRING]: string | null;
+
     [RequestStrings.FDR_STRING]: undefined;
     [RequestStrings.FDS_STRING]: T[];
     [RequestStrings.FDF_STRING]: string | null;
@@ -49,6 +53,10 @@ type AppActionPayload<T>     = {
     [RequestStrings.SDR_STRING]: undefined;
     [RequestStrings.SDS_STRING]: string; // The search term
     [RequestStrings.SDF_STRING]: string | null;
+
+    [RequestStrings.SSDR_STRING]: undefined;
+    [RequestStrings.SSDS_STRING]: T[]; // The search term
+    [RequestStrings.SSDF_STRING]: string | null;
 };
 
 // Generic AppActionType

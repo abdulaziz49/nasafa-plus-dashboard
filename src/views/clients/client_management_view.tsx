@@ -7,8 +7,8 @@ import DeleteButton from '../../components/buttons/crud_buttons/delete_button.ts
 import PrintButton from '../../components/buttons/crud_buttons/print_button.tsx';
 import PDFButton from '../../components/buttons/crud_buttons/pdf_button.tsx';
 import ExcelButton from '../../components/buttons/crud_buttons/excel_button.tsx';
-import SearchForm from '../../components/forms/search_form.tsx';
-import DataGrid from '../../components/datagrid/datagrid.tsx';
+// import SearchForm from '../../components/forms/search_form.tsx';
+// import DataGrid from '../../components/datagrid/datagrid.tsx';
 import Pagination from '../../components/pagination.tsx';
 import Select from '../../components/inputs/select.tsx';
 
@@ -27,11 +27,11 @@ const ClientManagementView = () => {
 						<InputField
 							name="client_name"
 							labelText={t('client-name-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('client-name-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 
 						<Select
@@ -49,61 +49,61 @@ const ClientManagementView = () => {
 						<InputField
 							name="phone_number"
 							labelText={t('phone-number-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('phone-number-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 
 						<InputField
 							name="telephone"
 							labelText={t('telephone-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('telephone-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 
 						<InputField
 							name="work_number"
 							labelText={t('work-number-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('work-number-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 
 						<InputField
 							name="address"
 							labelText={t('address-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('address-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 
 						<InputField
 							name="email"
 							labelText={t('email-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('email-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 
 						<InputField
 							name="user_id"
 							labelText={t('user-id-label')}
-							fieldType="text"
+							// fieldType="text"
 							placeholder={t('user-id-placeholder')}
 							withLabel={true}
 							containerClasses="w-full w-full lg:col-span-6"
-							changeEvent={() => {}}
+							// changeEvent={() => {}}
 						/>
 					</div>
 					<br />
@@ -143,11 +143,11 @@ const ClientManagementView = () => {
 				</form>
 			</FormContainer>
 
-			<SearchForm translateFile={translateFilePath}>
+			{/* <SearchForm translateFile={translateFilePath}>
 				<option selected>{t('filter-name')}</option>
 				<option>{t('filter-number')}</option>
 			</SearchForm>
-			<DataGrid />
+			<DataGrid /> */}
 			<Pagination />
 		</>
 	);

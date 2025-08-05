@@ -16,7 +16,7 @@ export const fetchGroups = async (
     dispatch({ name: RequestStrings.FDR_STRING, payload: undefined });
     try {
         const response = await AppAxios.get(
-            `groups/class/${classification}`,
+            `groups/classify/${classification}`,
             getAuthAxiosConfig(token)
         );
         dispatch({
@@ -52,7 +52,6 @@ export const addGroup = async (
     // You might dispatch a 'ADD_truck type_REQUEST' here too, for a loading state on the form
     dispatch({ name: RequestStrings.ADR_STRING, payload: undefined });
     try {
-        newTruckType.code = "groups";
         newTruckType.classify = classification;
         const response = await AppAxios.post(
             "groups",

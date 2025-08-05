@@ -1,3 +1,23 @@
 {
-	"title": "Truck Group Management"
+	"title": "Truck Group Management",
+	"code-label": "Code",
+    "code-placeholder": "Enter code of the group",
+	"group-label": "Type name",
+    "group-placeholder": "Enter type name",
+    "desc-label": "Type description",
+    "desc-placeholder": "Enter type Description",
+    "add-btn": "Save",
+    "del-btn": "Delete",
+    "edit-btn": "Edit",
+    "refresh-btn": "Refresh","print-btn": "Print",
+    "export-dropdown": "Export to",
+    "pdf-btn": "PDF",
+    "excel-btn": "Excel",
+    "search-placeholder": "Search for",
+    "filter-name": "By name",
+    "num-col": "Num",
+    "name-col": "Name",
+    "desc-col": "Description",
+    "create-col": "Create at",
+    "date_locale": "en-US"
 }
