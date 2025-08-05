@@ -91,7 +91,7 @@
 
 // export default AppAxios;
 
-import axios, { type AxiosRequestConfig, AxiosError } from "axios";
+import axios, { type AxiosRequestConfig, AxiosError } from 'axios';
 // Import the store directly, not the hook
 // import { useAuthStore } from "../states/stores/auth_store";
 import { toast } from "react-toastify"; // Make sure react-toastify is imported
@@ -103,36 +103,41 @@ const AppAxios = axios.create({
 });
 
 export const unauthAxiosHeaderJson = {
-  headers: {
-    "X-Requested-With": "XMLHttpRequest",
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
+	headers: {
+		'X-Requested-With': 'XMLHttpRequest',
+		Accept: 'application/json',
+		'Content-Type': 'application/json',
+	},
+	withCredentials: true,
 };
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-  headers?: {
-    [key: string]: string;
-    // Authorization: string;
-  };
-  withCredentials?: boolean;
+	headers?: {
+		[key: string]: string;
+		// Authorization: string;
+	};
+	withCredentials?: boolean;
 }
 
-export const getAuthAxiosConfig = (token?: string): CustomAxiosRequestConfig => {
-  const config: CustomAxiosRequestConfig = {
-    headers: {
-      "X-Requested-With": "XMLHttpRequest",
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  };
+export const getAuthAxiosConfig = (
+	token?: string,
+): CustomAxiosRequestConfig => {
+	const config: CustomAxiosRequestConfig = {
+		headers: {
+			'X-Requested-With': 'XMLHttpRequest',
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		withCredentials: true,
+	};
 
-  if (token) {
-    config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
-  }
-  return config;
+	if (token) {
+		config.headers = {
+			...config.headers,
+			Authorization: `Bearer ${token}`,
+		};
+	}
+	return config;
 };
 
 // --- Response Interceptor for Centralized Error Handling ---
@@ -149,17 +154,18 @@ AppAxios.interceptors.response.use(
     let errorMessage = "An unexpected error occurred.";
     // let shouldClearAuth = false; // Flag to decide if auth should be cleared
 
-    if (error.code === "ERR_NETWORK") {
-      // This covers 'net::ERR_INTERNET_DISCONNECTED', 'ERR_CONNECTION_REFUSED', etc.
-      errorMessage = "Network Error: Please check your internet connection and try again.";
-      console.error("Axios Network Error:", error);
-      toast.error(errorMessage);
-      toast.error(error.status);
-    } else if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      const { status, data } = error.response;
-      console.error(`Axios Server Error - Status: ${status}`, data);
+		if (error.code === 'ERR_NETWORK') {
+			// This covers 'net::ERR_INTERNET_DISCONNECTED', 'ERR_CONNECTION_REFUSED', etc.
+			errorMessage =
+				'Network Error: Please check your internet connection and try again.';
+			console.error('Axios Network Error:', error);
+			toast.error(errorMessage);
+			toast.error(error.status);
+		} else if (error.response) {
+			// The request was made and the server responded with a status code
+			// that falls out of the range of 2xx
+			const { status, data } = error.response;
+			console.error(`Axios Server Error - Status: ${status}`, data);
 
       // switch (status) {
       //   case 400: // Bad Request
@@ -224,9 +230,9 @@ AppAxios.interceptors.response.use(
       toast.error(errorMessage);
     }
 
-    // Re-throw the error so it can be caught downstream if needed
-    return Promise.reject(error);
-  }
+		// Re-throw the error so it can be caught downstream if needed
+		return Promise.reject(error);
+	},
 );
 
 export default AppAxios;
